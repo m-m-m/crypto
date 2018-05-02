@@ -48,23 +48,23 @@ public class SecurityPrivateKeyGeneric extends AbstractSecurityKey<PrivateKey> i
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    * @param key the {@link #getKey() key}.
    */
-  public SecurityPrivateKeyGeneric(String hex, PrivateKey key) {
+  public SecurityPrivateKeyGeneric(String base64, PrivateKey key) {
 
-    super(hex, key);
+    super(base64, key);
   }
 
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    * @param keySupplier the {@link Supplier} of the {@link #getKey() key}.
    */
-  public SecurityPrivateKeyGeneric(String hex, Supplier<PrivateKey> keySupplier) {
+  public SecurityPrivateKeyGeneric(String base64, Supplier<PrivateKey> keySupplier) {
 
-    super(hex, keySupplier);
+    super(base64, keySupplier);
   }
 
 }

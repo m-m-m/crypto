@@ -51,23 +51,23 @@ public class SecuritySymmetricKeyGeneric extends AbstractSecurityKey<SecretKey> 
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    * @param key the {@link #getKey() key}.
    */
-  public SecuritySymmetricKeyGeneric(String hex, SecretKey key) {
+  public SecuritySymmetricKeyGeneric(String base64, SecretKey key) {
 
-    super(hex, key);
+    super(base64, key);
   }
 
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    * @param keySupplier the {@link Supplier} of the {@link #getKey() key}.
    */
-  public SecuritySymmetricKeyGeneric(String hex, Supplier<SecretKey> keySupplier) {
+  public SecuritySymmetricKeyGeneric(String base64, Supplier<SecretKey> keySupplier) {
 
-    super(hex, keySupplier);
+    super(base64, keySupplier);
   }
 
   @Override

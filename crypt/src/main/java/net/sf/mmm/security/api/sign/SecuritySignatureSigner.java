@@ -1,5 +1,8 @@
 package net.sf.mmm.security.api.sign;
 
+import net.sf.mmm.security.api.SecurityBinaryType;
+import net.sf.mmm.security.api.hash.SecurityHash;
+
 /**
  * Extends {@link SecuritySignatureCreator} with ability to {@link #sign(boolean) sign} the {@link #update(byte[])
  * processed data} generating a signature.
@@ -45,6 +48,29 @@ public interface SecuritySignatureSigner extends SecuritySignatureCreator {
   default byte[] process(byte[] input, int offset, int length) {
 
     return sign(input, offset, length, true);
+  }
+
+  /**
+   * @param input the {@link SecurityBinaryType} containing the (next) {@link SecurityBinaryType#getData() data} to
+   *        sign. E.g. a {@link SecurityHash}.
+   * @param reset - {@code true} to {@link #reset() reset} after the signature has been generated, {@code false}
+   *        otherwise.
+   * @return the final signature generated for the {@link #update(byte[]) processed data}.
+   */
+  default SecuritySignature signature(SecurityBinaryType input, boolean reset) {
+
+    update(input);
+    return new SecuritySignature(sign(reset));
+  }
+
+  /**
+   * @param reset - {@code true} to {@link #reset() reset} after the signature has been generated, {@code false}
+   *        otherwise.
+   * @return the final signature generated for the {@link #update(byte[]) processed data}.
+   */
+  default SecuritySignature signature(boolean reset) {
+
+    return new SecuritySignature(sign(reset));
   }
 
 }

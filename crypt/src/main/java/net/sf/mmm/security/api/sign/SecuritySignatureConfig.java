@@ -12,7 +12,7 @@ public class SecuritySignatureConfig extends SecurityAlgorithmConfig {
 
   /**
    * The {@link java.security.Signature#getAlgorithm() signature algorithm} ECDSA (Elliptic Curve Digital Signature
-   * Algorithm). This constant is using NONE as hash algorithm to separate cryptographic algorithm from
+   * Algorithm). This constant is using NONE as hash algorithm to separate the plain signing algorithm from
    * {@link net.sf.mmm.security.api.hash.SecurityHashFactory hashing} algorithm. For details see
    * <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a>. See also
    * <a href="https://android-developers.googleblog.com/2013/08/some-securerandom-thoughts.html">Anroid fix</a>.
@@ -25,6 +25,7 @@ public class SecuritySignatureConfig extends SecurityAlgorithmConfig {
    * @param algorithm the {@link java.security.MessageDigest#getAlgorithm() hash algorithm}.
    */
   public SecuritySignatureConfig(String algorithm) {
+
     super(algorithm);
   }
 

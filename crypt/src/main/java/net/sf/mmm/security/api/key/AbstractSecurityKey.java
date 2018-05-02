@@ -4,6 +4,7 @@ import java.security.Key;
 import java.security.PrivateKey;
 import java.util.function.Supplier;
 
+import net.sf.mmm.security.api.SecurityBinaryType;
 import net.sf.mmm.util.lang.api.BinaryType;
 
 /**
@@ -14,7 +15,7 @@ import net.sf.mmm.util.lang.api.BinaryType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractSecurityKey<K extends Key> extends BinaryType implements SecurityKey<K> {
+public abstract class AbstractSecurityKey<K extends Key> extends SecurityBinaryType implements SecurityKey<K> {
 
   private K key;
 
@@ -59,12 +60,12 @@ public abstract class AbstractSecurityKey<K extends Key> extends BinaryType impl
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    * @param key the {@link #getKey() key}.
    */
-  public AbstractSecurityKey(String hex, K key) {
+  public AbstractSecurityKey(String base64, K key) {
 
-    super(hex);
+    super(base64);
     this.key = key;
     this.keySupplier = null;
   }
@@ -72,24 +73,14 @@ public abstract class AbstractSecurityKey<K extends Key> extends BinaryType impl
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    * @param keySupplier the {@link Supplier} of the {@link #getKey() key}.
    */
-  public AbstractSecurityKey(String hex, Supplier<K> keySupplier) {
+  public AbstractSecurityKey(String base64, Supplier<K> keySupplier) {
 
-    super(hex);
+    super(base64);
     this.key = null;
     this.keySupplier = keySupplier;
-  }
-
-  @Override
-  public K getKey() {
-
-    if ((this.key == null) && (this.keySupplier != null)) {
-      this.key = this.keySupplier.get();
-      this.keySupplier = null;
-    }
-    return this.key;
   }
 
   /**
@@ -105,11 +96,31 @@ public abstract class AbstractSecurityKey<K extends Key> extends BinaryType impl
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    */
-  public AbstractSecurityKey(String hex) {
+  public AbstractSecurityKey(String base64) {
 
-    super(hex);
+    super(base64);
+  }
+
+  @Override
+  public K getKey() {
+
+    if ((this.key == null) && (this.keySupplier != null)) {
+      this.key = this.keySupplier.get();
+      this.keySupplier = null;
+    }
+    return this.key;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    boolean equals = super.equals(obj);
+    if (equals) {
+      assert (getKey().equals(((AbstractSecurityKey<?>) obj).getKey()));
+    }
+    return equals;
   }
 
 }

@@ -4,22 +4,22 @@ package net.sf.mmm.security.api.crypt.asymmetric;
 
 import java.security.Security;
 
-import org.assertj.core.api.Assertions;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Test;
 
+import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyCreator;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPair;
 
 /**
  * Test of {@link Curve25519}.
  */
-public class Curve25519Test extends Assertions {
+public class Curve25519Test extends SecurityAsymmetricCryptorBuilderTest {
 
   /**
    * Test of {@link Curve25519#create()}.
    */
   @Test
-  public void testCurve25519() throws Exception {
+  public void testCurve25519() {
 
     // given
     Security.addProvider(new BouncyCastleProvider());
@@ -27,17 +27,36 @@ public class Curve25519Test extends Assertions {
     assertThat(curve25519.getAlgorithm()).isEqualTo("ECIES");
     assertThat(curve25519.getCryptorConfig().getKeyAlgorithmConfig().getKeyLength()).isEqualTo(256);
 
-    // when
-    SecurityAsymmetricKeyPair keyPair = curve25519.generateKeyPair();
-    SecurityAsymmetricCryptorFactoryPublicPrivate cryptorFactory = curve25519.crypt();
+    // when + then
+    verifyPublicPrivate(curve25519);
+  }
 
-    byte[] rawMessage = "Secret message".getBytes("UTF-8");
-    byte[] encryptedMessage = cryptorFactory.newEncryptor(keyPair.getPublicKey()).crypt(rawMessage, true);
-    byte[] decryptedMessage = cryptorFactory.newDecryptor(keyPair.getPrivateKey()).crypt(encryptedMessage, true);
+  @Override
+  protected int getEncryptionLength() {
 
-    // then
-    assertThat(decryptedMessage).isEqualTo(rawMessage);
-    assertThat(encryptedMessage).hasSize(99);
+    return 99;
+  }
+
+  @Override
+  protected int getSignatureMinLength() {
+
+    return 69;
+  }
+
+  @Override
+  protected int getSignatureLength() {
+
+    return 70;
+  }
+
+  @Override
+  protected void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, SecurityAsymmetricKeyCreator keyCreator) {
+
+    super.verifyKeyPair(keyPair, keyCreator);
+    assertThat(keyPair.getPrivateKey().getLength()).as("privateKey.length").isLessThanOrEqualTo(32);
+    // TODO make 32 byte representation normal form
+    // assertThat(keyPair.getPublicKey().getLength()).as("publicKey.length").isEqualTo(32);
+    assertThat(keyPair.getPublicKey().getLength()).as("publicKey.length").isEqualTo(33);
   }
 
 }

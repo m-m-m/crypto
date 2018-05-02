@@ -10,8 +10,8 @@ import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 
 /**
  * Extends {@link SecurityAsymmetricCryptorFactory} for cryptography where you can encrypt using
- * {@link java.security.PublicKey} and decrypt using {@link java.security.PrivateKey} (but not vice versa) such as e.g.
- * {@link SecurityAsymmetricCryptorConfigEcies ECIES}.
+ * {@link java.security.PublicKey} and decrypt using {@link java.security.PrivateKey}. May not necessarily work vice
+ * versa as e.g. for {@link SecurityAsymmetricCryptorConfigEcies ECIES}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

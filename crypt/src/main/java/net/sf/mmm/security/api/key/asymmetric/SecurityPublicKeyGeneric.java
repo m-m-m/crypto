@@ -48,23 +48,23 @@ public class SecurityPublicKeyGeneric extends AbstractSecurityKey<PublicKey> imp
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    * @param key the {@link #getKey() key}.
    */
-  public SecurityPublicKeyGeneric(String hex, PublicKey key) {
+  public SecurityPublicKeyGeneric(String base64, PublicKey key) {
 
-    super(hex, key);
+    super(base64, key);
   }
 
   /**
    * The constructor.
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    * @param keySupplier the {@link Supplier} for the {@link #getKey() key}.
    */
-  public SecurityPublicKeyGeneric(String hex, Supplier<PublicKey> keySupplier) {
+  public SecurityPublicKeyGeneric(String base64, Supplier<PublicKey> keySupplier) {
 
-    super(hex, keySupplier);
+    super(base64, keySupplier);
   }
 
 }

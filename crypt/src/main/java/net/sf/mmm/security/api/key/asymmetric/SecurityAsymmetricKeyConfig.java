@@ -1,7 +1,10 @@
 package net.sf.mmm.security.api.key.asymmetric;
 
 import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 
 import net.sf.mmm.security.api.key.SecurityKeyConfig;
 
@@ -47,6 +50,29 @@ public class SecurityAsymmetricKeyConfig extends SecurityKeyConfig {
   }
 
   /**
+   * @param privateKey the {@link PrivateKey} as raw {@code byte} array.
+   * @param lazy - {@code true} to return {@code null} if {@code privateKey} is given in normal form, {@code false}
+   *        otherwise (for eager deserialization).
+   * @return the deserialized {@link KeySpec} or {@code null} if normal form and {@code lazy} is {@code true}.
+   */
+  public KeySpec deserializePrivateKey(byte[] privateKey, boolean lazy) {
+
+    if (lazy) {
+      return null;
+    }
+    return this.privateKeyFactory.createKeySpec(privateKey);
+  }
+
+  /**
+   * @param privateKey the {@link PrivateKey} to serialize.
+   * @return the serialized data as raw {@code byte} array.
+   */
+  public byte[] serializePrivateKey(PrivateKey privateKey) {
+
+    return privateKey.getEncoded();
+  }
+
+  /**
    * @return the {@link SecurityAsymmetricKeySpecFactory factory} representing the {@link java.security.Key#getFormat()
    *         format} of the {@link java.security.PublicKey} and used to
    *         {@link SecurityAsymmetricKeySpecFactory#createKeySpec(byte[]) create} an according
@@ -55,6 +81,29 @@ public class SecurityAsymmetricKeyConfig extends SecurityKeyConfig {
   public SecurityAsymmetricKeySpecFactory getPublicKeyFactory() {
 
     return this.publicKeyFactory;
+  }
+
+  /**
+   * @param publicKey the {@link PublicKey} as raw {@code byte} array.
+   * @param lazy - {@code true} to return {@code null} if {@code publicKey} is given in normal form, {@code false}
+   *        otherwise (for eager deserialization).
+   * @return the deserialized {@link KeySpec} or {@code null} if normal form and {@code lazy} is {@code true}.
+   */
+  public KeySpec deserializePublicKey(byte[] publicKey, boolean lazy) {
+
+    if (lazy) {
+      return null;
+    }
+    return this.publicKeyFactory.createKeySpec(publicKey);
+  }
+
+  /**
+   * @param publicKey the {@link PublicKey} to serialize.
+   * @return the serialized data as raw {@code byte} array.
+   */
+  public byte[] serializePublicKey(PublicKey publicKey) {
+
+    return publicKey.getEncoded();
   }
 
   /**

@@ -1,5 +1,8 @@
 package net.sf.mmm.security.api.sign;
 
+import net.sf.mmm.security.api.SecurityBinaryType;
+import net.sf.mmm.security.api.hash.SecurityHash;
+
 /**
  * Extends {@link SecuritySignatureCreator} with ability to {@link #verify(byte[], byte[]) verify} a message with a
  * given expected signature.
@@ -68,8 +71,7 @@ public interface SecuritySignatureVerifier extends SecuritySignatureCreator {
    * @param signatureLength the number of bytes to read from {@code signature}.
    * @return {@code true} if the given signature is valid, {@code false} otherwise.
    */
-  default boolean verify(byte[] input, int inputOffset, int inputLength, byte[] signature, int signatureOffset,
-      int signatureLength) {
+  default boolean verify(byte[] input, int inputOffset, int inputLength, byte[] signature, int signatureOffset, int signatureLength) {
 
     update(input, inputOffset, inputLength);
     return verifyAfterUpdate(signature, signatureOffset, signatureLength);
@@ -94,6 +96,17 @@ public interface SecuritySignatureVerifier extends SecuritySignatureCreator {
    * @return {@code true} if the given signature is valid, {@code false} otherwise.
    */
   default boolean verify(byte[] input, SecuritySignature signature) {
+
+    update(input);
+    return verifyAfterUpdate(signature);
+  }
+
+  /**
+   * @param input the message data for which the {@code signature} was created. E.g. a {@link SecurityHash}.
+   * @param signature the {@code byte} array with the signature as raw data.
+   * @return {@code true} if the given signature is valid, {@code false} otherwise.
+   */
+  default boolean verify(SecurityBinaryType input, SecuritySignature signature) {
 
     update(input);
     return verifyAfterUpdate(signature);

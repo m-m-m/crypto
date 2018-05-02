@@ -4,22 +4,19 @@ package net.sf.mmm.security.api.crypt.asymmetric;
 
 import java.security.Security;
 
-import org.assertj.core.api.Assertions;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Test;
-
-import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPair;
 
 /**
  * Test of {@link Ecies}.
  */
-public class EciesTest extends Assertions {
+public class EciesTest extends SecurityAsymmetricCryptorBuilderTest {
 
   /**
    * Test of {@link Ecies#keyLength256()}.
    */
   @Test
-  public void testEcies256() throws Exception {
+  public void testEcies256() {
 
     // given
     Security.addProvider(new BouncyCastleProvider());
@@ -27,17 +24,26 @@ public class EciesTest extends Assertions {
     assertThat(ecies256.getAlgorithm()).isEqualTo("ECIES");
     assertThat(ecies256.getCryptorConfig().getKeyAlgorithmConfig().getKeyLength()).isEqualTo(256);
 
-    // when
-    SecurityAsymmetricKeyPair keyPair = ecies256.generateKeyPair();
-    SecurityAsymmetricCryptorFactoryPublicPrivate cryptorFactory = ecies256.crypt();
+    // when + then
+    verifyPublicPrivate(ecies256);
+  }
 
-    byte[] rawMessage = "Secret message".getBytes("UTF-8");
-    byte[] encryptedMessage = cryptorFactory.newEncryptor(keyPair.getPublicKey()).crypt(rawMessage, true);
-    byte[] decryptedMessage = cryptorFactory.newDecryptor(keyPair.getPrivateKey()).crypt(encryptedMessage, true);
+  @Override
+  protected int getEncryptionLength() {
 
-    // then
-    assertThat(decryptedMessage).isEqualTo(rawMessage);
-    assertThat(encryptedMessage).hasSize(99);
+    return 99;
+  }
+
+  @Override
+  protected int getSignatureMinLength() {
+
+    return 70;
+  }
+
+  @Override
+  protected int getSignatureLength() {
+
+    return 72;
   }
 
 }

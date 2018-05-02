@@ -11,8 +11,8 @@ import net.sf.mmm.util.lang.api.BinaryType;
  *
  * @see #createPrivateKey(PrivateKey)
  * @see #createPublicKey(PublicKey)
- * @see #createKeyPair(String, String)
- * @see #createKeyPair(byte[], byte[])
+ * @see #deserializeKeyPair(String, String)
+ * @see #deserializeKeyPair(byte[], byte[])
  * @see SecurityKeyCreator
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -33,13 +33,13 @@ public interface SecurityAsymmetricKeyCreator extends SecurityKeyCreator, Securi
   SecurityPrivateKey deserializePrivateKey(byte[] privateKey);
 
   /**
-   * @param privateKey the {@link SecurityPrivateKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getHex()
-   *        hex representation}.
+   * @param privateKey the {@link SecurityPrivateKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getBase64() base64
+   *        representation}.
    * @return the deserialized {@link SecurityPrivateKey}.
    */
   default SecurityPrivateKey deserializePrivateKey(String privateKey) {
 
-    return deserializePrivateKey(BinaryType.parseHex(privateKey));
+    return deserializePrivateKey(BinaryType.parseBase64(privateKey));
   }
 
   /**
@@ -58,13 +58,13 @@ public interface SecurityAsymmetricKeyCreator extends SecurityKeyCreator, Securi
   SecurityPublicKey deserializePublicKey(byte[] publicKey);
 
   /**
-   * @param publicKey the {@link SecurityPublicKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getHex() hex
+   * @param publicKey the {@link SecurityPublicKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getBase64() base64
    *        representation}.
    * @return the deserialized {@link SecurityPublicKey}.
    */
   default SecurityPublicKey deserializePublicKey(String publicKey) {
 
-    return deserializePublicKey(BinaryType.parseHex(publicKey));
+    return deserializePublicKey(BinaryType.parseBase64(publicKey));
   }
 
   /**
@@ -77,23 +77,25 @@ public interface SecurityAsymmetricKeyCreator extends SecurityKeyCreator, Securi
   }
 
   /**
-   * @param privateKey the {@link SecurityPrivateKey} as raw {@code byte} array.
-   * @param publicKey the {@link SecurityPublicKey} as raw {@code byte} array.
+   * @param privateKey the {@link SecurityPrivateKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getBase64() base64
+   *        representation}.
+   * @param publicKey the {@link SecurityPublicKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getBase64() base64
+   *        representation}.
    * @return the deserialized {@link SecurityAsymmetricKeyPair}.
    */
-  default SecurityAsymmetricKeyPair createKeyPair(String privateKey, String publicKey) {
+  default SecurityAsymmetricKeyPair deserializeKeyPair(String privateKey, String publicKey) {
 
     return new SecurityAsymmetricKeyPairGeneric(deserializePrivateKey(privateKey), deserializePublicKey(publicKey));
   }
 
   /**
-   * @param privateKey the {@link SecurityPrivateKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getHex()
-   *        hex representation}.
+   * @param privateKey the {@link SecurityPrivateKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getHex() hex
+   *        representation}.
    * @param publicKey the {@link SecurityPublicKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getHex() hex
    *        representation}.
    * @return the deserialized {@link SecurityAsymmetricKeyPair}.
    */
-  default SecurityAsymmetricKeyPair createKeyPair(byte[] privateKey, byte[] publicKey) {
+  default SecurityAsymmetricKeyPair deserializeKeyPair(byte[] privateKey, byte[] publicKey) {
 
     return new SecurityAsymmetricKeyPairGeneric(deserializePrivateKey(privateKey), deserializePublicKey(publicKey));
   }

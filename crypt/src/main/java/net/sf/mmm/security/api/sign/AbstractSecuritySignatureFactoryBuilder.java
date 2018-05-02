@@ -1,7 +1,6 @@
 package net.sf.mmm.security.api.sign;
 
 import net.sf.mmm.security.api.AbstractSecurityFactoryBuilder;
-import net.sf.mmm.security.api.crypt.SecurityCryptorFactory;
 import net.sf.mmm.security.api.hash.SecurityHashFactory;
 
 /**
@@ -14,18 +13,18 @@ import net.sf.mmm.security.api.hash.SecurityHashFactory;
 public interface AbstractSecuritySignatureFactoryBuilder extends AbstractSecurityFactoryBuilder {
 
   /**
-   * @param hashFactory the {@link SecurityHashFactory} that is used in advance to build a hash that is then signed
-   *        using the configured cryptor.
-   * @return the {@link SecuritySignatureFactory} for the configured cryptor and the given {@link SecurityHashFactory}.
+   * @param hashFactory the {@link SecurityHashFactory}.
+   * @return the {@link SecuritySignatureFactory} with the given {@link SecurityHashFactory} used in advance to create a
+   *         {@link net.sf.mmm.security.api.hash.SecurityHashCreator#hash() hash} that is then signed using the
+   *         configured cryptographic algorithm.
    */
   SecuritySignatureFactory signUsingCryptor(SecurityHashFactory hashFactory);
 
   /**
-   * @param hashFactory the {@link SecurityHashFactory} that is used in advance to build a hash that is then signed
-   *        using the given {@link SecurityCryptorFactory} to encrypt the hash.
-   * @param cryptorFactory the {@link SecurityCryptorFactory} used to encrypt the hash for signing and decrypt it for
-   *        verification.
-   * @return the {@link SecuritySignatureFactory} for the configured cryptor and hash.
+   * @return the {@link SecuritySignatureFactory} combining the {@link net.sf.mmm.security.api.hash.SecurityHashFactory}
+   *         in advance to create a {@link net.sf.mmm.security.api.hash.SecurityHashCreator#hash() hash} that is then
+   *         signed using the configured cryptographic algorithm (e.g. the
+   *         {@link net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorFactoryPrivatePublic}).
    */
   SecuritySignatureFactory signUsingHashAndCryptor();
 

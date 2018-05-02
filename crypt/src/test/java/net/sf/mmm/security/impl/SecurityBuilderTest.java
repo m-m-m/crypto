@@ -96,7 +96,7 @@ public class SecurityBuilderTest extends Assertions {
   /**
    * @return the {@link SecurityBuilder} instance to test.
    */
-  protected SecurityBuilder newBuilder() {
+  private SecurityBuilder newBuilder() {
 
     return new SecurityBuilderImpl();
   }
@@ -104,7 +104,7 @@ public class SecurityBuilderTest extends Assertions {
   /**
    * @return the {@link SecurityFactoryBuilder} instance to test.
    */
-  protected SecurityFactoryBuilder newFactoryBuilder() {
+  private SecurityFactoryBuilder newFactoryBuilder() {
 
     return newBuilder().newFactoryBuilder();
   }
@@ -337,25 +337,25 @@ public class SecurityBuilderTest extends Assertions {
     verifyKeyPair(keyPair, keyCreator, 91, 67, 67);
   }
 
-  protected void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, SecurityAsymmetricKeyCreator keyCreator, int publicKeyByteCount, int privateKeyByteCountMin,
+  private void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, SecurityAsymmetricKeyCreator keyCreator, int publicKeyByteCount, int privateKeyByteCountMin,
       int privateKeyByteCountMax) {
 
     verifyKeyPair(keyPair, publicKeyByteCount, privateKeyByteCountMin, privateKeyByteCountMax);
 
     SecurityPrivateKey privateKey = keyPair.getPrivateKey();
     SecurityPublicKey publicKey = keyPair.getPublicKey();
-    SecurityAsymmetricKeyPair keyPairCopy = keyCreator.createKeyPair(privateKey.getHex(), publicKey.getHex());
+    SecurityAsymmetricKeyPair keyPairCopy = keyCreator.deserializeKeyPair(privateKey.getBase64(), publicKey.getBase64());
     assertThat(keyPairCopy).isNotNull();
     assertThat(keyPairCopy.getPrivateKey()).isEqualTo(privateKey);
     assertThat(keyPairCopy.getPublicKey()).isEqualTo(publicKey);
     assertThat(keyPairCopy.getPrivateKey().getKey()).isEqualTo(privateKey.getKey());
     assertThat(keyPairCopy.getPublicKey().getKey()).isEqualTo(publicKey.getKey());
 
-    assertThat(keyCreator.deserializePrivateKey(privateKey.getHex())).isEqualTo(privateKey);
-    assertThat(keyCreator.deserializePublicKey(publicKey.getHex())).isEqualTo(publicKey);
+    assertThat(keyCreator.deserializePrivateKey(privateKey.getBase64())).isEqualTo(privateKey);
+    assertThat(keyCreator.deserializePublicKey(publicKey.getBase64())).isEqualTo(publicKey);
   }
 
-  protected void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, int publicKeyByteCount, int privateKeyByteCountMin, int privateKeyByteCountMax) {
+  private void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, int publicKeyByteCount, int privateKeyByteCountMin, int privateKeyByteCountMax) {
 
     assertThat(keyPair).isNotNull();
 
@@ -594,56 +594,56 @@ public class SecurityBuilderTest extends Assertions {
     assertThat(verifier.verify(rawMessage, new SecuritySignature(signature))).isTrue();
   }
 
-  protected SecurityCryptorFactory cryptUnsafe(SecurityFactoryBuilder builder, SecurityCryptorConfig<?> config) {
+  private SecurityCryptorFactory cryptUnsafe(SecurityFactoryBuilder builder, SecurityCryptorConfig<?> config) {
 
     SecurityCryptorFactory cryptorFactory = builder.cryptUnsafe(config);
     verifyFactory(cryptorFactory, config);
     return cryptorFactory;
   }
 
-  protected SecuritySymmetricCryptorFactory crypt(SecurityFactoryBuilder builder, SecuritySymmetricCryptorConfig config) {
+  private SecuritySymmetricCryptorFactory crypt(SecurityFactoryBuilder builder, SecuritySymmetricCryptorConfig config) {
 
     SecuritySymmetricCryptorFactory cryptorFactory = builder.crypt(config);
     verifyFactory(cryptorFactory, config);
     return cryptorFactory;
   }
 
-  protected SecurityAsymmetricCryptorFactoryBidirectional crypt(SecurityFactoryBuilder builder, SecurityAsymmetricCryptorConfigBidirectional config) {
+  private SecurityAsymmetricCryptorFactoryBidirectional crypt(SecurityFactoryBuilder builder, SecurityAsymmetricCryptorConfigBidirectional config) {
 
     SecurityAsymmetricCryptorFactoryBidirectional cryptorFactory = builder.crypt(config);
     verifyFactory(cryptorFactory, config);
     return cryptorFactory;
   }
 
-  protected SecurityAsymmetricCryptorFactoryPrivatePublic crypt(SecurityFactoryBuilder builder, SecurityAsymmetricCryptorConfigPrivatePublic config) {
+  private SecurityAsymmetricCryptorFactoryPrivatePublic crypt(SecurityFactoryBuilder builder, SecurityAsymmetricCryptorConfigPrivatePublic config) {
 
     SecurityAsymmetricCryptorFactoryPrivatePublic cryptorFactory = builder.crypt(config);
     verifyFactory(cryptorFactory, config);
     return cryptorFactory;
   }
 
-  protected SecurityAsymmetricCryptorFactoryPublicPrivate crypt(SecurityFactoryBuilder builder, SecurityAsymmetricCryptorConfigPublicPrivate config) {
+  private SecurityAsymmetricCryptorFactoryPublicPrivate crypt(SecurityFactoryBuilder builder, SecurityAsymmetricCryptorConfigPublicPrivate config) {
 
     SecurityAsymmetricCryptorFactoryPublicPrivate cryptorFactory = builder.crypt(config);
     verifyFactory(cryptorFactory, config);
     return cryptorFactory;
   }
 
-  protected SecurityAsymmetricKeyFactory key(SecurityFactoryBuilder builder, SecurityAsymmetricKeyConfig config) {
+  private SecurityAsymmetricKeyFactory key(SecurityFactoryBuilder builder, SecurityAsymmetricKeyConfig config) {
 
     SecurityAsymmetricKeyFactory keyFactory = builder.key(config);
     verifyFactory(keyFactory, config);
     return keyFactory;
   }
 
-  protected SecuritySymmetricKeyFactory key(SecurityFactoryBuilder builder, SecuritySymmetricKeyConfig config) {
+  private SecuritySymmetricKeyFactory key(SecurityFactoryBuilder builder, SecuritySymmetricKeyConfig config) {
 
     SecuritySymmetricKeyFactory keyFactory = builder.key(config);
     verifyFactory(keyFactory, config);
     return keyFactory;
   }
 
-  protected SecurityHashFactory hash(SecurityFactoryBuilder builder, SecurityHashConfig config) {
+  private SecurityHashFactory hash(SecurityFactoryBuilder builder, SecurityHashConfig config) {
 
     SecurityHashFactory hashFactory = builder.hash(config);
     String toString = config.getAlgorithm();
@@ -655,12 +655,12 @@ public class SecurityBuilderTest extends Assertions {
     return hashFactory;
   }
 
-  protected void verifyFactory(AbstractSecurityFactory factory, SecurityAlgorithmConfig config) {
+  private void verifyFactory(AbstractSecurityFactory factory, SecurityAlgorithmConfig config) {
 
     verifyFactory(factory, config, config.getAlgorithm());
   }
 
-  protected void verifyFactory(AbstractSecurityFactory factory, SecurityAlgorithmConfig config, String toString) {
+  private void verifyFactory(AbstractSecurityFactory factory, SecurityAlgorithmConfig config, String toString) {
 
     assertThat(factory.getAlgorithm()).isEqualTo(config.getAlgorithm());
     assertThat(factory.toString()).isEqualTo(toString);

@@ -33,7 +33,7 @@ public class UnlimitedKeyStrengthJurisdictionPolicy {
 
     try {
       if (!isRestrictedCryptography()) {
-        LOG.debug("Cryptography restrictions removal not needed");
+        LOG.trace("Cryptography restrictions removal not needed");
         return;
       }
       /*

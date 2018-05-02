@@ -35,4 +35,15 @@ public interface SecurityChunker extends SecurityAlgorithmProcessor {
    */
   void update(byte[] input, int offset, int length);
 
+  /**
+   * @see java.security.MessageDigest#update(byte[])
+   * @see java.security.Signature#update(byte[])
+   *
+   * @param input the {@link SecurityBinaryType} containing the next chunk of {@link SecurityBinaryType#getData() data}.
+   */
+  default void update(SecurityBinaryType input) {
+
+    update(input.getRawData());
+  }
+
 }

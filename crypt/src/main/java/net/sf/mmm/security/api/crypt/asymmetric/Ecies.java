@@ -2,6 +2,7 @@ package net.sf.mmm.security.api.crypt.asymmetric;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmEcies;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfigEc;
+import net.sf.mmm.security.api.sign.SecuritySignatureConfig;
 
 /**
  * Direct builder for {@link SecurityAlgorithmEcies ECIES}.
@@ -30,9 +31,14 @@ public final class Ecies extends AbstractSecurityAsymmetricCryptorBuilderPublicP
     return this.config;
   }
 
+  @Override
+  protected SecuritySignatureConfig getSignatureConfig() {
+
+    return new SecuritySignatureConfig(SecuritySignatureConfig.SIGNATURE_ALGORITHM_ECDSA);
+  }
+
   /**
-   * @param keyLength the {@link net.sf.mmm.security.api.key.SecurityKeyConfig#getKeyLength() key length} in
-   *        bits.
+   * @param keyLength the {@link net.sf.mmm.security.api.key.SecurityKeyConfig#getKeyLength() key length} in bits.
    * @return the according {@link Ecies} instance.
    */
   public static Ecies keyLength(int keyLength) {
@@ -41,7 +47,7 @@ public final class Ecies extends AbstractSecurityAsymmetricCryptorBuilderPublicP
   }
 
   /**
-   * @return the result of {@link #keyLength(int) keyLength}(4096).
+   * @return the result of {@link #keyLength(int) keyLength}(256).
    */
   public static Ecies keyLength256() {
 

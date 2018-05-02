@@ -2,6 +2,7 @@ package net.sf.mmm.security.api.hash;
 
 import java.io.OutputStream;
 
+import net.sf.mmm.security.api.SecurityBinaryType;
 import net.sf.mmm.security.api.SecurityChunker;
 
 /**
@@ -57,6 +58,18 @@ public interface SecurityHashCreator extends SecurityChunker {
 
     update(input);
     return hash(true);
+  }
+
+  /**
+   * @param input the data to hash.
+   * @param reset - see {@link #hash(boolean)}.
+   * @return the calculated {@link SecurityHash} of the given {@code input} data.
+   * @see java.security.MessageDigest#digest(byte[], int, int)
+   */
+  default SecurityHash hash(SecurityBinaryType input, boolean reset) {
+
+    update(input);
+    return new SecurityHash(hash(true));
   }
 
   /**

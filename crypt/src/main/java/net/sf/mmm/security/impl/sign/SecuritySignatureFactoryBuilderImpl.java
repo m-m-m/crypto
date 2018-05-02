@@ -19,25 +19,21 @@ import net.sf.mmm.security.api.sign.SecuritySignatureFactoryBuilder;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface SecuritySignatureFactoryBuilderImpl extends SecuritySignatureFactoryBuilder,
-    AbstractSecurityGetProvider, AbstractSecurityGetRandomFactory, AbstractSecurityGetHashFactory,
-    AbstractSecurityGetCryptorFactory<SecurityCryptorFactory>, AbstractSecuritySetSignatureFactory {
+public interface SecuritySignatureFactoryBuilderImpl extends SecuritySignatureFactoryBuilder, AbstractSecurityGetProvider, AbstractSecurityGetRandomFactory,
+    AbstractSecurityGetHashFactory, AbstractSecurityGetCryptorFactory<SecurityCryptorFactory>, AbstractSecuritySetSignatureFactory {
 
   @Override
   default SecuritySignatureFactory sign(SecuritySignatureConfig configuration) {
 
-    SecuritySignatureFactoryImpl factory = new SecuritySignatureFactoryImpl(configuration, getProvider(),
-        getRandomFactoryRequired());
+    SecuritySignatureFactoryImpl factory = new SecuritySignatureFactoryImpl(configuration, getProvider(), getRandomFactoryRequired());
     setSignatureFactory(factory);
     return factory;
   }
 
   @Override
-  default SecuritySignatureFactory sign(SecurityHashFactory hashFactory,
-      SecurityAsymmetricCryptorFactoryPrivatePublic cryptorFactory) {
+  default SecuritySignatureFactory sign(SecurityHashFactory hashFactory, SecurityAsymmetricCryptorFactoryPrivatePublic cryptorFactory) {
 
-    SecuritySignatureFactoryImplCryptorWithHash factory = new SecuritySignatureFactoryImplCryptorWithHash(
-        cryptorFactory, hashFactory);
+    SecuritySignatureFactoryImplCryptorWithHash factory = new SecuritySignatureFactoryImplCryptorWithHash(cryptorFactory, hashFactory);
     setSignatureFactory(factory);
     return factory;
   }
@@ -45,10 +41,8 @@ public interface SecuritySignatureFactoryBuilderImpl extends SecuritySignatureFa
   @Override
   default SecuritySignatureFactory sign(SecuritySignatureConfig configuration, SecurityHashFactory hashFactory) {
 
-    SecuritySignatureFactory signatureFactory = new SecuritySignatureFactoryImpl(configuration, getProvider(),
-        getRandomFactoryRequired());
-    SecuritySignatureFactoryImplWithHash factory = new SecuritySignatureFactoryImplWithHash(signatureFactory,
-        hashFactory);
+    SecuritySignatureFactory signatureFactory = new SecuritySignatureFactoryImpl(configuration, getProvider(), getRandomFactoryRequired());
+    SecuritySignatureFactoryImplWithHash factory = new SecuritySignatureFactoryImplWithHash(signatureFactory, hashFactory);
     setSignatureFactory(factory);
     return factory;
   }
@@ -56,10 +50,8 @@ public interface SecuritySignatureFactoryBuilderImpl extends SecuritySignatureFa
   @Override
   default SecuritySignatureFactory signUsingHash(SecuritySignatureConfig configuration) {
 
-    SecuritySignatureFactory signatureFactory = new SecuritySignatureFactoryImpl(configuration, getProvider(),
-        getRandomFactoryRequired());
-    SecuritySignatureFactoryImplWithHash factory = new SecuritySignatureFactoryImplWithHash(signatureFactory,
-        getHashFactoryRequired());
+    SecuritySignatureFactory signatureFactory = new SecuritySignatureFactoryImpl(configuration, getProvider(), getRandomFactoryRequired());
+    SecuritySignatureFactoryImplWithHash factory = new SecuritySignatureFactoryImplWithHash(signatureFactory, getHashFactoryRequired());
     setSignatureFactory(factory);
     return factory;
   }
@@ -69,8 +61,8 @@ public interface SecuritySignatureFactoryBuilderImpl extends SecuritySignatureFa
 
     SecurityCryptorFactory cryptorFactory = getCryptorFactoryRequired();
     if (!(cryptorFactory instanceof SecurityAsymmetricCryptorFactoryPrivatePublic)) {
-      throw new IllegalStateException("Illegal cryptor factory " + cryptorFactory.getClass().getName()
-          + " - has to be instance of " + SecurityAsymmetricCryptorFactoryPrivatePublic.class.getSimpleName());
+      throw new IllegalStateException("Illegal cryptor factory " + cryptorFactory.getClass().getName() + " - has to be an instance of "
+          + SecurityAsymmetricCryptorFactoryPrivatePublic.class.getSimpleName() + " in order to be used for signing.");
     }
     return sign(hashFactory, (SecurityAsymmetricCryptorFactoryPrivatePublic) cryptorFactory);
   }

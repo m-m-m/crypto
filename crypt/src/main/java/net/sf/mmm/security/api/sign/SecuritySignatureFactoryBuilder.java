@@ -42,17 +42,6 @@ public interface SecuritySignatureFactoryBuilder extends AbstractSecuritySignatu
    *        verification.
    * @return the {@link SecuritySignatureFactory} for the given {@code configuration}
    */
-  SecuritySignatureFactory sign(SecurityHashFactory hashFactory,
-      SecurityAsymmetricCryptorFactoryPrivatePublic cryptorFactory);
-
-  /**
-   * @param hashFactory the {@link SecurityHashFactory} that is used in advance to build a hash that is then signed
-   *        using the given {@link SecurityCryptorFactory} to encrypt the hash.
-   * @param cryptorFactory the {@link SecurityCryptorFactory} used to encrypt the hash for signing and decrypt it for
-   *        verification.
-   * @return the {@link SecuritySignatureFactory} for the given {@code configuration}
-   */
-  @Override
-  SecuritySignatureFactory signUsingHashAndCryptor();
+  SecuritySignatureFactory sign(SecurityHashFactory hashFactory, SecurityAsymmetricCryptorFactoryPrivatePublic cryptorFactory);
 
 }

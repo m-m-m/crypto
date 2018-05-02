@@ -80,7 +80,61 @@ public abstract interface SecurityAlgorithmProcessor extends SecurityAlgorithm {
    */
   default byte[] process(byte[] input, int offset, int length) {
 
+    return process(input, offset, length, true);
+  }
+
+  /**
+   * Generic method to process and transform data.
+   * <table border="1">
+   * <tr>
+   * <th>{@link SecurityAlgorithmProcessor}</th>
+   * <th>Equivalent of {@link #process(byte[], int, int, boolean) process}(input, offset, length, complete)</th>
+   * </tr>
+   * <tr>
+   * <td>{@link net.sf.mmm.security.api.hash.SecurityHashCreator}</td>
+   * <td><code>{@link net.sf.mmm.security.api.hash.SecurityHashCreator#update(byte[], int, int) update}(input, offset, length);
+   * return {@link net.sf.mmm.security.api.hash.SecurityHashCreator#hash(boolean)
+   * hash}(complete);</code></td>
+   * </tr>
+   * <tr>
+   * <td>{@link net.sf.mmm.security.api.crypt.SecurityCryptor}</td>
+   * <td><code>return {@link net.sf.mmm.security.api.crypt.SecurityCryptor#crypt(byte[], int, int, boolean) crypt}(input, offset, length, true);</code></td>
+   * </tr>
+   * <tr>
+   * <td>{@link net.sf.mmm.security.api.sign.SecuritySignatureSigner}</td>
+   * <td><code>{@link net.sf.mmm.security.api.sign.SecuritySignatureSigner#update(byte[], int, int) update}(input, offset, length);
+   * return {@link net.sf.mmm.security.api.sign.SecuritySignatureSigner#sign(boolean) sign}(complete);</code></td>
+   * </tr>
+   * <tr>
+   * <td>{@link net.sf.mmm.security.api.sign.SecuritySignatureVerifier}</td>
+   * <td><code>throw new {@link UnsupportedOperationException}();</code></td>
+   * </tr>
+   * </table>
+   *
+   * @param input the data to process.
+   * @param offset the index where to start reading data from {@code input}.
+   * @param length the number of bytes to read from {@code input}.
+   * @param complete - {@code true} to complete/reset this processor after processing the given {@code input},
+   *        {@code false} otherwise.
+   * @return the transformed {@code input} data.
+   */
+  default byte[] process(byte[] input, int offset, int length, boolean complete) {
+
     throw new UnsupportedOperationException();
+  }
+
+  /**
+   *
+   * @param input the {@link SecurityBinaryType} {@link SecurityBinaryType#getData() containing the data} to process.
+   * @param complete - {@code true} to complete/reset this processor after processing the given {@code input},
+   *        {@code false} otherwise.
+   * @return the transformed {@code input} data.
+   * @see #process(byte[])
+   */
+  default byte[] process(SecurityBinaryType input, boolean complete) {
+
+    byte[] data = input.getRawData();
+    return process(data, 0, data.length, complete);
   }
 
   /**
