@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.security.api.crypt.asymmetric;
 
-import java.security.Security;
-
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Test;
 
 /**
@@ -19,7 +16,6 @@ public class EciesTest extends SecurityAsymmetricCryptorBuilderTest {
   public void testEcies256() {
 
     // given
-    Security.addProvider(new BouncyCastleProvider());
     Ecies ecies256 = Ecies.keyLength256();
     assertThat(ecies256.getAlgorithm()).isEqualTo("ECIES");
     assertThat(ecies256.getCryptorConfig().getKeyAlgorithmConfig().getKeyLength()).isEqualTo(256);

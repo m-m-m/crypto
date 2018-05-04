@@ -75,6 +75,9 @@ public class UnlimitedKeyStrengthJurisdictionPolicy {
     removeCryptographyRestrictions();
   }
 
+  /**
+   * Ensures that the class gets loaded and the installation was triggered.
+   */
   public static void ensure() {
     // just force loading of this class
   }

@@ -61,7 +61,7 @@ public abstract class AbstractSecurityCryptorBuilder<C extends SecurityCryptorFa
 
   /**
    * Same as {@link #hash(SecurityHashConfig)} but returning {@code this} for builder pattern and fluent API.
-   * 
+   *
    * @param configuration the {@link SecurityHashConfig}.
    * @return this.
    */
@@ -134,6 +134,7 @@ public abstract class AbstractSecurityCryptorBuilder<C extends SecurityCryptorFa
    */
   public AbstractSecurityFactories getFactories() {
 
+    getCryptorFactory();
     return this.factoryBuilder;
   }
 

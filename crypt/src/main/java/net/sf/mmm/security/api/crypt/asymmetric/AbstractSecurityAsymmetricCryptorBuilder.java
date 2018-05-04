@@ -1,5 +1,6 @@
 package net.sf.mmm.security.api.crypt.asymmetric;
 
+import net.sf.mmm.security.api.AbstractSecurityFactories;
 import net.sf.mmm.security.api.SecurityFactoryBuilder;
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmRsa;
 import net.sf.mmm.security.api.crypt.AbstractSecurityCryptorBuilder;
@@ -61,6 +62,17 @@ public abstract class AbstractSecurityAsymmetricCryptorBuilder<C extends Securit
   public String getAlgorithm() {
 
     return getCryptorConfig().getAlgorithm();
+  }
+
+  @Override
+  public AbstractSecurityFactories getFactories() {
+
+    getAsymmetricKeyFactory();
+    AbstractSecurityFactories factories = super.getFactories();
+    if (factories.getSignatureFactory() == null) {
+      signUsingHashAndCryptor();
+    }
+    return factories;
   }
 
 }

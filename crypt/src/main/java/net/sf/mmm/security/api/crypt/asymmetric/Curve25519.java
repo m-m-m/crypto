@@ -3,6 +3,7 @@
 package net.sf.mmm.security.api.crypt.asymmetric;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmCurve25519;
+import net.sf.mmm.security.api.provider.BouncyCastleInstaller;
 import net.sf.mmm.security.api.sign.SecuritySignatureConfig;
 
 /**
@@ -23,7 +24,9 @@ public class Curve25519 extends AbstractSecurityAsymmetricCryptorBuilderPublicPr
   public Curve25519(SecurityAsymmetricCryptorConfigCurve25519 config) {
 
     super();
+    BouncyCastleInstaller.install();
     this.config = config;
+    // getFactoryBuilder().provider(BouncyCastleProvider.PROVIDER_NAME);
   }
 
   @Override

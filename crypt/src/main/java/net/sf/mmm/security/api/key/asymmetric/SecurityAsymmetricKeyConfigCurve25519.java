@@ -78,7 +78,20 @@ public class SecurityAsymmetricKeyConfigCurve25519 extends SecurityAsymmetricKey
   @Override
   public KeySpec deserializePublicKey(byte[] publicKey, boolean lazy) {
 
-    if (publicKey.length == 33) { // TODO make 32 byte representation normal form
+    if (publicKey.length <= 32) {
+      if (lazy && (publicKey.length == 32)) {
+        return null;
+      }
+      byte[] key = new byte[33];
+      int offset = 33 - publicKey.length;
+      for (int i = publicKey.length - 1; i >= 0; i--) {
+        key[offset++] = publicKey[i];
+      }
+      key[0] = 3;
+      ECCurve curve = getCurve25519().getCurve();
+      ECPoint q = curve.decodePoint(key);
+      return new ECPublicKeySpec(q, this.curve25519);
+    } else if (publicKey.length == 33) { // TODO make 32 byte representation normal form
       if (lazy) {
         return null;
       }
@@ -99,7 +112,7 @@ public class SecurityAsymmetricKeyConfigCurve25519 extends SecurityAsymmetricKey
   @Override
   public KeySpec deserializePrivateKey(byte[] privateKey, boolean lazy) {
 
-    if (privateKey.length == 32) {
+    if (privateKey.length <= 32) {
       if (lazy) {
         return null;
       }

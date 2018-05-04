@@ -2,6 +2,7 @@ package net.sf.mmm.security.api.crypt.asymmetric;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmEcies;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfigEc;
+import net.sf.mmm.security.api.provider.BouncyCastleInstaller;
 import net.sf.mmm.security.api.sign.SecuritySignatureConfig;
 
 /**
@@ -23,6 +24,7 @@ public final class Ecies extends AbstractSecurityAsymmetricCryptorBuilderPublicP
 
     super();
     this.config = config;
+    BouncyCastleInstaller.install();
   }
 
   @Override
