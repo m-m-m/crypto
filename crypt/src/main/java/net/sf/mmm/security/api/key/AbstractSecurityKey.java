@@ -113,14 +113,4 @@ public abstract class AbstractSecurityKey<K extends Key> extends SecurityBinaryT
     return this.key;
   }
 
-  @Override
-  public boolean equals(Object obj) {
-
-    boolean equals = super.equals(obj);
-    if (equals) {
-      assert (getKey().equals(((AbstractSecurityKey<?>) obj).getKey()));
-    }
-    return equals;
-  }
-
 }
