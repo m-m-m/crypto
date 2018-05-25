@@ -43,9 +43,9 @@ public interface SecurityHashCreator extends SecurityChunker {
   OutputStream wrapStream(OutputStream out);
 
   @Override
-  default byte[] process(byte[] input, int offset, int length) {
+  default byte[] process(byte[] input, int offset, int length, boolean complete) {
 
-    return hash(input, offset, length, true);
+    return hash(input, offset, length, complete);
   }
 
   /**

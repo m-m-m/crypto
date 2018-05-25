@@ -45,9 +45,9 @@ public interface SecuritySignatureSigner extends SecuritySignatureCreator {
   }
 
   @Override
-  default byte[] process(byte[] input, int offset, int length) {
+  default byte[] process(byte[] input, int offset, int length, boolean complete) {
 
-    return sign(input, offset, length, true);
+    return sign(input, offset, length, complete);
   }
 
   /**
