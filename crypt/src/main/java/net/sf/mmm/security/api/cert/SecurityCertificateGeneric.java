@@ -3,7 +3,7 @@ package net.sf.mmm.security.api.cert;
 import java.security.cert.Certificate;
 import java.util.function.Supplier;
 
-import net.sf.mmm.util.lang.api.BinaryType;
+import net.sf.mmm.util.datatype.api.BinaryType;
 
 /**
  * Generic implementation of {@link SecurityCertificate}.
@@ -23,6 +23,7 @@ public class SecurityCertificateGeneric extends BinaryType implements SecurityCe
    * @param certificate the {@link #getCertificate() certificate} to wrap.
    */
   public SecurityCertificateGeneric(Certificate certificate) {
+
     this(encode(certificate), certificate);
   }
 
@@ -34,6 +35,7 @@ public class SecurityCertificateGeneric extends BinaryType implements SecurityCe
    * @param certificate the {@link #getCertificate() certificate} to wrap.
    */
   public SecurityCertificateGeneric(byte[] data, Certificate certificate) {
+
     super(data);
     this.certificate = certificate;
     this.certificateSupplier = null;
@@ -47,6 +49,7 @@ public class SecurityCertificateGeneric extends BinaryType implements SecurityCe
    * @param certificateSupplier the {@link Supplier} of the {@link #getCertificate() certificate}.
    */
   public SecurityCertificateGeneric(byte[] data, Supplier<Certificate> certificateSupplier) {
+
     super(data);
     this.certificate = null;
     this.certificateSupplier = certificateSupplier;
@@ -60,6 +63,7 @@ public class SecurityCertificateGeneric extends BinaryType implements SecurityCe
    * @param certificate the {@link #getCertificate() certificate} to wrap.
    */
   public SecurityCertificateGeneric(String hex, Certificate certificate) {
+
     super(hex);
     this.certificate = certificate;
     this.certificateSupplier = null;
@@ -73,6 +77,7 @@ public class SecurityCertificateGeneric extends BinaryType implements SecurityCe
    * @param certificateSupplier the {@link Supplier} of the {@link #getCertificate() certificate}.
    */
   public SecurityCertificateGeneric(String hex, Supplier<Certificate> certificateSupplier) {
+
     super(hex);
     this.certificate = null;
     this.certificateSupplier = certificateSupplier;

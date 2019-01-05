@@ -2,16 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.security.api.crypt.asymmetric;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 import net.sf.mmm.security.api.hash.SecurityHashConfigSha256;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyCreator;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPair;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPrivateKey;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 import net.sf.mmm.security.api.sign.SecuritySignatureFactory;
-import net.sf.mmm.util.lang.api.BinaryType;
+import net.sf.mmm.util.datatype.api.BinaryType;
+
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * Test of {@link Curve25519}.

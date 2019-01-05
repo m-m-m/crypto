@@ -2,7 +2,7 @@ package net.sf.mmm.security.api.cert;
 
 import java.security.cert.Certificate;
 
-import net.sf.mmm.util.lang.api.Binary;
+import net.sf.mmm.util.datatype.api.Binary;
 
 /**
  * Interface for a {@link Certificate}.

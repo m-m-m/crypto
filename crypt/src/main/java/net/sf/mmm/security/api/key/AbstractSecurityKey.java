@@ -5,7 +5,7 @@ import java.security.PrivateKey;
 import java.util.function.Supplier;
 
 import net.sf.mmm.security.api.SecurityBinaryType;
-import net.sf.mmm.util.lang.api.BinaryType;
+import net.sf.mmm.util.datatype.api.BinaryType;
 
 /**
  * Simple datatype as container for a {@link PrivateKey} (see {@link #getKey()}). Allows simple and fast reading and

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.security.api;
 
-import net.sf.mmm.util.lang.api.BinaryType;
+import net.sf.mmm.util.datatype.api.BinaryType;
 
 /**
  * {@link BinaryType} for security content such as {@link net.sf.mmm.security.api.hash.SecurityHash},

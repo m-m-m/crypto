@@ -1,7 +1,7 @@
 package net.sf.mmm.security.api.cert;
 
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPair;
-import net.sf.mmm.util.lang.api.BinaryType;
+import net.sf.mmm.util.datatype.api.BinaryType;
 
 /**
  * Interface to {@link #generateCertificate(SecurityAsymmetricKeyPair, SecurityCertificateData) generate} or
@@ -21,8 +21,7 @@ public interface SecurityCertificateCreator {
   SecurityCertificate createCertificate(byte[] certificate);
 
   /**
-   * @param certificate the {@link SecurityCertificate} in {@link net.sf.mmm.util.lang.api.BinaryType#getHex()
-   *        hex representation}.
+   * @param certificate the {@link SecurityCertificate} in {@link BinaryType#getHex() hex representation}.
    * @return the deserialized {@link SecurityCertificate}.
    */
   default SecurityCertificate createCertificate(String certificate) {

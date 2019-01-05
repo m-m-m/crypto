@@ -2,7 +2,7 @@ package net.sf.mmm.security.api.crypt;
 
 import net.sf.mmm.security.api.SecurityAlgorithmProcessor;
 import net.sf.mmm.security.api.SecurityBinaryType;
-import net.sf.mmm.util.lang.api.Binary;
+import net.sf.mmm.util.datatype.api.Binary;
 
 /**
  * The abstract interface for an encryption or decryption function of an cryptographic algorithm. It supports both
@@ -19,7 +19,8 @@ import net.sf.mmm.util.lang.api.Binary;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface SecurityCryptor extends SecurityAlgorithmProcessor, SecurityCryptorConstants, AbstractSecurityGetNonceSize {
+public abstract interface SecurityCryptor
+    extends SecurityAlgorithmProcessor, SecurityCryptorConstants, AbstractSecurityGetNonceSize {
 
   /**
    * @see javax.crypto.Cipher#doFinal()

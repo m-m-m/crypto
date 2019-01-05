@@ -16,7 +16,7 @@ import net.sf.mmm.security.api.crypt.SecurityDecryptor;
 import net.sf.mmm.security.api.crypt.SecurityEncryptor;
 import net.sf.mmm.security.api.random.SecurityRandomFactory;
 import net.sf.mmm.security.impl.AbstractSecurityAlgorithmWithRandom;
-import net.sf.mmm.util.lang.api.Binary;
+import net.sf.mmm.util.datatype.api.Binary;
 
 /**
  * Abstract implementation of {@link SecurityCryptor} based on {@link Cipher}.
@@ -49,6 +49,7 @@ public abstract class SecurityCryptorImplCipher extends AbstractSecurityAlgorith
    */
   public SecurityCryptorImplCipher(Provider provider, SecurityRandomFactory randomFactory,
       SecurityCryptorConfig<?> config, Key key) {
+
     super(provider, randomFactory);
     this.key = key;
     this.config = config;

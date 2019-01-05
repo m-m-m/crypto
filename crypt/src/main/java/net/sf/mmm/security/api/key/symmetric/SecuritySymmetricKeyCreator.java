@@ -3,7 +3,7 @@ package net.sf.mmm.security.api.key.symmetric;
 import javax.crypto.SecretKey;
 
 import net.sf.mmm.security.api.key.SecurityKeyCreator;
-import net.sf.mmm.util.lang.api.BinaryType;
+import net.sf.mmm.util.datatype.api.BinaryType;
 
 /**
  * Extends {@link SecurityKeyCreator} for dealing with symmetric cryptographic keys.
@@ -39,8 +39,7 @@ public abstract interface SecuritySymmetricKeyCreator extends SecurityKeyCreator
   SecuritySymmetricKey deserializeKey(byte[] key);
 
   /**
-   * @param key the {@link SecuritySymmetricKey} in {@link net.sf.mmm.util.lang.api.BinaryType#getHex() hex
-   *        representation}.
+   * @param key the {@link SecuritySymmetricKey} in {@link BinaryType#getHex() hex representation}.
    * @return the deserialized {@link SecuritySymmetricKey}.
    */
   default SecuritySymmetricKey deserializeKey(String key) {

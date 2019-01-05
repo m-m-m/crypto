@@ -2,7 +2,7 @@ package net.sf.mmm.security.api.key;
 
 import java.security.Key;
 
-import net.sf.mmm.util.lang.api.Binary;
+import net.sf.mmm.util.datatype.api.Binary;
 
 /**
  * Abstract interface for a security key used for encryption/decryption and signatures.
