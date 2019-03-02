@@ -1,0 +1,16 @@
+language: java
+dist: trusty
+jdk:
+  - oraclejdk8
+script:
+  - mvn install
+cache:
+  directories:
+    - $HOME/.m2
+sudo: false
+branches:
+  except:
+    - gh-pages
+notifications:
+  email:
+    - joerg.hohwiller@googlemail.com
