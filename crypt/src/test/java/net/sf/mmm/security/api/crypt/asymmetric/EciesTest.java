@@ -21,13 +21,7 @@ public class EciesTest extends SecurityAsymmetricCryptorBuilderTest {
     assertThat(ecies256.getCryptorConfig().getKeyAlgorithmConfig().getKeyLength()).isEqualTo(256);
 
     // when + then
-    verifyPublicPrivate(ecies256);
-  }
-
-  @Override
-  protected int getEncryptionLength() {
-
-    return 99;
+    verify(ecies256, 99);
   }
 
   @Override
@@ -40,6 +34,32 @@ public class EciesTest extends SecurityAsymmetricCryptorBuilderTest {
   protected int getSignatureLength() {
 
     return 72;
+  }
+
+  @Override
+  protected int getPrivateKeyCompactLength() {
+
+    // return 32;
+    return 67;
+  }
+
+  @Override
+  protected int getPrivateKeyEncodedLength() {
+
+    return 67;
+  }
+
+  @Override
+  protected int getPublicKeyCompactLength() {
+
+    // return 33;
+    return 91;
+  }
+
+  @Override
+  protected int getPublicKeyEncodedLength() {
+
+    return 91;
   }
 
 }

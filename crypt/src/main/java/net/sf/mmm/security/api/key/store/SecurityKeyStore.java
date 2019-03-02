@@ -25,7 +25,7 @@ public interface SecurityKeyStore {
    * @param password the passphrase used to secure the {@link SecurityKeySet}.
    * @return the {@link SecurityKeySet} loaded from the key store.
    */
-  SecurityKeySet getKeyPair(String alias, String password);
+  SecurityKeySet getKey(String alias, String password);
 
   /**
    * @param alias the alias under which the key pair shall be stored.
@@ -33,7 +33,7 @@ public interface SecurityKeyStore {
    * @param password the passphrase used to secure the {@link SecurityKeySet}.
    * @param certificatePath the {@link SecurityCertificatePath}.
    */
-  void setKeyPair(String alias, SecurityAsymmetricKeyPair keyPair, String password,
+  void setKey(String alias, SecurityAsymmetricKeyPair keyPair, String password,
       SecurityCertificatePath certificatePath);
 
   /**
@@ -41,7 +41,7 @@ public interface SecurityKeyStore {
    * @param key the {@link SecuritySymmetricKey} to store.
    * @param password the passphrase used to secure the {@link SecurityKeySet}.
    */
-  void setKeyPair(String alias, SecuritySymmetricKey key, String password);
+  void setKey(String alias, SecuritySymmetricKey key, String password);
 
   /**
    * Saves all the key store with all changes.

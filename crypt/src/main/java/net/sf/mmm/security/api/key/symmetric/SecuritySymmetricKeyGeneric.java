@@ -14,7 +14,7 @@ import net.sf.mmm.security.api.key.AbstractSecurityKey;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecuritySymmetricKeyGeneric extends AbstractSecurityKey<SecretKey> implements SecuritySymmetricKey {
+public class SecuritySymmetricKeyGeneric extends AbstractSecurityKey<SecretKey, SecretKey> implements SecuritySymmetricKey {
 
   /**
    * The constructor.

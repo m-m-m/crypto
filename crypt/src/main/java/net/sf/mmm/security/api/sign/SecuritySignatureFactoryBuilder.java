@@ -1,7 +1,7 @@
 package net.sf.mmm.security.api.sign;
 
 import net.sf.mmm.security.api.crypt.SecurityCryptorFactory;
-import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorFactoryPrivatePublic;
+import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorFactory;
 import net.sf.mmm.security.api.hash.SecurityHashFactory;
 
 /**
@@ -37,11 +37,11 @@ public interface SecuritySignatureFactoryBuilder extends AbstractSecuritySignatu
 
   /**
    * @param hashFactory the {@link SecurityHashFactory} that is used in advance to build a hash that is then signed
-   *        using the given {@link SecurityAsymmetricCryptorFactoryPrivatePublic} to encrypt the hash.
+   *        using the given {@link SecurityAsymmetricCryptorFactory} to encrypt the hash.
    * @param cryptorFactory the {@link SecurityCryptorFactory} used to encrypt the hash for signing and decrypt it for
    *        verification.
    * @return the {@link SecuritySignatureFactory} for the given {@code configuration}
    */
-  SecuritySignatureFactory sign(SecurityHashFactory hashFactory, SecurityAsymmetricCryptorFactoryPrivatePublic cryptorFactory);
+  SecuritySignatureFactory sign(SecurityHashFactory hashFactory, SecurityAsymmetricCryptorFactory cryptorFactory);
 
 }

@@ -21,19 +21,31 @@ public class RsaTest extends SecurityAsymmetricCryptorBuilderTest {
     assertThat(rsa4096.getCryptorConfig().getKeyAlgorithmConfig().getKeyLength()).isEqualTo(4096);
 
     // when + then
-    verifyBidirectional(rsa4096);
-  }
-
-  @Override
-  protected int getEncryptionLength() {
-
-    return 512;
+    verifyBidirectional(rsa4096, 512);
   }
 
   @Override
   protected int getSignatureLength() {
 
     return 512;
+  }
+
+  @Override
+  protected int getPrivateKeyEncodedMinLength() {
+
+    return 2373;
+  }
+
+  @Override
+  protected int getPrivateKeyEncodedLength() {
+
+    return 2376;
+  }
+
+  @Override
+  protected int getPublicKeyEncodedLength() {
+
+    return 550;
   }
 
 }

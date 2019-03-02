@@ -10,10 +10,9 @@ import net.sf.mmm.security.api.hash.SecurityHashConfig;
 import net.sf.mmm.security.api.hash.SecurityHashFactory;
 import net.sf.mmm.security.api.hash.SecurityHashFactoryBuilder;
 import net.sf.mmm.security.api.provider.SecurityProviderBuilder;
-import net.sf.mmm.security.api.sign.AbstractSecuritySignatureFactoryBuilder;
+import net.sf.mmm.security.api.sign.AbstractSecurityGetSignatureFactory;
 import net.sf.mmm.security.api.sign.SecuritySignatureConfig;
 import net.sf.mmm.security.api.sign.SecuritySignatureFactory;
-import net.sf.mmm.security.impl.sign.SecuritySignatureFactoryImplWithHash;
 
 /**
  * Abstract base class for quick and short access to cryptor algorithms.
@@ -24,9 +23,12 @@ import net.sf.mmm.security.impl.sign.SecuritySignatureFactoryImplWithHash;
  * @since 1.0.0
  */
 public abstract class AbstractSecurityCryptorBuilder<C extends SecurityCryptorFactory, B extends AbstractSecurityCryptorBuilder<C, B>>
-    implements AbstractSecurityGetCryptorFactory<C>, SecurityProviderBuilder<B>, AbstractSecuritySignatureFactoryBuilder, SecurityHashFactoryBuilder {
+    implements AbstractSecurityGetCryptorFactory<C>, AbstractSecurityGetSignatureFactory, SecurityProviderBuilder<B>,
+    SecurityHashFactoryBuilder {
 
   private final SecurityFactoryBuilder factoryBuilder;
+
+  private SecurityHashConfig hashConfig;
 
   /**
    * The constructor.
@@ -40,10 +42,7 @@ public abstract class AbstractSecurityCryptorBuilder<C extends SecurityCryptorFa
   /**
    * @return the optional {@link SecuritySignatureConfig}.
    */
-  protected SecuritySignatureConfig getSignatureConfig() {
-
-    return null;
-  }
+  protected abstract SecuritySignatureConfig getSignatureConfig();
 
   /**
    * @return the result of {@link #getCryptorFactory()}.
@@ -56,6 +55,7 @@ public abstract class AbstractSecurityCryptorBuilder<C extends SecurityCryptorFa
   @Override
   public SecurityHashFactory hash(SecurityHashConfig configuration) {
 
+    this.hashConfig = configuration;
     return this.factoryBuilder.hash(configuration);
   }
 
@@ -71,23 +71,30 @@ public abstract class AbstractSecurityCryptorBuilder<C extends SecurityCryptorFa
     return self();
   }
 
-  @Override
-  public SecuritySignatureFactory signUsingCryptor(SecurityHashFactory hashFactory) {
+  /**
+   * @return the {@link SecurityHashConfig} or {@code null} if not yet {@link #hash(SecurityHashConfig) set}.
+   */
+  protected SecurityHashConfig getHashConfig() {
 
-    SecuritySignatureConfig signatureConfig = getSignatureConfig();
-    if (signatureConfig == null) {
-      getCryptorFactory();
-      return this.factoryBuilder.signUsingCryptor(hashFactory);
-    } else {
-      SecuritySignatureFactory signatureFactory = this.factoryBuilder.sign(signatureConfig);
-      return new SecuritySignatureFactoryImplWithHash(signatureFactory, hashFactory);
-    }
+    return this.hashConfig;
+  }
+
+  /**
+   * @return the result of {@link #getSignatureFactory()}.
+   */
+  public SecuritySignatureFactory sign() {
+
+    return getSignatureFactory();
   }
 
   @Override
-  public SecuritySignatureFactory signUsingHashAndCryptor() {
+  public SecuritySignatureFactory getSignatureFactory() {
 
-    return signUsingCryptor(this.factoryBuilder.getHashFactoryRequired());
+    SecuritySignatureFactory signatureFactory = this.factoryBuilder.getSignatureFactory();
+    if (signatureFactory == null) {
+      signatureFactory = this.factoryBuilder.sign(getSignatureConfig());
+    }
+    return signatureFactory;
   }
 
   @Override

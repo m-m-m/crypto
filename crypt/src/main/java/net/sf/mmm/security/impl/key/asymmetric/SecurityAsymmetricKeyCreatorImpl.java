@@ -2,7 +2,6 @@ package net.sf.mmm.security.impl.key.asymmetric;
 
 import java.security.KeyFactory;
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.Provider;
 import java.security.PublicKey;
@@ -10,22 +9,15 @@ import java.security.spec.KeySpec;
 
 import net.sf.mmm.security.api.key.SecurityKeyCreator;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfig;
-import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyCreator;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPair;
-import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPairGeneric;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPrivateKey;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPrivateKeyGeneric;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKeyGeneric;
 import net.sf.mmm.security.api.random.SecurityRandomFactory;
-import net.sf.mmm.security.impl.SecurityAlgorithmImplWithRandom;
 
 /**
  * Implementation of {@link SecurityKeyCreator}.
  */
-public class SecurityAsymmetricKeyCreatorImpl extends SecurityAlgorithmImplWithRandom implements SecurityAsymmetricKeyCreator {
-
-  private final SecurityAsymmetricKeyConfig config;
+public class SecurityAsymmetricKeyCreatorImpl extends AbstractSecurityAsymmetricKeyCreator {
 
   private KeyFactory keyFactory;
 
@@ -38,90 +30,64 @@ public class SecurityAsymmetricKeyCreatorImpl extends SecurityAlgorithmImplWithR
    */
   public SecurityAsymmetricKeyCreatorImpl(SecurityAsymmetricKeyConfig config, Provider provider, SecurityRandomFactory randomFactory) {
 
-    super(config.getAlgorithm(), provider, randomFactory);
-    this.config = config;
+    super(config, provider, randomFactory);
   }
 
   @Override
-  public SecurityAsymmetricKeyPair generateKeyPair() {
+  public SecurityPrivateKey deserializePrivateKey(byte[] privateKeyData) {
 
     try {
-      KeyPairGenerator keyGen;
-      Provider provider = getProvider();
-      if (provider == null) {
-        keyGen = KeyPairGenerator.getInstance(getAlgorithm());
-      } else {
-        keyGen = KeyPairGenerator.getInstance(getAlgorithm(), provider);
-      }
-      this.config.init(keyGen, createSecureRandom());
-      KeyPair key = keyGen.generateKeyPair();
-      PrivateKey privateKeyPlain = key.getPrivate();
-      SecurityPrivateKey privateKey = new SecurityPrivateKeyGeneric(this.config.serializePrivateKey(privateKeyPlain), privateKeyPlain);
-      PublicKey publicKeyPlain = key.getPublic();
-      SecurityPublicKey publicKey = new SecurityPublicKeyGeneric(this.config.serializePublicKey(publicKeyPlain), publicKeyPlain);
-      return new SecurityAsymmetricKeyPairGeneric(privateKey, publicKey);
+      return this.config.deserializePrivateKey(privateKeyData, getKeyFactory());
+    } catch (Exception e) {
+      throw creationFailedException(e, PrivateKey.class);
+    }
+  }
+
+  @Override
+  public SecurityPublicKey deserializePublicKey(byte[] publicKeyData) {
+
+    try {
+      return this.config.deserializePublicKey(publicKeyData, getKeyFactory());
+    } catch (Exception e) {
+      throw creationFailedException(e, PublicKey.class);
+    }
+  }
+
+  @Override
+  public SecurityAsymmetricKeyPair deserializeKeyPair(byte[] keyPairData) {
+
+    try {
+      return this.config.deserializeKeyPair(keyPairData, getKeyFactory());
     } catch (Exception e) {
       throw creationFailedException(e, KeyPair.class);
     }
   }
 
-  @Override
-  public SecurityPrivateKey deserializePrivateKey(byte[] privateKey) {
-
-    KeySpec keySpec = this.config.deserializePrivateKey(privateKey, true);
-    if (keySpec == null) {
-      return new SecurityPrivateKeyGeneric(privateKey, () -> deserializePrivateKeyRaw(privateKey));
-    } else {
-      try {
-        PrivateKey key = getKeyFactory().generatePrivate(keySpec);
-        return new SecurityPrivateKeyGeneric(this.config.serializePrivateKey(key), key);
-      } catch (Exception e) {
-        throw creationFailedException(e, PrivateKey.class);
-      }
-    }
-  }
-
-  @Override
-  public SecurityPublicKey deserializePublicKey(byte[] publicKey) {
-
-    KeySpec keySpec = this.config.deserializePublicKey(publicKey, true);
-    if (keySpec == null) {
-      return new SecurityPublicKeyGeneric(publicKey, () -> deserializePublicKeyRaw(publicKey));
-    } else {
-      try {
-        PublicKey key = getKeyFactory().generatePublic(keySpec);
-        return new SecurityPublicKeyGeneric(this.config.serializePublicKey(key), key);
-      } catch (Exception e) {
-        throw creationFailedException(e, PublicKey.class);
-      }
-    }
-  }
-
   /**
-   * @param privateKey the {@link PrivateKey} as raw {@code byte} array.
-   * @return the parsed {@link PrivateKey}.
+   * @param privateKeySpec the {@link KeySpec} for {@link PrivateKey}.
+   * @return the {@link PrivateKey}.
+   * @see KeyFactory#generatePrivate(KeySpec)
    */
-  protected PrivateKey deserializePrivateKeyRaw(byte[] privateKey) {
+  public PrivateKey generatePrivateKey(KeySpec privateKeySpec) {
 
     try {
-      KeySpec keySpec = this.config.deserializePrivateKey(privateKey, false);
-      return getKeyFactory().generatePrivate(keySpec);
+      return getKeyFactory().generatePrivate(privateKeySpec);
     } catch (Exception e) {
       throw creationFailedException(e, PrivateKey.class);
     }
   }
 
   /**
-   * @param publicKey the {@link PublicKey} as raw {@code byte} array.
-   * @return the deserialized {@link PublicKey}.
+   * @param publicKeySpec the {@link KeySpec} for {@link PublicKey}.
+   * @return the {@link PublicKey}.
+   * @see KeyFactory#generatePublic(KeySpec)
    */
-  protected PublicKey deserializePublicKeyRaw(byte[] publicKey) {
+  public PublicKey generatePublicKey(KeySpec publicKeySpec) {
 
     try {
-      KeySpec keySpec = this.config.deserializePublicKey(publicKey, false);
-      return getKeyFactory().generatePublic(keySpec);
+      return getKeyFactory().generatePublic(publicKeySpec);
     } catch (Exception e) {
-      throw creationFailedException(e, PublicKey.class);
+      throw creationFailedException(e, PrivateKey.class);
     }
   }
 

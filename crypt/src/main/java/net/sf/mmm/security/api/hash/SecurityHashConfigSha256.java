@@ -17,9 +17,16 @@ public class SecurityHashConfigSha256 extends SecurityHashConfig implements Secu
   public static final SecurityHashConfigSha256 SHA_256 = new SecurityHashConfigSha256();
 
   /**
+   * {@link SecurityAlgorithmSha2 SHA-2} variant {@link #ALGORITHM_SHA_256 SHA256} with two {@link #getIterationCount()
+   * iterations}.
+   */
+  public static final SecurityHashConfigSha256 SHA_256_2X = new SecurityHashConfigSha256(2);
+
+  /**
    * The constructor.
    */
   public SecurityHashConfigSha256() {
+
     super(ALGORITHM_SHA_256);
   }
 
@@ -29,6 +36,7 @@ public class SecurityHashConfigSha256 extends SecurityHashConfig implements Secu
    * @param iterationCount the {@link #getIterationCount() iteration count}.
    */
   public SecurityHashConfigSha256(int iterationCount) {
+
     super(ALGORITHM_SHA_256, iterationCount);
   }
 

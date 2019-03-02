@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.sf.mmm.security.api.key.SecurityKeySet;
+import net.sf.mmm.util.datatype.api.Binary;
 
 /**
  * Interface for a key pair consisting of a {@link SecurityPrivateKey} with its corresponding {@link SecurityPublicKey}
@@ -11,9 +12,9 @@ import net.sf.mmm.security.api.key.SecurityKeySet;
  * parties. The {@link SecurityPublicKey public key} can be made public and shared with anybody. Anybody knowing your
  * public key can encrypt data for you that only you as the owner of the corresponding {@link SecurityPrivateKey private
  * key} can decrypt. On the other hand only you can
- * {@link net.sf.mmm.security.api.sign.SecuritySignatureSigner#sign(byte[], boolean) sign} arbitrary data in a
- * way so that everybody can {@link net.sf.mmm.security.api.sign.SecuritySignatureVerifier#verifyAfterUpdate(byte[])
- * verify} this signature using your {@link SecurityPublicKey public key}.
+ * {@link net.sf.mmm.security.api.sign.SecuritySignatureSigner#sign(byte[], boolean) sign} arbitrary data in a way so
+ * that everybody can {@link net.sf.mmm.security.api.sign.SecuritySignatureVerifier#verifyAfterUpdate(byte[]) verify}
+ * this signature using your {@link SecurityPublicKey public key}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -38,5 +39,14 @@ public interface SecurityAsymmetricKeyPair extends SecurityKeySet {
     set.add(getPublicKey());
     return set;
   }
+
+  /**
+   * @return a compact representation of the entire key pair. Some algorithms allow to calculate the
+   *         {@link SecurityPublicKey public key} from the {@link SecurityPrivateKey private key}. In this case the
+   *         {@link #getPrivateKey() private key} will be returned.
+   * @see SecurityAsymmetricKeyCreator#deserializeKeyPair(byte[])
+   * @see SecurityAsymmetricKeyCreator#deserializeKeyPair(String)
+   */
+  Binary asBinary();
 
 }

@@ -1,17 +1,17 @@
 package net.sf.mmm.security.api.crypt.asymmetric;
 
-import net.sf.mmm.security.api.algorithm.SecurityAlgorithmEcies;
-import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfigEc;
+import net.sf.mmm.security.api.algorithm.SecurityAlgorithmEcIes;
+import net.sf.mmm.security.api.key.asymmetric.ec.jce.SecurityAsymmetricKeyConfigEcJce;
 import net.sf.mmm.security.api.provider.BouncyCastleInstaller;
 import net.sf.mmm.security.api.sign.SecuritySignatureConfig;
 
 /**
- * Direct builder for {@link SecurityAlgorithmEcies ECIES}.
+ * Direct builder for {@link SecurityAlgorithmEcIes ECIES}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class Ecies extends AbstractSecurityAsymmetricCryptorBuilderPublicPrivate<Ecies> {
+public final class Ecies extends AbstractSecurityAsymmetricCryptorBuilder<Ecies> {
 
   private final SecurityAsymmetricCryptorConfigEcies config;
 
@@ -45,7 +45,7 @@ public final class Ecies extends AbstractSecurityAsymmetricCryptorBuilderPublicP
    */
   public static Ecies keyLength(int keyLength) {
 
-    return new Ecies(new SecurityAsymmetricCryptorConfigEcies(new SecurityAsymmetricKeyConfigEc(keyLength)));
+    return new Ecies(new SecurityAsymmetricCryptorConfigEcies(new SecurityAsymmetricKeyConfigEcJce(keyLength)));
   }
 
   /**

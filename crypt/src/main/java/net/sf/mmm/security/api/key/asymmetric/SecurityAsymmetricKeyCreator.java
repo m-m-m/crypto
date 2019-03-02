@@ -4,6 +4,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 import net.sf.mmm.security.api.key.SecurityKeyCreator;
+import net.sf.mmm.util.datatype.api.Binary;
 import net.sf.mmm.util.datatype.api.BinaryType;
 
 /**
@@ -27,71 +28,93 @@ public interface SecurityAsymmetricKeyCreator extends SecurityKeyCreator, Securi
   SecurityAsymmetricKeyPair generateKeyPair();
 
   /**
-   * @param privateKey the {@link SecurityPrivateKey} as raw {@code byte} array.
+   * @param privateKeyBytes the {@link SecurityPrivateKey} as raw {@code byte} array.
    * @return the deserialized {@link SecurityPrivateKey}.
    */
-  SecurityPrivateKey deserializePrivateKey(byte[] privateKey);
+  SecurityPrivateKey deserializePrivateKey(byte[] privateKeyBytes);
 
   /**
-   * @param privateKey the {@link SecurityPrivateKey} in {@link BinaryType#getBase64() base64 representation}.
+   * @param privateKeyBase64 the {@link SecurityPrivateKey} in {@link BinaryType#getBase64() base64 representation}.
    * @return the deserialized {@link SecurityPrivateKey}.
    */
-  default SecurityPrivateKey deserializePrivateKey(String privateKey) {
+  default SecurityPrivateKey deserializePrivateKey(String privateKeyBase64) {
 
-    return deserializePrivateKey(BinaryType.parseBase64(privateKey));
+    return deserializePrivateKey(BinaryType.parseBase64(privateKeyBase64));
   }
 
   /**
    * @param privateKey the raw {@link PrivateKey}.
    * @return the wrapped {@link SecurityPrivateKey}.
    */
-  default SecurityPrivateKey createPrivateKey(PrivateKey privateKey) {
-
-    return new SecurityPrivateKeyGeneric(privateKey);
-  }
+  SecurityPrivateKey createPrivateKey(PrivateKey privateKey);
 
   /**
-   * @param publicKey the {@link SecurityPublicKey} as raw {@code byte} array.
+   * @param publicKeyBytes the {@link SecurityPublicKey} as raw {@code byte} array.
    * @return the deserialized {@link SecurityPublicKey}.
    */
-  SecurityPublicKey deserializePublicKey(byte[] publicKey);
+  SecurityPublicKey deserializePublicKey(byte[] publicKeyBytes);
 
   /**
-   * @param publicKey the {@link SecurityPublicKey} in {@link BinaryType#getBase64() base64 representation}.
+   * @param publicKeyBase64 the {@link SecurityPublicKey} in {@link BinaryType#getBase64() base64 representation}.
    * @return the deserialized {@link SecurityPublicKey}.
    */
-  default SecurityPublicKey deserializePublicKey(String publicKey) {
+  default SecurityPublicKey deserializePublicKey(String publicKeyBase64) {
 
-    return deserializePublicKey(BinaryType.parseBase64(publicKey));
+    return deserializePublicKey(BinaryType.parseBase64(publicKeyBase64));
   }
 
   /**
    * @param publicKey the raw {@link PublicKey}.
    * @return the wrapped {@link SecurityPublicKey}.
    */
-  default SecurityPublicKey createPublicKey(PublicKey publicKey) {
+  SecurityPublicKey createPublicKey(PublicKey publicKey);
 
-    return new SecurityPublicKeyGeneric(publicKey);
+  /**
+   * @param privateKeyBase64 the {@link SecurityPrivateKey} in {@link BinaryType#getBase64() base64 representation}.
+   * @param publicKeyBase64 the {@link SecurityPublicKey} in {@link BinaryType#getBase64() base64 representation}.
+   * @return the deserialized {@link SecurityAsymmetricKeyPair}.
+   */
+  default SecurityAsymmetricKeyPair deserializeKeyPair(String privateKeyBase64, String publicKeyBase64) {
+
+    SecurityPrivateKey privateKey = deserializePrivateKey(privateKeyBase64);
+    SecurityPublicKey publicKey = deserializePublicKey(publicKeyBase64);
+    return createKeyPair(privateKey, publicKey);
   }
 
   /**
-   * @param privateKey the {@link SecurityPrivateKey} in {@link BinaryType#getBase64() base64 representation}.
-   * @param publicKey the {@link SecurityPublicKey} in {@link BinaryType#getBase64() base64 representation}.
+   * @param privateKeyBytes the {@link SecurityPrivateKey} in {@link BinaryType#getHex() hex representation}.
+   * @param publicKeyBytes the {@link SecurityPublicKey} in {@link BinaryType#getHex() hex representation}.
    * @return the deserialized {@link SecurityAsymmetricKeyPair}.
    */
-  default SecurityAsymmetricKeyPair deserializeKeyPair(String privateKey, String publicKey) {
+  default SecurityAsymmetricKeyPair deserializeKeyPair(byte[] privateKeyBytes, byte[] publicKeyBytes) {
 
-    return new SecurityAsymmetricKeyPairGeneric(deserializePrivateKey(privateKey), deserializePublicKey(publicKey));
+    SecurityPrivateKey privateKey = deserializePrivateKey(privateKeyBytes);
+    SecurityPublicKey publicKey = deserializePublicKey(publicKeyBytes);
+    return createKeyPair(privateKey, publicKey);
   }
 
   /**
-   * @param privateKey the {@link SecurityPrivateKey} in {@link BinaryType#getHex() hex representation}.
-   * @param publicKey the {@link SecurityPublicKey} in {@link BinaryType#getHex() hex representation}.
+   * @param privateKey the {@link SecurityPrivateKey}.
+   * @param publicKey the {@link SecurityPublicKey}.
+   * @return the {@link SecurityAsymmetricKeyPair}.
+   */
+  SecurityAsymmetricKeyPair createKeyPair(SecurityPrivateKey privateKey, SecurityPublicKey publicKey);
+
+  /**
+   * @param keyPairBytes the {@link SecurityAsymmetricKeyPair} in its {@link SecurityAsymmetricKeyPair#asBinary() binary
+   *        form} as {@link Binary#getData() raw byte array}.
    * @return the deserialized {@link SecurityAsymmetricKeyPair}.
    */
-  default SecurityAsymmetricKeyPair deserializeKeyPair(byte[] privateKey, byte[] publicKey) {
+  SecurityAsymmetricKeyPair deserializeKeyPair(byte[] keyPairBytes);
 
-    return new SecurityAsymmetricKeyPairGeneric(deserializePrivateKey(privateKey), deserializePublicKey(publicKey));
+  /**
+   * @param keyPairBase64 the {@link SecurityAsymmetricKeyPair} in its {@link SecurityAsymmetricKeyPair#asBinary()
+   *        binary form} as {@link Binary#getBase64() base64 representation}.
+   * @return the deserialized {@link SecurityAsymmetricKeyPair}.
+   */
+  default SecurityAsymmetricKeyPair deserializeKeyPair(String keyPairBase64) {
+
+    return deserializeKeyPair(BinaryType.parseBase64(keyPairBase64));
   }
 
 }

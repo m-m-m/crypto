@@ -20,48 +20,48 @@ import net.sf.mmm.security.impl.AbstractSecurityAlgorithmWithRandom;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecurityCryptorFactoryImpl extends AbstractSecurityAlgorithmWithRandom implements SecurityCryptorFactory {
-
-  private final SecurityCryptorConfig<?> config;
+public abstract class SecurityCryptorFactoryImpl extends AbstractSecurityAlgorithmWithRandom implements SecurityCryptorFactory {
 
   /**
    * The constructor.
    *
-   * @param config the {@link SecurityCryptorConfig}.
    * @param provider the security {@link Provider}.
    * @param randomFactory the {@link SecurityRandomFactory}.
    */
-  public SecurityCryptorFactoryImpl(SecurityCryptorConfig<?> config, Provider provider,
-      SecurityRandomFactory randomFactory) {
+  public SecurityCryptorFactoryImpl(Provider provider, SecurityRandomFactory randomFactory) {
 
     super(provider, randomFactory);
-    this.config = config;
   }
+
+  /**
+   * @return the {@link SecurityCryptorConfig}.
+   */
+  public abstract SecurityCryptorConfig<?> getConfig();
 
   @Override
   public String getAlgorithm() {
 
-    return this.config.getAlgorithm();
+    return getConfig().getAlgorithm();
   }
 
   @Override
   public SecurityEncryptor newEncryptorUnsafe(Key encryptionKey) {
 
     Key key = transformKey(encryptionKey);
-    return new SecurityEncryptorImplCiper(getProvider(), getRandomFactory(), this.config, key);
+    return new SecurityEncryptorImplCiper(getProvider(), getRandomFactory(), getConfig(), key);
   }
 
   @Override
   public SecurityDecryptor newDecryptorUnsafe(Key decryptionKey) {
 
     Key key = transformKey(decryptionKey);
-    return new SecurityDecryptorImplCipher(getProvider(), getRandomFactory(), this.config, key);
+    return new SecurityDecryptorImplCipher(getProvider(), getRandomFactory(), getConfig(), key);
   }
 
   private Key transformKey(Key encryptionKey) {
 
     Key key = encryptionKey;
-    String algorithm = getKeyAlgorithm(this.config);
+    String algorithm = getKeyAlgorithm(getConfig());
     if (!encryptionKey.getAlgorithm().equals(algorithm) && (encryptionKey instanceof SecretKey)) {
       key = new SecretKeySpec(encryptionKey.getEncoded(), algorithm);
     }

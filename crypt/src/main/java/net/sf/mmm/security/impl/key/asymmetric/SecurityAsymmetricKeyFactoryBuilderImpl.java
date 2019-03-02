@@ -19,8 +19,8 @@ public interface SecurityAsymmetricKeyFactoryBuilderImpl extends SecurityAsymmet
   @Override
   default SecurityAsymmetricKeyFactory key(SecurityAsymmetricKeyConfig configuration) {
 
-    SecurityAsymmetricKeyFactoryImpl factory =
-        new SecurityAsymmetricKeyFactoryImpl(configuration, getProvider(), getRandomFactoryRequired());
+    SecurityAsymmetricKeyFactoryJava factory =
+        new SecurityAsymmetricKeyFactoryJava(configuration, getProvider(), getRandomFactoryRequired());
     setAsymmetricKeyFactory(factory);
     return factory;
   }

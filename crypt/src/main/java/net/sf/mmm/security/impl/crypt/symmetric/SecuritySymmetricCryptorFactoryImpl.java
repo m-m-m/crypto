@@ -13,8 +13,9 @@ import net.sf.mmm.security.impl.crypt.SecurityCryptorFactoryImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecuritySymmetricCryptorFactoryImpl extends SecurityCryptorFactoryImpl
-    implements SecuritySymmetricCryptorFactory {
+public class SecuritySymmetricCryptorFactoryImpl extends SecurityCryptorFactoryImpl implements SecuritySymmetricCryptorFactory {
+
+  private final SecuritySymmetricCryptorConfig config;
 
   /**
    * The constructor.
@@ -26,7 +27,14 @@ public class SecuritySymmetricCryptorFactoryImpl extends SecurityCryptorFactoryI
   public SecuritySymmetricCryptorFactoryImpl(SecuritySymmetricCryptorConfig config, Provider provider,
       SecurityRandomFactory randomFactory) {
 
-    super(config, provider, randomFactory);
+    super(provider, randomFactory);
+    this.config = config;
+  }
+
+  @Override
+  public SecuritySymmetricCryptorConfig getConfig() {
+
+    return this.config;
   }
 
 }

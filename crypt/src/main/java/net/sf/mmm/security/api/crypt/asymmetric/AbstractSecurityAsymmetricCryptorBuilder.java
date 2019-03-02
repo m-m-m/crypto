@@ -4,7 +4,6 @@ import net.sf.mmm.security.api.AbstractSecurityFactories;
 import net.sf.mmm.security.api.SecurityFactoryBuilder;
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmRsa;
 import net.sf.mmm.security.api.crypt.AbstractSecurityCryptorBuilder;
-import net.sf.mmm.security.api.crypt.SecurityCryptorFactory;
 import net.sf.mmm.security.api.key.asymmetric.AbstractSecurityGetAsymmetricKeyFactory;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyCreator;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyFactory;
@@ -13,13 +12,15 @@ import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPair;
 /**
  * Direct builder for {@link SecurityAlgorithmRsa RSA}.
  *
- * @param <C> the type of the {@link SecurityCryptorFactory}.
  * @param <B> type of the returned builder.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractSecurityAsymmetricCryptorBuilder<C extends SecurityAsymmetricCryptorFactory, B extends AbstractSecurityAsymmetricCryptorBuilder<C, B>>
-    extends AbstractSecurityCryptorBuilder<C, B> implements AbstractSecurityGetAsymmetricKeyFactory, SecurityAsymmetricKeyFactory {
+public abstract class AbstractSecurityAsymmetricCryptorBuilder<B extends AbstractSecurityAsymmetricCryptorBuilder<B>>
+    extends AbstractSecurityCryptorBuilder<SecurityAsymmetricCryptorFactory, B>
+    implements AbstractSecurityGetAsymmetricKeyFactory, SecurityAsymmetricKeyFactory {
+
+  private SecurityAsymmetricCryptorFactory cryptorFactory;
 
   /**
    * The constructor.
@@ -41,6 +42,15 @@ public abstract class AbstractSecurityAsymmetricCryptorBuilder<C extends Securit
       factory = builder.key(getCryptorConfig().getKeyAlgorithmConfig());
     }
     return factory;
+  }
+
+  @Override
+  public SecurityAsymmetricCryptorFactory getCryptorFactory() {
+
+    if (this.cryptorFactory == null) {
+      this.cryptorFactory = getFactoryBuilder().crypt(getCryptorConfig());
+    }
+    return this.cryptorFactory;
   }
 
   @Override
@@ -68,11 +78,7 @@ public abstract class AbstractSecurityAsymmetricCryptorBuilder<C extends Securit
   public AbstractSecurityFactories getFactories() {
 
     getAsymmetricKeyFactory();
-    AbstractSecurityFactories factories = super.getFactories();
-    if (factories.getSignatureFactory() == null) {
-      signUsingHashAndCryptor();
-    }
-    return factories;
+    return super.getFactories();
   }
 
 }

@@ -1,5 +1,6 @@
 package net.sf.mmm.security.api.key.asymmetric;
 
+import java.security.KeyFactory;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -7,35 +8,50 @@ import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 
 import net.sf.mmm.security.api.key.SecurityKeyConfig;
+import net.sf.mmm.security.api.key.asymmetric.ec.jce.SecurityAsymmetricKeyConfigEcJce;
+import net.sf.mmm.security.api.key.asymmetric.generic.SecurityAsymmetricKeySpecFactoryPkcs8;
+import net.sf.mmm.security.api.key.asymmetric.generic.SecurityAsymmetricKeySpecFactoryX509;
+import net.sf.mmm.security.api.key.asymmetric.rsa.SecurityAsymmetricKeyConfigRsa;
 
 /**
  * {@link SecurityKeyConfig Key algorithm configuration} for {@link SecurityAsymmetricKeyPair asymmetric keys}.
  *
  * @see SecurityAsymmetricKeyConfigRsa
- * @see SecurityAsymmetricKeyConfigEc
+ * @see SecurityAsymmetricKeyConfigEcJce
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecurityAsymmetricKeyConfig extends SecurityKeyConfig {
+public abstract class SecurityAsymmetricKeyConfig extends SecurityKeyConfig {
 
-  private final SecurityAsymmetricKeySpecFactory privateKeyFactory;
+  private final SecurityPrivateKeySpecFactory encodedPrivateKeySpecFactory;
 
-  private final SecurityAsymmetricKeySpecFactory publicKeyFactory;
+  private final SecurityPublicKeySpecFactory encodedPublicKeySpecFactory;
 
   /**
    * The constructor.
    *
    * @param algorithm the {@link #getAlgorithm() algorithm}.
    * @param keyLength the {@link #getKeyLength() key length} in bits.
-   * @param privateKeyFactory the {@link #getPrivateKeyFactory() private key factory}.
-   * @param publicKeyFactory the {@link #getPublicKeyFactory() public key factory}.
    */
-  public SecurityAsymmetricKeyConfig(String algorithm, int keyLength, SecurityAsymmetricKeySpecFactory privateKeyFactory,
-      SecurityAsymmetricKeySpecFactory publicKeyFactory) {
+  public SecurityAsymmetricKeyConfig(String algorithm, int keyLength) {
+
+    this(algorithm, keyLength, SecurityAsymmetricKeySpecFactoryPkcs8.INSTANCE, SecurityAsymmetricKeySpecFactoryX509.INSTANCE);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param algorithm the {@link #getAlgorithm() algorithm}.
+   * @param keyLength the {@link #getKeyLength() key length} in bits.
+   * @param encodedPrivateKeySpecFactory the {@link #getEncodedPrivateKeySpecFactory() private key factory}.
+   * @param encodedPublicKeySpecFactory the {@link #getEncodedPublicKeySpecFactory() public key factory}.
+   */
+  public SecurityAsymmetricKeyConfig(String algorithm, int keyLength, SecurityPrivateKeySpecFactory encodedPrivateKeySpecFactory,
+      SecurityPublicKeySpecFactory encodedPublicKeySpecFactory) {
 
     super(algorithm, keyLength);
-    this.privateKeyFactory = privateKeyFactory;
-    this.publicKeyFactory = publicKeyFactory;
+    this.encodedPrivateKeySpecFactory = encodedPrivateKeySpecFactory;
+    this.encodedPublicKeySpecFactory = encodedPublicKeySpecFactory;
   }
 
   /**
@@ -44,32 +60,9 @@ public class SecurityAsymmetricKeyConfig extends SecurityKeyConfig {
    *         {@link SecurityAsymmetricKeySpecFactory#createKeySpec(byte[]) create} an according
    *         {@link java.security.spec.KeySpec}.
    */
-  public SecurityAsymmetricKeySpecFactory getPrivateKeyFactory() {
+  public SecurityPrivateKeySpecFactory getEncodedPrivateKeySpecFactory() {
 
-    return this.privateKeyFactory;
-  }
-
-  /**
-   * @param privateKey the {@link PrivateKey} as raw {@code byte} array.
-   * @param lazy - {@code true} to return {@code null} if {@code privateKey} is given in normal form, {@code false}
-   *        otherwise (for eager deserialization).
-   * @return the deserialized {@link KeySpec} or {@code null} if normal form and {@code lazy} is {@code true}.
-   */
-  public KeySpec deserializePrivateKey(byte[] privateKey, boolean lazy) {
-
-    if (lazy) {
-      return null;
-    }
-    return this.privateKeyFactory.createKeySpec(privateKey);
-  }
-
-  /**
-   * @param privateKey the {@link PrivateKey} to serialize.
-   * @return the serialized data as raw {@code byte} array.
-   */
-  public byte[] serializePrivateKey(PrivateKey privateKey) {
-
-    return privateKey.getEncoded();
+    return this.encodedPrivateKeySpecFactory;
   }
 
   /**
@@ -78,32 +71,42 @@ public class SecurityAsymmetricKeyConfig extends SecurityKeyConfig {
    *         {@link SecurityAsymmetricKeySpecFactory#createKeySpec(byte[]) create} an according
    *         {@link java.security.spec.KeySpec}.
    */
-  public SecurityAsymmetricKeySpecFactory getPublicKeyFactory() {
+  public SecurityPublicKeySpecFactory getEncodedPublicKeySpecFactory() {
 
-    return this.publicKeyFactory;
+    return this.encodedPublicKeySpecFactory;
   }
 
   /**
-   * @param publicKey the {@link PublicKey} as raw {@code byte} array.
-   * @param lazy - {@code true} to return {@code null} if {@code publicKey} is given in normal form, {@code false}
-   *        otherwise (for eager deserialization).
-   * @return the deserialized {@link KeySpec} or {@code null} if normal form and {@code lazy} is {@code true}.
+   * @return the {@link SecurityAsymmetricKeyPairFactory}.
    */
-  public KeySpec deserializePublicKey(byte[] publicKey, boolean lazy) {
+  public abstract SecurityAsymmetricKeyPairFactory<?, ?, ?, ?, ?> getKeyPairFactory();
 
-    if (lazy) {
-      return null;
-    }
-    return this.publicKeyFactory.createKeySpec(publicKey);
+  /**
+   * @param privateKeyData the serialized key data.
+   * @param keyFactory the required {@link KeyFactory}.
+   * @return the deserialized {@link SecurityPrivateKey}.
+   * @throws Exception if anything goes wrong.
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public SecurityPrivateKey deserializePrivateKey(byte[] privateKeyData, KeyFactory keyFactory) throws Exception {
+
+    KeySpec privateKeySpec = this.encodedPrivateKeySpecFactory.createKeySpec(privateKeyData);
+    PrivateKey privateKey = keyFactory.generatePrivate(privateKeySpec);
+    return ((SecurityAsymmetricKeyPairFactory) getKeyPairFactory()).createPrivateKey(privateKey);
   }
 
   /**
-   * @param publicKey the {@link PublicKey} to serialize.
-   * @return the serialized data as raw {@code byte} array.
+   * @param publicKeyData the serialized key data.
+   * @param keyFactory the required {@link KeyFactory}.
+   * @return the deserialized {@link SecurityPublicKey}.
+   * @throws Exception if anything goes wrong.
    */
-  public byte[] serializePublicKey(PublicKey publicKey) {
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public SecurityPublicKey deserializePublicKey(byte[] publicKeyData, KeyFactory keyFactory) throws Exception {
 
-    return publicKey.getEncoded();
+    KeySpec publicKeySpec = this.encodedPublicKeySpecFactory.createKeySpec(publicKeyData);
+    PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
+    return ((SecurityAsymmetricKeyPairFactory) getKeyPairFactory()).createPublicKey(publicKey);
   }
 
   /**
@@ -115,5 +118,13 @@ public class SecurityAsymmetricKeyConfig extends SecurityKeyConfig {
 
     keyPairGenerator.initialize(getKeyLength(), random);
   }
+
+  /**
+   * @param keyPairBytes the {@link SecurityAsymmetricKeyPair#asBinary() binary bytes} to deserialize.
+   * @param keyFactory the required {@link KeyFactory}.
+   * @return the deserialized {@link SecurityAsymmetricKeyPair}.
+   * @throws Exception if anything goes wrong.
+   */
+  public abstract SecurityAsymmetricKeyPair deserializeKeyPair(byte[] keyPairBytes, KeyFactory keyFactory) throws Exception;
 
 }

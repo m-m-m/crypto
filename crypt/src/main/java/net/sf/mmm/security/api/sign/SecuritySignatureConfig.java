@@ -1,6 +1,7 @@
 package net.sf.mmm.security.api.sign;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmConfig;
+import net.sf.mmm.security.api.hash.SecurityHashConfig;
 
 /**
  * {@link SecurityAlgorithmConfig} for {@link SecuritySignatureSigner#sign(byte[], boolean) signing}.
@@ -19,14 +20,37 @@ public class SecuritySignatureConfig extends SecurityAlgorithmConfig {
    */
   public static final String SIGNATURE_ALGORITHM_ECDSA = "NONEwithECDSA";
 
+  private final SecurityHashConfig hashConfig;
+
   /**
    * The constructor.
    *
-   * @param algorithm the {@link java.security.MessageDigest#getAlgorithm() hash algorithm}.
+   * @param algorithm the {@link java.security.Signature#getAlgorithm() signature algorithm}.
    */
   public SecuritySignatureConfig(String algorithm) {
 
     super(algorithm);
+    this.hashConfig = null;
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param hashConfig the {@link SecurityHashConfig}.
+   * @param rawSignatureAlgorithm the raw {@link java.security.MessageDigest#getAlgorithm() signature algorithm}.
+   */
+  public SecuritySignatureConfig(SecurityHashConfig hashConfig, String rawSignatureAlgorithm) {
+
+    super(hashConfig.getAlgorithm().replace("-", "") + "with" + rawSignatureAlgorithm);
+    this.hashConfig = hashConfig;
+  }
+
+  /**
+   * @return the optional {@link SecurityHashConfig} the signature is based on.
+   */
+  public SecurityHashConfig getHashConfig() {
+
+    return this.hashConfig;
   }
 
 }

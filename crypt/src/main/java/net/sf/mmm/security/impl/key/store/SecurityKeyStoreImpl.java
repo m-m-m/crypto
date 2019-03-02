@@ -6,7 +6,10 @@ import java.security.Key;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Provider;
+import java.security.PublicKey;
 import java.security.cert.Certificate;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,11 +21,8 @@ import net.sf.mmm.security.api.io.SecurityDataResource;
 import net.sf.mmm.security.api.key.SecurityKey;
 import net.sf.mmm.security.api.key.SecurityKeySet;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPair;
-import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPairGeneric;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPrivateKey;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPrivateKeyGeneric;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKeyGeneric;
+import net.sf.mmm.security.api.key.asymmetric.generic.SecurityAsymmetricKeyPairGeneric;
+import net.sf.mmm.security.api.key.asymmetric.rsa.SecurityAsymmetricKeyPairRsa;
 import net.sf.mmm.security.api.key.store.SecurityKeyStore;
 import net.sf.mmm.security.api.key.store.SecurityKeyStoreConfig;
 import net.sf.mmm.security.api.key.symmetric.SecuritySymmetricKey;
@@ -89,8 +89,7 @@ public class SecurityKeyStoreImpl implements SecurityKeyStore {
         try (InputStream in = resource.openInputStream()) {
           ks.load(in, this.password);
         } catch (Exception e) {
-          throw new IllegalStateException(
-              "Failed to load KeyStore of type " + type + " from " + resource.getUri() + "!", e);
+          throw new IllegalStateException("Failed to load KeyStore of type " + type + " from " + resource.getUri() + "!", e);
         }
       } else {
         try {
@@ -105,44 +104,46 @@ public class SecurityKeyStoreImpl implements SecurityKeyStore {
   }
 
   @Override
-  public SecurityKeySet getKeyPair(String alias, String keyPassword) {
+  public SecurityKeySet getKey(String alias, String keyPassword) {
 
     try {
       char[] pwd = keyPassword.toCharArray();
       KeyStore ks = getKeyStore();
       Key key = ks.getKey(alias, pwd);
       if (key instanceof PrivateKey) {
-        SecurityPrivateKey privateKey = new SecurityPrivateKeyGeneric((PrivateKey) key);
+        PrivateKey privateKey = (PrivateKey) key;
         Certificate certificate = ks.getCertificate(alias);
-        SecurityPublicKey publicKey = new SecurityPublicKeyGeneric(certificate.getPublicKey());
+        PublicKey publicKey = certificate.getPublicKey();
+        // TODO
+        if (privateKey instanceof RSAPrivateKey) {
+          return new SecurityAsymmetricKeyPairRsa((RSAPrivateKey) privateKey, (RSAPublicKey) publicKey);
+        }
         return new SecurityAsymmetricKeyPairGeneric(privateKey, publicKey);
       } else if (key instanceof SecretKey) {
         return new SecuritySymmetricKeyGeneric((SecretKey) key);
       } else {
-        throw new IllegalStateException("Unsupported key (class: " + key.getClass().getSimpleName() + ", format: "
-            + key.getFormat() + "algorithm: " + key.getAlgorithm() + ")");
+        throw new IllegalStateException("Unsupported key (class: " + key.getClass().getSimpleName() + ", format: " + key.getFormat()
+            + "algorithm: " + key.getAlgorithm() + ")");
       }
     } catch (Exception e) {
-      throw new IllegalStateException("Failed to get Key with alias " + alias + " from KeyStore of type "
-          + this.config.getType() + " at " + this.config.getResource().getUri() + "!", e);
+      throw new IllegalStateException("Failed to get Key with alias " + alias + " from KeyStore of type " + this.config.getType() + " at "
+          + this.config.getResource().getUri() + "!", e);
     }
   }
 
   @Override
-  public void setKeyPair(String alias, SecurityAsymmetricKeyPair keyPair, String password,
-      SecurityCertificatePath certificatePath) {
+  public void setKey(String alias, SecurityAsymmetricKeyPair keyPair, String password, SecurityCertificatePath certificatePath) {
 
     setKeyPairInternal(alias, keyPair.getPrivateKey(), password, certificatePath);
   }
 
   @Override
-  public void setKeyPair(String alias, SecuritySymmetricKey key, String password) {
+  public void setKey(String alias, SecuritySymmetricKey key, String password) {
 
     setKeyPairInternal(alias, key, password, null);
   }
 
-  private void setKeyPairInternal(String alias, SecurityKey<?> secureKey, String password,
-      SecurityCertificatePath certificatePath) {
+  private void setKeyPairInternal(String alias, SecurityKey<?> secureKey, String password, SecurityCertificatePath certificatePath) {
 
     Objects.requireNonNull(secureKey, "secureKey");
     Certificate[] chain;
@@ -158,8 +159,8 @@ public class SecurityKeyStoreImpl implements SecurityKeyStore {
     try {
       getKeyStore().setKeyEntry(alias, secureKey.getKey(), getChars(password), chain);
     } catch (Exception e) {
-      throw new IllegalStateException("Failed to set Key with alias " + alias + " to KeyStore of type "
-          + this.config.getType() + " at " + this.config.getResource().getUri() + "!", e);
+      throw new IllegalStateException("Failed to set Key with alias " + alias + " to KeyStore of type " + this.config.getType() + " at "
+          + this.config.getResource().getUri() + "!", e);
     }
   }
 
@@ -176,15 +177,13 @@ public class SecurityKeyStoreImpl implements SecurityKeyStore {
       try {
         this.keyStore.store(null, this.password);
       } catch (Exception e) {
-        throw new IllegalStateException("Failed to save KeyStore of type " + type + " to " + resource.getUri() + "!",
-            e);
+        throw new IllegalStateException("Failed to save KeyStore of type " + type + " to " + resource.getUri() + "!", e);
       }
     } else {
       try (OutputStream out = outputStream) {
         this.keyStore.store(out, this.password);
       } catch (Exception e) {
-        throw new IllegalStateException("Failed to save KeyStore of type " + type + " to " + resource.getUri() + "!",
-            e);
+        throw new IllegalStateException("Failed to save KeyStore of type " + type + " to " + resource.getUri() + "!", e);
       }
     }
   }

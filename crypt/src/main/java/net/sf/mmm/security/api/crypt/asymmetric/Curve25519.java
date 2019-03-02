@@ -4,7 +4,6 @@ package net.sf.mmm.security.api.crypt.asymmetric;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmCurve25519;
 import net.sf.mmm.security.api.provider.BouncyCastleInstaller;
-import net.sf.mmm.security.api.sign.SecuritySignatureConfig;
 
 /**
  * Direct builder for {@link SecurityAlgorithmCurve25519 Curve 25519}.
@@ -12,7 +11,7 @@ import net.sf.mmm.security.api.sign.SecuritySignatureConfig;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Curve25519 extends AbstractSecurityAsymmetricCryptorBuilderPublicPrivate<Curve25519> {
+public class Curve25519 extends AbstractSecurityAsymmetricCryptorBuilderEcDsa<Curve25519> {
 
   private final SecurityAsymmetricCryptorConfigCurve25519 config;
 
@@ -41,12 +40,6 @@ public class Curve25519 extends AbstractSecurityAsymmetricCryptorBuilderPublicPr
   public static Curve25519 create() {
 
     return new Curve25519(SecurityAsymmetricCryptorConfigCurve25519.CURVE_25519);
-  }
-
-  @Override
-  protected SecuritySignatureConfig getSignatureConfig() {
-
-    return new SecuritySignatureConfig(SecuritySignatureConfig.SIGNATURE_ALGORITHM_ECDSA);
   }
 
 }

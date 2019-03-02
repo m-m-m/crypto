@@ -30,13 +30,7 @@ public class Curve25519Test extends SecurityAsymmetricCryptorBuilderTest {
     assertThat(curve25519.getCryptorConfig().getKeyAlgorithmConfig().getKeyLength()).isEqualTo(256);
 
     // when + then
-    verifyPublicPrivate(curve25519);
-  }
-
-  @Override
-  protected int getEncryptionLength() {
-
-    return 99;
+    verify(curve25519, 99);
   }
 
   @Override
@@ -49,6 +43,30 @@ public class Curve25519Test extends SecurityAsymmetricCryptorBuilderTest {
   protected int getSignatureLength() {
 
     return 70;
+  }
+
+  @Override
+  protected int getPrivateKeyCompactLength() {
+
+    return 32;
+  }
+
+  @Override
+  protected int getPrivateKeyEncodedLength() {
+
+    return 587;
+  }
+
+  @Override
+  protected int getPublicKeyCompactLength() {
+
+    return 33;
+  }
+
+  @Override
+  protected int getPublicKeyEncodedLength() {
+
+    return 309;
   }
 
   @Override
@@ -70,7 +88,7 @@ public class Curve25519Test extends SecurityAsymmetricCryptorBuilderTest {
     SecurityPrivateKey privateKey = keyCreator.deserializePrivateKey("yKsX5ek8Fi/xfzZL1pO/OZXZ3ONPdFJCWa27JXNSUWc=");
     SecurityPublicKey publicKey = keyCreator.deserializePublicKey("MWRq2d8BvrsFV5ZTD3I6lkXElkCNQ209oQJytX9A7wQ=");
     curve25519.hash(new SecurityHashConfigSha256(2));
-    SecuritySignatureFactory signatureFactory = curve25519.signUsingHashAndCryptor();
+    SecuritySignatureFactory signatureFactory = curve25519.sign();
     byte[] data = "Secret message".getBytes("UTF-8");
     byte[] signature = signatureFactory.newSigner(privateKey).sign(data, true);
     String sgn = BinaryType.formatHex(signature);

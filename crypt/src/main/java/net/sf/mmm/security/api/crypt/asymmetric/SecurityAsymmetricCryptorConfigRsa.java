@@ -1,7 +1,7 @@
 package net.sf.mmm.security.api.crypt.asymmetric;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmRsa;
-import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfigRsa;
+import net.sf.mmm.security.api.key.asymmetric.rsa.SecurityAsymmetricKeyConfigRsa;
 
 /**
  * {@link SecurityAsymmetricCryptorConfig} for {@link SecurityAlgorithmRsa RSA}.
@@ -9,8 +9,7 @@ import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfigRsa;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class SecurityAsymmetricCryptorConfigRsa
-    extends SecurityAsymmetricCryptorConfigBidirectional implements SecurityAlgorithmRsa {
+public final class SecurityAsymmetricCryptorConfigRsa extends SecurityAsymmetricCryptorConfig implements SecurityAlgorithmRsa {
 
   /**
    * {@link SecurityAlgorithmRsa RSA} with a {@link SecurityAsymmetricKeyConfigRsa#getKeyLength() key length} of 4096
@@ -27,6 +26,12 @@ public final class SecurityAsymmetricCryptorConfigRsa
   public SecurityAsymmetricCryptorConfigRsa(SecurityAsymmetricKeyConfigRsa keyAlgorithmConfig) {
 
     super(ALGORITHM_RSA, keyAlgorithmConfig, 0);
+  }
+
+  @Override
+  public boolean isBidirectional() {
+
+    return true;
   }
 
 }

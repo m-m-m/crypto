@@ -5,9 +5,6 @@ package net.sf.mmm.security.api.crypt.asymmetric;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
-import org.assertj.core.api.AbstractIntegerAssert;
-import org.assertj.core.api.Assertions;
-
 import net.sf.mmm.security.api.crypt.SecurityDecryptor;
 import net.sf.mmm.security.api.crypt.SecurityEncryptor;
 import net.sf.mmm.security.api.hash.SecurityHash;
@@ -19,36 +16,31 @@ import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 import net.sf.mmm.security.api.sign.SecuritySignature;
 import net.sf.mmm.security.api.sign.SecuritySignatureFactory;
 
+import org.assertj.core.api.AbstractIntegerAssert;
+import org.assertj.core.api.Assertions;
+
 /**
  * Abstract test class for {@link AbstractSecurityAsymmetricCryptorBuilder}.
  */
 public abstract class SecurityAsymmetricCryptorBuilderTest extends Assertions {
 
   /**
-   * @param builder the {@link AbstractSecurityAsymmetricCryptorBuilderPublicPrivate} to test.
-   */
-  protected void verifyPublicPrivate(AbstractSecurityAsymmetricCryptorBuilderPublicPrivate<?> builder) {
-
-    verify(builder, false, true);
-  }
-
-  /**
    * @param builder the {@link AbstractSecurityAsymmetricCryptorBuilderPrivatePublic} to test.
    */
-  protected void verifyPrivatePublic(AbstractSecurityAsymmetricCryptorBuilderPrivatePublic<?> builder) {
+  protected void verify(AbstractSecurityAsymmetricCryptorBuilder<?> builder, int encryptionLength) {
 
-    verify(builder, true, false);
+    verify(builder, encryptionLength, false);
   }
 
   /**
    * @param builder the {@link AbstractSecurityAsymmetricCryptorBuilderBidirectional} to test.
    */
-  protected void verifyBidirectional(AbstractSecurityAsymmetricCryptorBuilderBidirectional<?> builder) {
+  protected void verifyBidirectional(AbstractSecurityAsymmetricCryptorBuilder<?> builder, int encryptionLength) {
 
-    verify(builder, true, true);
+    verify(builder, encryptionLength, true);
   }
 
-  private void verify(AbstractSecurityAsymmetricCryptorBuilder<?, ?> builder, boolean privatePublic, boolean publicPrivate) {
+  private void verify(AbstractSecurityAsymmetricCryptorBuilder<?> builder, int encryptionLength, boolean bidirectional) {
 
     try {
       SecurityAsymmetricKeyPair keyPair = builder.generateKeyPair();
@@ -58,20 +50,15 @@ public abstract class SecurityAsymmetricCryptorBuilderTest extends Assertions {
       byte[] rawMessage = "Secret message".getBytes("UTF-8");
       SecurityPublicKey publicKey = keyPair.getPublicKey();
       SecurityPrivateKey privateKey = keyPair.getPrivateKey();
-      if (privatePublic) {
-        assertThat(cryptorFactory).isInstanceOf(SecurityAsymmetricCryptorFactoryPrivatePublic.class);
-        SecurityAsymmetricCryptorFactoryPrivatePublic f = (SecurityAsymmetricCryptorFactoryPrivatePublic) cryptorFactory;
-        verifyCrypt(f.newEncryptor(privateKey), f.newDecryptor(publicKey), rawMessage);
-      }
-      if (publicPrivate) {
-        assertThat(cryptorFactory).isInstanceOf(SecurityAsymmetricCryptorFactoryPublicPrivate.class);
-        SecurityAsymmetricCryptorFactoryPublicPrivate f = (SecurityAsymmetricCryptorFactoryPublicPrivate) cryptorFactory;
-        verifyCrypt(f.newEncryptor(publicKey), f.newDecryptor(privateKey), rawMessage);
+      verifyCrypt(cryptorFactory.newEncryptor(publicKey), cryptorFactory.newDecryptor(privateKey), rawMessage, encryptionLength);
+      if (bidirectional) {
+        verifyCrypt(cryptorFactory.newEncryptorUnsafe(privateKey.getKey()), cryptorFactory.newDecryptorUnsafe(publicKey.getKey()),
+            rawMessage, encryptionLength);
       }
       // signing
       SecurityHash data = new SecurityHash(rawMessage);
       builder.hash(new SecurityHashConfigSha256(2));
-      SecuritySignatureFactory signatureFactory = builder.signUsingHashAndCryptor();
+      SecuritySignatureFactory signatureFactory = builder.sign();
       SecuritySignature signature = signatureFactory.newSigner(privateKey).signature(data, true);
       boolean signatureVerified = signatureFactory.newVerifier(publicKey).verify(data, signature);
       assertThat(signatureVerified).as("signature verified").isTrue();
@@ -87,28 +74,34 @@ public abstract class SecurityAsymmetricCryptorBuilderTest extends Assertions {
    */
   protected void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, SecurityAsymmetricKeyCreator keyCreator) {
 
-    SecurityPublicKey publicKey = keyPair.getPublicKey();
+    // verify private key
     SecurityPrivateKey privateKey = keyPair.getPrivateKey();
-    // key de-/serialization
-    byte[] publicKeyData = publicKey.getData();
-    SecurityPublicKey deserializePublicKey = keyCreator.deserializePublicKey(publicKeyData);
-    assertThat(deserializePublicKey).isEqualTo(publicKey);
-    assertThat(deserializePublicKey.getKey()).isEqualTo(publicKey.getKey());
-    byte[] encoded = publicKey.getKey().getEncoded();
-    if (!Arrays.equals(publicKeyData, encoded)) {
-      deserializePublicKey = keyCreator.deserializePublicKey(encoded);
-      assertThat(deserializePublicKey).isEqualTo(publicKey);
-      assertThat(deserializePublicKey.getKey()).isEqualTo(publicKey.getKey());
-    }
     byte[] privateKeyData = privateKey.getData();
+    assertThat(privateKeyData.length).isBetween(getPrivateKeyCompactMinLength(), getPrivateKeyCompactLength());
     SecurityPrivateKey deserializePrivateKey = keyCreator.deserializePrivateKey(privateKeyData);
     assertThat(deserializePrivateKey).isEqualTo(privateKey);
     assertThat(deserializePrivateKey.getKey()).isEqualTo(privateKey.getKey());
-    encoded = privateKey.getKey().getEncoded();
+    byte[] encoded = privateKey.getKey().getEncoded();
+    assertThat(encoded.length).isBetween(getPrivateKeyEncodedMinLength(), getPrivateKeyEncodedLength());
     if (!Arrays.equals(privateKeyData, encoded)) {
       deserializePrivateKey = keyCreator.deserializePrivateKey(encoded);
       assertThat(deserializePrivateKey).isEqualTo(privateKey);
       assertThat(deserializePrivateKey.getKey()).isEqualTo(privateKey.getKey());
+    }
+
+    // verify public key
+    SecurityPublicKey publicKey = keyPair.getPublicKey();
+    byte[] publicKeyData = publicKey.getData();
+    assertThat(publicKeyData.length).isBetween(getPublicKeyCompactMinLength(), getPublicKeyCompactLength());
+    SecurityPublicKey deserializePublicKey = keyCreator.deserializePublicKey(publicKeyData);
+    assertThat(deserializePublicKey).isEqualTo(publicKey);
+    assertThat(deserializePublicKey.getKey()).isEqualTo(publicKey.getKey());
+    encoded = publicKey.getKey().getEncoded();
+    assertThat(encoded.length).isBetween(getPublicKeyEncodedMinLength(), getPublicKeyEncodedLength());
+    if (!Arrays.equals(publicKeyData, encoded)) {
+      deserializePublicKey = keyCreator.deserializePublicKey(encoded);
+      assertThat(deserializePublicKey).isEqualTo(publicKey);
+      assertThat(deserializePublicKey.getKey()).isEqualTo(publicKey.getKey());
     }
 
   }
@@ -124,6 +117,78 @@ public abstract class SecurityAsymmetricCryptorBuilderTest extends Assertions {
   protected int getSignatureMinLength() {
 
     return getSignatureLength();
+  }
+
+  /**
+   * @return the expected (maximum) length in bytes of the {@link SecurityPublicKey#getData() compact public key data}.
+   */
+  protected int getPublicKeyCompactLength() {
+
+    return getPublicKeyEncodedLength();
+  }
+
+  /**
+   * @return the expected (minimum) length in bytes of the {@link SecurityPublicKey#getData() compact public key data}.
+   */
+  protected int getPublicKeyCompactMinLength() {
+
+    if (getPublicKeyCompactLength() == getPublicKeyEncodedLength()) {
+      return getPublicKeyEncodedMinLength();
+    } else {
+      return getPublicKeyCompactLength();
+    }
+  }
+
+  /**
+   * @return the expected (maximum) length in bytes of the {@link java.security.PublicKey#getEncoded() encoded public
+   *         key data}.
+   */
+  protected abstract int getPublicKeyEncodedLength();
+
+  /**
+   * @return the expected (minimum) length in bytes of the {@link java.security.PublicKey#getEncoded() encoded public
+   *         key data}.
+   */
+  protected int getPublicKeyEncodedMinLength() {
+
+    return getPublicKeyEncodedLength();
+  }
+
+  /**
+   * @return the expected (maximum) length in bytes of the {@link SecurityPrivateKey#getData() compact private key
+   *         data}.
+   */
+  protected int getPrivateKeyCompactLength() {
+
+    return getPrivateKeyEncodedLength();
+  }
+
+  /**
+   * @return the expected (minimum) length in bytes of the {@link SecurityPrivateKey#getData() compact private key
+   *         data}.
+   */
+  protected int getPrivateKeyCompactMinLength() {
+
+    if (getPrivateKeyCompactLength() == getPrivateKeyEncodedLength()) {
+      return getPrivateKeyEncodedMinLength();
+    } else {
+      return getPrivateKeyCompactLength();
+    }
+  }
+
+  /**
+   * @return the expected (maximum) length in bytes of the {@link java.security.PrivateKey#getEncoded() encoded private
+   *         key data}.
+   */
+  protected abstract int getPrivateKeyEncodedLength();
+
+  /**
+   * @return the expected (minimum) length in bytes of the {@link java.security.PrivateKey#getEncoded() encoded private
+   *         key data}.
+   */
+  protected int getPrivateKeyEncodedMinLength() {
+
+    return getPrivateKeyEncodedLength();
   }
 
   /**
@@ -143,21 +208,15 @@ public abstract class SecurityAsymmetricCryptorBuilderTest extends Assertions {
     }
   }
 
-  private void verifyCrypt(SecurityEncryptor encryptor, SecurityDecryptor decryptor, byte[] rawMessage) {
+  private void verifyCrypt(SecurityEncryptor encryptor, SecurityDecryptor decryptor, byte[] rawMessage, int encryptionLength) {
 
     byte[] encryptedMessage = encryptor.crypt(rawMessage, true);
     byte[] decryptedMessage = decryptor.crypt(encryptedMessage, true);
     assertThat(decryptedMessage).isEqualTo(rawMessage);
 
-    int encryptionLength = getEncryptionLength();
     if (encryptionLength > 0) {
       assertThat(encryptedMessage).hasSize(encryptionLength);
     }
   }
-
-  /**
-   * @return the expected length in bytes of the encrypted data from the payload "Secret message".
-   */
-  protected abstract int getEncryptionLength();
 
 }

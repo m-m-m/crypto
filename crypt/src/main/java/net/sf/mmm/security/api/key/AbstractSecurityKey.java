@@ -11,11 +11,12 @@ import net.sf.mmm.util.datatype.api.BinaryType;
  * Simple datatype as container for a {@link PrivateKey} (see {@link #getKey()}). Allows simple and fast reading and
  * storing as {@link BinaryType} until real semantic parsing and usage is required.
  *
- * @param <K> the type of the wrapped {@link #getKey()}.
+ * @param <KT> the type of the {@link #getKey() key} for {@link SecurityKey}.
+ * @param <K> the type of the wrapped {@link #getKey() key}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractSecurityKey<K extends Key> extends SecurityBinaryType implements SecurityKey<K> {
+public abstract class AbstractSecurityKey<KT extends Key, K extends KT> extends SecurityBinaryType implements SecurityKey<KT> {
 
   private K key;
 

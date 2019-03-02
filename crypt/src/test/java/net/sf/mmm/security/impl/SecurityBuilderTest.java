@@ -26,15 +26,10 @@ import net.sf.mmm.security.api.crypt.SecurityCryptorFactory;
 import net.sf.mmm.security.api.crypt.SecurityDecryptor;
 import net.sf.mmm.security.api.crypt.SecurityEncryptor;
 import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorConfig;
-import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorConfigBidirectional;
 import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorConfigCurve25519;
 import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorConfigEcies;
-import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorConfigPrivatePublic;
-import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorConfigPublicPrivate;
 import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorConfigRsa;
-import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorFactoryBidirectional;
-import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorFactoryPrivatePublic;
-import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorFactoryPublicPrivate;
+import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorFactory;
 import net.sf.mmm.security.api.crypt.symmetric.SecuritySymmetricCryptorConfig;
 import net.sf.mmm.security.api.crypt.symmetric.SecuritySymmetricCryptorConfigAes;
 import net.sf.mmm.security.api.crypt.symmetric.SecuritySymmetricCryptorFactory;
@@ -44,13 +39,13 @@ import net.sf.mmm.security.api.hash.SecurityHashFactory;
 import net.sf.mmm.security.api.io.SecurityFileResource;
 import net.sf.mmm.security.api.key.SecurityKeySet;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfig;
-import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfigEc;
-import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfigRsa;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyCreator;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyFactory;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyPair;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPrivateKey;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
+import net.sf.mmm.security.api.key.asymmetric.ec.jce.SecurityAsymmetricKeyConfigEcJce;
+import net.sf.mmm.security.api.key.asymmetric.rsa.SecurityAsymmetricKeyConfigRsa;
 import net.sf.mmm.security.api.key.store.SecurityKeyStore;
 import net.sf.mmm.security.api.key.store.SecurityKeyStoreConfig;
 import net.sf.mmm.security.api.key.store.SecurityKeyStoreConfigBks;
@@ -314,12 +309,12 @@ public class SecurityBuilderTest extends Assertions {
     SecurityAsymmetricKeyPair keyPair = keyCreator.generateKeyPair();
 
     // then
-    verifyKeyPair(keyPair, keyCreator, 550, 2373, 2378);
+    verifyKeyPair(keyPair, keyCreator, 2373, 2378, 550, 550);
   }
 
   /**
    * Test of {@link SecurityFactoryBuilder#key(net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyConfig)} with
-   * {@link SecurityAsymmetricKeyConfigEc#EC_256}.
+   * {@link SecurityAsymmetricKeyConfigEcJce#EC_256}.
    */
   @Test
   public void testKeyEc() {
@@ -329,23 +324,23 @@ public class SecurityBuilderTest extends Assertions {
 
     // when
     builder.random();
-    SecurityAsymmetricKeyFactory keyFactory = key(builder, SecurityAsymmetricKeyConfigEc.EC_256);
+    SecurityAsymmetricKeyFactory keyFactory = key(builder, SecurityAsymmetricKeyConfigEcJce.EC_256);
     SecurityAsymmetricKeyCreator keyCreator = keyFactory.newKeyCreator();
     SecurityAsymmetricKeyPair keyPair = keyCreator.generateKeyPair();
 
     // then
-    verifyKeyPair(keyPair, keyCreator, 91, 67, 67);
+    // verifyKeyPair(keyPair, keyCreator, 32, 33, 32, 33);
+    verifyKeyPair(keyPair, keyCreator, 67, 67, 91, 91);
   }
 
-  private void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, SecurityAsymmetricKeyCreator keyCreator,
-      int publicKeyByteCount, int privateKeyByteCountMin, int privateKeyByteCountMax) {
+  private void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, SecurityAsymmetricKeyCreator keyCreator, int privateKeyByteCountMin,
+      int privateKeyByteCountMax, int publicKeyByteCountMin, int publicKeyByteCountMax) {
 
-    verifyKeyPair(keyPair, publicKeyByteCount, privateKeyByteCountMin, privateKeyByteCountMax);
+    verifyKeyPair(keyPair, privateKeyByteCountMin, privateKeyByteCountMax, publicKeyByteCountMin, publicKeyByteCountMax);
 
     SecurityPrivateKey privateKey = keyPair.getPrivateKey();
     SecurityPublicKey publicKey = keyPair.getPublicKey();
-    SecurityAsymmetricKeyPair keyPairCopy = keyCreator.deserializeKeyPair(privateKey.getBase64(),
-        publicKey.getBase64());
+    SecurityAsymmetricKeyPair keyPairCopy = keyCreator.deserializeKeyPair(privateKey.getBase64(), publicKey.getBase64());
     assertThat(keyPairCopy).isNotNull();
     assertThat(keyPairCopy.getPrivateKey()).isEqualTo(privateKey);
     assertThat(keyPairCopy.getPublicKey()).isEqualTo(publicKey);
@@ -356,8 +351,8 @@ public class SecurityBuilderTest extends Assertions {
     assertThat(keyCreator.deserializePublicKey(publicKey.getBase64())).isEqualTo(publicKey);
   }
 
-  private void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, int publicKeyByteCount, int privateKeyByteCountMin,
-      int privateKeyByteCountMax) {
+  private void verifyKeyPair(SecurityAsymmetricKeyPair keyPair, int privateKeyByteCountMin, int privateKeyByteCountMax,
+      int publicKeyByteCountMin, int publicKeyByteCountMax) {
 
     assertThat(keyPair).isNotNull();
 
@@ -369,7 +364,8 @@ public class SecurityBuilderTest extends Assertions {
 
     SecurityPublicKey publicKey = keyPair.getPublicKey();
     assertThat(publicKey).isNotNull();
-    assertThat(publicKey.getData()).isNotNull().hasSize(publicKeyByteCount);
+    assertThat(publicKey.getData()).isNotNull();
+    assertThat(publicKey.getData().length).isBetween(publicKeyByteCountMin, publicKeyByteCountMax);
     assertThat(publicKey.getKey()).isNotNull();
   }
 
@@ -469,14 +465,14 @@ public class SecurityBuilderTest extends Assertions {
     certificateData.setNotAfter(Instant.now().plus(Duration.ofDays(365)));
     certificateData.setSignatureAlgorithm("SHA256WithRSA");
     SecurityCertificate certificate = certificateCreator.generateCertificate(keyPair, certificateData);
-    keyStore.setKeyPair(alias, keyPair, password, new SecurityCertificatePathGeneric(certificate));
+    keyStore.setKey(alias, keyPair, password, new SecurityCertificatePathGeneric(certificate));
     keyStore.save();
     file.deleteOnExit();
 
     // then
     assertThat(file).exists().isFile();
     SecurityKeyStore keyStore2 = builder.keyStore(configuration);
-    SecurityKeySet keyPair2 = keyStore2.getKeyPair(alias, password);
+    SecurityKeySet keyPair2 = keyStore2.getKey(alias, password);
     assertThat(keyPair2).isEqualTo(keyPair);
     file.delete();
   }
@@ -493,8 +489,7 @@ public class SecurityBuilderTest extends Assertions {
     doTestCryptAsymmetric(SecurityAsymmetricCryptorConfigRsa.RSA_4096);
   }
 
-  private void doTestCryptAsymmetric(SecurityAsymmetricCryptorConfig configuration)
-      throws UnsupportedEncodingException {
+  private void doTestCryptAsymmetric(SecurityAsymmetricCryptorConfig configuration) throws UnsupportedEncodingException {
 
     // given
     SecurityFactoryBuilder builder = newFactoryBuilder();
@@ -505,27 +500,26 @@ public class SecurityBuilderTest extends Assertions {
     builder.random();
     SecurityAsymmetricKeyFactory keyFactory = key(builder, configuration.getKeyAlgorithmConfig());
     SecurityAsymmetricKeyPair keyPair = keyFactory.newKeyCreator().generateKeyPair();
-    SecurityCryptorFactory cryptorFactory = cryptUnsafe(builder, configuration);
+    SecurityAsymmetricCryptorFactory cryptorFactory = crypt(builder, configuration);
     SecurityEncryptor encryptor;
     SecurityDecryptor decryptor;
     byte[] encryptedMessage = null;
     byte[] decryptedMessage;
-    if (configuration.isPrivatePublic()) {
+    // when
+    encryptor = cryptorFactory.newEncryptor(keyPair.getPublicKey());
+    encryptedMessage = encryptor.crypt(rawMessage, true);
+    decryptor = cryptorFactory.newDecryptor(keyPair.getPrivateKey());
+    decryptedMessage = decryptor.crypt(encryptedMessage, true);
+
+    // then
+    assertThat(encryptedMessage).isNotEqualTo(rawMessage);
+    assertThat(decryptedMessage).isEqualTo(rawMessage);
+
+    if (configuration.isBidirectional()) {
       // when
       encryptor = cryptorFactory.newEncryptorUnsafe(keyPair.getPrivateKey().getKey());
-      encryptedMessage = encryptor.crypt(rawMessage, true);
-      decryptor = cryptorFactory.newDecryptorUnsafe(keyPair.getPublicKey().getKey());
-      decryptedMessage = decryptor.crypt(encryptedMessage, true);
-
-      // then
-      assertThat(encryptedMessage).isNotEqualTo(rawMessage);
-      assertThat(decryptedMessage).isEqualTo(rawMessage);
-    }
-    if (configuration.isPublicPrivate()) {
-      // when
-      encryptor = cryptorFactory.newEncryptorUnsafe(keyPair.getPublicKey().getKey());
       byte[] encryptedMessage2 = encryptor.crypt(rawMessage, true);
-      decryptor = cryptorFactory.newDecryptorUnsafe(keyPair.getPrivateKey().getKey());
+      decryptor = cryptorFactory.newDecryptorUnsafe(keyPair.getPublicKey().getKey());
       decryptedMessage = decryptor.crypt(encryptedMessage2, true);
 
       // then
@@ -578,7 +572,7 @@ public class SecurityBuilderTest extends Assertions {
     // when
     builder.random();
     SecurityHashFactory hashFactory = hash(builder, new SecurityHashConfigSha256(2));
-    SecurityAsymmetricCryptorFactoryBidirectional cryptorFactory = crypt(builder, configuration);
+    SecurityAsymmetricCryptorFactory cryptorFactory = crypt(builder, configuration);
     SecurityAsymmetricKeyFactory keyFactory = key(builder, configuration.getKeyAlgorithmConfig());
     SecurityAsymmetricKeyPair keyPair = keyFactory.newKeyCreator().generateKeyPair();
     SecuritySignatureFactory signatureFactory = builder.signUsingHashAndCryptor();
@@ -592,7 +586,7 @@ public class SecurityBuilderTest extends Assertions {
     // then
     assertThat(verified).isTrue();
     byte[] hash = hashFactory.newHashCreator().hash(rawMessage, true);
-    byte[] crypt = cryptorFactory.newEncryptor(privateKey).crypt(hash, true);
+    byte[] crypt = cryptorFactory.newEncryptorUnsafe(privateKey.getKey()).crypt(hash, true);
     assertThat(signature).isEqualTo(crypt);
     assertThat(verifier.verify(rawMessage, new SecuritySignature(signature))).isTrue();
   }
@@ -611,26 +605,9 @@ public class SecurityBuilderTest extends Assertions {
     return cryptorFactory;
   }
 
-  private SecurityAsymmetricCryptorFactoryBidirectional crypt(SecurityFactoryBuilder builder,
-      SecurityAsymmetricCryptorConfigBidirectional config) {
+  private SecurityAsymmetricCryptorFactory crypt(SecurityFactoryBuilder builder, SecurityAsymmetricCryptorConfig config) {
 
-    SecurityAsymmetricCryptorFactoryBidirectional cryptorFactory = builder.crypt(config);
-    verifyFactory(cryptorFactory, config);
-    return cryptorFactory;
-  }
-
-  private SecurityAsymmetricCryptorFactoryPrivatePublic crypt(SecurityFactoryBuilder builder,
-      SecurityAsymmetricCryptorConfigPrivatePublic config) {
-
-    SecurityAsymmetricCryptorFactoryPrivatePublic cryptorFactory = builder.crypt(config);
-    verifyFactory(cryptorFactory, config);
-    return cryptorFactory;
-  }
-
-  private SecurityAsymmetricCryptorFactoryPublicPrivate crypt(SecurityFactoryBuilder builder,
-      SecurityAsymmetricCryptorConfigPublicPrivate config) {
-
-    SecurityAsymmetricCryptorFactoryPublicPrivate cryptorFactory = builder.crypt(config);
+    SecurityAsymmetricCryptorFactory cryptorFactory = builder.crypt(config);
     verifyFactory(cryptorFactory, config);
     return cryptorFactory;
   }
