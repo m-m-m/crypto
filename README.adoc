@@ -8,67 +8,91 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 image:https://travis-ci.org/m-m-m/security.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/security"]
 
-`mmm-security-crypt` is a library for simple and more secure usage of cryptography. JCA and JCE offers an extensible API to provide cryptographic algorithms for Java. However, this API is low-level what often leads to programming mistakes and severe security frauds (missing parameters like nonce). Further, you need a lot of knowledge of the underlying security algorithms or you will end up with runtime errors. Also, changing things often requires refactorings of the code using the encryption or signature algorithms. This library allows you to get around of this problems and write your security related code more safe and easy.
+`mmm-security-crypt` is a library for simple and more secure usage of cryptography. https://en.wikipedia.org/wiki/Java_Cryptography_Architecture[JCA] and https://en.wikipedia.org/wiki/Java_Cryptography_Extension[JCE] offer an extensible API to provide cryptographic algorithms for Java. However, this API is very low-level what often leads to programming mistakes and severe security frauds (missing parameters like nonce). Further, you need a lot of knowledge of the underlying security algorithms or you will end up with runtime errors. Also, changing things often requires refactorings of the code using the encryption or signature algorithms. Finally, the JCA and JCE are limited and for many things you need extensions like http://bouncycastle.net/[BouncyCastle]. In some cases you need to create some security objects via BouncyCastle and others via the default provider and combine them properly to make things work. Again this opens pitfalls and requires a lot of knowledge.
+
+This library allows you to get around all these problems and write your security related code more safe and easy. In this context when we are 
+talking about security we mean aspects like:
+
+* hashing
+* encryption and decryption
+* signing and verifying signatures
+* key creation and management
+* certificate creation and management
+* key store management
+
+Other aspects of security such as authentication, authorization, intrusion detection, attack prevention, etc. are not covered here.
 
 === Features
 
-* Simple fluent builder API to choose and create cryptographic algorithms.
+* Simple API to access and create cryptographic objects and algorithms.
 * API enforces all parameters required for secure usage.
 * Detailed JavaDocs assist you to make the correct choice.
-* Flexible composition of algorithms: combine any hash (e.g. 5 x SHA-256) with any cryptor (e.g. RSA with 4096 bits of keylength) to create and verify signatures.
+* Flexible composition of algorithms: combine any hash (e.g. 5 x SHA-256) with any signature algorithm (e.g. ECIES) to create and verify signatures.
 * Build in support to encrypt and decrypt binary streams on the fly with just one line of code.
-* Usable and extendable also for cryptographic algorithms not already considered in the current release (if Java ships with a new algorithm you can use it by creating your own config without the need to wait for an update of this library).
-* Works with any custom provider like http://bouncycastle.org/[bouncycastle].
+* Usable and extendable also for cryptographic algorithms not already considered in the current release (if Java or BouncyCastle ships with a new algorithm you can use it by creating your own config without the need to wait for an update of this library).
+* Extended support for like http://bouncycastle.org/[bouncycastle].
+* Can be used with any other custom security provider.
 
 === Example
-Here is an example for asymmetric encryption with `mmm-security-crypt`:
+Here is an example for asymmetric encryption with `mmm-security-bc`:
 [source,java]
 -----
-Security.addProvider(new BouncyCastleProvider());
-Curve25519 curve25519 = Curve25519.create();
-SecurityAsymmetricKeyPair keyPair = curve25519.generateKeyPair();
-SecurityAsymmetricCryptorFactoryPublicPrivate cryptorFactory = curve25519.crypt();
-
-byte[] rawMessage = "Secret message".getBytes("UTF-8");
-SecurityEncryptor encryptor = cryptorFactory.newEncryptor(keyPair.getPublicKey());
+String hashAlgorithm = SecurityAlgorithmSha2.ALGORITHM_SHA_256; // "SHA-256";
+SecurityHashConfig sha256x2 = new SecurityHashConfig(hashAlgorithm, 2);
+SecurityAccessSecp256k1 access = SecurityAccessSecp256k1.ofPlain(sha256x2);
+SecurityAsymmetricKeyCreator keyCreator = access.newKeyCreator();
+SecurityAsymmetricKeyPair keyPair = keyCreator.generateKeyPair();
+PublicKey publicKey = keyPair.getPublicKey();
+PrivateKey privateKey = keyPair.getPrivateKey();
+// encryption + decryption
+byte[] rawMessage = "Secret message".getBytes(StandardCharsets.UTF_8);
+SecurityEncryptor encryptor = access.newEncryptorUnsafe(publicKey);
 byte[] encryptedMessage = encryptor.crypt(rawMessage, true);
-SecurityDecryptor decryptor = cryptorFactory.newDecryptor(keyPair.getPrivateKey());
+SecurityDecryptor decryptor = access.newDecryptorUnsafe(privateKey);
 byte[] decryptedMessage = decryptor.crypt(encryptedMessage, true);
-
 assertThat(decryptedMessage).isEqualTo(rawMessage);
+// signing
+SecuritySignature signature = access.newSignerUnsafe(privateKey).sign(rawMessage, true);
+boolean signatureVerified = access.newVerifierUnsafe(publicKey).verifyUnsafe(rawMessage, signature);
+assertThat(signatureVerified).as("signature verified").isTrue();
 -----
 
-On the first view this might not look much simpler than plain JCA/JCE. However, by only changing the first line you can
-change the encryption and key algorithms with all according settings. The following will use RSA with a key-length of 4096:
+On the first view this might not look much simpler than plain JCA/JCE. However, by only changing a single line you can
+change the encryption and key algorithms with all according settings. If you replace the third line with the following it will use RSA with a key-length of 4096:
 [source,java]
 -----
-Rsa curve25519 = Rsa.keyLength4096();
+SecurityAccessRsa access = SecurityAccessRsa.of4096(sha256x2);
 -----
 
-This is all just the beginning. You might have code that is using a hash algorithm such as SHA-256. Now you want to
-apply the hashing with multiple iterations. With `mmm-security-crypt` you can do so without changing your usage code but
-only by changing the configuration. Further, you might want to create a signature by combining a hash creator with an
-asymmetric encryption. With JCA/JCE you can only choose from build-in combinations of hash and encryptions while with
-our API you can do:
+You can see in the example some methods that end with `Unsafe`. Without this suffix the API is typesafe to prevent errors passing 
+the wrong type of key or signature to a specific algorithm. To make the code typesafe, you can use more specific types than `PublicKey`, etc.
+and remove the `Unsafe` suffix to use the type-safe methods.
+If you still want to keep your code portable so that you can change the algorithms as simple as just shown, you can simply use Java10+ type
+inference syntax. In the following example we use the algorithms used by BitCoin including a signature with recovery ID what is
+supported neither by JCA/JCE nor by BouncyCastle out of the box.
+
 [source,java]
 -----
-SecurityAsymmetricCryptorConfigBidirectional configuration = SecurityAsymmetricCryptorConfigRsa.RSA_4096;
-SecurityFactoryBuilder builder = new SecurityBuilderImpl().newFactoryBuilder();
-SecurityAsymmetricKeyFactory keyFactory = builder.key(configuration.getKeyAlgorithmConfig());
-SecurityAsymmetricKeyPair keyPair = keyFactory.newKeyCreator().generateKeyPair();
-SecurityAsymmetricCryptorFactoryPublicPrivate cryptorFactory = builder.crypt(configuration);
-int iterationCount = 2;
-builder.hash(new SecurityHashConfigSha256(iterationCount));
-SecuritySignatureFactory signatureFactory = builder.signUsingHashAndCryptor();
-
-byte[] rawMessage = "My contract".getBytes("UTF-8");
-SecuritySignatureSigner signer = signatureFactory.newSigner(keyPair.getPrivateKey());
-byte[] signature = signer.sign(rawMessage, false);
-SecuritySignatureVerifier verifier = signatureFactory.newVerifier(keyPair.getPublicKey());
-boolean valid = verifier.verify(rawMessage, signature);
-
-assertThat(valid).isTrue();
+var access = SecurityAccessSecp256k1.ofRecoveryId(new SecurityHashConfig("SHA-256"));
+var keyCreator = access.newKeyCreator();
+var keyPair = keyCreator.generateKeyPair();
+var publicKey = keyPair.getPublicKey();
+var privateKey = keyPair.getPrivateKey();
+// encryption + decryption
+var rawMessage = "Secret message".getBytes(StandardCharsets.UTF_8);
+var encryptor = access.newEncryptor(publicKey);
+var encryptedMessage = encryptor.crypt(rawMessage, true);
+var decryptor = access.newDecryptor(privateKey);
+var decryptedMessage = decryptor.crypt(encryptedMessage, true);
+assertThat(decryptedMessage).isEqualTo(rawMessage);
+// signing
+var signature = access.newSigner(privateKey).sign(rawMessage, true);
+var signatureVerified = access.newVerifier(publicKey).verifyUnsafe(rawMessage, signature);
+assertThat(signatureVerified).as("signature verified").isTrue();
+assertThat(signature.recoverPublicKey(rawMessage)).isEqualTo(publicKey);
 -----
+
+This is all just the beginning. 
 There is even much more. Dealing with JCA/JCE directly is rather complex and error-prone what easily leads to runtime
 errors or security frauds and vulnerabilities. Using this library will make your life a lot more simple and safe.
 
@@ -77,7 +101,7 @@ errors or security frauds and vulnerabilities. Using this library will make your
 ```
   <dependency>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-security-crypt</artifactId>
+    <artifactId>mmm-security-bc</artifactId>
     <version>1.0.0</version>
   </dependency>
 ```
