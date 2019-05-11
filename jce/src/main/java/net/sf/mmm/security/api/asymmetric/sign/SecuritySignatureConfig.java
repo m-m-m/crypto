@@ -23,9 +23,10 @@ public class SecuritySignatureConfig<S extends SecuritySignature> extends Securi
    * The constructor.
    *
    * @param signatureFactory the {@link #getSignatureFactory() signature factory}.
-   * @param hashConfig the {@link SecurityHashConfig} to be used as {@link #getHashConfig() pre-hashing config}.
+   * @param hashConfig the {@link SecurityHashConfig} used to calculate the hash that is the signed.
    * @param signingAlgorithm the {@link SecuritySignatureAlgorithm#getSigningAlgorithm() signing algorithm}.
-   * @param hashAlgorithm the {@link SecuritySignatureAlgorithm#getHashAlgorithm() hash algorithm}.
+   * @param hashAlgorithm the {@link SecuritySignatureAlgorithm#getHashAlgorithm() hash algorithm} used by the signing
+   *        algorithm (e.g. for HMac).
    * @param provider the {@link #getProvider() provider}.
    */
   public SecuritySignatureConfig(SecuritySignatureFactory<S> signatureFactory, SecurityHashConfig hashConfig, String signingAlgorithm,
@@ -38,16 +39,14 @@ public class SecuritySignatureConfig<S extends SecuritySignature> extends Securi
    * The constructor.
    *
    * @param signatureFactory the {@link #getSignatureFactory() signature factory}.
-   * @param hashConfig the {@link SecurityHashConfig}. The {@link #getHashConfig() pre-hashing config} will be set to
-   *        {@link SecurityHashConfig#decrementIterationCount()}.
+   * @param hashConfig the {@link SecurityHashConfig} used to calculate the hash that is the signed.
    * @param signingAlgorithm the {@link SecuritySignatureAlgorithm#getSigningAlgorithm() signing algorithm}.
    * @param provider the {@link #getProvider() provider}.
    */
   public SecuritySignatureConfig(SecuritySignatureFactory<S> signatureFactory, SecurityHashConfig hashConfig, String signingAlgorithm,
       SecurityProvider provider) {
 
-    this(signatureFactory, SecuritySignatureAlgorithm.of(hashConfig.getAlgorithm(), signingAlgorithm), hashConfig.decrementIterationCount(),
-        provider);
+    this(signatureFactory, SecuritySignatureAlgorithm.of(hashConfig.getAlgorithm(), signingAlgorithm), hashConfig, provider);
   }
 
   private SecuritySignatureConfig(SecuritySignatureFactory<S> signatureFactory, SecuritySignatureAlgorithm signatureAlgorithm,
@@ -68,7 +67,7 @@ public class SecuritySignatureConfig<S extends SecuritySignature> extends Securi
   }
 
   /**
-   * @return the optional {@link SecurityHashConfig} used for pre-hashing. If not {@code null} the data to sign will be
+   * @return the optional {@link SecurityHashConfig} used for hashing. If not {@code null} the data to sign will be
    *         first hashed using this configuration and the resulting hash will then be signed using
    *         {@link #getSignatureAlgorithm() signature algorithm}.
    */
@@ -83,6 +82,18 @@ public class SecuritySignatureConfig<S extends SecuritySignature> extends Securi
   public SecuritySignatureFactory<S> getSignatureFactory() {
 
     return this.signatureFactory;
+  }
+
+  /**
+   * @return a copy of this {@link SecuritySignatureConfig} without {@link #getHashConfig() hash config} (set to
+   *         {@code null}).
+   */
+  public SecuritySignatureConfig<S> withoutHashConfig() {
+
+    if (this.hashConfig == null) {
+      return this;
+    }
+    return new SecuritySignatureConfig<>(this.signatureFactory, this.signatureAlgorithm, null, this.provider);
   }
 
 }

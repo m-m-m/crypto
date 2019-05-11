@@ -32,7 +32,7 @@ public class SecurityHashCreatorImplMultipleRounds extends SecurityHashCreatorIm
     if (iterationCount <= 1) {
       throw new IllegalArgumentException("Iteration count (" + iterationCount + ") has to be greater than 1!");
     }
-    this.roundDigest = provider.createDigest(hashAlgorithm);
+    this.roundDigest = getProvider().createDigest(hashAlgorithm);
     this.iterationCount = iterationCount;
   }
 

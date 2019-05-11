@@ -72,11 +72,7 @@ public class SecuritySignatureProcessorFactoryImplEcBc<S extends SecuritySignatu
   public SecuritySignatureSigner<S> newSigner(BCECPrivateKey privateKey) {
 
     try {
-      SecurityHashConfig hashConfig = this.config.getHashConfig();
-      if (hashConfig == null) {
-        throw new IllegalStateException("Hash config is required for signature.");
-      }
-      Digest digest = createDigest(hashConfig.getAlgorithm());
+      Digest digest = createDigest(this.config.getSignatureAlgorithm().getHashAlgorithm());
       ECDSASigner ecSigner = new ECDSASigner(new HMacDSAKCalculator(digest));
       AsymmetricKeyParameter privKeyParams = ECUtil.generatePrivateKeyParameter(privateKey);
       ecSigner.init(true, privKeyParams);

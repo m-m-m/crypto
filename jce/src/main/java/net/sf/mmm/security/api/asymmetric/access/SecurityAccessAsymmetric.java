@@ -20,6 +20,9 @@ import net.sf.mmm.security.api.crypt.SecurityDecryptor;
 import net.sf.mmm.security.api.crypt.SecurityDecryptorImplCipher;
 import net.sf.mmm.security.api.crypt.SecurityEncryptor;
 import net.sf.mmm.security.api.crypt.SecurityEncryptorImplCiper;
+import net.sf.mmm.security.api.hash.SecurityHashCreator;
+import net.sf.mmm.security.api.hash.SecurityHashFactory;
+import net.sf.mmm.security.api.hash.access.SecurityAccessHash;
 import net.sf.mmm.security.api.random.SecurityRandomFactory;
 
 /**
@@ -37,16 +40,22 @@ import net.sf.mmm.security.api.random.SecurityRandomFactory;
  * @since 1.0.0
  */
 public abstract class SecurityAccessAsymmetric<S extends SecuritySignature, PR extends PrivateKey, PU extends PublicKey, PAIR extends SecurityAsymmetricKeyPair<PR, PU>, KC extends SecurityAsymmetricKeyCreator<PR, PU, PAIR>>
-    extends SecurityAccess
-    implements SecurityAsymmetricKeyFactory<KC>, SecurityAsymmetricCryptorFactory<PR, PU>, SecuritySignatureProcessorFactory<S, PR, PU> {
+    extends SecurityAccess implements SecurityAsymmetricKeyFactory<KC>, SecurityAsymmetricCryptorFactory<PR, PU>,
+    SecuritySignatureProcessorFactory<S, PR, PU>, SecurityHashFactory {
 
   /** The {@link SecurityAsymmetricCryptorConfig}. */
   protected final SecurityAsymmetricCryptorConfig<PR, PU> cryptorConfig;
+
+  private final SecuritySignatureConfig<S> signatureConfig;
 
   /** The {@link SecurityRandomFactory}. */
   protected final SecurityRandomFactory randomFactory;
 
   private final SecuritySignatureProcessorFactory<S, PR, PU> signatureFactory;
+
+  private final SecuritySignatureProcessorFactory<S, PR, PU> signatureFactoryWithoutHash;
+
+  private final SecurityAccessHash hashFactory;
 
   private KC keyCreator;
 
@@ -60,23 +69,30 @@ public abstract class SecurityAccessAsymmetric<S extends SecuritySignature, PR e
   public SecurityAccessAsymmetric(SecuritySignatureConfig<S> signatureConfig, SecurityAsymmetricCryptorConfig<PR, PU> cryptorConfig,
       SecurityRandomFactory randomFactory) {
 
-    this(new SecuritySignatureProcessorFactoryImpl<>(signatureConfig, randomFactory), cryptorConfig, randomFactory);
+    super();
+    this.signatureConfig = signatureConfig;
+    this.signatureFactory = createSignatureProcessorFactory(signatureConfig);
+    this.signatureFactoryWithoutHash = createSignatureProcessorFactory(signatureConfig.withoutHashConfig());
+    this.cryptorConfig = cryptorConfig;
+    this.randomFactory = randomFactory;
+    this.hashFactory = new SecurityAccessHash(signatureConfig.getHashConfig());
   }
 
   /**
-   * The constructor.
-   *
-   * @param signatureFactory the {@link SecuritySignatureProcessorFactory}.
-   * @param cryptorConfig the {@link SecurityAsymmetricCryptorConfig}.
-   * @param randomFactory the {@link SecurityRandomFactory}.
+   * @param signatureCfg the {@link SecuritySignatureConfig}.
+   * @return the created {@link SecuritySignatureProcessorFactory} instance.
    */
-  public SecurityAccessAsymmetric(SecuritySignatureProcessorFactory<S, PR, PU> signatureFactory,
-      SecurityAsymmetricCryptorConfig<PR, PU> cryptorConfig, SecurityRandomFactory randomFactory) {
+  protected SecuritySignatureProcessorFactory<S, PR, PU> createSignatureProcessorFactory(SecuritySignatureConfig<S> signatureCfg) {
 
-    super();
-    this.signatureFactory = signatureFactory;
-    this.cryptorConfig = cryptorConfig;
-    this.randomFactory = randomFactory;
+    return new SecuritySignatureProcessorFactoryImpl<>(signatureCfg, this.randomFactory);
+  }
+
+  /**
+   * @return the {@link SecuritySignatureConfig}.
+   */
+  public SecuritySignatureConfig<S> getSignatureConfig() {
+
+    return this.signatureConfig;
   }
 
   private KC getKeyCreatorInternal() {
@@ -131,6 +147,22 @@ public abstract class SecurityAccessAsymmetric<S extends SecuritySignature, PR e
   public S createSignature(byte[] data) {
 
     return this.signatureFactory.createSignature(data);
+  }
+
+  @Override
+  public SecurityHashCreator newHashCreator() {
+
+    return this.hashFactory.newHashCreator();
+  }
+
+  /**
+   * @return the {@link SecuritySignatureProcessorFactory} for plain signing without prior hashing. This is useful for
+   *         situations where hashing should be in control of the developer using this library (e.g. to avoid duplicate
+   *         hash calculation or for rolling hashes).
+   */
+  public SecuritySignatureProcessorFactory<S, PR, PU> getSignatureFactoryWithoutHash() {
+
+    return this.signatureFactoryWithoutHash;
   }
 
 }

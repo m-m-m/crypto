@@ -43,16 +43,20 @@ public class SecuritySignatureProcessorFactoryImpl<S extends SecuritySignature, 
     return this.config.getAlgorithm();
   }
 
-  private SecurityHashCreator newPreHashCreator() {
+  private SecurityHashCreator newHashCreator() {
 
     SecurityHashConfig hashConfig = this.config.getHashConfig();
     if (hashConfig != null) {
+      String algorithm = hashConfig.getAlgorithm();
+      if (SecurityHashConfig.ALGORITHM_NONE.equals(algorithm)) {
+        return null;
+      }
       int iterationCount = hashConfig.getIterationCount();
       if (iterationCount == 1) {
-        return new SecurityHashCreatorImplDigest(hashConfig.getAlgorithm(), getProvider());
+        return new SecurityHashCreatorImplDigest(algorithm, getProvider());
       } else {
         assert (iterationCount > 1);
-        return new SecurityHashCreatorImplMultipleRounds(hashConfig.getAlgorithm(), getProvider(), iterationCount);
+        return new SecurityHashCreatorImplMultipleRounds(algorithm, getProvider(), iterationCount);
       }
     }
     return null;
@@ -65,7 +69,7 @@ public class SecuritySignatureProcessorFactoryImpl<S extends SecuritySignature, 
       Signature signature = getProvider().createSignature(this.config.getAlgorithm());
       signature.initSign(privateKey, createSecureRandom());
       SecuritySignatureSigner<S> signer = new SecuritySignatureSignerImpl<>(signature, this.config.getSignatureFactory());
-      SecurityHashCreator hashGenerator = newPreHashCreator();
+      SecurityHashCreator hashGenerator = newHashCreator();
       if (hashGenerator != null) {
         signer = new SecuritySignatureSignerImplWithHash<>(hashGenerator, signer);
       }
@@ -82,7 +86,7 @@ public class SecuritySignatureProcessorFactoryImpl<S extends SecuritySignature, 
       Signature signature = getProvider().createSignature(this.config.getAlgorithm());
       signature.initVerify(publicKey);
       SecuritySignatureVerifier<S> verifier = new SecuritySignatureVerifierImpl<>(signature);
-      SecurityHashCreator hashGenerator = newPreHashCreator();
+      SecurityHashCreator hashGenerator = newHashCreator();
       if (hashGenerator != null) {
         verifier = new SecuritySignatureVerifierImplWithHash<>(hashGenerator, verifier);
       }

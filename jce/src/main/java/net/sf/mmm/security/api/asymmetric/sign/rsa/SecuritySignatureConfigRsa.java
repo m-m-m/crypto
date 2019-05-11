@@ -16,7 +16,7 @@ public class SecuritySignatureConfigRsa extends SecuritySignatureConfig<Security
   /**
    * The constructor.
    *
-   * @param hashConfig the {@link SecurityHashConfig} to be used as {@link #getHashConfig() pre-hashing config}.
+   * @param hashConfig the {@link SecurityHashConfig} to be used as {@link #getHashConfig() hashing config}.
    * @param provider the {@link #getProvider() provider}.
    */
   public SecuritySignatureConfigRsa(SecurityHashConfig hashConfig, SecurityProvider provider) {
@@ -27,7 +27,7 @@ public class SecuritySignatureConfigRsa extends SecuritySignatureConfig<Security
   /**
    * The constructor.
    *
-   * @param hashConfig the {@link SecurityHashConfig} to be used as {@link #getHashConfig() pre-hashing config}.
+   * @param hashConfig the {@link SecurityHashConfig} to be used as {@link #getHashConfig() hashing config}.
    * @param hashAlgorithm the {@link SecuritySignatureAlgorithm#getHashAlgorithm() hash algorithm}.
    * @param provider the {@link #getProvider() provider}.
    */

@@ -68,12 +68,31 @@ public class SecurityAccessCurve25519<S extends SecuritySignatureEcBc> extends S
   }
 
   /**
+   * @param hashAlgorithm the {@link SecurityHashConfig#getAlgorithm() algorithm} for the hash used for signatures.
+   * @return a {@link SecurityAccessCurve25519} instance for plain signature.
+   */
+  public static SecurityAccessCurve25519<SecuritySignatureEcBcPlain> ofPlain(String hashAlgorithm) {
+
+    return ofPlain(new SecurityHashConfig(hashAlgorithm));
+  }
+
+  /**
    * @param hashConfig the {@link SecurityHashConfig} for the hash used for signatures.
    * @return a {@link SecurityAccessCurve25519} instance for plain signature.
    */
   public static SecurityAccessCurve25519<SecuritySignatureEcBcPlain> ofPlain(SecurityHashConfig hashConfig) {
 
     return of(new SecuritySignatureFactoryEcBcPlain(CURVE), hashConfig, null);
+  }
+
+  /**
+   * @param hashAlgorithm the {@link SecurityHashConfig#getAlgorithm() algorithm} for the hash used for signatures.
+   * @return a {@link SecurityAccessCurve25519} instance for signature with
+   *         {@link SecuritySignatureEcBcWithRecoveryId#getRecoveryId() recovery ID}.
+   */
+  public static SecurityAccessCurve25519<SecuritySignatureEcBcWithRecoveryId> ofRecoveryId(String hashAlgorithm) {
+
+    return ofRecoveryId(new SecurityHashConfig(hashAlgorithm));
   }
 
   /**

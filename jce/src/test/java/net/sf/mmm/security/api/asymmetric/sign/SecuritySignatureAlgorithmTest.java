@@ -5,11 +5,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Signature;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * Test of {@link SecuritySignatureAlgorithm}.
  */
+@Ignore("JDK is unstable and supported algorithms may come and go - relying on bouncy castle is a good option")
 public class SecuritySignatureAlgorithmTest extends Assertions {
 
   @Test

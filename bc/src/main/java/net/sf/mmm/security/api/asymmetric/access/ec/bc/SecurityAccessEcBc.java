@@ -10,6 +10,7 @@ import net.sf.mmm.security.api.asymmetric.crypt.ec.SecurityAsymmetricCryptorConf
 import net.sf.mmm.security.api.asymmetric.key.ec.bc.SecurityAsymmetricKeyCreatorEcBc;
 import net.sf.mmm.security.api.asymmetric.key.ec.bc.SecurityAsymmetricKeyPairEcBc;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureConfig;
+import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureProcessorFactory;
 import net.sf.mmm.security.api.asymmetric.sign.ec.bc.SecuritySignatureEcBc;
 import net.sf.mmm.security.api.asymmetric.sign.ec.bc.SecuritySignatureFactoryEcBc;
 import net.sf.mmm.security.api.asymmetric.sign.ec.bc.SecuritySignatureProcessorFactoryImplEcBc;
@@ -47,7 +48,7 @@ public abstract class SecurityAccessEcBc<S extends SecuritySignatureEcBc>
   public SecurityAccessEcBc(ECParameterSpec ecParameters, SecuritySignatureConfig<S> signatureConfig,
       SecurityAsymmetricCryptorConfigEcies<BCECPrivateKey, BCECPublicKey> cryptorConfig, SecurityRandomFactory randomFactory) {
 
-    super(new SecuritySignatureProcessorFactoryImplEcBc<>(signatureConfig), cryptorConfig, randomFactory);
+    super(signatureConfig, cryptorConfig, randomFactory);
     this.ecParameters = ecParameters;
   }
 
@@ -70,6 +71,13 @@ public abstract class SecurityAccessEcBc<S extends SecuritySignatureEcBc>
 
     this(ecParameters, new SecuritySignatureConfig<>(signatureFactory, hashConfig, SecurityAlgorithmEcDsa.ALGORITHM_ECDSA, provider),
         new SecurityAsymmetricCryptorConfigEcies<>(provider), randomFactory);
+  }
+
+  @Override
+  protected SecuritySignatureProcessorFactory<S, BCECPrivateKey, BCECPublicKey> createSignatureProcessorFactory(
+      SecuritySignatureConfig<S> signatureCfg) {
+
+    return new SecuritySignatureProcessorFactoryImplEcBc<>(signatureCfg);
   }
 
   @Override

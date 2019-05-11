@@ -12,6 +12,9 @@ import net.sf.mmm.security.api.provider.SecurityProvider;
  */
 public class SecurityHashConfig extends SecurityAlgorithmConfig implements AbstractSecurityGetIterationCount {
 
+  /** The dummy hash algorithm NONE for no hashing (e.g. plain signing without prior hashing). */
+  public static final String ALGORITHM_NONE = "NONE";
+
   private final int iterationCount;
 
   /**

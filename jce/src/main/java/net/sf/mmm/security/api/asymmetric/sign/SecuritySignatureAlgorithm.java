@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithm;
+import net.sf.mmm.security.api.hash.SecurityHashConfig;
 
 /**
  * Little helper to workaround quirks in JCE/JCA for {@link java.security.Signature#getAlgorithm() signature algorithm}
@@ -13,9 +14,6 @@ import net.sf.mmm.security.api.algorithm.SecurityAlgorithm;
  * @since 1.0.0
  */
 public final class SecuritySignatureAlgorithm implements SecurityAlgorithm {
-
-  /** The dummy hash algorithm NONE for plain signing without prior hashing. */
-  public static final String HASH_ALGORITHM_NONE = "NONE";
 
   private static final String SEPARATOR = "with";
 
@@ -80,11 +78,12 @@ public final class SecuritySignatureAlgorithm implements SecurityAlgorithm {
   }
 
   /**
-   * @return {@code true} if {@link #getHashAlgorithm() hash algorithm} is {@link #HASH_ALGORITHM_NONE NONE}.
+   * @return {@code true} if {@link #getHashAlgorithm() hash algorithm} is {@link SecurityHashConfig#ALGORITHM_NONE
+   *         NONE}.
    */
   public boolean isNoHashing() {
 
-    return HASH_ALGORITHM_NONE.equals(this.hashAlgorithm);
+    return SecurityHashConfig.ALGORITHM_NONE.equals(this.hashAlgorithm);
   }
 
   /**

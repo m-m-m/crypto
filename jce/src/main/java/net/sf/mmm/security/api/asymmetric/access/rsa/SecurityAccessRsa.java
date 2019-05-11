@@ -4,7 +4,6 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmRsa;
-import net.sf.mmm.security.api.algorithm.SecurityAlgorithmSha2;
 import net.sf.mmm.security.api.asymmetric.access.SecurityAccessAsymmetric;
 import net.sf.mmm.security.api.asymmetric.crypt.SecurityAsymmetricCryptorConfig;
 import net.sf.mmm.security.api.asymmetric.crypt.rsa.SecurityAsymmetricCryptorConfigRsa;
@@ -56,6 +55,17 @@ public final class SecurityAccessRsa extends
   }
 
   /**
+   * @param hashAlgorithm the {@link SecurityHashConfig#getAlgorithm() algorithm} for the hash used for signatures.
+   * @return a {@link SecurityAccessRsa} instance with a
+   *         {@link net.sf.mmm.security.api.asymmetric.key.SecurityAsymmetricKeyCreator#getKeyLength() key length} of
+   *         4096 bits.
+   */
+  public static SecurityAccessRsa of4096(String hashAlgorithm) {
+
+    return of4096(new SecurityHashConfig(hashAlgorithm));
+  }
+
+  /**
    * @param hashConfig the {@link SecurityHashConfig} for hashing data for {@link SecuritySignatureRsa signatures}.
    * @return a {@link SecurityAccessRsa} instance with a
    *         {@link net.sf.mmm.security.api.asymmetric.key.SecurityAsymmetricKeyCreator#getKeyLength() key length} of
@@ -69,11 +79,12 @@ public final class SecurityAccessRsa extends
   /**
    * @param keyLength the {@link net.sf.mmm.security.api.asymmetric.key.SecurityAsymmetricKeyCreator#getKeyLength() key
    *        length} in bits.
-   * @return a {@link SecurityAccessRsa} instance with {@link SecurityAlgorithmSha2#ALGORITHM_SHA_256} as hash config.
+   * @param hashAlgorithm the {@link SecurityHashConfig#getAlgorithm() algorithm} for the hash used for signatures.
+   * @return the according {@link SecurityAccessRsa} instance.
    */
-  public static SecurityAccessRsa ofSha256(int keyLength) {
+  public static SecurityAccessRsa of(int keyLength, String hashAlgorithm) {
 
-    return of(keyLength, new SecurityHashConfig(SecurityAlgorithmSha2.ALGORITHM_SHA_256));
+    return of(keyLength, new SecurityHashConfig(hashAlgorithm));
   }
 
   /**
@@ -84,7 +95,7 @@ public final class SecurityAccessRsa extends
    */
   public static SecurityAccessRsa of(int keyLength, SecurityHashConfig hashConfig) {
 
-    return of(keyLength, hashConfig, null, null);
+    return of(keyLength, hashConfig, hashConfig.getAlgorithm(), null, null);
   }
 
   /**
@@ -96,21 +107,23 @@ public final class SecurityAccessRsa extends
    */
   public static SecurityAccessRsa of(int keyLength, SecurityHashConfig hashConfig, SecurityRandomFactory randomFactory) {
 
-    return of(keyLength, hashConfig, randomFactory, null);
+    return of(keyLength, hashConfig, hashConfig.getAlgorithm(), randomFactory, null);
   }
 
   /**
    * @param keyLength the {@link net.sf.mmm.security.api.asymmetric.key.SecurityAsymmetricKeyCreator#getKeyLength() key
    *        length} in bits.
    * @param hashConfig the {@link SecurityHashConfig} for hashing data for {@link SecuritySignatureRsa signatures}.
+   * @param hashAlgorithm the {@link SecurityHashConfig#getAlgorithm() hash algorithm} for the signature (e.g. for
+   *        HMac).
    * @param randomFactory the {@link SecurityRandomFactory}.
    * @param provider the {@link SecurityProvider} to use.
    * @return the according {@link SecurityAccessRsa} instance.
    */
-  public static SecurityAccessRsa of(int keyLength, SecurityHashConfig hashConfig, SecurityRandomFactory randomFactory,
-      SecurityProvider provider) {
+  public static SecurityAccessRsa of(int keyLength, SecurityHashConfig hashConfig, String hashAlgorithm,
+      SecurityRandomFactory randomFactory, SecurityProvider provider) {
 
-    SecuritySignatureConfigRsa signatureConfig = new SecuritySignatureConfigRsa(hashConfig, provider);
+    SecuritySignatureConfigRsa signatureConfig = new SecuritySignatureConfigRsa(hashConfig, hashAlgorithm, provider);
     SecurityAsymmetricCryptorConfigRsa cryptorConfig = new SecurityAsymmetricCryptorConfigRsa(provider);
     return new SecurityAccessRsa(signatureConfig, cryptorConfig, randomFactory, keyLength, provider);
   }

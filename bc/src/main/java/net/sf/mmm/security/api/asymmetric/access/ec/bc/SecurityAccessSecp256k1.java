@@ -69,12 +69,30 @@ public class SecurityAccessSecp256k1<S extends SecuritySignatureEcBc> extends Se
   }
 
   /**
+   * @param hashAlgorithm the {@link SecurityHashConfig#getAlgorithm() algorithm} for the hash used for signatures.
+   * @return a {@link SecurityAccessSecp256k1} instance for default signature.
+   */
+  public static SecurityAccessSecp256k1<SecuritySignatureEcBcPlain> ofPlain(String hashAlgorithm) {
+
+    return ofPlain(new SecurityHashConfig(hashAlgorithm));
+  }
+
+  /**
    * @param hashConfig the {@link SecurityHashConfig} for the hash used for signatures.
    * @return a {@link SecurityAccessSecp256k1} instance for default signature.
    */
   public static SecurityAccessSecp256k1<SecuritySignatureEcBcPlain> ofPlain(SecurityHashConfig hashConfig) {
 
     return of(new SecuritySignatureFactoryEcBcPlain(CURVE), hashConfig, null);
+  }
+
+  /**
+   * @param hashAlgorithm the {@link SecurityHashConfig#getAlgorithm() algorithm} for the hash used for signatures.
+   * @return a {@link SecurityAccessSecp256k1} instance for bitcoin signature.
+   */
+  public static SecurityAccessSecp256k1<SecuritySignatureEcBcWithRecoveryId> ofRecoveryId(String hashAlgorithm) {
+
+    return ofRecoveryId(new SecurityHashConfig(hashAlgorithm));
   }
 
   /**

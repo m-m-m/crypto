@@ -4,7 +4,6 @@ package net.sf.mmm.security.api.asymmetric.access.rsa;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmSha2;
 import net.sf.mmm.security.api.asymmetric.access.SecurityAccessAsymmetricTest;
-import net.sf.mmm.security.api.asymmetric.access.rsa.SecurityAccessRsa;
 import net.sf.mmm.security.api.hash.SecurityHashConfig;
 
 import org.junit.Test;
@@ -21,7 +20,7 @@ public class SecurityAccessRsaTest extends SecurityAccessAsymmetricTest {
   public void testRsa() {
 
     // given
-    SecurityHashConfig hashConfig = new SecurityHashConfig(SecurityAlgorithmSha2.ALGORITHM_SHA_256, null, 2);
+    SecurityHashConfig hashConfig = new SecurityHashConfig(SecurityAlgorithmSha2.ALGORITHM_SHA_256, 2);
     SecurityAccessRsa rsa4096 = SecurityAccessRsa.of4096(hashConfig);
     assertThat(rsa4096.getAlgorithm()).isEqualTo("RSA");
     assertThat(rsa4096.newKeyCreator().getKeyLength()).isEqualTo(4096);

@@ -41,8 +41,8 @@ public abstract class SecurityAccessAsymmetricTest extends Assertions {
     verify((SecurityAccessAsymmetric) access, encryptionLength, true);
   }
 
-  private void verify(SecurityAccessAsymmetric<SecuritySignature, PrivateKey, PublicKey, ?, ?> access,
-      int encryptionLength, boolean bidirectional) {
+  private void verify(SecurityAccessAsymmetric<SecuritySignature, PrivateKey, PublicKey, ?, ?> access, int encryptionLength,
+      boolean bidirectional) {
 
     SecurityAsymmetricKeyCreator<PrivateKey, PublicKey, ?> keyCreator = access.newKeyCreator();
     SecurityAsymmetricKeyPair keyPair = keyCreator.generateKeyPair();
@@ -53,15 +53,13 @@ public abstract class SecurityAccessAsymmetricTest extends Assertions {
     PrivateKey privateKey = keyPair.getPrivateKey();
     verifyCrypt(access.newEncryptor(publicKey), access.newDecryptor(privateKey), rawMessage, encryptionLength);
     if (bidirectional) {
-      verifyCrypt(access.newEncryptorUnsafe(privateKey), access.newDecryptorUnsafe(publicKey), rawMessage,
-          encryptionLength);
+      verifyCrypt(access.newEncryptorUnsafe(privateKey), access.newDecryptorUnsafe(publicKey), rawMessage, encryptionLength);
     }
     // signing
     SecurityBinaryType data = new SecurityBinaryType(rawMessage);
     SecuritySignature signature = access.newSigner(privateKey).sign(data, true);
     boolean signatureVerified = access.newVerifier(publicKey).verify(data, signature);
     assertThat(signatureVerified).as("signature verified").isTrue();
-    verifySignature(signature);
   }
 
   /**
@@ -95,19 +93,6 @@ public abstract class SecurityAccessAsymmetricTest extends Assertions {
       deserializePublicKey = keyCreator.createPublicKey(encoded);
       assertThat(deserializePublicKey).isEqualTo(publicKey);
     }
-  }
-
-  /**
-   * @return the expected (maximum) length in bytes of the signature of a SHA-256 hash.
-   */
-  protected abstract int getSignatureLength();
-
-  /**
-   * @return the expected minimum length in bytes of the signature of a SHA-256 hash.
-   */
-  protected int getSignatureMinLength() {
-
-    return getSignatureLength();
   }
 
   /**
@@ -186,23 +171,22 @@ public abstract class SecurityAccessAsymmetricTest extends Assertions {
 
   /**
    * @param signature the {@link SecuritySignature} to verify.
+   * @param minLength the minimum length
+   * @param maxLength the maximum length
    */
-  protected void verifySignature(SecuritySignature signature) {
+  protected void verifySignatureLength(SecuritySignature signature, int minLength, int maxLength) {
 
-    int signatureLength = getSignatureLength();
-    if (signatureLength > 0) {
-      int signatureMinLength = getSignatureMinLength();
+    if (maxLength > 0) {
       AbstractIntegerAssert<?> length = assertThat(signature.getLength()).as("signature.length");
-      if (signatureMinLength == signatureLength) {
-        length.isEqualTo(signatureLength);
+      if (minLength == maxLength) {
+        length.isEqualTo(minLength);
       } else {
-        length.isBetween(Integer.valueOf(signatureMinLength), Integer.valueOf(signatureLength));
+        length.isBetween(Integer.valueOf(minLength), Integer.valueOf(maxLength));
       }
     }
   }
 
-  private void verifyCrypt(SecurityEncryptor encryptor, SecurityDecryptor decryptor, byte[] rawMessage,
-      int encryptionLength) {
+  private void verifyCrypt(SecurityEncryptor encryptor, SecurityDecryptor decryptor, byte[] rawMessage, int encryptionLength) {
 
     byte[] encryptedMessage = encryptor.crypt(rawMessage, true);
     byte[] decryptedMessage = decryptor.crypt(encryptedMessage, true);
