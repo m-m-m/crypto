@@ -38,7 +38,7 @@ public class RsaTest extends AsymmetricAccessTest {
   @Override
   protected int getPrivateKeyEncodedMinLength() {
 
-    return 2373;
+    return 2370;
   }
 
   @Override
