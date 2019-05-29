@@ -3,23 +3,14 @@
 package net.sf.mmm.crypto.asymmetric.access.ec.bc;
 
 import java.nio.charset.StandardCharsets;
-import java.security.PrivateKey;
-import java.security.PublicKey;
 
 import net.sf.mmm.binary.api.BinaryType;
 import net.sf.mmm.crypto.CryptoBinaryFormat;
 import net.sf.mmm.crypto.asymmetric.access.AsymmetricAccessTest;
-import net.sf.mmm.crypto.asymmetric.access.ec.bc.Secp256k1;
-import net.sf.mmm.crypto.asymmetric.access.rsa.Rsa;
-import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreator;
-import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import net.sf.mmm.crypto.asymmetric.key.ec.bc.AsymmetricKeyCreatorEcBc;
 import net.sf.mmm.crypto.asymmetric.key.ec.bc.AsymmetricKeyPairEcBc;
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
 import net.sf.mmm.crypto.asymmetric.sign.ec.bc.SignatureEcBcPlain;
 import net.sf.mmm.crypto.asymmetric.sign.ec.bc.SignatureEcBcWithRecoveryId;
-import net.sf.mmm.crypto.crypt.Decryptor;
-import net.sf.mmm.crypto.crypt.Encryptor;
 import net.sf.mmm.crypto.hash.HashConfig;
 import net.sf.mmm.crypto.hash.sha2.Sha256;
 
@@ -32,28 +23,6 @@ import org.junit.Test;
  */
 @SuppressWarnings({ "rawtypes" })
 public class Secp256k1Test extends AsymmetricAccessTest {
-
-  public static void main(String[] args) {
-
-    String hashAlgorithm = Sha256.ALGORITHM_SHA_256; // "SHA-256";
-    HashConfig sha256x2 = new HashConfig(hashAlgorithm, 2);
-    Rsa access = Rsa.of4096(sha256x2);
-    AsymmetricKeyCreator keyCreator = access.newKeyCreator();
-    AsymmetricKeyPair keyPair = keyCreator.generateKeyPair();
-    PublicKey publicKey = keyPair.getPublicKey();
-    PrivateKey privateKey = keyPair.getPrivateKey();
-    // encryption + decryption
-    byte[] rawMessage = "Secret message".getBytes(StandardCharsets.UTF_8);
-    Encryptor encryptor = access.newEncryptorUnsafe(publicKey);
-    byte[] encryptedMessage = encryptor.crypt(rawMessage, true);
-    Decryptor decryptor = access.newDecryptorUnsafe(privateKey);
-    byte[] decryptedMessage = decryptor.crypt(encryptedMessage, true);
-    assertThat(decryptedMessage).isEqualTo(rawMessage);
-    // signing
-    SignatureBinary signature = access.newSignerUnsafe(privateKey).sign(rawMessage, true);
-    boolean signatureVerified = access.newVerifierUnsafe(publicKey).verifyUnsafe(rawMessage, signature);
-    assertThat(signatureVerified).as("signature verified").isTrue();
-  }
 
   /**
    * Basic/generic test of {@link Secp256k1#ofPlain(String)}.

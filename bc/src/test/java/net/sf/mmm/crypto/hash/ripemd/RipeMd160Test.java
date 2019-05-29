@@ -1,6 +1,6 @@
 package net.sf.mmm.crypto.hash.ripemd;
 
-import net.sf.mmm.crypto.hash.access.HashTest;
+import net.sf.mmm.crypto.hash.HashTest;
 
 import org.junit.Test;
 

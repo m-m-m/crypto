@@ -1,4 +1,4 @@
-package net.sf.mmm.crypto.hash.access;
+package net.sf.mmm.crypto.hash;
 
 import java.nio.charset.StandardCharsets;
 

@@ -23,12 +23,12 @@ import net.sf.mmm.crypto.key.KeySet;
 import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyGeneric;
 
 /**
- * Implementation of {@link SecurityKeyStore}.
+ * Implementation of {@link KeyStoreApi}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecurityKeyStoreImpl implements SecurityKeyStore {
+public class KeyStoreImpl implements KeyStoreApi {
 
   private static final Certificate[] NO_CHAIN = null;
 
@@ -43,7 +43,7 @@ public class SecurityKeyStoreImpl implements SecurityKeyStore {
    *
    * @param config the {@link KeyStoreConfig}.
    */
-  public SecurityKeyStoreImpl(KeyStoreConfig config) {
+  public KeyStoreImpl(KeyStoreConfig config) {
 
     super();
     this.config = config;

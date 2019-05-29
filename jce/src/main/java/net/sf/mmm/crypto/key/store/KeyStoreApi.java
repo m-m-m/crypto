@@ -16,7 +16,7 @@ import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKey;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface SecurityKeyStore {
+public interface KeyStoreApi {
 
   /**
    * @return the underlying {@link KeyStore}.
@@ -57,7 +57,7 @@ public interface SecurityKeyStore {
   }
 
   /**
-   * Saves all the key store with all changes.
+   * Saves this key store with all changes.
    */
   void save();
 

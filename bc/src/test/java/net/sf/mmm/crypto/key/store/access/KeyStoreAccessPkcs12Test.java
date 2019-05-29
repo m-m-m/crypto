@@ -8,17 +8,16 @@ import net.sf.mmm.crypto.asymmetric.cert.access.CertificateAccessX509;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyFactory;
 import net.sf.mmm.crypto.hash.HashConfig;
 import net.sf.mmm.crypto.hash.sha2.Sha256;
-import net.sf.mmm.crypto.key.store.access.SecurityAccessKeyStorePkcs12;
 
 import org.junit.Test;
 
 /**
- * Test of {@link SecurityAccessKeyStorePkcs12}.
+ * Test of {@link KeyStoreAccessPkcs12}.
  */
-public class SecurityAccessKeyStorePkcs12Test extends SecurityAccessKeyStoreTest {
+public class KeyStoreAccessPkcs12Test extends KeyStoreAccessTest {
 
   /**
-   * Test of {@link SecurityAccessKeyStorePkcs12#of(File, String)}.
+   * Test of {@link KeyStoreAccessPkcs12#of(File, String)}.
    *
    * @throws Exception on error
    */
@@ -29,7 +28,7 @@ public class SecurityAccessKeyStorePkcs12Test extends SecurityAccessKeyStoreTest
     File keyStore = File.createTempFile("mmm.security", ".p12");
     keyStore.delete();
     String password = "$ecr4t";
-    SecurityAccessKeyStorePkcs12 access = SecurityAccessKeyStorePkcs12.of(keyStore, password);
+    KeyStoreAccessPkcs12 access = KeyStoreAccessPkcs12.of(keyStore, password);
     AsymmetricKeyFactory keyFactory = Rsa.of4096(new HashConfig(Sha256.ALGORITHM_SHA_256));
     CertificateCreator certificateCreator = CertificateAccessX509.of().newCertificateCreator();
     check(access, keyFactory, certificateCreator);

@@ -7,7 +7,7 @@ import net.sf.mmm.crypto.io.CryptoResource;
 import net.sf.mmm.crypto.provider.SecurityProvider;
 
 /**
- * Configuration for {@link SecurityKeyStore}.<br>
+ * Configuration for {@link KeyStoreApi}.<br>
  * Additional proprietary configs:
  * <ul>
  * <li>"Windows-MY" / "SunMSCAPI"</li>

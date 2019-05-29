@@ -11,14 +11,14 @@ import net.sf.mmm.crypto.key.store.KeyStoreConfigPkcs12;
  *
  * @since 1.0.0
  */
-public class SecurityAccessKeyStorePkcs12 extends KeyStoreAccess {
+public class KeyStoreAccessPkcs12 extends KeyStoreAccess {
 
   /**
    * The constructor.
    *
    * @param config the {@link KeyStoreConfigPkcs12}.
    */
-  public SecurityAccessKeyStorePkcs12(KeyStoreConfigPkcs12 config) {
+  public KeyStoreAccessPkcs12(KeyStoreConfigPkcs12 config) {
 
     super(config);
   }
@@ -28,7 +28,7 @@ public class SecurityAccessKeyStorePkcs12 extends KeyStoreAccess {
    * @param password the password used to encrypt/decrypt the keystore.
    * @return the new instance.
    */
-  public static SecurityAccessKeyStorePkcs12 of(File keyStore, String password) {
+  public static KeyStoreAccessPkcs12 of(File keyStore, String password) {
 
     return of(new CryptoFileResource(keyStore), password);
   }
@@ -38,9 +38,9 @@ public class SecurityAccessKeyStorePkcs12 extends KeyStoreAccess {
    * @param password the password used to encrypt/decrypt the keystore.
    * @return the new instance.
    */
-  public static SecurityAccessKeyStorePkcs12 of(CryptoResource keyStoreResource, String password) {
+  public static KeyStoreAccessPkcs12 of(CryptoResource keyStoreResource, String password) {
 
-    return new SecurityAccessKeyStorePkcs12(new KeyStoreConfigPkcs12(keyStoreResource, password));
+    return new KeyStoreAccessPkcs12(new KeyStoreConfigPkcs12(keyStoreResource, password));
   }
 
 }

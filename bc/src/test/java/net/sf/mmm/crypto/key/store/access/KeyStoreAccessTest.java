@@ -10,12 +10,11 @@ import net.sf.mmm.crypto.asymmetric.cert.CertificateDataBean;
 import net.sf.mmm.crypto.asymmetric.cert.CertificatePathGeneric;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyFactory;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
-import net.sf.mmm.crypto.io.CryptoResource;
 import net.sf.mmm.crypto.io.CryptoFileResource;
+import net.sf.mmm.crypto.io.CryptoResource;
 import net.sf.mmm.crypto.key.KeySet;
-import net.sf.mmm.crypto.key.store.SecurityKeyStore;
+import net.sf.mmm.crypto.key.store.KeyStoreApi;
 import net.sf.mmm.crypto.key.store.KeyStoreConfig;
-import net.sf.mmm.crypto.key.store.access.KeyStoreAccess;
 
 import org.assertj.core.api.Assertions;
 
@@ -23,10 +22,9 @@ import org.assertj.core.api.Assertions;
  * Abstract base test for {@link KeyStoreAccess}.
  */
 @SuppressWarnings({ "rawtypes" })
-public class SecurityAccessKeyStoreTest extends Assertions {
+public class KeyStoreAccessTest extends Assertions {
 
-  void check(KeyStoreAccess keyStoreAccess, AsymmetricKeyFactory keyFactory,
-      CertificateCreator certificateCreator) {
+  void check(KeyStoreAccess keyStoreAccess, AsymmetricKeyFactory keyFactory, CertificateCreator certificateCreator) {
 
     // given
     String password = "$4cret";
@@ -35,7 +33,7 @@ public class SecurityAccessKeyStoreTest extends Assertions {
 
     // when
     AsymmetricKeyPair keyPair = keyFactory.newKeyCreator().generateKeyPair();
-    SecurityKeyStore keyStore = keyStoreAccess.newKeyStore();
+    KeyStoreApi keyStore = keyStoreAccess.newKeyStore();
     String alias = "alias1";
     CertificateDataBean certificateData = new CertificateDataBean();
     certificateData.setIssuer("CN=thankpoint");
@@ -52,7 +50,7 @@ public class SecurityAccessKeyStoreTest extends Assertions {
       file = ((CryptoFileResource) resource).getFile();
       assertThat(file).exists().isFile();
     }
-    SecurityKeyStore keyStore2 = keyStoreAccess.newKeyStore();
+    KeyStoreApi keyStore2 = keyStoreAccess.newKeyStore();
     KeySet keyPair2 = keyStore2.getKey(alias, password);
     assertThat(keyPair2).isEqualTo(keyPair);
     if (file != null) {
