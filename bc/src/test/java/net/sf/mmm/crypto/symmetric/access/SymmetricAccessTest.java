@@ -4,15 +4,14 @@ import java.nio.charset.StandardCharsets;
 
 import javax.crypto.SecretKey;
 
-import net.sf.mmm.crypto.symmetric.access.SymmetricAccess;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyCreator;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeyCreator;
 
 import org.assertj.core.api.Assertions;
 
 /**
  * Abstract base test of {@link SymmetricAccess}.
  */
-public abstract class SecurityAccessSymmetricTest extends Assertions {
+public abstract class SymmetricAccessTest extends Assertions {
 
   /**
    * @param <K> type of {@link SecretKey}.
@@ -20,7 +19,7 @@ public abstract class SecurityAccessSymmetricTest extends Assertions {
    */
   protected <K extends SecretKey> void check(SymmetricAccess<K> access) {
 
-    SecuritySymmetricKeyCreator<K> keyCreator = access.newKeyCreator();
+    SymmetricKeyCreator<K> keyCreator = access.newKeyCreator();
     String password = "$4cr4t";
     K key = keyCreator.createKey(password);
     // assertThat(keyCreator.getKeyLength(key)).isEqualTo(keyCreator.getKeyLength());

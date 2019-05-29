@@ -7,7 +7,7 @@ import net.sf.mmm.crypto.algorithm.CryptoAlgorithm;
  * there is no common method here. This might change in the future.
  *
  * @see net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreator
- * @see net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyCreator
+ * @see net.sf.mmm.crypto.symmetric.key.SymmetricKeyCreator
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

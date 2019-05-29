@@ -20,7 +20,7 @@ import net.sf.mmm.crypto.asymmetric.key.generic.AsymmetricKeyPairGeneric;
 import net.sf.mmm.crypto.asymmetric.key.rsa.AsymmetricKeyPairRsa;
 import net.sf.mmm.crypto.io.CryptoResource;
 import net.sf.mmm.crypto.key.KeySet;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyGeneric;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeyGeneric;
 
 /**
  * Implementation of {@link KeyStoreApi}.
@@ -101,7 +101,7 @@ public class KeyStoreImpl implements KeyStoreApi {
         }
         return new AsymmetricKeyPairGeneric(privateKey, publicKey);
       } else if (key instanceof SecretKey) {
-        return new SecuritySymmetricKeyGeneric<>((SecretKey) key);
+        return new SymmetricKeyGeneric<>((SecretKey) key);
       } else {
         throw new IllegalStateException("Unsupported key (class: " + key.getClass().getSimpleName() + ", format: " + key.getFormat()
             + "algorithm: " + key.getAlgorithm() + ")");

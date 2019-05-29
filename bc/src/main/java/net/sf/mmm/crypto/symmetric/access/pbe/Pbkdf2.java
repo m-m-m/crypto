@@ -1,28 +1,26 @@
 package net.sf.mmm.crypto.symmetric.access.pbe;
 
 import net.sf.mmm.crypto.provider.BouncyCastle;
-import net.sf.mmm.crypto.symmetric.access.pbe.PbeAccess;
 import net.sf.mmm.crypto.symmetric.crypt.SymmetricCryptorConfig;
 import net.sf.mmm.crypto.symmetric.crypt.aes.SymmetricCryptorConfigAes;
-import net.sf.mmm.crypto.symmetric.key.pbe.SecuritySymmetricKeyConfigPbe;
+import net.sf.mmm.crypto.symmetric.key.pbe.SymmetricKeyConfigPbe;
 
 /**
- * {@link PbeAccess} for <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> (Password-Based Key
- * Derivation Function 2) from <em>PKCS #5 v2.0</em>.
+ * {@link PbeAccess} for <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> (Password-Based Key Derivation
+ * Function 2) from <em>PKCS #5 v2.0</em>.
  *
  * @since 1.0.0
  */
 public class Pbkdf2 extends PbeAccess {
 
-  static final SymmetricCryptorConfigAes CRYPTOR_CONFIG_AES = new SymmetricCryptorConfigAes(
-      BouncyCastle.getSecurityProvider());
+  static final SymmetricCryptorConfigAes CRYPTOR_CONFIG_AES = new SymmetricCryptorConfigAes(BouncyCastle.getSecurityProvider());
 
   /**
    * The constructor.
    *
    * @param keyConfig the {@link SecuritySymmetricKeyConfigPbkdf2}.
    */
-  Pbkdf2(SecuritySymmetricKeyConfigPbe keyConfig) {
+  Pbkdf2(SymmetricKeyConfigPbe keyConfig) {
 
     super(keyConfig, CRYPTOR_CONFIG_AES);
   }
@@ -33,7 +31,7 @@ public class Pbkdf2 extends PbeAccess {
    * @param keyConfig the {@link SecuritySymmetricKeyConfigPbkdf2}.
    * @param cryptorConfig the {@link SymmetricCryptorConfig}.
    */
-  Pbkdf2(SecuritySymmetricKeyConfigPbe keyConfig, SymmetricCryptorConfig cryptorConfig) {
+  Pbkdf2(SymmetricKeyConfigPbe keyConfig, SymmetricCryptorConfig cryptorConfig) {
 
     super(keyConfig, cryptorConfig);
   }
@@ -57,7 +55,7 @@ public class Pbkdf2 extends PbeAccess {
    */
   Pbkdf2(String keyAlgorithm, int keyLength, SymmetricCryptorConfig cryptorConfig) {
 
-    super(new SecuritySymmetricKeyConfigPbe(keyAlgorithm, BouncyCastle.getSecurityProvider(), keyLength), cryptorConfig);
+    super(new SymmetricKeyConfigPbe(keyAlgorithm, BouncyCastle.getSecurityProvider(), keyLength), cryptorConfig);
   }
 
 }

@@ -7,7 +7,7 @@ import java.util.Set;
  * Interface for a {@link Set} of {@link java.security.Key}s that belong together.
  *
  * @see net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair
- * @see net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKey
+ * @see net.sf.mmm.crypto.symmetric.key.SymmetricKey
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -8,7 +8,7 @@ import net.sf.mmm.crypto.CryptoAccess;
 import net.sf.mmm.crypto.asymmetric.crypt.AsymmetricCryptorConfig;
 import net.sf.mmm.crypto.asymmetric.crypt.AsymmetricCryptorFactory;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreator;
-import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyFactory;
+import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreatorFactory;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
 import net.sf.mmm.crypto.asymmetric.sign.SignatureConfig;
@@ -40,7 +40,7 @@ import net.sf.mmm.crypto.random.RandomFactory;
  * @since 1.0.0
  */
 public abstract class AsymmetricAccess<S extends SignatureBinary, PR extends PrivateKey, PU extends PublicKey, PAIR extends AsymmetricKeyPair<PR, PU>, KC extends AsymmetricKeyCreator<PR, PU, PAIR>>
-    extends CryptoAccess implements AsymmetricKeyFactory<KC>, AsymmetricCryptorFactory<PR, PU>,
+    extends CryptoAccess implements AsymmetricKeyCreatorFactory<KC>, AsymmetricCryptorFactory<PR, PU>,
     SignatureProcessorFactory<S, PR, PU>, HashFactory {
 
   /** The {@link AsymmetricCryptorConfig}. */

@@ -8,7 +8,7 @@ import java.security.spec.KeySpec;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface SecuritySymmetricKeySpecFactory {
+public interface SymmetricKeySpecFactory {
 
   /**
    * @param password the secret password.

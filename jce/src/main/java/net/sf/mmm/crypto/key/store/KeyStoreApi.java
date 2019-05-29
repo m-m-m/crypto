@@ -8,7 +8,7 @@ import javax.crypto.SecretKey;
 import net.sf.mmm.crypto.asymmetric.cert.CertificatePath;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import net.sf.mmm.crypto.key.KeySet;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKey;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKey;
 
 /**
  * Wrapper for a {@link KeyStore} with ability to {@link #save() save}.
@@ -47,10 +47,10 @@ public interface KeyStoreApi {
 
   /**
    * @param alias the alias under which the key pair shall be stored.
-   * @param key the {@link SecuritySymmetricKey} to store.
+   * @param key the {@link SymmetricKey} to store.
    * @param password the passphrase used to secure the {@link KeySet}.
    */
-  default void setKey(String alias, SecuritySymmetricKey<?> key, String password) {
+  default void setKey(String alias, SymmetricKey<?> key, String password) {
 
     Objects.requireNonNull(key, "key");
     setKey(alias, key.getKey(), password);

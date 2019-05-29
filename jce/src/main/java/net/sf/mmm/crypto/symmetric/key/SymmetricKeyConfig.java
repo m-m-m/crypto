@@ -12,9 +12,9 @@ import net.sf.mmm.crypto.provider.SecurityProvider;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class SecuritySymmetricKeyConfig extends KeyConfig {
+public abstract class SymmetricKeyConfig extends KeyConfig {
 
-  private final SecuritySymmetricKeySpecFactory keySpecFactory;
+  private final SymmetricKeySpecFactory keySpecFactory;
 
   /**
    * The constructor.
@@ -24,17 +24,17 @@ public abstract class SecuritySymmetricKeyConfig extends KeyConfig {
    * @param keyLength the {@link #getKeyLength() key length} in bits.
    * @param keySpecFactory the {@link #getKeySpecFactory() key spec factory}.
    */
-  public SecuritySymmetricKeyConfig(String algorithm, SecurityProvider provider, int keyLength,
-      SecuritySymmetricKeySpecFactory keySpecFactory) {
+  public SymmetricKeyConfig(String algorithm, SecurityProvider provider, int keyLength,
+      SymmetricKeySpecFactory keySpecFactory) {
 
     super(algorithm, provider, keyLength);
     this.keySpecFactory = keySpecFactory;
   }
 
   /**
-   * @return the {@link SecuritySymmetricKeySpecFactory}.
+   * @return the {@link SymmetricKeySpecFactory}.
    */
-  public SecuritySymmetricKeySpecFactory getKeySpecFactory() {
+  public SymmetricKeySpecFactory getKeySpecFactory() {
 
     return this.keySpecFactory;
   }

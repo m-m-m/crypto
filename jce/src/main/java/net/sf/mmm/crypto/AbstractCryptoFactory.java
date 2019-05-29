@@ -8,8 +8,8 @@ package net.sf.mmm.crypto;
  * @see net.sf.mmm.crypto.hash.HashFactory
  * @see net.sf.mmm.crypto.crypt.CryptorFactory
  * @see net.sf.mmm.crypto.asymmetric.sign.SignatureProcessorFactory
- * @see net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyFactory
- * @see net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyFactory
+ * @see net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreatorFactory
+ * @see net.sf.mmm.crypto.symmetric.key.SymmetricKeyCreatorFactory
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

@@ -14,37 +14,37 @@ import net.sf.mmm.crypto.crypt.EncryptorImplCiper;
 import net.sf.mmm.crypto.key.AbstractGetKeyLength;
 import net.sf.mmm.crypto.random.RandomFactory;
 import net.sf.mmm.crypto.symmetric.crypt.SymmetricCryptorFactory;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyConfig;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyCreator;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyCreatorImpl;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyFactory;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeyConfig;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeyCreator;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeyCreatorImpl;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeyCreatorFactory;
 
 /**
- * Abstract base implementation of factory for {@link SecuritySymmetricKeyCreator key management} and
+ * Abstract base implementation of factory for {@link SymmetricKeyCreator key management} and
  * {@link SymmetricCryptorFactory encryption/decryption} based on
- * {@link net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKey symmetric} cryptography.
+ * {@link net.sf.mmm.crypto.symmetric.key.SymmetricKey symmetric} cryptography.
  *
  * @param <K> type of {@link SecretKey}.
  * @since 1.0.0
  */
 public abstract class SymmetricAccess<K extends SecretKey> extends CryptoAccess implements
-    SecuritySymmetricKeyFactory<SecuritySymmetricKeyCreator<K>>, SymmetricCryptorFactory<K>, AbstractGetKeyLength {
+    SymmetricKeyCreatorFactory<SymmetricKeyCreator<K>>, SymmetricCryptorFactory<K>, AbstractGetKeyLength {
 
-  private final SecuritySymmetricKeyConfig keyConfig;
+  private final SymmetricKeyConfig keyConfig;
 
   private final CryptorConfig cryptorConfig;
 
   private RandomFactory randomFactory;
 
-  private SecuritySymmetricKeyCreator<K> keyCreator;
+  private SymmetricKeyCreator<K> keyCreator;
 
   /**
    * The constructor.
    *
-   * @param keyConfig the {@link SecuritySymmetricKeyConfig}.
+   * @param keyConfig the {@link SymmetricKeyConfig}.
    * @param cryptorConfig the {@link CryptorConfig}.
    */
-  public SymmetricAccess(SecuritySymmetricKeyConfig keyConfig, CryptorConfig cryptorConfig) {
+  public SymmetricAccess(SymmetricKeyConfig keyConfig, CryptorConfig cryptorConfig) {
 
     super();
     Objects.requireNonNull(keyConfig, "keyConfig");
@@ -54,12 +54,12 @@ public abstract class SymmetricAccess<K extends SecretKey> extends CryptoAccess 
   }
 
   @Override
-  public SecuritySymmetricKeyCreator<K> newKeyCreator() {
+  public SymmetricKeyCreator<K> newKeyCreator() {
 
-    return new SecuritySymmetricKeyCreatorImpl<>(this.keyConfig);
+    return new SymmetricKeyCreatorImpl<>(this.keyConfig);
   }
 
-  private SecuritySymmetricKeyCreator<K> getKeyCreatorInternal() {
+  private SymmetricKeyCreator<K> getKeyCreatorInternal() {
 
     if (this.keyCreator == null) {
       this.keyCreator = newKeyCreator();
@@ -68,9 +68,9 @@ public abstract class SymmetricAccess<K extends SecretKey> extends CryptoAccess 
   }
 
   /**
-   * @return the {@link SecuritySymmetricKeyConfig}.
+   * @return the {@link SymmetricKeyConfig}.
    */
-  public SecuritySymmetricKeyConfig getKeyConfig() {
+  public SymmetricKeyConfig getKeyConfig() {
 
     return this.keyConfig;
   }

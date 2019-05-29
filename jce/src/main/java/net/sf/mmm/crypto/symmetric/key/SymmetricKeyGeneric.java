@@ -5,12 +5,12 @@ import java.util.Objects;
 import javax.crypto.SecretKey;
 
 /**
- * Generic implementation of {@link SecuritySymmetricKey}.
+ * Generic implementation of {@link SymmetricKey}.
  *
  * @param <K> type of {@link SecretKey}.
  * @since 1.0.0
  */
-public class SecuritySymmetricKeyGeneric<K extends SecretKey> implements SecuritySymmetricKey<K> {
+public class SymmetricKeyGeneric<K extends SecretKey> implements SymmetricKey<K> {
 
   private final K key;
 
@@ -19,7 +19,7 @@ public class SecuritySymmetricKeyGeneric<K extends SecretKey> implements Securit
    *
    * @param key the {@link SecretKey}.
    */
-  public SecuritySymmetricKeyGeneric(K key) {
+  public SymmetricKeyGeneric(K key) {
 
     super();
     Objects.requireNonNull(key, "key");
@@ -47,7 +47,7 @@ public class SecuritySymmetricKeyGeneric<K extends SecretKey> implements Securit
     if ((obj == null) || (getClass() != obj.getClass())) {
       return false;
     }
-    SecuritySymmetricKeyGeneric<?> other = (SecuritySymmetricKeyGeneric<?>) obj;
+    SymmetricKeyGeneric<?> other = (SymmetricKeyGeneric<?>) obj;
     if (!Objects.equals(this.key, other.key)) {
       return false;
     }

@@ -4,16 +4,16 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 
 import net.sf.mmm.crypto.provider.SecurityProvider;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyConfig;
-import net.sf.mmm.crypto.symmetric.key.spec.SecuritySymmetricKeySpecFactoryImplPbe;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeyConfig;
+import net.sf.mmm.crypto.symmetric.key.spec.SymmetricKeySpecFactoryImplPbe;
 
 /**
- * {@link SecuritySymmetricKeyConfig} for PBE (Password Based Encryption).
+ * {@link SymmetricKeyConfig} for PBE (Password Based Encryption).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecuritySymmetricKeyConfigPbe extends SecuritySymmetricKeyConfig {
+public class SymmetricKeyConfigPbe extends SymmetricKeyConfig {
 
   private static final byte[] SALT = new byte[] { (byte) 0x0fc, (byte) 0x007, (byte) 0x0cf, (byte) 0x01c, (byte) 0x003, (byte) 0x00b,
   (byte) 0x0ff, (byte) 0x020, (byte) 0x021, (byte) 0x0aa, (byte) 0x027, (byte) 0x0b3, (byte) 0x091, (byte) 0x0e6, (byte) 0x0c5,
@@ -25,7 +25,7 @@ public class SecuritySymmetricKeyConfigPbe extends SecuritySymmetricKeyConfig {
    * @param algorithm the {@link #getAlgorithm() algorithm}.
    * @param keyLength the {@link #getKeyLength() key length} in bits.
    */
-  public SecuritySymmetricKeyConfigPbe(String algorithm, int keyLength) {
+  public SymmetricKeyConfigPbe(String algorithm, int keyLength) {
 
     this(algorithm, keyLength, 65536, SALT);
   }
@@ -37,7 +37,7 @@ public class SecuritySymmetricKeyConfigPbe extends SecuritySymmetricKeyConfig {
    * @param provider the {@link SecurityProvider}.
    * @param keyLength the {@link #getKeyLength() key length} in bits.
    */
-  public SecuritySymmetricKeyConfigPbe(String algorithm, SecurityProvider provider, int keyLength) {
+  public SymmetricKeyConfigPbe(String algorithm, SecurityProvider provider, int keyLength) {
 
     this(algorithm, provider, keyLength, 65536, SALT);
   }
@@ -50,7 +50,7 @@ public class SecuritySymmetricKeyConfigPbe extends SecuritySymmetricKeyConfig {
    * @param iterationCount the {@link net.sf.mmm.crypto.AbstractGetIterationCount#getIterationCount()
    *        iteration count}.
    */
-  public SecuritySymmetricKeyConfigPbe(String algorithm, int keyLength, int iterationCount) {
+  public SymmetricKeyConfigPbe(String algorithm, int keyLength, int iterationCount) {
 
     this(algorithm, keyLength, iterationCount, SALT);
   }
@@ -64,7 +64,7 @@ public class SecuritySymmetricKeyConfigPbe extends SecuritySymmetricKeyConfig {
    *        iteration count}.
    * @param salt the {@link javax.crypto.spec.PBEKeySpec#getSalt() salt}.
    */
-  public SecuritySymmetricKeyConfigPbe(String algorithm, int keyLength, int iterationCount, byte[] salt) {
+  public SymmetricKeyConfigPbe(String algorithm, int keyLength, int iterationCount, byte[] salt) {
 
     this(algorithm, null, keyLength, iterationCount, salt);
   }
@@ -79,9 +79,9 @@ public class SecuritySymmetricKeyConfigPbe extends SecuritySymmetricKeyConfig {
    *        iteration count}.
    * @param salt the {@link javax.crypto.spec.PBEKeySpec#getSalt() salt}.
    */
-  public SecuritySymmetricKeyConfigPbe(String algorithm, SecurityProvider provider, int keyLength, int iterationCount, byte[] salt) {
+  public SymmetricKeyConfigPbe(String algorithm, SecurityProvider provider, int keyLength, int iterationCount, byte[] salt) {
 
-    super(algorithm, provider, keyLength, new SecuritySymmetricKeySpecFactoryImplPbe(salt, iterationCount, keyLength));
+    super(algorithm, provider, keyLength, new SymmetricKeySpecFactoryImplPbe(salt, iterationCount, keyLength));
   }
 
   @Override

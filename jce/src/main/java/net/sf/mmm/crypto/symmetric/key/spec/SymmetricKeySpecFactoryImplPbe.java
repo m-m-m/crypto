@@ -4,17 +4,17 @@ import java.security.spec.KeySpec;
 
 import javax.crypto.spec.PBEKeySpec;
 
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeySpecFactory;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeySpecFactory;
 
 /**
- * Implementation of {@link SecuritySymmetricKeySpecFactory} for PBE ({@link PBEKeySpec}). For sufficient security
+ * Implementation of {@link SymmetricKeySpecFactory} for PBE ({@link PBEKeySpec}). For sufficient security
  * strength you should use a salt of {@code 20} bytes, a {@link #getKeyLength() key length} of {@code 256} bits (never
  * use less than {@code 128} bits) and a high number of iterations (e.g. {@code 65536}).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecuritySymmetricKeySpecFactoryImplPbe implements SecuritySymmetricKeySpecFactory {
+public class SymmetricKeySpecFactoryImplPbe implements SymmetricKeySpecFactory {
 
   private byte[] salt;
 
@@ -25,7 +25,7 @@ public class SecuritySymmetricKeySpecFactoryImplPbe implements SecuritySymmetric
   /**
    * The constructor.
    */
-  public SecuritySymmetricKeySpecFactoryImplPbe() {
+  public SymmetricKeySpecFactoryImplPbe() {
 
     this(null, 0, 0);
   }
@@ -35,7 +35,7 @@ public class SecuritySymmetricKeySpecFactoryImplPbe implements SecuritySymmetric
    *
    * @param salt the {@link PBEKeySpec#getSalt() salt} or {@code null} for no salting.
    */
-  public SecuritySymmetricKeySpecFactoryImplPbe(byte[] salt) {
+  public SymmetricKeySpecFactoryImplPbe(byte[] salt) {
 
     this(salt, 0, 0);
   }
@@ -46,7 +46,7 @@ public class SecuritySymmetricKeySpecFactoryImplPbe implements SecuritySymmetric
    * @param salt the {@link PBEKeySpec#getSalt() salt} or {@code null} for no salting.
    * @param iterationCount the {@link #getIterationCount() iteration count}.
    */
-  public SecuritySymmetricKeySpecFactoryImplPbe(byte[] salt, int iterationCount) {
+  public SymmetricKeySpecFactoryImplPbe(byte[] salt, int iterationCount) {
 
     this(salt, iterationCount, 0);
   }
@@ -58,7 +58,7 @@ public class SecuritySymmetricKeySpecFactoryImplPbe implements SecuritySymmetric
    * @param iterationCount the {@link #getIterationCount() iteration count}.
    * @param keyLength the {@link #getKeyLength() key length}.
    */
-  public SecuritySymmetricKeySpecFactoryImplPbe(byte[] salt, int iterationCount, int keyLength) {
+  public SymmetricKeySpecFactoryImplPbe(byte[] salt, int iterationCount, int keyLength) {
     super();
     if (iterationCount < 0) {
       throw new IllegalArgumentException("iterationCount: " + iterationCount);

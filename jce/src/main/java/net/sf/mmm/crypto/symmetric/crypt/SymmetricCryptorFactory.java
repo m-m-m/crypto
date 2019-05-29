@@ -5,10 +5,10 @@ import javax.crypto.SecretKey;
 import net.sf.mmm.crypto.crypt.CryptorFactory;
 import net.sf.mmm.crypto.crypt.Decryptor;
 import net.sf.mmm.crypto.crypt.Encryptor;
-import net.sf.mmm.crypto.symmetric.key.SecuritySymmetricKeyCreator;
+import net.sf.mmm.crypto.symmetric.key.SymmetricKeyCreator;
 
 /**
- * Extends {@link CryptorFactory} for {@link SecuritySymmetricKeyCreator symmetric} encryption and decryption.
+ * Extends {@link CryptorFactory} for {@link SymmetricKeyCreator symmetric} encryption and decryption.
  *
  * @param <K> type of {@link SecretKey}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

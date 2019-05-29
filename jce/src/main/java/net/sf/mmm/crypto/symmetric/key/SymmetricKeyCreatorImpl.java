@@ -10,24 +10,24 @@ import javax.crypto.spec.SecretKeySpec;
 import net.sf.mmm.crypto.algorithm.AbstractCryptoAlgorithmWithProvider;
 
 /**
- * Implementation of {@link SecuritySymmetricKeyCreator}.
+ * Implementation of {@link SymmetricKeyCreator}.
  *
  * @param <K> type of {@link SecretKey}.
  * @since 1.0.0
  */
-public class SecuritySymmetricKeyCreatorImpl<K extends SecretKey> extends AbstractCryptoAlgorithmWithProvider
-    implements SecuritySymmetricKeyCreator<K> {
+public class SymmetricKeyCreatorImpl<K extends SecretKey> extends AbstractCryptoAlgorithmWithProvider
+    implements SymmetricKeyCreator<K> {
 
-  private final SecuritySymmetricKeyConfig config;
+  private final SymmetricKeyConfig config;
 
   private SecretKeyFactory keyFactory;
 
   /**
    * The constructor.
    *
-   * @param config the {@link SecuritySymmetricKeyConfig}.
+   * @param config the {@link SymmetricKeyConfig}.
    */
-  public SecuritySymmetricKeyCreatorImpl(SecuritySymmetricKeyConfig config) {
+  public SymmetricKeyCreatorImpl(SymmetricKeyConfig config) {
 
     super(config.getProvider());
     this.config = config;

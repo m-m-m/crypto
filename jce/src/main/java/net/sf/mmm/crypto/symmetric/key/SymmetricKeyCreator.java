@@ -15,7 +15,7 @@ import net.sf.mmm.crypto.key.KeyCreator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface SecuritySymmetricKeyCreator<K extends SecretKey> extends KeyCreator {
+public abstract interface SymmetricKeyCreator<K extends SecretKey> extends KeyCreator {
 
   /**
    * @param password the secret password.

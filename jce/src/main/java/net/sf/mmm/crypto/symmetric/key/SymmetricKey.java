@@ -14,7 +14,7 @@ import net.sf.mmm.crypto.key.KeySet;
  * @param <K> type of {@link SecretKey}.
  * @since 1.0.0
  */
-public interface SecuritySymmetricKey<K extends SecretKey> extends KeySet {
+public interface SymmetricKey<K extends SecretKey> extends KeySet {
 
   /**
    * @return the {@link SecretKey}.

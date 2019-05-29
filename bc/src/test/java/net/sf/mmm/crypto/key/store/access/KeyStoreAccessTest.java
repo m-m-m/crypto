@@ -8,7 +8,7 @@ import java.time.Instant;
 import net.sf.mmm.crypto.asymmetric.cert.CertificateCreator;
 import net.sf.mmm.crypto.asymmetric.cert.CertificateDataBean;
 import net.sf.mmm.crypto.asymmetric.cert.CertificatePathGeneric;
-import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyFactory;
+import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreatorFactory;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import net.sf.mmm.crypto.io.CryptoFileResource;
 import net.sf.mmm.crypto.io.CryptoResource;
@@ -24,7 +24,7 @@ import org.assertj.core.api.Assertions;
 @SuppressWarnings({ "rawtypes" })
 public class KeyStoreAccessTest extends Assertions {
 
-  void check(KeyStoreAccess keyStoreAccess, AsymmetricKeyFactory keyFactory, CertificateCreator certificateCreator) {
+  void check(KeyStoreAccess keyStoreAccess, AsymmetricKeyCreatorFactory keyFactory, CertificateCreator certificateCreator) {
 
     // given
     String password = "$4cret";

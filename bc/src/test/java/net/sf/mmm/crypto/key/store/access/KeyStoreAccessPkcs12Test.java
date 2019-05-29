@@ -5,7 +5,7 @@ import java.io.File;
 import net.sf.mmm.crypto.asymmetric.access.rsa.Rsa;
 import net.sf.mmm.crypto.asymmetric.cert.CertificateCreator;
 import net.sf.mmm.crypto.asymmetric.cert.access.CertificateAccessX509;
-import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyFactory;
+import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreatorFactory;
 import net.sf.mmm.crypto.hash.HashConfig;
 import net.sf.mmm.crypto.hash.sha2.Sha256;
 
@@ -29,7 +29,7 @@ public class KeyStoreAccessPkcs12Test extends KeyStoreAccessTest {
     keyStore.delete();
     String password = "$ecr4t";
     KeyStoreAccessPkcs12 access = KeyStoreAccessPkcs12.of(keyStore, password);
-    AsymmetricKeyFactory keyFactory = Rsa.of4096(new HashConfig(Sha256.ALGORITHM_SHA_256));
+    AsymmetricKeyCreatorFactory keyFactory = Rsa.of4096(new HashConfig(Sha256.ALGORITHM_SHA_256));
     CertificateCreator certificateCreator = CertificateAccessX509.of().newCertificateCreator();
     check(access, keyFactory, certificateCreator);
     keyStore.deleteOnExit();

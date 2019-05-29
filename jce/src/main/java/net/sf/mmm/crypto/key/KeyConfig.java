@@ -7,7 +7,7 @@ import net.sf.mmm.crypto.provider.SecurityProvider;
  * Abstract base class of an {@link CryptoAlgorithmConfig algorithm configuration} for dealing with
  * {@link java.security.Key}s.
  *
- * @see KeyFactory
+ * @see KeyCreatorFactory
  * @see KeyCreator
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
