@@ -41,7 +41,6 @@ public class Pbkdf2 extends PbeAccess {
    *
    * @param keyAlgorithm the {@link SymmetricKeyConfigPbe#getAlgorithm() key algorithm}.
    * @param keyLength the {@link #getKeyLength() key-length}.
-   * @param cryptorConfig the {@link SymmetricCryptorConfig}.
    */
   Pbkdf2(String keyAlgorithm, int keyLength) {
 
