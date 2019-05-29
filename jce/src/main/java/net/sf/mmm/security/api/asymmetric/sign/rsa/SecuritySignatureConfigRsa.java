@@ -36,4 +36,13 @@ public class SecuritySignatureConfigRsa extends SecuritySignatureConfig<Security
     super(SecuritySignatureFactoryRsa.get(), hashConfig, SecurityAlgorithmRsa.ALGORITHM_RSA, hashAlgorithm, provider);
   }
 
+  @Override
+  public SecuritySignatureConfigRsa withoutHashConfig() {
+
+    if (getHashConfig() == null) {
+      return this;
+    }
+    return new SecuritySignatureConfigRsa(null, getSignatureAlgorithm().getHashAlgorithm(), getProvider());
+  }
+
 }

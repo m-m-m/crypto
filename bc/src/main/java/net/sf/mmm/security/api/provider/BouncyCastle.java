@@ -23,6 +23,8 @@ public class BouncyCastle {
 
   private static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 
+  private static final SecurityProvider SECURITY_PROVIDER = SecurityProvider.of(PROVIDER);
+
   /**
    * ensures {@link BouncyCastleProvider} is {@link Security#addProvider(java.security.Provider) registered} to java
    * {@link Security}.
@@ -43,6 +45,14 @@ public class BouncyCastle {
   public static BouncyCastleProvider getProvider() {
 
     return PROVIDER;
+  }
+
+  /**
+   * @return the {@link SecurityProvider} for {@link #getProvider() bouncy castle provider}.
+   */
+  public static SecurityProvider getSecurityProvider() {
+
+    return SECURITY_PROVIDER;
   }
 
 }

@@ -4,7 +4,6 @@ import javax.crypto.SecretKey;
 
 import net.sf.mmm.binary.api.Binary;
 import net.sf.mmm.security.api.SecurityBinaryType;
-import net.sf.mmm.security.api.algorithm.SecuritySymmetricKeyConstants;
 import net.sf.mmm.security.api.key.SecurityKeyCreator;
 
 /**
@@ -16,7 +15,7 @@ import net.sf.mmm.security.api.key.SecurityKeyCreator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface SecuritySymmetricKeyCreator<K extends SecretKey> extends SecurityKeyCreator, SecuritySymmetricKeyConstants {
+public abstract interface SecuritySymmetricKeyCreator<K extends SecretKey> extends SecurityKeyCreator {
 
   /**
    * @param password the secret password.

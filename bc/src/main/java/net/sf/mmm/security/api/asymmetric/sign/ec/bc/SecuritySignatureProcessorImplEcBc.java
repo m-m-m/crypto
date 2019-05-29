@@ -1,10 +1,10 @@
 package net.sf.mmm.security.api.asymmetric.sign.ec.bc;
 
-import net.sf.mmm.security.api.algorithm.SecurityAlgorithmEcDsa;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignature;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureConfig;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureProcessor;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureSigner;
+import net.sf.mmm.security.api.asymmetric.sign.ec.SecuritySignatureConfigEcDsa;
 
 import org.bouncycastle.crypto.signers.ECDSASigner;
 
@@ -15,8 +15,7 @@ import org.bouncycastle.crypto.signers.ECDSASigner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class SecuritySignatureProcessorImplEcBc<S extends SecuritySignatureEcBc>
-    implements SecuritySignatureProcessor, SecurityAlgorithmEcDsa {
+public abstract class SecuritySignatureProcessorImplEcBc<S extends SecuritySignatureEcBc> implements SecuritySignatureProcessor {
 
   private final SecuritySignatureConfig<S> config;
 
@@ -34,7 +33,7 @@ public abstract class SecuritySignatureProcessorImplEcBc<S extends SecuritySigna
    * @param config the {@link #getConfig() config}.
    * @param signer the underlying {@link ECDSASigner}.
    */
-  public SecuritySignatureProcessorImplEcBc(SecuritySignatureConfig<S> config, ECDSASigner signer) {
+  public SecuritySignatureProcessorImplEcBc(SecuritySignatureConfigEcDsa<S> config, ECDSASigner signer) {
 
     super();
     this.config = config;

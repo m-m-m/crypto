@@ -14,7 +14,7 @@ import net.sf.mmm.security.api.asymmetric.key.AbstractSecurityAsymmetricKeyPair;
 import net.sf.mmm.security.api.asymmetric.key.SecurityAsymmetricKeyPair;
 
 /**
- * An implementation of {@link SecurityAsymmetricKeyPair} for {@link net.sf.mmm.security.api.asymmetric.access.rsa.SecurityAccessRsa}.
+ * An implementation of {@link SecurityAsymmetricKeyPair} for {@link net.sf.mmm.security.api.asymmetric.access.rsa.Rsa}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -47,4 +47,13 @@ public class SecurityAccessHash extends SecurityAccess implements SecurityHashFa
     return this.config.getAlgorithm();
   }
 
+  /**
+   * @param config the {@link SecurityHashConfig}.
+   * @return the {@link SecurityAccessHash}.
+   */
+  public static SecurityAccessHash of(SecurityHashConfig config) {
+
+    return new SecurityAccessHash(config);
+  }
+
 }

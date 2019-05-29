@@ -1,9 +1,9 @@
 package net.sf.mmm.security.api.asymmetric.sign.ec.bc;
 
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignature;
-import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureConfig;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureSigner;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureVerifier;
+import net.sf.mmm.security.api.asymmetric.sign.ec.SecuritySignatureConfigEcDsa;
 
 import org.bouncycastle.crypto.signers.ECDSASigner;
 
@@ -23,7 +23,7 @@ public class SecuritySignatureVerifierImplEcBc<S extends SecuritySignatureEcBc> 
    * @param config the {@link #getConfig() config}.
    * @param signer the underlying {@link ECDSASigner}.
    */
-  public SecuritySignatureVerifierImplEcBc(SecuritySignatureConfig<S> config, ECDSASigner signer) {
+  public SecuritySignatureVerifierImplEcBc(SecuritySignatureConfigEcDsa<S> config, ECDSASigner signer) {
 
     super(config, signer);
   }

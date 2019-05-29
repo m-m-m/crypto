@@ -11,6 +11,7 @@ import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureSigner;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureSignerImplWithHash;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureVerifier;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureVerifierImplWithHash;
+import net.sf.mmm.security.api.asymmetric.sign.ec.SecuritySignatureConfigEcDsa;
 import net.sf.mmm.security.api.hash.SecurityHashConfig;
 import net.sf.mmm.security.api.hash.SecurityHashCreator;
 import net.sf.mmm.security.api.hash.SecurityHashCreatorImplDigest;
@@ -35,14 +36,14 @@ import org.bouncycastle.jcajce.provider.util.DigestFactory;
 public class SecuritySignatureProcessorFactoryImplEcBc<S extends SecuritySignatureEcBc> extends AbstractSecurityAlgorithm
     implements SecuritySignatureProcessorFactory<S, BCECPrivateKey, BCECPublicKey> {
 
-  private final SecuritySignatureConfig<S> config;
+  private final SecuritySignatureConfigEcDsa<S> config;
 
   /**
    * The constructor.
    *
    * @param config the {@link SecuritySignatureConfig}.
    */
-  public SecuritySignatureProcessorFactoryImplEcBc(SecuritySignatureConfig<S> config) {
+  public SecuritySignatureProcessorFactoryImplEcBc(SecuritySignatureConfigEcDsa<S> config) {
 
     super();
     this.config = config;
@@ -119,6 +120,15 @@ public class SecuritySignatureProcessorFactoryImplEcBc<S extends SecuritySignatu
   public S createSignature(byte[] data) {
 
     return this.config.getSignatureFactory().createSignature(data);
+  }
+
+  @Override
+  public SecuritySignatureProcessorFactory<S, BCECPrivateKey, BCECPublicKey> getSignatureFactoryWithoutHash() {
+
+    if (this.config.getHashConfig() == null) {
+      return this;
+    }
+    return new SecuritySignatureProcessorFactoryImplEcBc<>(this.config.withoutHashConfig());
   }
 
 }

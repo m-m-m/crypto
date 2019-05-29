@@ -68,6 +68,12 @@ public class SecuritySignatureProcessorFactoryImplCryptorWithHash<PR extends Pri
   }
 
   @Override
+  public SecuritySignatureProcessorFactory<SecuritySignature, PR, PU> getSignatureFactoryWithoutHash() {
+
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public String toString() {
 
     return this.hashFactory.toString() + "+" + this.cryptorFactory.toString();

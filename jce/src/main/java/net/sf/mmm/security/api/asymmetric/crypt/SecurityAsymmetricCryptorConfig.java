@@ -3,6 +3,7 @@ package net.sf.mmm.security.api.asymmetric.crypt;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import net.sf.mmm.security.api.crypt.SecurityCipherTransformation;
 import net.sf.mmm.security.api.crypt.SecurityCryptorConfig;
 import net.sf.mmm.security.api.provider.SecurityProvider;
 
@@ -20,13 +21,13 @@ public abstract class SecurityAsymmetricCryptorConfig<PR extends PrivateKey, PU 
   /**
    * The constructor.
    *
-   * @param algorithm the {@link javax.crypto.Cipher#getAlgorithm() algorithm} for encryption and decryption.
+   * @param transformation the {@link #getTransformation() transfomation} for the {@link javax.crypto.Cipher}.
    * @param nonceSize the {@link #getNonceSize() nonce size}.
    * @param provider the {@link SecurityProvider}.
    */
-  public SecurityAsymmetricCryptorConfig(String algorithm, int nonceSize, SecurityProvider provider) {
+  public SecurityAsymmetricCryptorConfig(SecurityCipherTransformation transformation, int nonceSize, SecurityProvider provider) {
 
-    super(algorithm, provider, nonceSize);
+    super(transformation, provider, nonceSize);
   }
 
   /**

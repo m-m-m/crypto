@@ -53,8 +53,6 @@ public abstract class SecurityAccessAsymmetric<S extends SecuritySignature, PR e
 
   private final SecuritySignatureProcessorFactory<S, PR, PU> signatureFactory;
 
-  private final SecuritySignatureProcessorFactory<S, PR, PU> signatureFactoryWithoutHash;
-
   private final SecurityAccessHash hashFactory;
 
   private KC keyCreator;
@@ -69,22 +67,30 @@ public abstract class SecurityAccessAsymmetric<S extends SecuritySignature, PR e
   public SecurityAccessAsymmetric(SecuritySignatureConfig<S> signatureConfig, SecurityAsymmetricCryptorConfig<PR, PU> cryptorConfig,
       SecurityRandomFactory randomFactory) {
 
-    super();
-    this.signatureConfig = signatureConfig;
-    this.signatureFactory = createSignatureProcessorFactory(signatureConfig);
-    this.signatureFactoryWithoutHash = createSignatureProcessorFactory(signatureConfig.withoutHashConfig());
-    this.cryptorConfig = cryptorConfig;
-    this.randomFactory = randomFactory;
-    this.hashFactory = new SecurityAccessHash(signatureConfig.getHashConfig());
+    this(signatureConfig, null, cryptorConfig, randomFactory);
   }
 
   /**
-   * @param signatureCfg the {@link SecuritySignatureConfig}.
-   * @return the created {@link SecuritySignatureProcessorFactory} instance.
+   * The constructor.
+   *
+   * @param signatureConfig the {@link SecuritySignatureConfig}.
+   * @param signatureFactory the {@link SecuritySignatureProcessorFactory}.
+   * @param cryptorConfig the {@link SecurityAsymmetricCryptorConfig}.
+   * @param randomFactory the {@link SecurityRandomFactory}.
    */
-  protected SecuritySignatureProcessorFactory<S, PR, PU> createSignatureProcessorFactory(SecuritySignatureConfig<S> signatureCfg) {
+  public SecurityAccessAsymmetric(SecuritySignatureConfig<S> signatureConfig, SecuritySignatureProcessorFactory<S, PR, PU> signatureFactory,
+      SecurityAsymmetricCryptorConfig<PR, PU> cryptorConfig, SecurityRandomFactory randomFactory) {
 
-    return new SecuritySignatureProcessorFactoryImpl<>(signatureCfg, this.randomFactory);
+    super();
+    this.signatureConfig = signatureConfig;
+    if (signatureFactory == null) {
+      this.signatureFactory = new SecuritySignatureProcessorFactoryImpl<>(signatureConfig, randomFactory);
+    } else {
+      this.signatureFactory = signatureFactory;
+    }
+    this.cryptorConfig = cryptorConfig;
+    this.randomFactory = randomFactory;
+    this.hashFactory = new SecurityAccessHash(signatureConfig.getHashConfig());
   }
 
   /**
@@ -93,6 +99,14 @@ public abstract class SecurityAccessAsymmetric<S extends SecuritySignature, PR e
   public SecuritySignatureConfig<S> getSignatureConfig() {
 
     return this.signatureConfig;
+  }
+
+  /**
+   * @return the {@link SecurityAsymmetricCryptorConfig}.
+   */
+  public SecurityAsymmetricCryptorConfig<PR, PU> getCryptorConfig() {
+
+    return this.cryptorConfig;
   }
 
   private KC getKeyCreatorInternal() {
@@ -155,14 +169,10 @@ public abstract class SecurityAccessAsymmetric<S extends SecuritySignature, PR e
     return this.hashFactory.newHashCreator();
   }
 
-  /**
-   * @return the {@link SecuritySignatureProcessorFactory} for plain signing without prior hashing. This is useful for
-   *         situations where hashing should be in control of the developer using this library (e.g. to avoid duplicate
-   *         hash calculation or for rolling hashes).
-   */
+  @Override
   public SecuritySignatureProcessorFactory<S, PR, PU> getSignatureFactoryWithoutHash() {
 
-    return this.signatureFactoryWithoutHash;
+    return this.signatureFactory.getSignatureFactoryWithoutHash();
   }
 
 }

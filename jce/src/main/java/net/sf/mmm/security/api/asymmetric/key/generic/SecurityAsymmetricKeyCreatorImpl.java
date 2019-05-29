@@ -16,7 +16,7 @@ import net.sf.mmm.security.api.random.SecurityRandomFactory;
 /**
  * Generic implementation of {@link SecurityKeyCreator}. If available you should prefer implementations for specific
  * algorithms according {@code SecurityAccess*} classes (e.g.
- * {@link net.sf.mmm.security.api.asymmetric.access.rsa.SecurityAccessRsa}).
+ * {@link net.sf.mmm.security.api.asymmetric.access.rsa.Rsa}).
  *
  * @param <PR> type of {@link PrivateKey}.
  * @param <PU> type of {@link PublicKey}.

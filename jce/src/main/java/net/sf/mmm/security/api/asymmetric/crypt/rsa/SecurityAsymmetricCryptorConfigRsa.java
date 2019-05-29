@@ -5,6 +5,7 @@ import java.security.interfaces.RSAPublicKey;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmRsa;
 import net.sf.mmm.security.api.asymmetric.crypt.SecurityAsymmetricCryptorConfig;
+import net.sf.mmm.security.api.crypt.SecurityCipherTransformation;
 import net.sf.mmm.security.api.provider.SecurityProvider;
 
 /**
@@ -29,12 +30,12 @@ public final class SecurityAsymmetricCryptorConfigRsa extends SecurityAsymmetric
 
   /**
    * The constructor.
-   * 
+   *
    * @param provider the {@link SecurityProvider}.
    */
   public SecurityAsymmetricCryptorConfigRsa(SecurityProvider provider) {
 
-    super(ALGORITHM_RSA, 0, provider);
+    super(new SecurityCipherTransformation(ALGORITHM_RSA), 0, provider);
   }
 
   @Override

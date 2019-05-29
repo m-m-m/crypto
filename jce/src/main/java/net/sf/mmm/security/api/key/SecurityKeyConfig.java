@@ -12,7 +12,7 @@ import net.sf.mmm.security.api.provider.SecurityProvider;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class SecurityKeyConfig extends SecurityAlgorithmConfig {
+public abstract class SecurityKeyConfig extends SecurityAlgorithmConfig implements AbstractSecurityGetKeyLength {
 
   private final int keyLength;
 
@@ -29,11 +29,7 @@ public abstract class SecurityKeyConfig extends SecurityAlgorithmConfig {
     this.keyLength = keyLength;
   }
 
-  /**
-   * @return the length of the key in bits. The bigger the key length the stronger and more secure the encryption but
-   *         also the more performance is required for computation. Reasonable values depend on the
-   *         {@link #getAlgorithm() algorithm}: A recent value for RSA is 4096 bits while for PBKDF2 256 is sufficient.
-   */
+  @Override
   public int getKeyLength() {
 
     return this.keyLength;

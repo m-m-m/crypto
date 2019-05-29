@@ -3,14 +3,12 @@
 package net.sf.mmm.security.api.asymmetric.access.ec.bc;
 
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmEc;
-import net.sf.mmm.security.api.algorithm.SecurityAlgorithmEcDsa;
-import net.sf.mmm.security.api.algorithm.SecurityAlgorithmEcIes;
 import net.sf.mmm.security.api.asymmetric.access.SecurityAccessAsymmetric;
-import net.sf.mmm.security.api.asymmetric.crypt.ec.SecurityAsymmetricCryptorConfigEcies;
+import net.sf.mmm.security.api.asymmetric.crypt.ec.SecurityAsymmetricCryptorConfigEcIes;
 import net.sf.mmm.security.api.asymmetric.key.ec.bc.SecurityAsymmetricKeyCreatorEcBc;
 import net.sf.mmm.security.api.asymmetric.key.ec.bc.SecurityAsymmetricKeyPairEcBc;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureConfig;
-import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureProcessorFactory;
+import net.sf.mmm.security.api.asymmetric.sign.ec.SecuritySignatureConfigEcDsa;
 import net.sf.mmm.security.api.asymmetric.sign.ec.bc.SecuritySignatureEcBc;
 import net.sf.mmm.security.api.asymmetric.sign.ec.bc.SecuritySignatureFactoryEcBc;
 import net.sf.mmm.security.api.asymmetric.sign.ec.bc.SecuritySignatureProcessorFactoryImplEcBc;
@@ -31,8 +29,7 @@ import org.bouncycastle.jce.spec.ECParameterSpec;
  * @since 1.0.0
  */
 public abstract class SecurityAccessEcBc<S extends SecuritySignatureEcBc>
-    extends SecurityAccessAsymmetric<S, BCECPrivateKey, BCECPublicKey, SecurityAsymmetricKeyPairEcBc, SecurityAsymmetricKeyCreatorEcBc>
-    implements SecurityAlgorithmEcIes {
+    extends SecurityAccessAsymmetric<S, BCECPrivateKey, BCECPublicKey, SecurityAsymmetricKeyPairEcBc, SecurityAsymmetricKeyCreatorEcBc> {
 
   /** The {@link ECParameterSpec} of the elliptic curve. */
   protected final ECParameterSpec ecParameters;
@@ -42,13 +39,13 @@ public abstract class SecurityAccessEcBc<S extends SecuritySignatureEcBc>
    *
    * @param ecParameters the {@link ECParameterSpec}.
    * @param signatureConfig the {@link SecuritySignatureConfig}.
-   * @param cryptorConfig the {@link SecurityAsymmetricCryptorConfigEcies}.
+   * @param cryptorConfig the {@link SecurityAsymmetricCryptorConfigEcIes}.
    * @param randomFactory the optional {@link SecurityRandomFactory}.
    */
   public SecurityAccessEcBc(ECParameterSpec ecParameters, SecuritySignatureConfig<S> signatureConfig,
-      SecurityAsymmetricCryptorConfigEcies<BCECPrivateKey, BCECPublicKey> cryptorConfig, SecurityRandomFactory randomFactory) {
+      SecurityAsymmetricCryptorConfigEcIes<BCECPrivateKey, BCECPublicKey> cryptorConfig, SecurityRandomFactory randomFactory) {
 
-    super(signatureConfig, cryptorConfig, randomFactory);
+    super(signatureConfig, new SecuritySignatureProcessorFactoryImplEcBc<>((SecuritySignatureConfigEcDsa<S>) signatureConfig), cryptorConfig, randomFactory);
     this.ecParameters = ecParameters;
   }
 
@@ -69,15 +66,7 @@ public abstract class SecurityAccessEcBc<S extends SecuritySignatureEcBc>
   private SecurityAccessEcBc(ECParameterSpec ecParameters, SecuritySignatureFactoryEcBc<S> signatureFactory, SecurityHashConfig hashConfig,
       SecurityRandomFactory randomFactory, SecurityProvider provider) {
 
-    this(ecParameters, new SecuritySignatureConfig<>(signatureFactory, hashConfig, SecurityAlgorithmEcDsa.ALGORITHM_ECDSA, provider),
-        new SecurityAsymmetricCryptorConfigEcies<>(provider), randomFactory);
-  }
-
-  @Override
-  protected SecuritySignatureProcessorFactory<S, BCECPrivateKey, BCECPublicKey> createSignatureProcessorFactory(
-      SecuritySignatureConfig<S> signatureCfg) {
-
-    return new SecuritySignatureProcessorFactoryImplEcBc<>(signatureCfg);
+    this(ecParameters, new SecuritySignatureConfigEcDsa<>(signatureFactory, hashConfig, provider), new SecurityAsymmetricCryptorConfigEcIes<>(provider), randomFactory);
   }
 
   @Override

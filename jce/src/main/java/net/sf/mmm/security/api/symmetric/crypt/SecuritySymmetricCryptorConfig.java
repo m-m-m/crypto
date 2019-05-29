@@ -1,8 +1,8 @@
 package net.sf.mmm.security.api.symmetric.crypt;
 
+import net.sf.mmm.security.api.crypt.SecurityCipherTransformation;
 import net.sf.mmm.security.api.crypt.SecurityCryptorConfig;
 import net.sf.mmm.security.api.provider.SecurityProvider;
-import net.sf.mmm.security.api.symmetric.key.SecuritySymmetricKeyConfig;
 
 /**
  * {@link SecurityCryptorConfig} for {@link SecuritySymmetricCryptorFactory symmetric encryption}.
@@ -15,15 +15,13 @@ public class SecuritySymmetricCryptorConfig extends SecurityCryptorConfig {
   /**
    * The constructor.
    *
-   * @param algorithm the {@link javax.crypto.Cipher#getAlgorithm() algorithm} for encryption and decryption.
+   * @param transformation the {@link #getTransformation() transfomation} for the {@link javax.crypto.Cipher}.
    * @param nonceSize the {@link #getNonceSize() nonce size}.
    * @param provider the {@link SecurityProvider}.
-   * @param keyAlgorithmConfig the corresponding {@link SecuritySymmetricKeyConfig}.
    */
-  public SecuritySymmetricCryptorConfig(String algorithm, SecurityProvider provider, int nonceSize,
-      SecuritySymmetricKeyConfig keyAlgorithmConfig) {
+  public SecuritySymmetricCryptorConfig(SecurityCipherTransformation transformation, SecurityProvider provider, int nonceSize) {
 
-    super(algorithm, provider, nonceSize);
+    super(transformation, provider, nonceSize);
   }
 
 }

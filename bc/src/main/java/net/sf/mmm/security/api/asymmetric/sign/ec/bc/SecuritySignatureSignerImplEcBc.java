@@ -3,8 +3,8 @@ package net.sf.mmm.security.api.asymmetric.sign.ec.bc;
 import java.math.BigInteger;
 
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignature;
-import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureConfig;
 import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureSigner;
+import net.sf.mmm.security.api.asymmetric.sign.ec.SecuritySignatureConfigEcDsa;
 
 import org.bouncycastle.crypto.signers.ECDSASigner;
 import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
@@ -28,7 +28,7 @@ public class SecuritySignatureSignerImplEcBc<S extends SecuritySignatureEcBc> ex
    * @param signer the underlying {@link ECDSASigner}.
    * @param publicKey the {@link #getPublicKey() public key}.
    */
-  public SecuritySignatureSignerImplEcBc(SecuritySignatureConfig<S> config, ECDSASigner signer, BCECPublicKey publicKey) {
+  public SecuritySignatureSignerImplEcBc(SecuritySignatureConfigEcDsa<S> config, ECDSASigner signer, BCECPublicKey publicKey) {
 
     super(config, signer);
     this.publicKey = publicKey;

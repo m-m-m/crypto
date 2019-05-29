@@ -1,15 +1,15 @@
 package net.sf.mmm.security.api.random;
 
-import net.sf.mmm.security.api.algorithm.SecurityAlgorithmSha1Prng;
-
 /**
- * {@link SecurityRandomConfig} for {@link SecurityAlgorithmSha1Prng SHA1PRNG}.
+ * {@link SecurityRandomConfig} for SHA1PRNG.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecurityRandomConfigSha1Prng extends SecurityRandomConfig
-    implements SecurityAlgorithmSha1Prng {
+public class SecurityRandomConfigSha1Prng extends SecurityRandomConfig {
+
+  /** The {@link #getAlgorithm() algorithm} name {@value}. */
+  public static final String ALGORITHM_SHA1PRNG = "SHA1PRNG";
 
   /** Simple singleton instance. */
   public static final SecurityRandomConfigSha1Prng SHA1PRNG = new SecurityRandomConfigSha1Prng();
@@ -18,6 +18,7 @@ public class SecurityRandomConfigSha1Prng extends SecurityRandomConfig
    * The constructor.
    */
   public SecurityRandomConfigSha1Prng() {
+
     super(ALGORITHM_SHA1PRNG);
   }
 
@@ -27,6 +28,7 @@ public class SecurityRandomConfigSha1Prng extends SecurityRandomConfig
    * @param reseedCount the {@link #getReseedCount() re-seed count}.
    */
   public SecurityRandomConfigSha1Prng(int reseedCount) {
+
     super(ALGORITHM_SHA1PRNG, reseedCount);
   }
 

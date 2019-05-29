@@ -56,6 +56,12 @@ public class SecuritySignatureProcessorFactoryImplWithHash<S extends SecuritySig
   }
 
   @Override
+  public SecuritySignatureProcessorFactory<S, PR, PU> getSignatureFactoryWithoutHash() {
+
+    return this.signatureFactory;
+  }
+
+  @Override
   public String toString() {
 
     return this.hashFactory.toString() + "+" + this.signatureFactory.toString();

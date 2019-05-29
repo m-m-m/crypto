@@ -3,7 +3,6 @@ package net.sf.mmm.security.api.symmetric.key;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 
-import net.sf.mmm.security.api.algorithm.SecuritySymmetricKeyConstants;
 import net.sf.mmm.security.api.key.SecurityKeyConfig;
 import net.sf.mmm.security.api.provider.SecurityProvider;
 
@@ -13,7 +12,7 @@ import net.sf.mmm.security.api.provider.SecurityProvider;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class SecuritySymmetricKeyConfig extends SecurityKeyConfig implements SecuritySymmetricKeyConstants {
+public abstract class SecuritySymmetricKeyConfig extends SecurityKeyConfig {
 
   private final SecuritySymmetricKeySpecFactory keySpecFactory;
 

@@ -102,4 +102,13 @@ public class SecuritySignatureProcessorFactoryImpl<S extends SecuritySignature, 
     return this.config.getSignatureFactory().createSignature(data);
   }
 
+  @Override
+  public SecuritySignatureProcessorFactory<S, PR, PU> getSignatureFactoryWithoutHash() {
+
+    if (this.config.getHashConfig() == null) {
+      return this;
+    }
+    return new SecuritySignatureProcessorFactoryImpl<>(this.config.withoutHashConfig(), getRandomFactory());
+  }
+
 }

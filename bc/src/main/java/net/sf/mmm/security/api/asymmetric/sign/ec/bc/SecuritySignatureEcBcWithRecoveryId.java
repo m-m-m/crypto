@@ -3,6 +3,7 @@ package net.sf.mmm.security.api.asymmetric.sign.ec.bc;
 import java.math.BigInteger;
 
 import net.sf.mmm.security.api.asymmetric.access.ec.bc.SecurityEllipticCurveBc;
+import net.sf.mmm.security.api.asymmetric.sign.SecuritySignatureWithPublicKeyRecovery;
 
 import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
 
@@ -14,7 +15,7 @@ import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
  *
  * @since 1.0.0
  */
-public class SecuritySignatureEcBcWithRecoveryId extends SecuritySignatureEcBc {
+public class SecuritySignatureEcBcWithRecoveryId extends SecuritySignatureEcBc implements SecuritySignatureWithPublicKeyRecovery {
 
   /** {@link #getRecoveryOffset() recovery offset} used for BitCoin. Nobody knows why this magic number was chosen. */
   public static final byte BITCOIN_RECOVERY_OFFSET = 27;
@@ -102,6 +103,7 @@ public class SecuritySignatureEcBcWithRecoveryId extends SecuritySignatureEcBc {
    * @param message the payload (typically hash of message) that was signed when this signature was created.
    * @return the recovered public key.
    */
+  @Override
   public BCECPublicKey recoverPublicKey(byte[] message) {
 
     BCECPublicKey publicKey = recoverPublicKey(message, getRecoveryIndex());

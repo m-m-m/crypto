@@ -11,6 +11,7 @@ import net.sf.mmm.security.api.crypt.SecurityDecryptor;
 import net.sf.mmm.security.api.crypt.SecurityDecryptorImplCipher;
 import net.sf.mmm.security.api.crypt.SecurityEncryptor;
 import net.sf.mmm.security.api.crypt.SecurityEncryptorImplCiper;
+import net.sf.mmm.security.api.key.AbstractSecurityGetKeyLength;
 import net.sf.mmm.security.api.random.SecurityRandomFactory;
 import net.sf.mmm.security.api.symmetric.crypt.SecuritySymmetricCryptorFactory;
 import net.sf.mmm.security.api.symmetric.key.SecuritySymmetricKeyConfig;
@@ -26,8 +27,8 @@ import net.sf.mmm.security.api.symmetric.key.SecuritySymmetricKeyFactory;
  * @param <K> type of {@link SecretKey}.
  * @since 1.0.0
  */
-public abstract class SecurityAccessSymmetric<K extends SecretKey> extends SecurityAccess
-    implements SecuritySymmetricKeyFactory<SecuritySymmetricKeyCreator<K>>, SecuritySymmetricCryptorFactory<K> {
+public abstract class SecurityAccessSymmetric<K extends SecretKey> extends SecurityAccess implements
+    SecuritySymmetricKeyFactory<SecuritySymmetricKeyCreator<K>>, SecuritySymmetricCryptorFactory<K>, AbstractSecurityGetKeyLength {
 
   private final SecuritySymmetricKeyConfig keyConfig;
 
@@ -64,6 +65,28 @@ public abstract class SecurityAccessSymmetric<K extends SecretKey> extends Secur
       this.keyCreator = newKeyCreator();
     }
     return this.keyCreator;
+  }
+
+  /**
+   * @return the {@link SecuritySymmetricKeyConfig}.
+   */
+  public SecuritySymmetricKeyConfig getKeyConfig() {
+
+    return this.keyConfig;
+  }
+
+  /**
+   * @return the {@link SecurityCryptorConfig}.
+   */
+  public SecurityCryptorConfig getCryptorConfig() {
+
+    return this.cryptorConfig;
+  }
+
+  @Override
+  public int getKeyLength() {
+
+    return this.keyConfig.getKeyLength();
   }
 
   @Override

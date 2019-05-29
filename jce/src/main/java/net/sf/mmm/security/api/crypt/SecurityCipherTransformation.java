@@ -12,9 +12,15 @@ import net.sf.mmm.security.api.algorithm.SecurityAlgorithm;
  */
 public class SecurityCipherTransformation implements SecurityAlgorithm {
 
+  /** {@link #getPadding() Padding} value {@value}. */
+  public static final String PADDING_NONE = "NoPadding";
+
   /**
-   *
+   * {@link #getMode() Mode} value {@value} (<a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">Galois/Counter
+   * Mode</a>).
    */
+  public static final String MODE_GCM = "GCM";
+
   private static final String SEPARATOR = "/";
 
   private final String algorithm;
@@ -24,6 +30,16 @@ public class SecurityCipherTransformation implements SecurityAlgorithm {
   private final String padding;
 
   private final String transformation;
+
+  /**
+   * The constructor. Be careful not to confuse with {@link #of(String)} to create from transformation.
+   *
+   * @param algorithm - see {@link #getAlgorithm()}.
+   */
+  public SecurityCipherTransformation(String algorithm) {
+
+    this(algorithm, null, null);
+  }
 
   /**
    * The constructor.

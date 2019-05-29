@@ -2,6 +2,7 @@ package net.sf.mmm.security.api.hash;
 
 import net.sf.mmm.security.api.AbstractSecurityGetIterationCount;
 import net.sf.mmm.security.api.algorithm.SecurityAlgorithmConfig;
+import net.sf.mmm.security.api.hash.access.SecurityAccessHash;
 import net.sf.mmm.security.api.provider.SecurityProvider;
 
 /**
@@ -10,7 +11,7 @@ import net.sf.mmm.security.api.provider.SecurityProvider;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecurityHashConfig extends SecurityAlgorithmConfig implements AbstractSecurityGetIterationCount {
+public class SecurityHashConfig extends SecurityAlgorithmConfig implements AbstractSecurityGetIterationCount, SecurityHashFactory {
 
   /** The dummy hash algorithm NONE for no hashing (e.g. plain signing without prior hashing). */
   public static final String ALGORITHM_NONE = "NONE";
@@ -82,6 +83,20 @@ public class SecurityHashConfig extends SecurityAlgorithmConfig implements Abstr
       return null;
     }
     return new SecurityHashConfig(getAlgorithm(), this.provider, this.iterationCount - 1);
+  }
+
+  /**
+   * @return a new {@link SecurityAccessHash} for this configuration.
+   */
+  public SecurityAccessHash newAccess() {
+
+    return new SecurityAccessHash(this);
+  }
+
+  @Override
+  public SecurityHashCreator newHashCreator() {
+
+    return newAccess().newHashCreator();
   }
 
 }

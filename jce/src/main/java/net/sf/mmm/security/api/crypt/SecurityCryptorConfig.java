@@ -13,19 +13,30 @@ import net.sf.mmm.security.api.provider.SecurityProvider;
  */
 public class SecurityCryptorConfig extends SecurityAlgorithmConfig implements AbstractSecurityGetNonceSize {
 
+  private final SecurityCipherTransformation transformation;
+
   private final int nonceSize;
 
   /**
    * The constructor.
    *
-   * @param algorithm the {@link javax.crypto.Cipher#getAlgorithm() algorithm} for encryption and decryption.
+   * @param transformation the {@link #getTransformation() transfomation} for the {@link javax.crypto.Cipher}.
    * @param provider the {@link SecurityProvider}.
    * @param nonceSize the {@link #getNonceSize() nonce size}.
    */
-  public SecurityCryptorConfig(String algorithm, SecurityProvider provider, int nonceSize) {
+  public SecurityCryptorConfig(SecurityCipherTransformation transformation, SecurityProvider provider, int nonceSize) {
 
-    super(algorithm, provider);
+    super(transformation.getAlgorithm(), provider);
+    this.transformation = transformation;
     this.nonceSize = nonceSize;
+  }
+
+  /**
+   * @return the {@link SecurityCipherTransformation}.
+   */
+  public SecurityCipherTransformation getTransformation() {
+
+    return this.transformation;
   }
 
   /**

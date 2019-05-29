@@ -58,4 +58,10 @@ public interface SecuritySignatureProcessorFactory<S extends SecuritySignature, 
    */
   SecuritySignatureVerifier<S> newVerifier(PU publicKey);
 
+  /**
+   * @return an instance of this {@link SecuritySignatureFactory} that does not hash before signing so you can control
+   *         the hashing manually and only sign the resulting hash (e.g. to reuse the hash value for further
+   *         calculations).
+   */
+  SecuritySignatureProcessorFactory<S, PR, PU> getSignatureFactoryWithoutHash();
 }
