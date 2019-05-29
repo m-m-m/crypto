@@ -8,16 +8,16 @@
     <version>2.7.0</version>
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-security</artifactId>
+  <artifactId>mmm-crypto</artifactId>
   <version>dev-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>Library for simple and more secure usage of cryptography (JCA and JCE).</description>
+  <description>Library for simple and more secure usage of cryptography (JCA,JCE, and BC).</description>
 
   <properties>
     <java.version>1.8</java.version>
-    <mmm.repository>security</mmm.repository>
-    <mmm.security.version>1.0.0-beta1-SNAPSHOT</mmm.security.version>
+    <mmm.repository>crypto</mmm.repository>
+    <mmm.crypto.version>1.0.0-beta1-SNAPSHOT</mmm.crypto.version>
   </properties>
 
   <modules>

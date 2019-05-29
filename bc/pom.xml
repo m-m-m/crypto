@@ -4,20 +4,20 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-security</artifactId>
+    <artifactId>mmm-crypto</artifactId>
     <version>dev-SNAPSHOT</version>
   </parent>
-  <artifactId>mmm-security-bc</artifactId>
-  <version>${mmm.security.version}</version>
+  <artifactId>mmm-crypto-bc</artifactId>
+  <version>${mmm.crypto.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
-  <description>Extensions of mmm-security-jce for Bouncy Castle (bc).</description>
+  <description>Extensions of mmm-crypto-jce for Bouncy Castle (bc).</description>
 
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-security-jce</artifactId>
-      <version>${mmm.security.version}</version>
+      <artifactId>mmm-crypto-jce</artifactId>
+      <version>${mmm.crypto.version}</version>
     </dependency>
     <dependency>
       <groupId>org.bouncycastle</groupId>
