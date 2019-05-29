@@ -12,7 +12,7 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
 
   /**
    * Generic method to process and transform data.
-   * <table border="1">
+   * <table summary="method usage examples" border="1">
    * <tr>
    * <th>{@link CryptoProcessor}</th>
    * <th>Equivalent of {@link #process(byte[]) process}(input)</th>
@@ -47,7 +47,7 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
 
   /**
    * Generic method to process and transform data.
-   * <table border="1">
+   * <table summary="method usage examples" border="1">
    * <tr>
    * <th>{@link CryptoProcessor}</th>
    * <th>Equivalent of {@link #process(byte[], int, int) process}(input, offset, length)</th>
@@ -85,7 +85,7 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
 
   /**
    * Generic method to process and transform data.
-   * <table border="1">
+   * <table summary="method usage examples" border="1">
    * <tr>
    * <th>{@link CryptoProcessor}</th>
    * <th>Equivalent of {@link #process(byte[], int, int, boolean) process}(input, offset, length, complete)</th>
@@ -124,7 +124,6 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   }
 
   /**
-   *
    * @param input the {@link CryptBinary} {@link CryptBinary#getData() containing the data} to process.
    * @param complete - {@code true} to complete/reset this processor after processing the given {@code input},
    *        {@code false} otherwise.
@@ -139,8 +138,8 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
 
   /**
    * Will reset the internal state of this object. Please note that complex algorithms especially for
-   * {@link net.sf.mmm.crypto.crypt.Cryptor} may <b>not</b> reusable. It is therefore preferable to always
-   * create a fresh instance for each cryptographic task.
+   * {@link net.sf.mmm.crypto.crypt.Cryptor} may <b>not</b> reusable. It is therefore preferable to always create a
+   * fresh instance for each cryptographic task.
    *
    * @see java.security.MessageDigest#reset()
    */

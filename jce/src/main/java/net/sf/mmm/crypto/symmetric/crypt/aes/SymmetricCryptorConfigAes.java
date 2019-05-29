@@ -5,8 +5,8 @@ import net.sf.mmm.crypto.provider.SecurityProvider;
 import net.sf.mmm.crypto.symmetric.crypt.SymmetricCryptorConfig;
 
 /**
- * SecurityCryptorAlgorithmSymmetricConfig for <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard>
- * AES</a>.<br>
+ * SecurityCryptorAlgorithmSymmetricConfig for
+ * <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES</a>.<br>
  * <b>Attention:</b> JCA/JCE is buggy (creates a nonce of 12 on encryption but expects 16 bytes nonce on decryption,
  * etc.). Therefore you shall only use this with {@link SecurityProvider#BC BouncyCastle}.
  *

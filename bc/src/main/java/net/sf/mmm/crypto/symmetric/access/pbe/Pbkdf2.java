@@ -18,7 +18,7 @@ public class Pbkdf2 extends PbeAccess {
   /**
    * The constructor.
    *
-   * @param keyConfig the {@link SecuritySymmetricKeyConfigPbkdf2}.
+   * @param keyConfig the {@link SymmetricKeyConfigPbe}.
    */
   Pbkdf2(SymmetricKeyConfigPbe keyConfig) {
 
@@ -28,7 +28,7 @@ public class Pbkdf2 extends PbeAccess {
   /**
    * The constructor.
    *
-   * @param keyConfig the {@link SecuritySymmetricKeyConfigPbkdf2}.
+   * @param keyConfig the {@link SymmetricKeyConfigPbe}.
    * @param cryptorConfig the {@link SymmetricCryptorConfig}.
    */
   Pbkdf2(SymmetricKeyConfigPbe keyConfig, SymmetricCryptorConfig cryptorConfig) {
@@ -39,7 +39,8 @@ public class Pbkdf2 extends PbeAccess {
   /**
    * The constructor.
    *
-   * @param keyConfig the {@link SecuritySymmetricKeyConfigPbkdf2}.
+   * @param keyAlgorithm the {@link SymmetricKeyConfigPbe#getAlgorithm() key algorithm}.
+   * @param keyLength the {@link #getKeyLength() key-length}.
    * @param cryptorConfig the {@link SymmetricCryptorConfig}.
    */
   Pbkdf2(String keyAlgorithm, int keyLength) {
@@ -50,7 +51,8 @@ public class Pbkdf2 extends PbeAccess {
   /**
    * The constructor.
    *
-   * @param keyConfig the {@link SecuritySymmetricKeyConfigPbkdf2}.
+   * @param keyAlgorithm the {@link SymmetricKeyConfigPbe#getAlgorithm() key algorithm}.
+   * @param keyLength the {@link #getKeyLength() key-length}.
    * @param cryptorConfig the {@link SymmetricCryptorConfig}.
    */
   Pbkdf2(String keyAlgorithm, int keyLength, SymmetricCryptorConfig cryptorConfig) {
