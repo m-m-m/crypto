@@ -26,7 +26,7 @@ public class SecurityCryptorConfig extends SecurityAlgorithmConfig implements Ab
    */
   public SecurityCryptorConfig(SecurityCipherTransformation transformation, SecurityProvider provider, int nonceSize) {
 
-    super(transformation.getAlgorithm(), provider);
+    super(transformation.getTransformation(), provider);
     this.transformation = transformation;
     this.nonceSize = nonceSize;
   }
