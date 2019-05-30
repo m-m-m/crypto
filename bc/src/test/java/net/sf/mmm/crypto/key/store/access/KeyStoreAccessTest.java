@@ -13,8 +13,8 @@ import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import net.sf.mmm.crypto.io.CryptoFileResource;
 import net.sf.mmm.crypto.io.CryptoResource;
 import net.sf.mmm.crypto.key.KeySet;
-import net.sf.mmm.crypto.key.store.KeyStoreApi;
 import net.sf.mmm.crypto.key.store.KeyStoreConfig;
+import net.sf.mmm.crypto.key.store.KeyStoreFacade;
 
 import org.assertj.core.api.Assertions;
 
@@ -33,7 +33,7 @@ public class KeyStoreAccessTest extends Assertions {
 
     // when
     AsymmetricKeyPair keyPair = keyFactory.newKeyCreator().generateKeyPair();
-    KeyStoreApi keyStore = keyStoreAccess.newKeyStore();
+    KeyStoreFacade keyStore = keyStoreAccess.newKeyStore();
     String alias = "alias1";
     CertificateDataBean certificateData = new CertificateDataBean();
     certificateData.setIssuer("CN=thankpoint");
@@ -50,7 +50,7 @@ public class KeyStoreAccessTest extends Assertions {
       file = ((CryptoFileResource) resource).getFile();
       assertThat(file).exists().isFile();
     }
-    KeyStoreApi keyStore2 = keyStoreAccess.newKeyStore();
+    KeyStoreFacade keyStore2 = keyStoreAccess.newKeyStore();
     KeySet keyPair2 = keyStore2.getKey(alias, password);
     assertThat(keyPair2).isEqualTo(keyPair);
     if (file != null) {

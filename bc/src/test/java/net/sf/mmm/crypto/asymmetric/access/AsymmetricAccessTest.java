@@ -7,8 +7,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Arrays;
 
-import net.sf.mmm.crypto.CryptBinary;
-import net.sf.mmm.crypto.asymmetric.access.AsymmetricAccess;
+import net.sf.mmm.crypto.CryptoBinary;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreator;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
@@ -42,8 +41,7 @@ public abstract class AsymmetricAccessTest extends Assertions {
     verify((AsymmetricAccess) access, encryptionLength, true);
   }
 
-  private void verify(AsymmetricAccess<SignatureBinary, PrivateKey, PublicKey, ?, ?> access, int encryptionLength,
-      boolean bidirectional) {
+  private void verify(AsymmetricAccess<SignatureBinary, PrivateKey, PublicKey, ?, ?> access, int encryptionLength, boolean bidirectional) {
 
     AsymmetricKeyCreator<PrivateKey, PublicKey, ?> keyCreator = access.newKeyCreator();
     AsymmetricKeyPair keyPair = keyCreator.generateKeyPair();
@@ -57,7 +55,7 @@ public abstract class AsymmetricAccessTest extends Assertions {
       verifyCrypt(access.newEncryptorUnsafe(privateKey), access.newDecryptorUnsafe(publicKey), rawMessage, encryptionLength);
     }
     // signing
-    CryptBinary data = new CryptBinary(rawMessage);
+    CryptoBinary data = new CryptoBinary(rawMessage);
     SignatureBinary signature = access.newSigner(privateKey).sign(data, true);
     boolean signatureVerified = access.newVerifier(publicKey).verify(data, signature);
     assertThat(signatureVerified).as("signature verified").isTrue();
@@ -97,8 +95,8 @@ public abstract class AsymmetricAccessTest extends Assertions {
   }
 
   /**
-   * @return the expected (maximum) length in bytes of the
-   *         {@link net.sf.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT compact public key data}.
+   * @return the expected (maximum) length in bytes of the {@link net.sf.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT
+   *         compact public key data}.
    */
   protected int getPublicKeyCompactLength() {
 
@@ -106,8 +104,8 @@ public abstract class AsymmetricAccessTest extends Assertions {
   }
 
   /**
-   * @return the expected (minimum) length in bytes of the
-   *         {@link net.sf.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT compact public key data}.
+   * @return the expected (minimum) length in bytes of the {@link net.sf.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT
+   *         compact public key data}.
    */
   protected int getPublicKeyCompactMinLength() {
 
@@ -134,8 +132,8 @@ public abstract class AsymmetricAccessTest extends Assertions {
   }
 
   /**
-   * @return the expected (maximum) length in bytes of the
-   *         {@link net.sf.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT compact private key data}.
+   * @return the expected (maximum) length in bytes of the {@link net.sf.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT
+   *         compact private key data}.
    */
   protected int getPrivateKeyCompactLength() {
 
@@ -143,8 +141,8 @@ public abstract class AsymmetricAccessTest extends Assertions {
   }
 
   /**
-   * @return the expected (minimum) length in bytes of the
-   *         {@link net.sf.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT compact private key data}.
+   * @return the expected (minimum) length in bytes of the {@link net.sf.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT
+   *         compact private key data}.
    */
   protected int getPrivateKeyCompactMinLength() {
 
