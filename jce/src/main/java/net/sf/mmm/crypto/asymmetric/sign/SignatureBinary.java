@@ -1,6 +1,6 @@
 package net.sf.mmm.crypto.asymmetric.sign;
 
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 
 /**
  * Simple datatype as container for a {@link SignatureSigner#signAfterUpdate(boolean) signature}. Allows
@@ -10,7 +10,7 @@ import net.sf.mmm.crypto.CryptBinary;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class SignatureBinary extends CryptBinary {
+public abstract class SignatureBinary extends CryptoBinary {
 
   /**
    * The constructor.

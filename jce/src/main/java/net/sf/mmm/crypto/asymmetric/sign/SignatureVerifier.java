@@ -1,10 +1,10 @@
 package net.sf.mmm.crypto.asymmetric.sign;
 
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 import net.sf.mmm.crypto.hash.Hash;
 
 /**
- * Extends {@link SignatureProcessor} with ability to {@link #verify(CryptBinary, SignatureBinary)
+ * Extends {@link SignatureProcessor} with ability to {@link #verify(CryptoBinary, SignatureBinary)
  * verify} a message with a given expected signature.
  *
  * @param <S> type of {@link SignatureBinary}.
@@ -62,7 +62,7 @@ public interface SignatureVerifier<S extends SignatureBinary> extends SignatureV
    * @param signature the {@code byte} array with the signature as raw data.
    * @return {@code true} if the given signature is valid, {@code false} otherwise.
    */
-  default boolean verify(CryptBinary input, S signature) {
+  default boolean verify(CryptoBinary input, S signature) {
 
     update(input);
     return verifyAfterUpdate(signature);

@@ -1,12 +1,12 @@
 package net.sf.mmm.crypto.key.store.access;
 
 import net.sf.mmm.crypto.CryptoAccess;
-import net.sf.mmm.crypto.key.store.KeyStoreApi;
+import net.sf.mmm.crypto.key.store.KeyStoreFacade;
 import net.sf.mmm.crypto.key.store.KeyStoreConfig;
-import net.sf.mmm.crypto.key.store.KeyStoreImpl;
+import net.sf.mmm.crypto.key.store.KeyStoreFacadeImpl;
 
 /**
- * {@link CryptoAccess} to {@link #newKeyStore() create} instances of {@link KeyStoreApi}.
+ * {@link CryptoAccess} to {@link #newKeyStore() create} instances of {@link KeyStoreFacade}.
  *
  * @since 1.0.0
  */
@@ -34,11 +34,11 @@ public abstract class KeyStoreAccess extends CryptoAccess {
   }
 
   /**
-   * @return the new {@link KeyStoreApi} instance.
+   * @return the new {@link KeyStoreFacade} instance.
    */
-  public KeyStoreApi newKeyStore() {
+  public KeyStoreFacade newKeyStore() {
 
-    return new KeyStoreImpl(this.config);
+    return new KeyStoreFacadeImpl(this.config);
   }
 
 }

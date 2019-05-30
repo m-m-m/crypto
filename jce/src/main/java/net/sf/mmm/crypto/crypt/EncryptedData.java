@@ -1,14 +1,14 @@
 package net.sf.mmm.crypto.crypt;
 
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 
 /**
- * Simple datatype as container for a {@link Encryptor#crypt(CryptBinary, boolean) encrypted data}.
+ * Simple datatype as container for a {@link Encryptor#crypt(CryptoBinary, boolean) encrypted data}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class EncryptedData extends CryptBinary {
+public class EncryptedData extends CryptoBinary {
 
   /**
    * The constructor.

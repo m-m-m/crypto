@@ -1,6 +1,6 @@
 package net.sf.mmm.crypto.hash;
 
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 
 /**
  * Simple datatype as container for a {@link HashCreator#hash() hash}.
@@ -8,7 +8,7 @@ import net.sf.mmm.crypto.CryptBinary;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Hash extends CryptBinary {
+public class Hash extends CryptoBinary {
 
   /**
    * The constructor.

@@ -4,7 +4,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 import net.sf.mmm.binary.api.Binary;
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 
 /**
  * Interface for factory to create instances of {@link AsymmetricKeyPair}, {@link PrivateKey}, and
@@ -25,7 +25,7 @@ public interface AsymmetricKeyPairFactory<PR extends PrivateKey, PU extends Publ
    */
   default Binary asBinary(PAIR keyPair) {
 
-    return new CryptBinary(asData(keyPair));
+    return new CryptoBinary(asData(keyPair));
   }
 
   /**

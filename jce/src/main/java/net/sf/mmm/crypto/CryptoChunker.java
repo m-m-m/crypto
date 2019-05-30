@@ -39,9 +39,9 @@ public interface CryptoChunker extends CryptoProcessor {
    * @see java.security.MessageDigest#update(byte[])
    * @see java.security.Signature#update(byte[])
    *
-   * @param input the {@link CryptBinary} containing the next chunk of {@link CryptBinary#getData() data}.
+   * @param input the {@link CryptoBinary} containing the next chunk of {@link CryptoBinary#getData() data}.
    */
-  default void update(CryptBinary input) {
+  default void update(CryptoBinary input) {
 
     update(input.getRawData());
   }

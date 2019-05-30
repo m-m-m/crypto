@@ -3,7 +3,7 @@ package net.sf.mmm.crypto.asymmetric.key;
 import java.security.PrivateKey;
 
 import net.sf.mmm.binary.api.Binary;
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 
 /**
  * Interface for factory to create instances of {@link PrivateKey}.
@@ -21,7 +21,7 @@ public interface PrivateKeyFactory<PR extends PrivateKey> {
    */
   default Binary asBinary(PR privateKey) {
 
-    return new CryptBinary(asData(privateKey));
+    return new CryptoBinary(asData(privateKey));
   }
 
   /**

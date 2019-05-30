@@ -3,7 +3,7 @@ package net.sf.mmm.crypto.symmetric.key;
 import javax.crypto.SecretKey;
 
 import net.sf.mmm.binary.api.Binary;
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 import net.sf.mmm.crypto.key.KeyCreator;
 
 /**
@@ -41,7 +41,7 @@ public abstract interface SymmetricKeyCreator<K extends SecretKey> extends KeyCr
    */
   default Binary asBinary(K key) {
 
-    return new CryptBinary(asData(key));
+    return new CryptoBinary(asData(key));
   }
 
   /**

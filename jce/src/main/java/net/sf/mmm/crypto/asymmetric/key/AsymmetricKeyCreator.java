@@ -4,7 +4,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 import net.sf.mmm.binary.api.Binary;
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 import net.sf.mmm.crypto.CryptoBinaryFormat;
 import net.sf.mmm.crypto.key.KeyCreator;
 
@@ -44,7 +44,7 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
    */
   default Binary asBinary(PR privateKey, String format) {
 
-    return new CryptBinary(asData(privateKey, format));
+    return new CryptoBinary(asData(privateKey, format));
   }
 
   /**
@@ -80,7 +80,7 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
    */
   default Binary asBinary(PU publicKey, String format) {
 
-    return new CryptBinary(asData(publicKey, format));
+    return new CryptoBinary(asData(publicKey, format));
   }
 
   /**
@@ -116,7 +116,7 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
    */
   default Binary asBinary(PAIR keyPair, String format) {
 
-    return new CryptBinary(asData(keyPair, format));
+    return new CryptoBinary(asData(keyPair, format));
   }
 
   /**

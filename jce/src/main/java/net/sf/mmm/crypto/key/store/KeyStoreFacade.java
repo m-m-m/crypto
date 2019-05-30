@@ -16,7 +16,7 @@ import net.sf.mmm.crypto.symmetric.key.SymmetricKey;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface KeyStoreApi {
+public interface KeyStoreFacade {
 
   /**
    * @return the underlying {@link KeyStore}.

@@ -124,13 +124,13 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   }
 
   /**
-   * @param input the {@link CryptBinary} {@link CryptBinary#getData() containing the data} to process.
+   * @param input the {@link CryptoBinary} {@link CryptoBinary#getData() containing the data} to process.
    * @param complete - {@code true} to complete/reset this processor after processing the given {@code input},
    *        {@code false} otherwise.
    * @return the transformed {@code input} data.
    * @see #process(byte[])
    */
-  default byte[] process(CryptBinary input, boolean complete) {
+  default byte[] process(CryptoBinary input, boolean complete) {
 
     byte[] data = input.getRawData();
     return process(data, 0, data.length, complete);

@@ -1,7 +1,7 @@
 package net.sf.mmm.crypto.crypt;
 
 import net.sf.mmm.binary.api.Binary;
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 import net.sf.mmm.crypto.CryptoProcessor;
 
 /**
@@ -53,7 +53,7 @@ public abstract interface Cryptor extends CryptoProcessor, AbstractGetNonceSize 
    *        {@code false} otherwise.
    * @return the encrypted or decrypted data.
    */
-  default byte[] crypt(CryptBinary input, boolean complete) {
+  default byte[] crypt(CryptoBinary input, boolean complete) {
 
     return process(input, complete);
   }

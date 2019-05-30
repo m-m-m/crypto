@@ -1,7 +1,7 @@
 package net.sf.mmm.crypto;
 
 /**
- * Interface for the concept and constants of different formats of a {@link CryptBinary binary representation}. The
+ * Interface for the concept and constants of different formats of a {@link CryptoBinary binary representation}. The
  * formats {@link #FORMAT_ENCODED} and {@link #FORMAT_COMPACT} shall always be accepted. For generic implementations
  * that only support a single format both formats can be used synonymously. Specific implementations may also support
  * additional supports such as e.g. {@link net.sf.mmm.crypto.asymmetric.key.ec.AsymmetricKeyPairEc#FORMAT_UNCOMORESSED}.
@@ -20,8 +20,8 @@ public interface CryptoBinaryFormat {
 
   /**
    * The format for the encoded binary representation. This is the most universal, portable and standardized format.
-   * However, it is also a large representation according to the {@link CryptBinary#getLength() length}. If you want to
-   * store the {@link CryptBinary#getData() raw data} in the most efficient way use {@link #FORMAT_COMPACT} instead.
+   * However, it is also a large representation according to the {@link CryptoBinary#getLength() length}. If you want to
+   * store the {@link CryptoBinary#getData() raw data} in the most efficient way use {@link #FORMAT_COMPACT} instead.
    *
    * @see java.security.Key#getEncoded()
    */

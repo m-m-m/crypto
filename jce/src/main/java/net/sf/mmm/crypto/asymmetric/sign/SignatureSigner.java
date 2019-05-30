@@ -1,6 +1,6 @@
 package net.sf.mmm.crypto.asymmetric.sign;
 
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 import net.sf.mmm.crypto.hash.Hash;
 
 /**
@@ -46,13 +46,13 @@ public interface SignatureSigner<S extends SignatureBinary> extends SignatureSig
   }
 
   /**
-   * @param input the {@link CryptBinary} containing the (next) {@link CryptBinary#getData() data} to
+   * @param input the {@link CryptoBinary} containing the (next) {@link CryptoBinary#getData() data} to
    *        sign. E.g. a {@link Hash}.
    * @param reset - {@code true} to {@link #reset() reset} after the signature has been generated, {@code false}
    *        otherwise.
    * @return the final signature generated for the {@link #update(byte[]) processed data}.
    */
-  default S sign(CryptBinary input, boolean reset) {
+  default S sign(CryptoBinary input, boolean reset) {
 
     update(input);
     return signAfterUpdate(reset);

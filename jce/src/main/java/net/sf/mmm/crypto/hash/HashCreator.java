@@ -2,7 +2,7 @@ package net.sf.mmm.crypto.hash;
 
 import java.io.OutputStream;
 
-import net.sf.mmm.crypto.CryptBinary;
+import net.sf.mmm.crypto.CryptoBinary;
 import net.sf.mmm.crypto.CryptoChunker;
 
 /**
@@ -66,7 +66,7 @@ public interface HashCreator extends CryptoChunker {
    * @return the calculated {@link Hash} of the given {@code input} data.
    * @see java.security.MessageDigest#digest(byte[], int, int)
    */
-  default Hash hash(CryptBinary input, boolean reset) {
+  default Hash hash(CryptoBinary input, boolean reset) {
 
     update(input);
     return new Hash(hash(true));
