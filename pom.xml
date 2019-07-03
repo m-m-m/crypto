@@ -17,7 +17,7 @@
   <properties>
     <java.version>1.8</java.version>
     <mmm.repository>crypto</mmm.repository>
-    <mmm.crypto.version>1.0.0-beta4-SNAPSHOT</mmm.crypto.version>
+    <mmm.crypto.version>1.0.0-beta4</mmm.crypto.version>
   </properties>
 
   <modules>
