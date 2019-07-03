@@ -156,6 +156,7 @@ public abstract class SignatureEcBc extends SignatureBinary {
    */
   protected BCECPublicKey recoverPublicKey(byte[] message, byte recoveryIndex) {
 
+    initRS();
     return recoverPublicKey(message, this.curve, this.r, this.s, recoveryIndex);
   }
 
