@@ -112,6 +112,13 @@ public class Secp256k1Test extends AsymmetricAccessTest {
     assertThat(valid).isTrue();
     BCECPublicKey recoveredPublicKey = signature.recoverPublicKey(hash);
     assertThat(recoveredPublicKey).isEqualTo(publicKey);
+    // recover signature to proper test initialization ...
+    signature = secp256k1.createSignature(signature.getData());
+    recoveredPublicKey = signature.recoverPublicKey(hash);
+    assertThat(recoveredPublicKey).isEqualTo(publicKey);
+    signature = secp256k1.createSignature(signature.getData());
+    valid = secp256k1.getSignatureFactoryWithoutHash().newVerifier(publicKey).verify(hash, signature);
+    assertThat(valid).isTrue();
   }
 
   /**
