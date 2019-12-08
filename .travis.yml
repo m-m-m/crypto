@@ -5,7 +5,7 @@ env:
   - secure: jvzsCEqsBavaNbDyp9UMQ7K87xGwIMLKGJU7LMa2oP0nCFwMlKy07Bx6vvbUp9eSTPpjFVHsamrgp4FLsMyNxxu9AzABd1JNSHuMA5tBu37b8XVgh/FaAF4rRtJ3u0jXp43S8bDlbae8mt0R9XmcJ0GR/9+1TVYns4QhJqd0qPNc68TG3XBZbhEOEtrzSesuCXTCzW86Sh37EgX4sY994YISh0DvwDNsSs2NHDjJD0rtVZPLBfUhfL+V7icv5OWtAHTq+zLxn7JV50FfDGDUtgH+tGsrzQd+hOYH0JZbw+L8IUdEdhKetBFRRu553jfQcHBQ+Zh9uTh0gcTUl8LQKYtARcK7ujUBGapUGAxU3eNga5OxnoiSzUC5DQQRu+4/Ea8s5kwe0y7FnOcG9Ehj3MsFMipsbDkS40fTU98tFvkEMiqW+aZEEMMcwCp2Uipzh/ivCYm+utASqjQVtSX9Vr10m2Mx72gLCEUwDOLdAQBDDjWXFQzPg1p8dwA7pD1Rnf7HpLHy1lKnD+Lg+n9raiEQhSha7bJA59j40bWZfX1wIEQMxo4nAdCg6DHKQNIXGBFHb5yP83Yn5ME3ox+EvhJqM67jKHZaPN80f9WYyVQEQZ7RoyZSIzfn89R1GXDUeJ7yb02myImjMUMnarAiw6Ygi5Oi/KgTXSOQUxJWSoY=
   - secure: Jow5ZUBCmq5Ok6E4szooj7UCfZAT6Aa5UBJyngrZw43e0c4WiS/qjc/2EiHKN2z2ob7VqJOpBwuPciHvW0E1H4k/ITxKs8aEJ+RQwH7Y8QuOuOJAD52L9xxc2Ceka5GzkB2ktUuwKXVn+CzpQ2lll0jUXZkb9PIoA5K8ewAzvkFYUactFZm51+4ONkLTiKGKPVBePwSyYQkykEssy0aFfLZBenA/toRnkVw2grLUPyGtFQftsKZwpxnlLdQ/XJ+5ZhLlkmkW7o8UYWlAZDfzeNqNFrp2by5WHXTOcjkrPs0zkXajJ4K60s94tJDnV9W4en+g03jsLwDkJIPAE+Y3yU6Lhfu6HpnFlnS0xxs/AjZRA6CrWSQmadeWhm6AtOzAkOFB7GBZdLpNKmsulaGuTwCj2VvimDdfxmlvBm3WVupvP+AEG39Bdh0mmenPXBF9VFDJ9jTWbVIUo5dDFrePQCl3IO5J4PEwHR+imUx1pXOh5kFulNWXNXbKINiyLHv1UILUEhWFr9YToixrQZgM5gSVJE+laJw7GaJaXxYSflqVeEyfFUPks+J3Ar5cflrc7F9pbM40ZxfASnJZztAb/BZW1O/I5c/SG3Z6rtKq/641RWSC+86o8IUgjL4JGs5bYz7PLgpLAxTxR3QtzOa7fA4x8cuqYPCuZOHsysjdC9g=
 install: skip
-script: mvn --settings .mvn/settings.xml install && [[ $TRAVIS_BRANCH != "master" ]] || mvn --settings .mvn/settings.xml -DskipTests=true deploy
+script: mvn --settings .mvn/settings.xml install && ([[ $TRAVIS_BRANCH != "master" ]] || mvn --settings .mvn/settings.xml -DskipTests=true deploy)
 sudo: false
 cache:
   directories: "$HOME/.m2"
