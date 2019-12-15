@@ -1,16 +1,14 @@
-= Mature Modular Meta-framework (mmm)
+image:https://m-m-m.github.io/logo.svg[logo,width="150",link="https://m-m-m.github.io"]
 
-image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
-
-*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]*
+image:https://img.shields.io/github/license/m-m-m/crypto.svg?label=License["Apache License, Version 2.0",link=https://github.com/m-m-m/crypto/blob/develop/LICENSE.txt]
+image:https://travis-ci.org/m-m-m/crypto.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/crypto"]
 
 == mmm-crypto
 
-image:https://img.shields.io/github/license/m-m-m/crypto.svg?label=License["Apache License, Version 2.0",link=https://github.com/m-m-m/crypto/blob/develop/LICENSE.txt]
-image:https://img.shields.io/maven-central/v/net.sf.m-m-m/mmm-crypto-bc.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:net.sf.mmm]
-image:https://travis-ci.org/m-m-m/crypto.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/crypto"]
+image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-crypto.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:io.github.m-m-m]
+image:https://m-m-m.github.io/javadoc.svg?status=online["apidoc",link="https://m-m-m.github.io/docs/api/io.github.mmm.crypto/module-summary.html"]
 
-`mmm-crypto` is a library for simple and more secure usage of cryptography. https://en.wikipedia.org/wiki/Java_Cryptography_Architecture[JCA] and https://en.wikipedia.org/wiki/Java_Cryptography_Extension[JCE] offer an extensible API to provide cryptographic algorithms for Java. However, this API is very low-level what often leads to programming mistakes and severe security frauds (missing parameters like nonce). Further, you need a lot of knowledge of the underlying cryptographic algorithms or you will end up with runtime errors. Also, changing things often requires refactorings of the code using the encryption or signature algorithms. Finally, the JCA and JCE are limited and for many things you need extensions like http://bouncycastle.net/[BouncyCastle]. In some cases you need to create some cryptographic objects via BouncyCastle and others via the default provider and combine them properly to make things work. Again this opens pitfalls and requires a lot of knowledge.
+The module `io.github.mmm.crypto` (artifactId `mmm-crypto`) allows more simple and secure usage of cryptography. https://en.wikipedia.org/wiki/Java_Cryptography_Architecture[JCA] and https://en.wikipedia.org/wiki/Java_Cryptography_Extension[JCE] offer an extensible API to provide cryptographic algorithms for Java. However, this API is very low-level what often leads to programming mistakes and severe security frauds (missing parameters like nonce). Further, you need a lot of knowledge of the underlying cryptographic algorithms or you will end up with runtime errors. Also, changing things often requires refactorings of the code using the encryption or signature algorithms. Finally, the JCA and JCE are limited and for many things you need extensions like http://bouncycastle.net/[BouncyCastle]. In some cases you need to create some cryptographic objects via BouncyCastle and others via the default provider and combine them properly to make things work. Again this opens pitfalls and requires a lot of knowledge.
 
 This library allows you to get around all these problems and write your cryptogrphic code safe and easy. 
 
@@ -97,12 +95,41 @@ This is all just the beginning.
 There is even much more. Dealing with JCA/JCE directly is rather complex and error-prone what easily leads to runtime
 errors or security frauds and vulnerabilities. Using this library will make your life a lot more simple and safe.
 
-== Dependency
+== Usage
 
-```
+Maven Dependency:
+```xml
   <dependency>
-    <groupId>net.sf.m-m-m</groupId>
+    <groupId>io.github.m-m-m</groupId>
+    <artifactId>mmm-crypto</artifactId>
+    <!--<version>...latest...</version>-->
+  </dependency>
+```
+
+Module Dependency:
+```java
+  requires transitive io.github.mmm.crypto;
+```
+
+== mmm-crypto-bc
+
+image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-crypto-bc.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:io.github.m-m-m]
+image:https://m-m-m.github.io/javadoc.svg?status=online["apidoc",link="https://m-m-m.github.io/docs/api/io.github.mmm.crypto.bc/module-summary.html"]
+
+The module `io.github.mmm.crypto.bc` (artifactId `mmm-crypto-bc`) provides the extension and integration with https://www.bouncycastle.org[bouncy-castle].
+
+== Usage
+
+Maven Dependency:
+```xml
+  <dependency>
+    <groupId>io.github.m-m-m</groupId>
     <artifactId>mmm-crypto-bc</artifactId>
     <!--<version>...latest...</version>-->
   </dependency>
+```
+
+Module Dependency:
+```java
+  requires transitive io.github.mmm.crypto.bc;
 ```
