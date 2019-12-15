@@ -102,7 +102,7 @@ Maven Dependency:
   <dependency>
     <groupId>io.github.m-m-m</groupId>
     <artifactId>mmm-crypto</artifactId>
-    <!--<version>...latest...</version>-->
+    <version>${mmm.crypto.version}</version>
   </dependency>
 ```
 
@@ -125,7 +125,7 @@ Maven Dependency:
   <dependency>
     <groupId>io.github.m-m-m</groupId>
     <artifactId>mmm-crypto-bc</artifactId>
-    <!--<version>...latest...</version>-->
+    <version>${mmm.crypto.version}</version>
   </dependency>
 ```
 
