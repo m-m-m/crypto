@@ -9,13 +9,14 @@
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-crypto-parent</artifactId>
-  <version>${revision}${changelist}</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>Library for simple and more secure usage of cryptography (JCA,JCE, and BC).</description>
 
   <properties>
     <mmm.repository>crypto</mmm.repository>
+    <revision>0-SNAPSHOT</revision>
   </properties>
 
   <modules>
