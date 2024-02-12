@@ -45,7 +45,7 @@ public class SymmetricCryptorConfigAes extends SymmetricCryptorConfig {
    */
   public SymmetricCryptorConfigAes(SecurityProvider provider) {
 
-    this(provider, 16);
+    this(provider, 12);
   }
 
   /**
