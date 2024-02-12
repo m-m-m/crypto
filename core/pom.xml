@@ -21,10 +21,5 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-binary</artifactId>
     </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>
