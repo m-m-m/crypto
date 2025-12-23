@@ -6,7 +6,7 @@ image:https://github.com/m-m-m/crypto/actions/workflows/build.yml/badge.svg["Bui
 == mmm-crypto
 
 image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-crypto.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:io.github.m-m-m]
-image:https://m-m-m.github.io/javadoc.svg?status=online["apidoc",link="https://m-m-m.github.io/docs/api/io.github.mmm.crypto/module-summary.html"]
+image:https://javadoc.io/badge2/io.github.m-m-m/mmm-crypto/javadoc.svg["base JavaDoc", link=https://javadoc.io/doc/io.github.m-m-m/mmm-crypto]
 
 The module `io.github.mmm.crypto` (artifactId `mmm-crypto`) allows more simple and secure usage of cryptography. https://en.wikipedia.org/wiki/Java_Cryptography_Architecture[JCA] and https://en.wikipedia.org/wiki/Java_Cryptography_Extension[JCE] offer an extensible API to provide cryptographic algorithms for Java. However, this API is very low-level what often leads to programming mistakes and severe security frauds (missing parameters like nonce). Further, you need a lot of knowledge of the underlying cryptographic algorithms or you will end up with runtime errors. Also, changing things often requires refactorings of the code using the encryption or signature algorithms. Finally, the JCA and JCE are limited and for many things you need extensions like http://bouncycastle.net/[BouncyCastle]. In some cases you need to create some cryptographic objects via BouncyCastle and others via the default provider and combine them properly to make things work. Again this opens pitfalls and requires a lot of knowledge.
 
