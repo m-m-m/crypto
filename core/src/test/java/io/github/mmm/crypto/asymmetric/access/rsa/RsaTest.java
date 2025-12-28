@@ -12,13 +12,13 @@ import io.github.mmm.crypto.hash.sha2.Sha256;
 /**
  * Test of {@link Rsa}.
  */
-public class RsaTest extends AsymmetricAccessTest {
+class RsaTest extends AsymmetricAccessTest {
 
   /**
    * Test of {@link Rsa#keyLength4096()}.
    */
   @Test
-  public void testRsa() {
+  void testRsa() {
 
     // arrange
     HashConfig hashConfig = new HashConfig(Sha256.ALGORITHM_SHA_256, 2);

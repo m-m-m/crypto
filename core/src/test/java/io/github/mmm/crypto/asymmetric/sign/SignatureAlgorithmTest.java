@@ -14,10 +14,10 @@ import io.github.mmm.crypto.asymmetric.sign.SignatureAlgorithm;
  * Test of {@link SignatureAlgorithm}.
  */
 @Disabled("JDK is unstable and supported algorithms may come and go - relying on bouncy castle is a good option")
-public class SignatureAlgorithmTest extends Assertions {
+class SignatureAlgorithmTest extends Assertions {
 
   @Test
-  public void test() throws NoSuchAlgorithmException {
+  void test() throws NoSuchAlgorithmException {
 
     check("NONE", "RSA", "NONEwithRSA");
     check("MD2", "RSA", "MD2withRSA");

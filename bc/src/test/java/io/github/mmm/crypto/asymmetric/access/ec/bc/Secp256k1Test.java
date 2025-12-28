@@ -27,7 +27,7 @@ public class Secp256k1Test extends AsymmetricAccessTest {
    * Basic/generic test of {@link Secp256k1#ofPlain(String)}.
    */
   @Test
-  public void testSecp256k1() {
+  void testSecp256k1() {
 
     // arrange
     Secp256k1 secp256k1 = Secp256k1.ofPlain(Sha256.SHA_256);
@@ -76,7 +76,7 @@ public class Secp256k1Test extends AsymmetricAccessTest {
    * Test of {@link Secp256k1#ofRecoveryId(HashConfig)} with official examples from BitCoin.
    */
   @Test
-  public void testSecp256k1KeyPairFromBitcoin() {
+  void testSecp256k1KeyPairFromBitcoin() {
 
     Secp256k1<SignatureEcBcWithRecoveryId> secp256k1 = Secp256k1
         .ofRecoveryId(new HashConfig(Sha256.ALGORITHM_SHA_256, 1));
@@ -130,7 +130,7 @@ public class Secp256k1Test extends AsymmetricAccessTest {
    * Advanced signature test of {@link Secp256k1#ofPlain(HashConfig)}.
    */
   @Test
-  public void testSecp256k1Sign() {
+  void testSecp256k1Sign() {
 
     String privateKeyHex = "e9873d79c6d87dc0fb6a5778633389f4453213303da61f20bd67fc233aa33262";
     byte[] privateKeyBytes = BinaryType.parseHex(privateKeyHex);

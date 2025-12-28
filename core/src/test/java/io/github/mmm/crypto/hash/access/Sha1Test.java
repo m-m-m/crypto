@@ -11,7 +11,7 @@ public class Sha1Test extends HashAccessTest {
 
   /** Test of {@link Sha1#of()}. */
   @Test
-  public void testSingle() {
+  void testSingle() {
 
     Sha1 hash = Sha1.SHA1;
     check(hash, "Hello world!", "d3486ae9136e7856bc42212385ea797094475802");

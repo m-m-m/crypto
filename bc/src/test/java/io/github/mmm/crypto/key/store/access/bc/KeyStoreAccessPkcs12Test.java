@@ -24,7 +24,7 @@ public class KeyStoreAccessPkcs12Test extends KeyStoreAccessTest {
    */
   @SuppressWarnings("rawtypes")
   @Test
-  public void testX509() throws Exception {
+  void testX509() throws Exception {
 
     File keyStore = File.createTempFile("mmm.security", ".p12");
     keyStore.delete();

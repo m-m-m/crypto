@@ -15,7 +15,7 @@ public class Pbkdf2Test extends SymmetricAccessTest {
    * Test of {@link Pbkdf2WithHmacSha224#of256()}.
    */
   @Test
-  public void testPbkdf2HmacSha224() {
+  void testPbkdf2HmacSha224() {
 
     Pbkdf2 pbkdf2 = Pbkdf2WithHmacSha224.of256();
     SymmetricKeyCreator<PBEKey> keyCreator = pbkdf2.newKeyCreator();
@@ -28,7 +28,7 @@ public class Pbkdf2Test extends SymmetricAccessTest {
    * Test of {@link Pbkdf2WithHmacSha256#of256()}.
    */
   @Test
-  public void testPbkdf2HmacSha256() {
+  void testPbkdf2HmacSha256() {
 
     Pbkdf2 pbkdf2 = Pbkdf2WithHmacSha256.of256();
     SymmetricKeyCreator<PBEKey> keyCreator = pbkdf2.newKeyCreator();
@@ -41,7 +41,7 @@ public class Pbkdf2Test extends SymmetricAccessTest {
    * Test of {@link Pbkdf2WithHmacSha384#of256()}.
    */
   @Test
-  public void testPbkdf2HmacSha384() {
+  void testPbkdf2HmacSha384() {
 
     Pbkdf2 pbkdf2 = Pbkdf2WithHmacSha384.of256();
     assertThat(pbkdf2.getCryptorConfig().getAlgorithm()).isEqualTo("AES/GCM/NoPadding");
@@ -55,7 +55,7 @@ public class Pbkdf2Test extends SymmetricAccessTest {
    * Test of {@link Pbkdf2WithHmacSha512#of256()}.
    */
   @Test
-  public void testPbkdf2HmacSha512() {
+  void testPbkdf2HmacSha512() {
 
     Pbkdf2 pbkdf2 = Pbkdf2WithHmacSha512.of256();
     assertThat(pbkdf2.getCryptorConfig().getAlgorithm()).isEqualTo("AES/GCM/NoPadding");

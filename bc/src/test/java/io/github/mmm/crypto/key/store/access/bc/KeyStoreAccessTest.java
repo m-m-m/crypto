@@ -23,7 +23,7 @@ import io.github.mmm.crypto.key.store.access.KeyStoreAccess;
  * Abstract base test for {@link KeyStoreAccess}.
  */
 @SuppressWarnings({ "rawtypes" })
-public class KeyStoreAccessTest extends Assertions {
+class KeyStoreAccessTest extends Assertions {
 
   void check(KeyStoreAccess keyStoreAccess, AsymmetricKeyCreatorFactory keyFactory,
       CertificateCreator certificateCreator) {

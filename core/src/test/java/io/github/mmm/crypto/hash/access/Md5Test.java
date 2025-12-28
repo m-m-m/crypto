@@ -11,7 +11,7 @@ public class Md5Test extends HashAccessTest {
 
   /** Test of {@link Md5#of()}. */
   @Test
-  public void testSingle() {
+  void testSingle() {
 
     Md5 hash = Md5.MD5;
     check(hash, "Hello world!", "86fb269d190d2c85f6e0468ceca42a20");

@@ -22,7 +22,7 @@ public class Curve25519Test extends AsymmetricAccessTest {
    * Test of {@link Curve25519#ofPlain(HashConfig)}.
    */
   @Test
-  public void testCurve25519() {
+  void testCurve25519() {
 
     // arrange
     Curve25519 curve25519 = Curve25519.ofPlain(Sha256.SHA_256);
@@ -73,7 +73,7 @@ public class Curve25519Test extends AsymmetricAccessTest {
    * @throws Exception on error.
    */
   @Test
-  public void testCurve25519Sign() throws Exception {
+  void testCurve25519Sign() throws Exception {
 
     Curve25519 curve25519 = Curve25519.ofPlain(Sha256.ALGORITHM_SHA_256);
     AsymmetricKeyCreatorEcBc keyCreator = curve25519.newKeyCreator();
