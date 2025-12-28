@@ -28,12 +28,12 @@ public class KeyStoreAccessTest extends Assertions {
   void check(KeyStoreAccess keyStoreAccess, AsymmetricKeyCreatorFactory keyFactory,
       CertificateCreator certificateCreator) {
 
-    // given
+    // arrange
     String password = "$4cret";
     KeyStoreConfig config = keyStoreAccess.getConfig();
     CryptoResource resource = config.getResource();
 
-    // when
+    // act
     AsymmetricKeyPair keyPair = keyFactory.newKeyCreator().generateKeyPair();
     KeyStoreFacade keyStore = keyStoreAccess.newKeyStore();
     String alias = "alias1";
@@ -46,7 +46,7 @@ public class KeyStoreAccessTest extends Assertions {
     keyStore.setKey(alias, keyPair, password, new CertificatePathGeneric(certificate));
     keyStore.save();
 
-    // then
+    // assert
     File file = null;
     if (resource instanceof CryptoFileResource) {
       file = ((CryptoFileResource) resource).getFile();

@@ -29,7 +29,7 @@ public class Secp256k1Test extends AsymmetricAccessTest {
   @Test
   public void testSecp256k1() {
 
-    // given
+    // arrange
     Secp256k1 secp256k1 = Secp256k1.ofPlain(Sha256.SHA_256);
     assertThat(secp256k1.getSignatureConfig().getHashConfig().getAlgorithm()).isEqualTo("SHA-256")
         .isEqualTo(Sha256.ALGORITHM_SHA_256);
@@ -38,7 +38,7 @@ public class Secp256k1Test extends AsymmetricAccessTest {
     assertThat(secp256k1.getCryptorConfig().getAlgorithm()).isEqualTo("ECIES");
     assertThat(secp256k1.newKeyCreator().getKeyLength()).isEqualTo(256);
 
-    // when + then
+    // act + assert
     verify(secp256k1, 99);
   }
 

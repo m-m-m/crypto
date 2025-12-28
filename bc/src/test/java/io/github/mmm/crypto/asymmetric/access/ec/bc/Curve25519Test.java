@@ -24,7 +24,7 @@ public class Curve25519Test extends AsymmetricAccessTest {
   @Test
   public void testCurve25519() {
 
-    // given
+    // arrange
     Curve25519 curve25519 = Curve25519.ofPlain(Sha256.SHA_256);
     assertThat(curve25519.getSignatureConfig().getHashConfig().getAlgorithm()).isEqualTo("SHA-256")
         .isEqualTo(Sha256.ALGORITHM_SHA_256);
@@ -33,7 +33,7 @@ public class Curve25519Test extends AsymmetricAccessTest {
     assertThat(curve25519.getCryptorConfig().getAlgorithm()).isEqualTo("ECIES");
     assertThat(curve25519.newKeyCreator().getKeyLength()).isEqualTo(253);
 
-    // when + then
+    // act + assert
     verify(curve25519, 99);
   }
 
