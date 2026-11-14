@@ -2,12 +2,10 @@ package io.github.mmm.crypto.crypt;
 
 import java.io.InputStream;
 
-/**
- * Abstract implementation of {@link Decryptor}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Abstract implementation of [Decryptor].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public interface AbstractDecryptor extends Decryptor {
 
   @Override

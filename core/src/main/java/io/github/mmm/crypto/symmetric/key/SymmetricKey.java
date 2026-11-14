@@ -8,17 +8,13 @@ import javax.crypto.SecretKey;
 
 import io.github.mmm.crypto.key.KeySet;
 
-/**
- * Interface for a {@link KeySet} with a single {@link SecretKey} for symmetric encryption.
- *
- * @param <K> type of {@link SecretKey}.
- * @since 1.0.0
- */
+/// Interface for a [KeySet] with a single [SecretKey] for symmetric encryption.
+///
+/// @param <K> type of [SecretKey].
+/// @since 1.0.0
 public interface SymmetricKey<K extends SecretKey> extends KeySet {
 
-  /**
-   * @return the {@link SecretKey}.
-   */
+  /// @return the [SecretKey].
   K getKey();
 
   @Override

@@ -20,28 +20,24 @@ import io.github.mmm.crypto.provider.SecurityProvider;
 import io.github.mmm.crypto.provider.bc.BouncyCastle;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * {@link AsymmetricAccess} for <a href="https://en.wikipedia.org/wiki/Elliptic_curve_cryptography">ECC</a> based on
- * {@link BouncyCastle}.
- *
- * @param <S> type of {@link SignatureEcBc}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// [AsymmetricAccess] for <a href="https://en.wikipedia.org/wiki/Elliptic_curve_cryptography">ECC</a> based on
+/// [BouncyCastle].
+///
+/// @param <S> type of [SignatureEcBc].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class AsymmetricAccessEcBc<S extends SignatureEcBc>
     extends AsymmetricAccess<S, BCECPrivateKey, BCECPublicKey, AsymmetricKeyPairEcBc, AsymmetricKeyCreatorEcBc> {
 
-  /** The {@link ECParameterSpec} of the elliptic curve. */
+  /// The [ECParameterSpec] of the elliptic curve.
   protected final ECParameterSpec ecParameters;
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   * @param signatureConfig the {@link SignatureConfig}.
-   * @param cryptorConfig the {@link AsymmetricCryptorConfigEcIes}.
-   * @param randomFactory the optional {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
+  /// @param signatureConfig the [SignatureConfig].
+  /// @param cryptorConfig the [AsymmetricCryptorConfigEcIes].
+  /// @param randomFactory the optional [RandomFactory].
   public AsymmetricAccessEcBc(ECParameterSpec ecParameters, SignatureConfig<S> signatureConfig,
       AsymmetricCryptorConfigEcIes<BCECPrivateKey, BCECPublicKey> cryptorConfig, RandomFactory randomFactory) {
 
@@ -50,14 +46,12 @@ public abstract class AsymmetricAccessEcBc<S extends SignatureEcBc>
     this.ecParameters = ecParameters;
   }
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   * @param signatureFactory the {@link SignatureFactoryEcBc}.
-   * @param hashConfig the {@link HashConfig} for the hash used for signatures.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
+  /// @param signatureFactory the [SignatureFactoryEcBc].
+  /// @param hashConfig the [HashConfig] for the hash used for signatures.
+  /// @param randomFactory the [RandomFactory].
   public AsymmetricAccessEcBc(ECParameterSpec ecParameters, SignatureFactoryEcBc<S> signatureFactory,
       HashConfig hashConfig, RandomFactory randomFactory) {
 

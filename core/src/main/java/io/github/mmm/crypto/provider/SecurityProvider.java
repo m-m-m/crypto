@@ -18,17 +18,15 @@ import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKeyFactory;
 
-/**
- * Abstraction of {@link Provider}.
- *
- * @since 1.0.0
- */
+/// Abstraction of [Provider].
+///
+/// @since 1.0.0
 public final class SecurityProvider {
 
-  /** The Java default {@link SecurityProvider} (JCE). */
+  /// The Java default [SecurityProvider] (JCE).
   public static final SecurityProvider DEFAULT = new SecurityProvider();
 
-  /** The {@link SecurityProvider} for bouncy castle. */
+  /// The [SecurityProvider] for bouncy castle.
   public static final SecurityProvider BC = new SecurityProvider("BC");
 
   private final Provider provider;
@@ -60,13 +58,10 @@ public final class SecurityProvider {
     this.providerName = providerName;
   }
 
-  /**
-   * @param algorithm the {@link KeyPairGenerator#getAlgorithm() key-pair generator algorithm}. See <a href=
-   *        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keypairgenerator-algorithms">KeyPairGenerator
-   *        Algorithms</a>.
-   * @return the (uninitialized) {@link KeyPairGenerator} instance.
-   *
-   */
+  /// @param algorithm the [key-pair generator algorithm][KeyPairGenerator#getAlgorithm()]. See <a href=
+        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keypairgenerator-algorithms">KeyPairGenerator
+  ///        Algorithms</a>.
+  /// @return the (uninitialized) [KeyPairGenerator] instance.
   public KeyPairGenerator createKeyPairGenerator(String algorithm) {
 
     try {
@@ -85,12 +80,10 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param algorithm the {@link SecretKeyFactory#getAlgorithm() secret key factory algorithm}. See <a href=
-   *        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#secretkeyfactory-algorithms">SecretKeyFactory
-   *        Algorithms</a>.
-   * @return the (uninitialized) {@link SecretKeyFactory} instance.
-   */
+  /// @param algorithm the [secret key factory algorithm][SecretKeyFactory#getAlgorithm()]. See <a href=
+        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#secretkeyfactory-algorithms">SecretKeyFactory
+  ///        Algorithms</a>.
+  /// @return the (uninitialized) [SecretKeyFactory] instance.
   public SecretKeyFactory createSecretKeyFactory(String algorithm) {
 
     try {
@@ -109,13 +102,11 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param algorithm the {@link Signature#getAlgorithm() signature algorithm}. See <a href=
-   *        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#signature-algorithms">Signature
-   *        Algorithms</a>.
-   * @return the (uninitialized) {@link Signature} instance.
-   * @see io.github.mmm.crypto.asymmetric.sign.SignatureAlgorithm
-   */
+  /// @param algorithm the [signature algorithm][Signature#getAlgorithm()]. See <a href=
+        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#signature-algorithms">Signature
+  ///        Algorithms</a>.
+  /// @return the (uninitialized) [Signature] instance.
+  /// @see io.github.mmm.crypto.asymmetric.sign.SignatureAlgorithm
   public Signature createSignature(String algorithm) {
 
     Objects.requireNonNull(algorithm, "algorithm");
@@ -134,12 +125,9 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param transformation the {@link Cipher#getAlgorithm() encryption algorithm} or
-   *        {@link io.github.mmm.crypto.crypt.CipherTransformation#getTransformation() transformation}.
-   * @return the (uninitialized) {@link Cipher} instance.
-   *
-   */
+  /// @param transformation the [encryption algorithm][Cipher#getAlgorithm()] or
+  ///        [transformation][io.github.mmm.crypto.crypt.CipherTransformation#getTransformation()].
+  /// @return the (uninitialized) [Cipher] instance.
   public Cipher createCipher(String transformation) {
 
     Objects.requireNonNull(transformation, "transformation");
@@ -159,13 +147,10 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param algorithm the {@link MessageDigest#getAlgorithm() hash algorithm} (see <a href=
-   *        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#messagedigest-algorithms">MessageDigest
-   *        Algorithms</a>).
-   * @return the (uninitialized) {@link MessageDigest} instance.
-   *
-   */
+  /// @param algorithm the [hash algorithm][MessageDigest#getAlgorithm()] (see <a href=
+        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#messagedigest-algorithms">MessageDigest
+  ///        Algorithms</a>).
+  /// @return the (uninitialized) [MessageDigest] instance.
   public MessageDigest createDigest(String algorithm) {
 
     Objects.requireNonNull(algorithm, "algorithm");
@@ -184,12 +169,10 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param algorithm the {@link SecureRandom#getAlgorithm() secure random algorithm} (see <a href=
-   *        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#securerandom-number-generation-algorithms">SecureRandom
-   *        Number Generation Algorithms</a>).
-   * @return the {@link SecureRandom} instance.
-   */
+  /// @param algorithm the [secure random algorithm][SecureRandom#getAlgorithm()] (see <a href=
+        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#securerandom-number-generation-algorithms">SecureRandom
+  ///        Number Generation Algorithms</a>).
+  /// @return the [SecureRandom] instance.
   public SecureRandom createSecureRandom(String algorithm) {
 
     try {
@@ -208,12 +191,10 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param type the {@link CertificateFactory#getType() type} of the {@link CertificateFactory} (see <a href=
-   *        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#certificatefactory-types">CertificateFactory
-   *        Types</a>).
-   * @return the {@link CertificateFactory} instance.
-   */
+  /// @param type the [type][CertificateFactory#getType()] of the [CertificateFactory] (see <a href=
+        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#certificatefactory-types">CertificateFactory
+  ///        Types</a>).
+  /// @return the [CertificateFactory] instance.
   public CertificateFactory createCertificateFactory(String type) {
 
     try {
@@ -232,12 +213,10 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param algorithm the {@link KeyFactory#getAlgorithm() algorithm} of the {@link KeyFactory} (see <a href=
-   *        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keyfactory-algorithms">KeyFactory
-   *        Algorithms</a>).
-   * @return the {@link KeyFactory} instance.
-   */
+  /// @param algorithm the [algorithm][KeyFactory#getAlgorithm()] of the [KeyFactory] (see <a href=
+        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keyfactory-algorithms">KeyFactory
+  ///        Algorithms</a>).
+  /// @return the [KeyFactory] instance.
   public KeyFactory createKeyFactory(String algorithm) {
 
     try {
@@ -256,12 +235,10 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param type the {@link KeyStore#getType() type} of the {@link KeyStore} (see <a href=
-   *        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keystore-types">KeyStore
-   *        Types</a>).
-   * @return the {@link KeyStore} instance.
-   */
+  /// @param type the [type][KeyStore#getType()] of the [KeyStore] (see <a href=
+        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keystore-types">KeyStore
+  ///        Types</a>).
+  /// @return the [KeyStore] instance.
   public KeyStore createKeyStore(String type) {
 
     try {
@@ -290,10 +267,8 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param name the {@link Provider#getName() provider name}.
-   * @return the {@link SecurityProvider}.
-   */
+  /// @param name the [provider name][Provider#getName()].
+  /// @return the [SecurityProvider].
   public static SecurityProvider of(String name) {
 
     if (BC.providerName.equals(name)) {
@@ -303,10 +278,8 @@ public final class SecurityProvider {
     }
   }
 
-  /**
-   * @param provider the {@link Provider} to wrap.
-   * @return the {@link SecurityProvider}.
-   */
+  /// @param provider the [Provider] to wrap.
+  /// @return the [SecurityProvider].
   public static SecurityProvider of(Provider provider) {
 
     Objects.requireNonNull(provider, "provider");

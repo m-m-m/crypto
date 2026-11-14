@@ -18,14 +18,12 @@ import io.github.mmm.crypto.key.KeyCreator;
 import io.github.mmm.crypto.provider.SecurityProvider;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Abstract base implementation of {@link KeyCreator}.
- *
- * @param <PR> type of wrapped {@link PrivateKey}.
- * @param <PU> type of wrapped {@link PublicKey}.
- * @param <PAIR> type of {@link AsymmetricKeyPair}.
- * @since 1.0.0
- */
+/// Abstract base implementation of [KeyCreator].
+///
+/// @param <PR> type of wrapped [PrivateKey].
+/// @param <PU> type of wrapped [PublicKey].
+/// @param <PAIR> type of [AsymmetricKeyPair].
+/// @since 1.0.0
 public abstract class AbstractAsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKey, PAIR extends AbstractAsymmetricKeyPair<PR, PU>>
     extends CryptoAlgorithmImplWithRandom implements AsymmetricKeyCreator<PR, PU, PAIR> {
 
@@ -35,14 +33,12 @@ public abstract class AbstractAsymmetricKeyCreator<PR extends PrivateKey, PU ext
 
   private final int keyLength;
 
-  /**
-   * The constructor.
-   *
-   * @param keyFactory the {@link KeyFactory}.
-   * @param keyLength the {@link #getKeyLength() key length}.
-   * @param provider the security {@link Provider}.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyFactory the [KeyFactory].
+  /// @param keyLength the [key length][#getKeyLength()].
+  /// @param provider the security [Provider].
+  /// @param randomFactory the [RandomFactory].
   public AbstractAsymmetricKeyCreator(KeyFactory keyFactory, int keyLength, SecurityProvider provider,
       RandomFactory randomFactory) {
 
@@ -59,22 +55,18 @@ public abstract class AbstractAsymmetricKeyCreator<PR extends PrivateKey, PU ext
     return this.keyLength;
   }
 
-  /**
-   * Please register in proper order of trials for auto-detection.
-   *
-   * @param factory the {@link AsymmetricKeyPairFactory} to register.
-   */
+  /// Please register in proper order of trials for auto-detection.
+  ///
+  /// @param factory the [AsymmetricKeyPairFactory] to register.
   protected void register(AsymmetricKeyPairFactory<PR, PU, PAIR> factory) {
 
     register(factory, CryptoBinaryFormat.FORMAT_COMPACT);
   }
 
-  /**
-   * Please register in proper order of trials for auto-detection.
-   *
-   * @param factory the {@link AsymmetricKeyPairFactory} to register.
-   * @param format the format to register as.
-   */
+  /// Please register in proper order of trials for auto-detection.
+  ///
+  /// @param factory the [AsymmetricKeyPairFactory] to register.
+  /// @param format the format to register as.
   protected void register(AsymmetricKeyPairFactory<PR, PU, PAIR> factory, String format) {
 
     AsymmetricKeyPairFactory<PR, PU, PAIR> old = this.format2factoryMap.put(format, factory);
@@ -185,10 +177,8 @@ public abstract class AbstractAsymmetricKeyCreator<PR extends PrivateKey, PU ext
     }
   }
 
-  /**
-   * @param keyPairGenerator the {@link KeyPairGenerator} to {@link KeyPairGenerator#initialize(int) initialize}.
-   * @throws Exception on error.
-   */
+  /// @param keyPairGenerator the [KeyPairGenerator] to [initialize][KeyPairGenerator#initialize(int)].
+  /// @throws Exception on error.
   protected void init(KeyPairGenerator keyPairGenerator) throws Exception {
 
     keyPairGenerator.initialize(this.keyLength, createSecureRandom());

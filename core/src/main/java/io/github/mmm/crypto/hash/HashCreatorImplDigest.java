@@ -6,22 +6,18 @@ import java.security.MessageDigest;
 import io.github.mmm.crypto.algorithm.CryptoAlgorithmImpl;
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * This is a simple implementation of {@link HashCreator} that only wraps {@link MessageDigest}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// This is a simple implementation of [HashCreator] that only wraps [MessageDigest].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class HashCreatorImplDigest extends CryptoAlgorithmImpl implements HashCreator {
 
   private final MessageDigest digest;
 
-  /**
-   * The constructor.
-   *
-   * @param hashAlgorithm the name of the hash algorithm to use (e.g. "SHA-256").
-   * @param provider the {@link SecurityProvider} to use.
-   */
+  /// The constructor.
+  ///
+  /// @param hashAlgorithm the name of the hash algorithm to use (e.g. "SHA-256").
+  /// @param provider the [SecurityProvider] to use.
   public HashCreatorImplDigest(String hashAlgorithm, SecurityProvider provider) {
 
     super(hashAlgorithm, provider);
@@ -47,13 +43,11 @@ public class HashCreatorImplDigest extends CryptoAlgorithmImpl implements HashCr
     return messageDigest.digest();
   }
 
-  /**
-   * @param messageDigest the original {@link MessageDigest}.
-   * @param clone - {@code true} to return a clone or copy of the original {@link MessageDigest}, {@code false}
-   *        otherwise.
-   * @return the original {@link MessageDigest} or a {@link #clone() clone} of it in case the given {@code clone} flag
-   *         was {@code true}.
-   */
+  /// @param messageDigest the original [MessageDigest].
+  /// @param clone - `true` to return a clone or copy of the original [MessageDigest], `false`
+  ///        otherwise.
+  /// @return the original [MessageDigest] or a [clone][#clone()] of it in case the given `clone` flag
+  ///         was `true`.
   protected static MessageDigest getOrCloneMessageDigest(MessageDigest messageDigest, boolean clone) {
 
     if (!clone) {

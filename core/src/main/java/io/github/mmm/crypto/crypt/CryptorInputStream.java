@@ -7,13 +7,11 @@ import java.util.Objects;
 import io.github.mmm.crypto.io.InputStreamWrapper;
 import io.github.mmm.crypto.io.OutputStreamWrapper;
 
-/**
- * Implementation of {@link InputStream} for {@link Decryptor#wrapStream(InputStream)} based on
- * {@link OutputStreamWrapper}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [InputStream] for [Decryptor#wrapStream(InputStream)] based on
+/// [OutputStreamWrapper].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class CryptorInputStream extends InputStreamWrapper {
 
   private Cryptor cryptor;
@@ -28,12 +26,10 @@ public class CryptorInputStream extends InputStreamWrapper {
 
   private boolean done; // delegate stream has been consumed?
 
-  /**
-   * The constructor.
-   *
-   * @param cryptor the {@link Cryptor}.
-   * @param delegate the {@link InputStream} to wrap.
-   */
+  /// The constructor.
+ ///
+ /// @param cryptor the [Cryptor].
+ /// @param delegate the [InputStream] to wrap.
   public CryptorInputStream(Cryptor cryptor, InputStream delegate) {
     super(delegate);
     Objects.requireNonNull(cryptor, "cryptor");

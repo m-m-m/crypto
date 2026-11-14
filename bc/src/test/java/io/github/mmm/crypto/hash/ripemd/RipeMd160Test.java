@@ -2,12 +2,10 @@ package io.github.mmm.crypto.hash.ripemd;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * Test of {@link RipeMd160}.
- */
+/// Test of [RipeMd160].
 public class RipeMd160Test extends HashTest {
 
-  /** Test of {@link RipeMd160#RIPEMD_160}. */
+  /// Test of [RipeMd160#RIPEMD_160].
   @Test
   void testSingle() {
 

@@ -11,26 +11,22 @@ import io.github.mmm.crypto.hash.HashCreatorImplDigest;
 import io.github.mmm.crypto.hash.HashCreatorImplMultipleRounds;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Default implementation of {@link SignatureProcessorFactory} based on {@link Signature}.
- *
- * @param <S> type of {@link SignatureBinary}.
- * @param <PR> type of {@link PrivateKey}.
- * @param <PU> type of {@link PublicKey}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Default implementation of [SignatureProcessorFactory] based on [Signature].
+///
+/// @param <S> type of [SignatureBinary].
+/// @param <PR> type of [PrivateKey].
+/// @param <PU> type of [PublicKey].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SignatureProcessorFactoryImpl<S extends SignatureBinary, PR extends PrivateKey, PU extends PublicKey>
     extends AbstractCryptoAlgorithmWithRandom implements SignatureProcessorFactory<S, PR, PU> {
 
   private final SignatureConfig<S> config;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link SignatureConfig}.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [SignatureConfig].
+  /// @param randomFactory the [RandomFactory].
   public SignatureProcessorFactoryImpl(SignatureConfig<S> config, RandomFactory randomFactory) {
 
     super(config.getProvider(), randomFactory);

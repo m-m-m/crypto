@@ -5,11 +5,9 @@ import java.security.PublicKey;
 
 import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPairFactorySimple;
 
-/**
- * Implementation of {@link AsymmetricKeyPairFactorySimple} for {@link AsymmetricKeyPairGeneric}.
- *
- * @since 1.0.0
- */
+/// Implementation of [AsymmetricKeyPairFactorySimple] for [AsymmetricKeyPairGeneric].
+///
+/// @since 1.0.0
 public class AsymmetricKeyPairFactoryGeneric
     implements AsymmetricKeyPairFactorySimple<PrivateKey, PublicKey, AsymmetricKeyPairGeneric> {
 
@@ -21,9 +19,7 @@ public class AsymmetricKeyPairFactoryGeneric
     return new AsymmetricKeyPairGeneric(privateKey, publicKey);
   }
 
-  /**
-   * @return the singleton instance.
-   */
+  /// @return the singleton instance.
   public static final AsymmetricKeyPairFactoryGeneric get() {
 
     return INSTANCE;

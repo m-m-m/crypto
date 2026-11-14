@@ -14,32 +14,26 @@ import io.github.mmm.crypto.provider.SecurityProvider;
 import io.github.mmm.crypto.provider.bc.BouncyCastle;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Implementation of {@link AsymmetricKeyCreator} for {@link AsymmetricKeyPairEcBc}.
- *
- * @since 1.0.0
- */
+/// Implementation of [AsymmetricKeyCreator] for [AsymmetricKeyPairEcBc].
+///
+/// @since 1.0.0
 public class AsymmetricKeyCreatorEcBc
     extends AbstractAsymmetricKeyCreator<BCECPrivateKey, BCECPublicKey, AsymmetricKeyPairEcBc> {
 
   private final ECParameterSpec ecParameters;
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
   public AsymmetricKeyCreatorEcBc(ECParameterSpec ecParameters) {
 
     this(ecParameters, null);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   * @param randomFactory the {@link #getRandomFactory() random factory}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
+  /// @param randomFactory the [random factory][#getRandomFactory()].
   public AsymmetricKeyCreatorEcBc(ECParameterSpec ecParameters, RandomFactory randomFactory) {
 
     super(AsymmetricKeyPairEcBc.getKeyFactory(), ecParameters.getCurve().getOrder().bitLength(),

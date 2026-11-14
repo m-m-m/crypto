@@ -21,32 +21,26 @@ import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import io.github.mmm.crypto.asymmetric.key.ec.AsymmetricKeyPairEc;
 import io.github.mmm.crypto.provider.bc.BouncyCastle;
 
-/**
- * An implementation of {@link AsymmetricKeyPair} for {@link BCECPrivateKey} and {@link BCECPublicKey}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// An implementation of [AsymmetricKeyPair] for [BCECPrivateKey] and [BCECPublicKey].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class AsymmetricKeyPairEcBc extends AsymmetricKeyPairEc<BCECPrivateKey, BCECPublicKey> {
 
   private static KeyFactory keyFactory;
 
-  /**
-   * The constructor.
-   *
-   * @param privateKey the {@link #getPrivateKey() private key}.
-   */
+  /// The constructor.
+  ///
+  /// @param privateKey the [private key][#getPrivateKey()].
   public AsymmetricKeyPairEcBc(BCECPrivateKey privateKey) {
 
     super(privateKey, createPublicKey(privateKey));
   }
 
-  /**
-   * The constructor.
-   *
-   * @param privateKey the {@link #getPrivateKey() private key}.
-   * @param publicKey the {@link #getPrivateKey() public key}.
-   */
+  /// The constructor.
+  ///
+  /// @param privateKey the [private key][#getPrivateKey()].
+  /// @param publicKey the [public key][#getPrivateKey()].
   public AsymmetricKeyPairEcBc(BCECPrivateKey privateKey, BCECPublicKey publicKey) {
 
     super(privateKey, publicKey);
@@ -64,29 +58,23 @@ public class AsymmetricKeyPairEcBc extends AsymmetricKeyPairEc<BCECPrivateKey, B
     return keyFactory;
   }
 
-  /**
-   * @param s the private key value {@link BCECPrivateKey#getS() s}.
-   * @param ecParameters the {@link ECParameterSpec} representing the curve.
-   * @return the {@link BCECPrivateKey}.
-   */
+  /// @param s the private key value [s][BCECPrivateKey#getS()].
+  /// @param ecParameters the [ECParameterSpec] representing the curve.
+  /// @return the [BCECPrivateKey].
   public static BCECPrivateKey createPrivateKey(BigInteger s, ECParameterSpec ecParameters) {
 
     return createPrivateKey(new ECPrivateKeySpec(s, ecParameters));
   }
 
-  /**
-   * @param keySpec the {@link ECPrivateKeySpec}.
-   * @return the {@link BCECPrivateKey}.
-   */
+  /// @param keySpec the [ECPrivateKeySpec].
+  /// @return the [BCECPrivateKey].
   public static BCECPrivateKey createPrivateKey(ECPrivateKeySpec keySpec) {
 
     return new BCECPrivateKey(ALGORITHM_EC, keySpec, BouncyCastleProvider.CONFIGURATION);
   }
 
-  /**
-   * @param keySpec the {@link KeySpec}.
-   * @return the {@link BCECPrivateKey}.
-   */
+  /// @param keySpec the [KeySpec].
+  /// @return the [BCECPrivateKey].
   private static BCECPrivateKey createPrivateKey(KeySpec keySpec) {
 
     try {
@@ -96,19 +84,15 @@ public class AsymmetricKeyPairEcBc extends AsymmetricKeyPairEc<BCECPrivateKey, B
     }
   }
 
-  /**
-   * @param data the {@link java.security.Key#getEncoded() encoded data}.
-   * @return the {@link BCECPrivateKey}.
-   */
+  /// @param data the [encoded data][java.security.Key#getEncoded()].
+  /// @return the [BCECPrivateKey].
   public static BCECPrivateKey createPrivateKeyFromEncodedData(byte[] data) {
 
     return createPrivateKey(new PKCS8EncodedKeySpec(data));
   }
 
-  /**
-   * @param privateKey the {@link BCECPrivateKey}.
-   * @return the corresponding {@link BCECPublicKey}.
-   */
+  /// @param privateKey the [BCECPrivateKey].
+  /// @return the corresponding [BCECPublicKey].
   public static BCECPublicKey createPublicKey(BCECPrivateKey privateKey) {
 
     BigInteger s = privateKey.getS();
@@ -117,29 +101,23 @@ public class AsymmetricKeyPairEcBc extends AsymmetricKeyPairEc<BCECPrivateKey, B
     return createPublicKey(q, ecParameters);
   }
 
-  /**
-   * @param q the public key value {@link ECPublicKey#getQ() q}.
-   * @param ecParameters the {@link ECParameterSpec} representing the curve.
-   * @return the {@link ECPublicKey}.
-   */
+  /// @param q the public key value [q][ECPublicKey#getQ()].
+  /// @param ecParameters the [ECParameterSpec] representing the curve.
+  /// @return the [ECPublicKey].
   public static BCECPublicKey createPublicKey(ECPoint q, ECParameterSpec ecParameters) {
 
     return createPublicKey(new ECPublicKeySpec(q, ecParameters));
   }
 
-  /**
-   * @param keySpec the {@link ECPublicKeySpec}.
-   * @return the {@link ECPublicKey}.
-   */
+  /// @param keySpec the [ECPublicKeySpec].
+  /// @return the [ECPublicKey].
   public static BCECPublicKey createPublicKey(ECPublicKeySpec keySpec) {
 
     return new BCECPublicKey(ALGORITHM_EC, keySpec, BouncyCastleProvider.CONFIGURATION);
   }
 
-  /**
-   * @param keySpec the {@link KeySpec}.
-   * @return the {@link ECPublicKey}.
-   */
+  /// @param keySpec the [KeySpec].
+  /// @return the [ECPublicKey].
   private static BCECPublicKey createPublicKey(KeySpec keySpec) {
 
     try {
@@ -149,10 +127,8 @@ public class AsymmetricKeyPairEcBc extends AsymmetricKeyPairEc<BCECPrivateKey, B
     }
   }
 
-  /**
-   * @param data the {@link java.security.Key#getEncoded() encoded data}.
-   * @return the {@link ECPublicKey}.
-   */
+  /// @param data the [encoded data][java.security.Key#getEncoded()].
+  /// @return the [ECPublicKey].
   public static BCECPublicKey createPublicKeyFromEncodedData(byte[] data) {
 
     return createPublicKey(new X509EncodedKeySpec(data));

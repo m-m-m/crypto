@@ -17,15 +17,11 @@ import io.github.mmm.crypto.asymmetric.sign.ec.bc.SignatureEcBcWithRecoveryId;
 import io.github.mmm.crypto.hash.HashConfig;
 import io.github.mmm.crypto.hash.sha2.Sha256;
 
-/**
- * Test of {@link Secp256k1}.
- */
+/// Test of [Secp256k1].
 @SuppressWarnings({ "rawtypes" })
 public class Secp256k1Test extends AsymmetricAccessTest {
 
-  /**
-   * Basic/generic test of {@link Secp256k1#ofPlain(String)}.
-   */
+  /// Basic/generic test of [Secp256k1#ofPlain(String)].
   @Test
   void testSecp256k1() {
 
@@ -72,9 +68,7 @@ public class Secp256k1Test extends AsymmetricAccessTest {
     return 311;
   }
 
-  /**
-   * Test of {@link Secp256k1#ofRecoveryId(HashConfig)} with official examples from BitCoin.
-   */
+  /// Test of [Secp256k1#ofRecoveryId(HashConfig)] with official examples from BitCoin.
   @Test
   void testSecp256k1KeyPairFromBitcoin() {
 
@@ -126,9 +120,7 @@ public class Secp256k1Test extends AsymmetricAccessTest {
     assertThat(valid).isTrue();
   }
 
-  /**
-   * Advanced signature test of {@link Secp256k1#ofPlain(HashConfig)}.
-   */
+  /// Advanced signature test of [Secp256k1#ofPlain(HashConfig)].
   @Test
   void testSecp256k1Sign() {
 

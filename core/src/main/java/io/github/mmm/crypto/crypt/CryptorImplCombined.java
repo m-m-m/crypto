@@ -2,21 +2,17 @@ package io.github.mmm.crypto.crypt;
 
 import io.github.mmm.crypto.algorithm.AbstractSecurityAlgorithm;
 
-/**
- * An implementation of {@link Cryptor} that combines multiple {@link Cryptor}s.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// An implementation of [Cryptor] that combines multiple [Cryptor]s.
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class CryptorImplCombined extends AbstractSecurityAlgorithm implements Cryptor {
 
   private Cryptor[] cryptors;
 
-  /**
-   * The constructor.
-   *
-   * @param cryptors the {@link Cryptor}s to combine.
-   */
+  /// The constructor.
+  ///
+  /// @param cryptors the [Cryptor]s to combine.
   public CryptorImplCombined(Cryptor[] cryptors) {
     super();
     this.cryptors = cryptors;
@@ -34,9 +30,7 @@ public abstract class CryptorImplCombined extends AbstractSecurityAlgorithm impl
     return getLastCryptor().getNonceSize();
   }
 
-  /**
-   * @return the last {@link Cryptor} from the chain.
-   */
+  /// @return the last [Cryptor] from the chain.
   protected Cryptor getLastCryptor() {
 
     return this.cryptors[this.cryptors.length - 1];

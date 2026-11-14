@@ -12,16 +12,12 @@ import io.github.mmm.crypto.hash.HashConfig;
 import io.github.mmm.crypto.hash.sha2.Sha256;
 import io.github.mmm.crypto.key.store.access.KeyStoreAccessPkcs12;
 
-/**
- * Test of {@link KeyStoreAccessPkcs12}.
- */
+/// Test of [KeyStoreAccessPkcs12].
 public class KeyStoreAccessPkcs12Test extends KeyStoreAccessTest {
 
-  /**
-   * Test of {@link KeyStoreAccessPkcs12#of(File, String)}.
-   *
-   * @throws Exception on error
-   */
+  /// Test of [KeyStoreAccessPkcs12#of(File, String)].
+  ///
+  /// @throws Exception on error
   @SuppressWarnings("rawtypes")
   @Test
   void testX509() throws Exception {

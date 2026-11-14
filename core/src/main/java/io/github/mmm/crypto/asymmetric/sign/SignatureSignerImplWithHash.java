@@ -3,25 +3,21 @@ package io.github.mmm.crypto.asymmetric.sign;
 import io.github.mmm.crypto.algorithm.CryptoAlgorithm;
 import io.github.mmm.crypto.hash.HashCreator;
 
-/**
- * Implementation of {@link SignatureSigner} combining a {@link HashCreator} with another
- * {@link SignatureSigner}.
- *
- * @param <S> type of {@link SignatureBinary}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SignatureSigner] combining a [HashCreator] with another
+/// [SignatureSigner].
+///
+/// @param <S> type of [SignatureBinary].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SignatureSignerImplWithHash<S extends SignatureBinary> extends SignatureProcessorImplWithHash
     implements SignatureSigner<S> {
 
   private final SignatureSigner<S> signer;
 
-  /**
-   * The constructor.
-   *
-   * @param hashGenerator the {@link HashCreator} to apply as extension.
-   * @param signer the {@link SignatureSigner} to extend.
-   */
+  /// The constructor.
+  ///
+  /// @param hashGenerator the [HashCreator] to apply as extension.
+  /// @param signer the [SignatureSigner] to extend.
   public SignatureSignerImplWithHash(HashCreator hashGenerator, SignatureSigner<S> signer) {
 
     super(hashGenerator);

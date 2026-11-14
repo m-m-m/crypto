@@ -9,14 +9,10 @@ import io.github.mmm.crypto.asymmetric.access.rsa.Rsa;
 import io.github.mmm.crypto.hash.HashConfig;
 import io.github.mmm.crypto.hash.sha2.Sha256;
 
-/**
- * Test of {@link Rsa}.
- */
+/// Test of [Rsa].
 class RsaTest extends AsymmetricAccessTest {
 
-  /**
-   * Test of {@link Rsa#keyLength4096()}.
-   */
+  /// Test of [Rsa#keyLength4096()].
   @Test
   void testRsa() {
 

@@ -4,22 +4,18 @@ import java.security.Provider;
 
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * The abstract base implementation of {@link CryptoAlgorithm}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// The abstract base implementation of [CryptoAlgorithm].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class AbstractCryptoAlgorithmWithProvider extends AbstractSecurityAlgorithm {
 
-  /** The {@link SecurityProvider}. */
+  /// The [SecurityProvider].
   protected final SecurityProvider provider;
 
-  /**
-   * The constructor.
-   *
-   * @param provider the optional security {@link Provider}.
-   */
+  /// The constructor.
+  ///
+  /// @param provider the optional security [Provider].
   public AbstractCryptoAlgorithmWithProvider(SecurityProvider provider) {
 
     super();
@@ -30,9 +26,7 @@ public abstract class AbstractCryptoAlgorithmWithProvider extends AbstractSecuri
     }
   }
 
-  /**
-   * @return the {@link SecurityProvider}.
-   */
+  /// @return the [SecurityProvider].
   public SecurityProvider getProvider() {
 
     return this.provider;

@@ -4,21 +4,17 @@ import java.util.Objects;
 
 import io.github.mmm.crypto.algorithm.CryptoAlgorithm;
 
-/**
- * Simple representation of a {@link javax.crypto.Cipher} {@link #getTransformation() transformation}. Please be careful
- * not to confuse or mix {@link #getAlgorithm() algorithm} and {@link #getTransformation() transformation}.
- *
- * @since 1.0.0
- */
+/// Simple representation of a [javax.crypto.Cipher] [transformation][#getTransformation()]. Please be careful
+/// not to confuse or mix [algorithm][#getAlgorithm()] and [transformation][#getTransformation()].
+///
+/// @since 1.0.0
 public class CipherTransformation implements CryptoAlgorithm {
 
-  /** {@link #getPadding() Padding} value {@value}. */
+  /// [Padding][#getPadding()] value {@value}.
   public static final String PADDING_NONE = "NoPadding";
 
-  /**
-   * {@link #getMode() Mode} value {@value} (<a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">Galois/Counter
-   * Mode</a>).
-   */
+  /// [Mode][#getMode()] value {@value} (<a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">Galois/Counter
+  /// Mode</a>).
   public static final String MODE_GCM = "GCM";
 
   private static final String SEPARATOR = "/";
@@ -31,23 +27,19 @@ public class CipherTransformation implements CryptoAlgorithm {
 
   private final String transformation;
 
-  /**
-   * The constructor. Be careful not to confuse with {@link #of(String)} to create from transformation.
-   *
-   * @param algorithm - see {@link #getAlgorithm()}.
-   */
+  /// The constructor. Be careful not to confuse with [#of(String)] to create from transformation.
+  ///
+  /// @param algorithm - see [#getAlgorithm()].
   public CipherTransformation(String algorithm) {
 
     this(algorithm, null, null);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param algorithm - see {@link #getAlgorithm()}.
-   * @param mode - see {@link #getMode()}.
-   * @param padding - see {@link #getPadding()}.
-   */
+  /// The constructor.
+  ///
+  /// @param algorithm - see [#getAlgorithm()].
+  /// @param mode - see [#getMode()].
+  /// @param padding - see [#getPadding()].
   public CipherTransformation(String algorithm, String mode, String padding) {
 
     super();
@@ -66,39 +58,31 @@ public class CipherTransformation implements CryptoAlgorithm {
     }
   }
 
-  /**
-   * @return the {@link javax.crypto.Cipher#getAlgorithm() encryption algorithm}. See <a href=
-   *         "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#cipher-algorithm-names">Cipher
-   *         Algorithm Names</a>.
-   */
+  /// @return the [encryption algorithm][javax.crypto.Cipher#getAlgorithm()]. See <a href=
+         "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#cipher-algorithm-names">Cipher
+  ///         Algorithm Names</a>.
   @Override
   public String getAlgorithm() {
 
     return this.algorithm;
   }
 
-  /**
-   * @return the {@link javax.crypto.Cipher#getAlgorithm() cipher mode} <a href=
-   *         "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#cipher-algorithm-modes">mode</a>.
-   */
+  /// @return the [cipher mode][javax.crypto.Cipher#getAlgorithm()] <a href=
+         "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#cipher-algorithm-modes">mode</a>.
   public String getMode() {
 
     return this.mode;
   }
 
-  /**
-   * @return the {@link javax.crypto.Cipher#getAlgorithm() cipher padding} <a href=
-   *         "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#cipher-algorithm-modes">padding</a>.
-   */
+  /// @return the [cipher padding][javax.crypto.Cipher#getAlgorithm()] <a href=
+         "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#cipher-algorithm-modes">padding</a>.
   public String getPadding() {
 
     return this.padding;
   }
 
-  /**
-   * @return the {@link javax.crypto.Cipher#getInstance(String) cipher transformation} composed of
-   *         {@link #getAlgorithm() algorithm}, {@link #getMode() mode}, and {@link #getPadding() padding}.
-   */
+  /// @return the [cipher transformation][javax.crypto.Cipher#getInstance(String)] composed of
+  ///         [algorithm][#getAlgorithm()], [mode][#getMode()], and [padding][#getPadding()].
   public String getTransformation() {
 
     return this.transformation;
@@ -132,10 +116,8 @@ public class CipherTransformation implements CryptoAlgorithm {
     return this.transformation;
   }
 
-  /**
-   * @param transformation the {@link #getTransformation() transformation}.
-   * @return the parsed {@link CipherTransformation}.
-   */
+  /// @param transformation the [transformation][#getTransformation()].
+  /// @return the parsed [CipherTransformation].
   public static CipherTransformation of(String transformation) {
 
     if ((transformation == null) || transformation.isEmpty()) {

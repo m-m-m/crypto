@@ -5,19 +5,15 @@ import io.github.mmm.crypto.asymmetric.cert.CertificateCreator;
 import io.github.mmm.crypto.asymmetric.cert.access.CertificateAccess;
 import io.github.mmm.crypto.asymmetric.cert.bc.CertificateCreatorImpl;
 
-/**
- * {@link CertificateAccess} using {@link io.github.mmm.crypto.provider.bc.BouncyCastle} (as code dependency and not
- * necessarily as security provider).
- *
- * @since 1.0.0
- */
+/// [CertificateAccess] using [io.github.mmm.crypto.provider.bc.BouncyCastle] (as code dependency and not
+/// necessarily as security provider).
+///
+/// @since 1.0.0
 public class CertificateAccessBc extends CertificateAccess {
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link CertificateConfig}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [CertificateConfig].
   public CertificateAccessBc(CertificateConfig config) {
 
     super(config);

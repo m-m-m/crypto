@@ -6,18 +6,14 @@ import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
 
 import io.github.mmm.crypto.asymmetric.access.ec.bc.CryptoEllipticCurveBc;
 
-/**
- * Implementation of {@link io.github.mmm.crypto.asymmetric.sign.SignatureFactory} for {@link SignatureEcBcPlain}.
- *
- * @since 1.0.0
- */
+/// Implementation of [io.github.mmm.crypto.asymmetric.sign.SignatureFactory] for [SignatureEcBcPlain].
+///
+/// @since 1.0.0
 public class SignatureFactoryEcBcPlain extends SignatureFactoryEcBc<SignatureEcBcPlain> {
 
-  /**
-   * The constructor.
-   *
-   * @param curve the {@link CryptoEllipticCurveBc elliptic curve}.
-   */
+  /// The constructor.
+  ///
+  /// @param curve the [elliptic curve][CryptoEllipticCurveBc].
   public SignatureFactoryEcBcPlain(CryptoEllipticCurveBc curve) {
 
     super(curve);

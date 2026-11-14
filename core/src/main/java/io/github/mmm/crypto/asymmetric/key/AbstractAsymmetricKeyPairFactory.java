@@ -6,42 +6,34 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
-/**
- * Abstract base implementation of {@link AsymmetricKeyPairFactory} using {@link KeyFactory}.
- *
- * @param <PR> type of {@link PrivateKey}.
- * @param <PU> type of {@link PublicKey}.
- * @param <PAIR> type of {@link AsymmetricKeyPair}.
- * @since 1.0.0
- */
+/// Abstract base implementation of [AsymmetricKeyPairFactory] using [KeyFactory].
+///
+/// @param <PR> type of [PrivateKey].
+/// @param <PU> type of [PublicKey].
+/// @param <PAIR> type of [AsymmetricKeyPair].
+/// @since 1.0.0
 public abstract class AbstractAsymmetricKeyPairFactory<PR extends PrivateKey, PU extends PublicKey, PAIR extends AbstractAsymmetricKeyPair<PR, PU>>
     implements AsymmetricKeyPairFactory<PR, PU, PAIR> {
 
   private final KeyFactory keyFactory;
 
-  /**
-   * The constructor.
-   *
-   * @param keyFactory the {@link KeyFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyFactory the [KeyFactory].
   public AbstractAsymmetricKeyPairFactory(KeyFactory keyFactory) {
 
     super();
     this.keyFactory = keyFactory;
   }
 
-  /**
-   * @return the underlying {@link KeyFactory}.
-   */
+  /// @return the underlying [KeyFactory].
   public KeyFactory getKeyFactory() {
 
     return this.keyFactory;
   }
 
-  /**
-   * @param keySpec the {@link KeySpec}.
-   * @return the {@link PrivateKey}.
-   */
+  /// @param keySpec the [KeySpec].
+  /// @return the [PrivateKey].
   @SuppressWarnings("unchecked")
   protected PR createPrivateKey(KeySpec keySpec) {
 
@@ -53,10 +45,8 @@ public abstract class AbstractAsymmetricKeyPairFactory<PR extends PrivateKey, PU
     }
   }
 
-  /**
-   * @param keySpec the {@link KeySpec}.
-   * @return the {@link PublicKey}.
-   */
+  /// @param keySpec the [KeySpec].
+  /// @return the [PublicKey].
   @SuppressWarnings("unchecked")
   protected PU createPublicKey(KeySpec keySpec) {
 

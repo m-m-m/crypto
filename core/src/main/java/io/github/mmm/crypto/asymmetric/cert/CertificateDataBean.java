@@ -3,12 +3,10 @@ package io.github.mmm.crypto.asymmetric.cert;
 import java.math.BigInteger;
 import java.time.Instant;
 
-/**
- * This class ...
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// This class ...
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class CertificateDataBean implements CertificateData {
 
   private String subject;
@@ -23,9 +21,7 @@ public class CertificateDataBean implements CertificateData {
 
   private String signatureAlgorithm;
 
-  /**
-   * The constructor.
-   */
+  /// The constructor.
   public CertificateDataBean() {
     super();
   }
@@ -39,9 +35,7 @@ public class CertificateDataBean implements CertificateData {
     return this.notBefore;
   }
 
-  /**
-   * @param notBefore new value of {@link #getNotBefore()}.
-   */
+  /// @param notBefore new value of [#getNotBefore()].
   public void setNotBefore(Instant notBefore) {
 
     this.notBefore = notBefore;
@@ -53,9 +47,7 @@ public class CertificateDataBean implements CertificateData {
     return this.notAfter;
   }
 
-  /**
-   * @param notAfter new value of {@link #getNotAfter()}.
-   */
+  /// @param notAfter new value of [#getNotAfter()].
   public void setNotAfter(Instant notAfter) {
 
     this.notAfter = notAfter;
@@ -67,9 +59,7 @@ public class CertificateDataBean implements CertificateData {
     return this.issuer;
   }
 
-  /**
-   * @param issuer new value of {@link #getIssuer()}.
-   */
+  /// @param issuer new value of [#getIssuer()].
   public void setIssuer(String issuer) {
 
     this.issuer = issuer;
@@ -81,9 +71,7 @@ public class CertificateDataBean implements CertificateData {
     return this.subject;
   }
 
-  /**
-   * @param subject new value of {@link #getSubject()}.
-   */
+  /// @param subject new value of [#getSubject()].
   public void setSubject(String subject) {
 
     this.subject = subject;
@@ -98,9 +86,7 @@ public class CertificateDataBean implements CertificateData {
     return this.serialNumber;
   }
 
-  /**
-   * @param serialNumber new value of {@link #getSerialNumber()}.
-   */
+  /// @param serialNumber new value of [#getSerialNumber()].
   public void setSerialNumber(BigInteger serialNumber) {
 
     this.serialNumber = serialNumber;
@@ -112,9 +98,7 @@ public class CertificateDataBean implements CertificateData {
     return this.signatureAlgorithm;
   }
 
-  /**
-   * @param signatureAlgorithm new value of {@link #getSignatureAlgorithm()}.
-   */
+  /// @param signatureAlgorithm new value of [#getSignatureAlgorithm()].
   public void setSignatureAlgorithm(String signatureAlgorithm) {
 
     this.signatureAlgorithm = signatureAlgorithm;

@@ -5,41 +5,35 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Objects;
 
-/**
- * Abstract base implementation of {@link AsymmetricKeyPair}.
- *
- * @param <PR> type of {@link #getPrivateKey() private key}.
- * @param <PU> type of {@link #getPublicKey() public key}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Abstract base implementation of [AsymmetricKeyPair].
+///
+/// @param <PR> type of [private key][#getPrivateKey()].
+/// @param <PU> type of [public key][#getPublicKey()].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class AbstractAsymmetricKeyPair<PR extends PrivateKey, PU extends PublicKey>
     implements AsymmetricKeyPair<PR, PU> {
 
-  /** @see #getPrivateKey() */
+  /// @see #getPrivateKey()
   protected final PR privateKey;
 
-  /** @see #getPublicKey() */
+  /// @see #getPublicKey()
   protected final PU publicKey;
 
   private final KeyPair keyPair;
 
-  /**
-   * The constructor.
-   *
-   * @param privateKey the {@link #getPrivateKey() private key}.
-   * @param publicKey the {@link #getPrivateKey() public key}.
-   */
+  /// The constructor.
+  ///
+  /// @param privateKey the [private key][#getPrivateKey()].
+  /// @param publicKey the [public key][#getPrivateKey()].
   public AbstractAsymmetricKeyPair(PR privateKey, PU publicKey) {
 
     this(privateKey, publicKey, null);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param keyPair the {@link #getKeyPair() key pair}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyPair the [key pair][#getKeyPair()].
   @SuppressWarnings("unchecked")
   public AbstractAsymmetricKeyPair(KeyPair keyPair) {
 
@@ -52,13 +46,11 @@ public abstract class AbstractAsymmetricKeyPair<PR extends PrivateKey, PU extend
     this.keyPair = keyPair;
   }
 
-  /**
-   * The constructor.
-   *
-   * @param privateKey the {@link #getPrivateKey() private key}.
-   * @param publicKey the {@link #getPrivateKey() public key}.
-   * @param keyPair the {@link #getKeyPair() key pair}.
-   */
+  /// The constructor.
+  ///
+  /// @param privateKey the [private key][#getPrivateKey()].
+  /// @param publicKey the [public key][#getPrivateKey()].
+  /// @param keyPair the [key pair][#getKeyPair()].
   public AbstractAsymmetricKeyPair(PR privateKey, PU publicKey, KeyPair keyPair) {
 
     super();

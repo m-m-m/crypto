@@ -12,14 +12,12 @@ import javax.crypto.Cipher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Code from <a href=
- * "https://stackoverflow.com/questions/1179672/how-to-avoid-installing-unlimited-strength-jce-policy-files-when-deploying-an">Stackoverflow:
- * how to avoid installing unlimited strength jce policy files</a>.
- *
- * @author ntoskrnl, Vadzim
- * @since 1.0.0
- */
+/// Code from <a href=
+ "https://stackoverflow.com/questions/1179672/how-to-avoid-installing-unlimited-strength-jce-policy-files-when-deploying-an">Stackoverflow:
+/// how to avoid installing unlimited strength jce policy files</a>.
+///
+/// @author ntoskrnl, Vadzim
+/// @since 1.0.0
 public class UnlimitedKeyStrengthJurisdictionPolicy {
 
   private static final Logger LOG = LoggerFactory.getLogger(UnlimitedKeyStrengthJurisdictionPolicy.class);
@@ -75,9 +73,7 @@ public class UnlimitedKeyStrengthJurisdictionPolicy {
     removeCryptographyRestrictions();
   }
 
-  /**
-   * Ensures that the class gets loaded and the installation was triggered.
-   */
+  /// Ensures that the class gets loaded and the installation was triggered.
   public static void ensure() {
     // just force loading of this class
   }

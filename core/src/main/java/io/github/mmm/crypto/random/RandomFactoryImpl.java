@@ -6,23 +6,19 @@ import java.security.SecureRandom;
 import io.github.mmm.crypto.algorithm.AbstractCryptoAlgorithmWithProvider;
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * Implementation of {@link RandomFactory}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [RandomFactory].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class RandomFactoryImpl extends AbstractCryptoAlgorithmWithProvider implements RandomFactory {
 
   private static RandomFactoryImpl STRONG_INSTANCE;
 
   private final RandomConfig config;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link RandomConfig}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [RandomConfig].
   public RandomFactoryImpl(RandomConfig config) {
 
     super(config.getProvider());
@@ -47,9 +43,7 @@ public class RandomFactoryImpl extends AbstractCryptoAlgorithmWithProvider imple
     return this.provider.createSecureRandom(getAlgorithm());
   }
 
-  /**
-   * @return {@link RandomFactoryImpl} for {@link SecureRandom#getInstanceStrong()}.
-   */
+  /// @return [RandomFactoryImpl] for [SecureRandom#getInstanceStrong()].
   public static RandomFactoryImpl ofStrong() {
 
     if (STRONG_INSTANCE == null) {

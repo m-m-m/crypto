@@ -7,20 +7,16 @@ import io.github.mmm.crypto.hash.HashCreatorImplDigest;
 import io.github.mmm.crypto.hash.HashCreatorImplMultipleRounds;
 import io.github.mmm.crypto.hash.HashFactory;
 
-/**
- * {@link CryptoAccess} for {@link HashFactory}.
- *
- * @since 1.0.0
- */
+/// [CryptoAccess] for [HashFactory].
+///
+/// @since 1.0.0
 public class HashAccess extends CryptoAccess implements HashFactory {
 
   private final HashConfig config;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link HashAccess}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [HashAccess].
   public HashAccess(HashConfig config) {
 
     super();
@@ -47,10 +43,8 @@ public class HashAccess extends CryptoAccess implements HashFactory {
     return this.config.getAlgorithm();
   }
 
-  /**
-   * @param config the {@link HashAccess}.
-   * @return the {@link HashAccess}.
-   */
+  /// @param config the [HashAccess].
+  /// @return the [HashAccess].
   public static HashAccess of(HashConfig config) {
 
     return new HashAccess(config);

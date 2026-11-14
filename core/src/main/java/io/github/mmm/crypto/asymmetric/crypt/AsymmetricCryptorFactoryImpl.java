@@ -6,25 +6,21 @@ import java.security.PublicKey;
 import io.github.mmm.crypto.crypt.CryptorFactoryImpl;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Implementation of {@link AsymmetricCryptorFactory}.
- *
- * @param <PR> type of {@link PrivateKey}.
- * @param <PU> type of {@link PublicKey}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [AsymmetricCryptorFactory].
+///
+/// @param <PR> type of [PrivateKey].
+/// @param <PU> type of [PublicKey].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class AsymmetricCryptorFactoryImpl<PR extends PrivateKey, PU extends PublicKey> extends CryptorFactoryImpl
     implements AsymmetricCryptorFactory<PR, PU> {
 
   private final AsymmetricCryptorConfig<PR, PU> config;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link AsymmetricCryptorConfig}.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [AsymmetricCryptorConfig].
+  /// @param randomFactory the [RandomFactory].
   public AsymmetricCryptorFactoryImpl(AsymmetricCryptorConfig<PR, PU> config, RandomFactory randomFactory) {
 
     super(config.getProvider(), randomFactory);

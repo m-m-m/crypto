@@ -7,32 +7,26 @@ import java.security.spec.EllipticCurve;
 
 import io.github.mmm.crypto.algorithm.CryptoAlgorithmParameterConfig;
 
-/**
- * Implementation of {@link CryptoAlgorithmParameterConfig} for Elliptic Curves using bouncy castle
- * ({@link ECParameterSpec}).
- *
- * @since 1.0.0
- */
+/// Implementation of [CryptoAlgorithmParameterConfig] for Elliptic Curves using bouncy castle
+/// ([ECParameterSpec]).
+///
+/// @since 1.0.0
 public class EllipticCurveEcJce extends CryptoAlgorithmParameterConfig {
 
   private final String curveName;
 
   private ECParameterSpec ecParameters;
 
-  /**
-   * The constructor.
-   *
-   * @param curveName the {@link #getCurveName() curve name}.
-   */
+  /// The constructor.
+  ///
+  /// @param curveName the [curve name][#getCurveName()].
   public EllipticCurveEcJce(String curveName) {
 
     super();
     this.curveName = curveName;
   }
 
-  /**
-   * @return the {@link ECParameterSpec}.
-   */
+  /// @return the [ECParameterSpec].
   @Override
   public ECParameterSpec getAlgorithmParameters() {
 
@@ -46,9 +40,7 @@ public class EllipticCurveEcJce extends CryptoAlgorithmParameterConfig {
     return this.ecParameters;
   }
 
-  /**
-   * @return the curve name.
-   */
+  /// @return the curve name.
   public String getCurveName() {
 
     return this.curveName;

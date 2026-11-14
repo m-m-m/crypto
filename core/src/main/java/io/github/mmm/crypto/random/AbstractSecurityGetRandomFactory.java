@@ -1,22 +1,16 @@
 package io.github.mmm.crypto.random;
 
-/**
- * Abstract interface to {@link #getRandomFactory() get} the {@link RandomFactory}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Abstract interface to [get][#getRandomFactory()] the [RandomFactory].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract interface AbstractSecurityGetRandomFactory {
 
-  /**
-   * @return the {@link RandomFactory}. May be {@code null}.
-   */
+  /// @return the [RandomFactory]. May be `null`.
   RandomFactory getRandomFactory();
 
-  /**
-   * @throws IllegalStateException if {@link #getRandomFactory()} is {@code null}.
-   * @return the {@link RandomFactory}. Never {@code null}.
-   */
+  /// @throws IllegalStateException if [#getRandomFactory()] is `null`.
+  /// @return the [RandomFactory]. Never `null`.
   default RandomFactory getRandomFactoryRequired() {
 
     RandomFactory factory = getRandomFactory();

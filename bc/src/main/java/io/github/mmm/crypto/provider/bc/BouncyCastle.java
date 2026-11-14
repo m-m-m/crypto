@@ -10,13 +10,10 @@ import org.slf4j.LoggerFactory;
 
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * Installer that ensures {@link BouncyCastleProvider} is {@link Security#addProvider(java.security.Provider)
- * registered} to java {@link Security} on {@link #install()}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Installer that ensures [BouncyCastleProvider] is [registered][Security#addProvider(java.security.Provider)] to java [Security] on [#install()].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class BouncyCastle {
 
   private static final Logger LOG = LoggerFactory.getLogger(BouncyCastle.class);
@@ -27,10 +24,8 @@ public class BouncyCastle {
 
   private static final SecurityProvider SECURITY_PROVIDER = SecurityProvider.of(PROVIDER);
 
-  /**
-   * ensures {@link BouncyCastleProvider} is {@link Security#addProvider(java.security.Provider) registered} to java
-   * {@link Security}.
-   */
+  /// ensures [BouncyCastleProvider] is [registered][Security#addProvider(java.security.Provider)] to java
+  /// [Security].
   public static void install() {
 
     if (!installed) {
@@ -41,17 +36,13 @@ public class BouncyCastle {
     }
   }
 
-  /**
-   * @return the {@link BouncyCastleProvider} instance.
-   */
+  /// @return the [BouncyCastleProvider] instance.
   public static BouncyCastleProvider getProvider() {
 
     return PROVIDER;
   }
 
-  /**
-   * @return the {@link SecurityProvider} for {@link #getProvider() bouncy castle provider}.
-   */
+  /// @return the [SecurityProvider] for [bouncy castle provider][#getProvider()].
   public static SecurityProvider getSecurityProvider() {
 
     return SECURITY_PROVIDER;

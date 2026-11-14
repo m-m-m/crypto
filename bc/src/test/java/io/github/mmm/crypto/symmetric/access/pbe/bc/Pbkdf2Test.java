@@ -6,14 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import io.github.mmm.crypto.symmetric.key.SymmetricKeyCreator;
 
-/**
- * Test of {@link Pbkdf2}.
- */
+/// Test of [Pbkdf2].
 public class Pbkdf2Test extends SymmetricAccessTest {
 
-  /**
-   * Test of {@link Pbkdf2WithHmacSha224#of256()}.
-   */
+  /// Test of [Pbkdf2WithHmacSha224#of256()].
   @Test
   void testPbkdf2HmacSha224() {
 
@@ -24,9 +20,7 @@ public class Pbkdf2Test extends SymmetricAccessTest {
     check(pbkdf2);
   }
 
-  /**
-   * Test of {@link Pbkdf2WithHmacSha256#of256()}.
-   */
+  /// Test of [Pbkdf2WithHmacSha256#of256()].
   @Test
   void testPbkdf2HmacSha256() {
 
@@ -37,9 +31,7 @@ public class Pbkdf2Test extends SymmetricAccessTest {
     check(pbkdf2);
   }
 
-  /**
-   * Test of {@link Pbkdf2WithHmacSha384#of256()}.
-   */
+  /// Test of [Pbkdf2WithHmacSha384#of256()].
   @Test
   void testPbkdf2HmacSha384() {
 
@@ -51,9 +43,7 @@ public class Pbkdf2Test extends SymmetricAccessTest {
     check(pbkdf2);
   }
 
-  /**
-   * Test of {@link Pbkdf2WithHmacSha512#of256()}.
-   */
+  /// Test of [Pbkdf2WithHmacSha512#of256()].
   @Test
   void testPbkdf2HmacSha512() {
 

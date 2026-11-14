@@ -1,21 +1,17 @@
 package io.github.mmm.crypto.hash;
 
-/**
- * The implementation of {@link HashFactory} that combines multiple {@link HashFactory} instances by
- * sequentially applying the hashes.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// The implementation of [HashFactory] that combines multiple [HashFactory] instances by
+/// sequentially applying the hashes.
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class HashFactoryCombined implements HashFactory {
 
   private final HashFactory[] factories;
 
-  /**
-   * The constructor.
-   *
-   * @param factories the {@link HashFactory} instances to combine.
-   */
+  /// The constructor.
+  ///
+  /// @param factories the [HashFactory] instances to combine.
   public HashFactoryCombined(HashFactory[] factories) {
 
     super();

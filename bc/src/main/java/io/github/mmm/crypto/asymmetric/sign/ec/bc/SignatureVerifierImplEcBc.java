@@ -5,22 +5,18 @@ import org.bouncycastle.crypto.signers.ECDSASigner;
 import io.github.mmm.crypto.asymmetric.sign.SignatureVerifier;
 import io.github.mmm.crypto.asymmetric.sign.ec.SignatureConfigEcDsa;
 
-/**
- * Implementation of {@link SignatureVerifier} for {@link SignatureEcBc}.
- *
- * @param <S> type of {@link SignatureEcBc}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SignatureVerifier] for [SignatureEcBc].
+///
+/// @param <S> type of [SignatureEcBc].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SignatureVerifierImplEcBc<S extends SignatureEcBc> extends SignatureProcessorImplEcBc<S>
     implements SignatureVerifier<S> {
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link #getConfig() config}.
-   * @param signer the underlying {@link ECDSASigner}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [config][#getConfig()].
+  /// @param signer the underlying [ECDSASigner].
   public SignatureVerifierImplEcBc(SignatureConfigEcDsa<S> config, ECDSASigner signer) {
 
     super(config, signer);

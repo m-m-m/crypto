@@ -28,23 +28,19 @@ import io.github.mmm.crypto.asymmetric.cert.CertificateData;
 import io.github.mmm.crypto.asymmetric.cert.CertificateDataBean;
 import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 
-/**
- * Implementation of {@link CertificateCreator}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [CertificateCreator].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class CertificateCreatorImpl extends AbstractSecurityAlgorithm implements CertificateCreator {
 
   private final CertificateConfig config;
 
   private CertificateFactory certificateFactory;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link CertificateConfig}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [CertificateConfig].
   public CertificateCreatorImpl(CertificateConfig config) {
 
     super();
@@ -57,9 +53,7 @@ public class CertificateCreatorImpl extends AbstractSecurityAlgorithm implements
     return this.config.getType();
   }
 
-  /**
-   * @return the {@link CertificateFactory}.
-   */
+  /// @return the [CertificateFactory].
   protected CertificateFactory getCertificateFactory() {
 
     if (this.certificateFactory == null) {

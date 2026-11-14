@@ -2,23 +2,19 @@ package io.github.mmm.crypto;
 
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * Abstract base class for a configuration of a security creator or processor (for hashes, signatures, keys, encryption,
- * decryption, etc.). It {@link #getProvider() configures} the {@link SecurityProvider} used for fabrication.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Abstract base class for a configuration of a security creator or processor (for hashes, signatures, keys, encryption,
+/// decryption, etc.). It [configures][#getProvider()] the [SecurityProvider] used for fabrication.
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class CryptoConfig {
 
-  /** @see #getProvider() */
+  /// @see #getProvider()
   protected final SecurityProvider provider;
 
-  /**
-   * The constructor.
-   *
-   * @param provider the {@link #getProvider() provider}.
-   */
+  /// The constructor.
+  ///
+  /// @param provider the [provider][#getProvider()].
   public CryptoConfig(SecurityProvider provider) {
 
     super();
@@ -29,9 +25,7 @@ public abstract class CryptoConfig {
     }
   }
 
-  /**
-   * @return the {@link SecurityProvider}.
-   */
+  /// @return the [SecurityProvider].
   public SecurityProvider getProvider() {
 
     return this.provider;

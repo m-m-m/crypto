@@ -8,27 +8,23 @@ import io.github.mmm.crypto.CryptoBinary;
 import io.github.mmm.crypto.CryptoBinaryFormat;
 import io.github.mmm.crypto.key.KeyCreator;
 
-/**
- * Extends {@link KeyCreator} for dealing with asymmetric cryptographic keys.
- *
- * @see #generateKeyPair()
- * @see #createPrivateKey(byte[], String)
- * @see #createPublicKey(byte[], String)
- * @see #createKeyPair(byte[], String)
- *
- * @param <PR> type of {@link PrivateKey}.
- * @param <PU> type of {@link PublicKey}.
- * @param <PAIR> type of {@link AsymmetricKeyPair}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Extends [KeyCreator] for dealing with asymmetric cryptographic keys.
+///
+/// @see #generateKeyPair()
+/// @see #createPrivateKey(byte[], String)
+/// @see #createPublicKey(byte[], String)
+/// @see #createKeyPair(byte[], String)
+///
+/// @param <PR> type of [PrivateKey].
+/// @param <PU> type of [PublicKey].
+/// @param <PAIR> type of [AsymmetricKeyPair].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKey, PAIR extends AsymmetricKeyPair<PR, PU>>
     extends KeyCreator, AsymmetricKeyPairFactory<PR, PU, PAIR> {
 
-  /**
-   * @return a new {@link AsymmetricKeyPair} with a generated {@link AsymmetricKeyPair#getPrivateKey() private} and
-   *         {@link AsymmetricKeyPair#getPublicKey() public} key for the underlying cryptography.
-   */
+  /// @return a new [AsymmetricKeyPair] with a generated [private][AsymmetricKeyPair#getPrivateKey()] and
+  ///         [public][AsymmetricKeyPair#getPublicKey()] key for the underlying cryptography.
   PAIR generateKeyPair();
 
   @Override
@@ -37,21 +33,17 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
     return asData(privateKey, CryptoBinaryFormat.FORMAT_COMPACT);
   }
 
-  /**
-   * @param privateKey the {@link PrivateKey} to serialize.
-   * @param format the the {@link CryptoBinaryFormat} to use.
-   * @return the {@link Binary}.
-   */
+  /// @param privateKey the [PrivateKey] to serialize.
+  /// @param format the the [CryptoBinaryFormat] to use.
+  /// @return the [Binary].
   default Binary asBinary(PR privateKey, String format) {
 
     return new CryptoBinary(asData(privateKey, format));
   }
 
-  /**
-   * @param privateKey the {@link PrivateKey} to serialize.
-   * @param format the the {@link CryptoBinaryFormat} to use.
-   * @return the binary data.
-   */
+  /// @param privateKey the [PrivateKey] to serialize.
+  /// @param format the the [CryptoBinaryFormat] to use.
+  /// @return the binary data.
   byte[] asData(PR privateKey, String format);
 
   @Override
@@ -60,11 +52,9 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
     return createPrivateKey(data, null);
   }
 
-  /**
-   * @param data the {@link PrivateKey} as raw {@code byte} array.
-   * @param format the {@link CryptoBinaryFormat} to use.
-   * @return the deserialized {@link PrivateKey}.
-   */
+  /// @param data the [PrivateKey] as raw `byte` array.
+  /// @param format the [CryptoBinaryFormat] to use.
+  /// @return the deserialized [PrivateKey].
   PR createPrivateKey(byte[] data, String format);
 
   @Override
@@ -73,21 +63,17 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
     return asData(publicKey, CryptoBinaryFormat.FORMAT_COMPACT);
   }
 
-  /**
-   * @param publicKey the {@link PublicKey} to serialize.
-   * @param format the the {@link CryptoBinaryFormat} to use.
-   * @return the {@link Binary}.
-   */
+  /// @param publicKey the [PublicKey] to serialize.
+  /// @param format the the [CryptoBinaryFormat] to use.
+  /// @return the [Binary].
   default Binary asBinary(PU publicKey, String format) {
 
     return new CryptoBinary(asData(publicKey, format));
   }
 
-  /**
-   * @param publicKey the {@link PublicKey} to serialize.
-   * @param format the the {@link CryptoBinaryFormat} to use.
-   * @return the binary data.
-   */
+  /// @param publicKey the [PublicKey] to serialize.
+  /// @param format the the [CryptoBinaryFormat] to use.
+  /// @return the binary data.
   byte[] asData(PU publicKey, String format);
 
   @Override
@@ -96,11 +82,9 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
     return createPublicKey(data, null);
   }
 
-  /**
-   * @param data the {@link PublicKey} as raw {@code byte} array.
-   * @param format the the {@link CryptoBinaryFormat} to use.
-   * @return the deserialized {@link PublicKey}.
-   */
+  /// @param data the [PublicKey] as raw `byte` array.
+  /// @param format the the [CryptoBinaryFormat] to use.
+  /// @return the deserialized [PublicKey].
   PU createPublicKey(byte[] data, String format);
 
   @Override
@@ -109,21 +93,17 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
     return asData(keyPair, CryptoBinaryFormat.FORMAT_COMPACT);
   }
 
-  /**
-   * @param keyPair the {@link AsymmetricKeyPair} to serialize.
-   * @param format the the {@link CryptoBinaryFormat} to use.
-   * @return the serialized {@link Binary}.
-   */
+  /// @param keyPair the [AsymmetricKeyPair] to serialize.
+  /// @param format the the [CryptoBinaryFormat] to use.
+  /// @return the serialized [Binary].
   default Binary asBinary(PAIR keyPair, String format) {
 
     return new CryptoBinary(asData(keyPair, format));
   }
 
-  /**
-   * @param keyPair the {@link AsymmetricKeyPair} to serialize.
-   * @param format the the {@link CryptoBinaryFormat} to use.
-   * @return the serialized binary data.
-   */
+  /// @param keyPair the [AsymmetricKeyPair] to serialize.
+  /// @param format the the [CryptoBinaryFormat] to use.
+  /// @return the serialized binary data.
   byte[] asData(PAIR keyPair, String format);
 
   @Override
@@ -132,24 +112,18 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
     return createKeyPair(data, CryptoBinaryFormat.FORMAT_COMPACT);
   }
 
-  /**
-   * @param data the {@link AsymmetricKeyPair} as raw byte array.
-   * @param format the the {@link CryptoBinaryFormat} to use.
-   * @return the deserialized {@link AsymmetricKeyPair}.
-   */
+  /// @param data the [AsymmetricKeyPair] as raw byte array.
+  /// @param format the the [CryptoBinaryFormat] to use.
+  /// @return the deserialized [AsymmetricKeyPair].
   PAIR createKeyPair(byte[] data, String format);
 
-  /**
-   * @param privateKey the {@link PrivateKey}.
-   * @return the {@link #getKeyLength() key length} of the given key in bits.
-   */
+  /// @param privateKey the [PrivateKey].
+  /// @return the [key length][#getKeyLength()] of the given key in bits.
   int getKeyLength(PR privateKey);
 
-  /**
-   * Verify that the given key matches the criteria of this key creator such as {@link #getKeyLength() key length}.
-   *
-   * @param privateKey the {@link PrivateKey} to verify.
-   */
+  /// Verify that the given key matches the criteria of this key creator such as [key length][#getKeyLength()].
+  ///
+  /// @param privateKey the [PrivateKey] to verify.
   default void verifyKey(PR privateKey) {
 
     int givenKeyLength = getKeyLength(privateKey);
@@ -160,17 +134,13 @@ public interface AsymmetricKeyCreator<PR extends PrivateKey, PU extends PublicKe
     }
   }
 
-  /**
-   * @param publicKey the {@link PublicKey}.
-   * @return the {@link #getKeyLength() key length} of the given key in bits.
-   */
+  /// @param publicKey the [PublicKey].
+  /// @return the [key length][#getKeyLength()] of the given key in bits.
   int getKeyLength(PU publicKey);
 
-  /**
-   * Verify that the given key matches the criteria of this key creator such as {@link #getKeyLength() key length}.
-   *
-   * @param publicKey the {@link PublicKey} to verify.
-   */
+  /// Verify that the given key matches the criteria of this key creator such as [key length][#getKeyLength()].
+  ///
+  /// @param publicKey the [PublicKey] to verify.
   default void verifyKey(PU publicKey) {
 
     int givenKeyLength = getKeyLength(publicKey);

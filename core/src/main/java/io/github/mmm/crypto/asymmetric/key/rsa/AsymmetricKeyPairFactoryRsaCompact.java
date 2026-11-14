@@ -8,12 +8,10 @@ import java.security.interfaces.RSAPublicKey;
 import io.github.mmm.crypto.CryptoBinaryFormat;
 import io.github.mmm.crypto.asymmetric.key.AbstractAsymmetricKeyPairFactory;
 
-/**
- * Implementation of {@link AbstractAsymmetricKeyPairFactory} for RSA in
- * {@link CryptoBinaryFormat#FORMAT_COMPACT compact format}.
- *
- * @since 1.0.0
- */
+/// Implementation of [AbstractAsymmetricKeyPairFactory] for RSA in
+/// [compact format][CryptoBinaryFormat#FORMAT_COMPACT].
+///
+/// @since 1.0.0
 public class AsymmetricKeyPairFactoryRsaCompact
     extends AbstractAsymmetricKeyPairFactory<RSAPrivateKey, RSAPublicKey, AsymmetricKeyPairRsa> {
 
@@ -32,19 +30,15 @@ public class AsymmetricKeyPairFactoryRsaCompact
     }
   }
 
-  /**
-   * The constructor.
-   */
+  /// The constructor.
   public AsymmetricKeyPairFactoryRsaCompact() {
 
     super(AsymmetricKeyPairRsa.getKeyFactory());
   }
 
-  /**
-   * The constructor.
-   *
-   * @param keyFactory the {@link KeyFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyFactory the [KeyFactory].
   public AsymmetricKeyPairFactoryRsaCompact(KeyFactory keyFactory) {
 
     super(keyFactory);

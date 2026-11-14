@@ -5,12 +5,10 @@ import org.junit.jupiter.api.Test;
 import io.github.mmm.crypto.hash.access.HashAccessTest;
 import io.github.mmm.crypto.hash.sha2.Sha256;
 
-/**
- * Test of {@link Sha256}.
- */
+/// Test of [Sha256].
 public class Sha256Test extends HashAccessTest {
 
-  /** Test of {@link Sha256#SecurityHashConfigSha256.SHA_256}. */
+  /// Test of {@link Sha256#SecurityHashConfigSha256.SHA_256}.
   @Test
   void testSingle() {
 
@@ -18,7 +16,7 @@ public class Sha256Test extends HashAccessTest {
     check(hash, "Hello world!", "c0535e4be2b79ffd93291305436bf889314e4a3faec05ecffcbb7df31ad9e51a");
   }
 
-  /** Test of {@link Sha256#SHA_256_X2}. */
+  /// Test of [Sha256#SHA_256_X2].
   @Test
   void testDouble() {
 
@@ -26,7 +24,7 @@ public class Sha256Test extends HashAccessTest {
     check(hash, "Hello world!", "7982970534e089b839957b7e174725ce1878731ed6d700766e59cb16f1c25e27");
   }
 
-  /** Test of {@link Sha256#SecurityHashConfigSha256(int)} with 3 iterations. */
+  /// Test of [Sha256#SecurityHashConfigSha256(int)] with 3 iterations.
   @Test
   void testTripple() {
 

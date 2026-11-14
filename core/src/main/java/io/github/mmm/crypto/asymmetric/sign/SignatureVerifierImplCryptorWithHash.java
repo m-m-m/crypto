@@ -5,24 +5,20 @@ import java.util.Arrays;
 import io.github.mmm.crypto.crypt.Decryptor;
 import io.github.mmm.crypto.hash.HashCreator;
 
-/**
- * Implementation of {@link SignatureVerifier} combining a {@link Decryptor} with a
- * {@link HashCreator}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SignatureVerifier] combining a [Decryptor] with a
+/// [HashCreator].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SignatureVerifierImplCryptorWithHash extends SignatureProcessorImplWithHash
     implements SignatureVerifier<SignatureBinary> {
 
   private final Decryptor decryptor;
 
-  /**
-   * The constructor.
-   *
-   * @param hashGenerator the {@link HashCreator} to apply as extension.
-   * @param decryptor the {@link Decryptor} to extend.
-   */
+  /// The constructor.
+  ///
+  /// @param hashGenerator the [HashCreator] to apply as extension.
+  /// @param decryptor the [Decryptor] to extend.
   public SignatureVerifierImplCryptorWithHash(HashCreator hashGenerator, Decryptor decryptor) {
 
     super(hashGenerator);

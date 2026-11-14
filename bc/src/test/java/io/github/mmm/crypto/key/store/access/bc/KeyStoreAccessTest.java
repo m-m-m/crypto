@@ -19,9 +19,7 @@ import io.github.mmm.crypto.key.store.KeyStoreConfig;
 import io.github.mmm.crypto.key.store.KeyStoreFacade;
 import io.github.mmm.crypto.key.store.access.KeyStoreAccess;
 
-/**
- * Abstract base test for {@link KeyStoreAccess}.
- */
+/// Abstract base test for [KeyStoreAccess].
 @SuppressWarnings({ "rawtypes" })
 class KeyStoreAccessTest extends Assertions {
 

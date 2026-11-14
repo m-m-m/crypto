@@ -11,15 +11,13 @@ import io.github.mmm.crypto.crypt.Cryptor;
 import io.github.mmm.crypto.hash.HashCreator;
 import io.github.mmm.crypto.hash.HashFactory;
 
-/**
- * Implementation of {@link SignatureProcessorFactory} combining a {@link Cryptor} with a
- * {@link HashCreator}.
- *
- * @param <PR> type of {@link PrivateKey}.
- * @param <PU> type of {@link PublicKey}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SignatureProcessorFactory] combining a [Cryptor] with a
+/// [HashCreator].
+///
+/// @param <PR> type of [PrivateKey].
+/// @param <PU> type of [PublicKey].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SignatureProcessorFactoryImplCryptorWithHash<PR extends PrivateKey, PU extends PublicKey>
     implements SignatureProcessorFactory<SignatureBinary, PR, PU> {
 
@@ -27,12 +25,10 @@ public class SignatureProcessorFactoryImplCryptorWithHash<PR extends PrivateKey,
 
   private final AsymmetricCryptorFactory<PR, PU> cryptorFactory;
 
-  /**
-   * The constructor.
-   *
-   * @param cryptorFactory the {@link AsymmetricCryptorFactory} to delegate to.
-   * @param hashFactory the {@link HashFactory} to apply as extension.
-   */
+  /// The constructor.
+  ///
+  /// @param cryptorFactory the [AsymmetricCryptorFactory] to delegate to.
+  /// @param hashFactory the [HashFactory] to apply as extension.
   public SignatureProcessorFactoryImplCryptorWithHash(AsymmetricCryptorFactory<PR, PU> cryptorFactory,
       HashFactory hashFactory) {
 

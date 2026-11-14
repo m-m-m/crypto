@@ -4,12 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import io.github.mmm.crypto.hash.md5.Md5;
 
-/**
- * Test of {@link Md5}.
- */
+/// Test of [Md5].
 public class Md5Test extends HashAccessTest {
 
-  /** Test of {@link Md5#of()}. */
+  /// Test of [Md5#of()].
   @Test
   void testSingle() {
 

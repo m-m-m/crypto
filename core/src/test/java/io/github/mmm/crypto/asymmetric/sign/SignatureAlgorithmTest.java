@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import io.github.mmm.crypto.asymmetric.sign.SignatureAlgorithm;
 
-/**
- * Test of {@link SignatureAlgorithm}.
- */
+/// Test of [SignatureAlgorithm].
 @Disabled("JDK is unstable and supported algorithms may come and go - relying on bouncy castle is a good option")
 class SignatureAlgorithmTest extends Assertions {
 

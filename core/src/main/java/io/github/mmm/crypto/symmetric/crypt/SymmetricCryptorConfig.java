@@ -4,21 +4,17 @@ import io.github.mmm.crypto.crypt.CipherTransformation;
 import io.github.mmm.crypto.crypt.CryptorConfig;
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * {@link CryptorConfig} for {@link SymmetricCryptorFactory symmetric encryption}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// [CryptorConfig] for [symmetric encryption][SymmetricCryptorFactory].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SymmetricCryptorConfig extends CryptorConfig {
 
-  /**
-   * The constructor.
-   *
-   * @param transformation the {@link #getTransformation() transfomation} for the {@link javax.crypto.Cipher}.
-   * @param nonceSize the {@link #getNonceSize() nonce size}.
-   * @param provider the {@link SecurityProvider}.
-   */
+  /// The constructor.
+  ///
+  /// @param transformation the [transfomation][#getTransformation()] for the [javax.crypto.Cipher].
+  /// @param nonceSize the [nonce size][#getNonceSize()].
+  /// @param provider the [SecurityProvider].
   public SymmetricCryptorConfig(CipherTransformation transformation, SecurityProvider provider, int nonceSize) {
 
     super(transformation, provider, nonceSize);

@@ -9,15 +9,11 @@ import org.assertj.core.api.Assertions;
 import io.github.mmm.crypto.symmetric.access.SymmetricAccess;
 import io.github.mmm.crypto.symmetric.key.SymmetricKeyCreator;
 
-/**
- * Abstract base test of {@link SymmetricAccess}.
- */
+/// Abstract base test of [SymmetricAccess].
 public abstract class SymmetricAccessTest extends Assertions {
 
-  /**
-   * @param <K> type of {@link SecretKey}.
-   * @param access the {@link SymmetricAccess} to test.
-   */
+  /// @param <K> type of [SecretKey].
+  /// @param access the [SymmetricAccess] to test.
   protected <K extends SecretKey> void check(SymmetricAccess<K> access) {
 
     SymmetricKeyCreator<K> keyCreator = access.newKeyCreator();

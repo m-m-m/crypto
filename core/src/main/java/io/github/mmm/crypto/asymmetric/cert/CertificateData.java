@@ -6,44 +6,30 @@ import java.time.Instant;
 
 import io.github.mmm.crypto.algorithm.CryptoAlgorithm;
 
-/**
- * Interface for the meta-data of a {@link java.security.cert.Certificate}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Interface for the meta-data of a [java.security.cert.Certificate].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public interface CertificateData {
 
-  /**
-   * @return the issuer of the certificate.
-   */
+  /// @return the issuer of the certificate.
   String getIssuer();
 
-  /**
-   * @return the subject of the certificate (e.g. "CN=myname@mydomain.com").
-   */
+  /// @return the subject of the certificate (e.g. "CN=myname@mydomain.com").
   String getSubject();
 
-  /**
-   * @return the serial number (e.g. {@link BigInteger#ONE}).
-   */
+  /// @return the serial number (e.g. [BigInteger#ONE]).
   BigInteger getSerialNumber();
 
-  /**
-   * @return the begin of the validity.
-   * @see X509Certificate#getNotBefore()
-   */
+  /// @return the begin of the validity.
+  /// @see X509Certificate#getNotBefore()
   Instant getNotBefore();
 
-  /**
-   * @return the end of the validity.
-   * @see X509Certificate#getNotAfter()
-   */
+  /// @return the end of the validity.
+  /// @see X509Certificate#getNotAfter()
   Instant getNotAfter();
 
-  /**
-   * @return the {@link CryptoAlgorithm#getAlgorithm() algorithm name} for the signature.
-   */
+  /// @return the [algorithm name][CryptoAlgorithm#getAlgorithm()] for the signature.
   String getSignatureAlgorithm();
 
 }

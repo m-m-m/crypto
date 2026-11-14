@@ -18,25 +18,19 @@ import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.mmm.crypto.crypt.Decryptor;
 import io.github.mmm.crypto.crypt.Encryptor;
 
-/**
- * Abstract test class for {@link AsymmetricAccess}.
- */
+/// Abstract test class for [AsymmetricAccess].
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class AsymmetricAccessTest extends Assertions {
 
-  /**
-   * @param access the {@link AsymmetricAccess} to test.
-   * @param encryptionLength the expected encrypted data length of the message "Secret message".
-   */
+  /// @param access the [AsymmetricAccess] to test.
+  /// @param encryptionLength the expected encrypted data length of the message "Secret message".
   protected void verify(AsymmetricAccess<?, ?, ?, ?, ?> access, int encryptionLength) {
 
     verify((AsymmetricAccess) access, encryptionLength, false);
   }
 
-  /**
-   * @param access the {@link AsymmetricAccess} to test.
-   * @param encryptionLength the expected encrypted data length of the message "Secret message".
-   */
+  /// @param access the [AsymmetricAccess] to test.
+  /// @param encryptionLength the expected encrypted data length of the message "Secret message".
   protected void verifyBidirectional(AsymmetricAccess<?, ?, ?, ?, ?> access, int encryptionLength) {
 
     verify((AsymmetricAccess) access, encryptionLength, true);
@@ -64,10 +58,8 @@ public abstract class AsymmetricAccessTest extends Assertions {
     assertThat(signatureVerified).as("signature verified").isTrue();
   }
 
-  /**
-   * @param keyPair the {@link AsymmetricKeyPair} to verify.
-   * @param keyCreator the {@link AsymmetricKeyCreator}.
-   */
+  /// @param keyPair the [AsymmetricKeyPair] to verify.
+  /// @param keyCreator the [AsymmetricKeyCreator].
   protected void verifyKeyPair(AsymmetricKeyPair keyPair, AsymmetricKeyCreator keyCreator) {
 
     // verify private key
@@ -97,19 +89,13 @@ public abstract class AsymmetricAccessTest extends Assertions {
     }
   }
 
-  /**
-   * @return the expected (maximum) length in bytes of the {@link io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT
-   *         compact public key data}.
-   */
+  /// @return the expected (maximum) length in bytes of the [compact public key data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
   protected int getPublicKeyCompactLength() {
 
     return getPublicKeyEncodedLength();
   }
 
-  /**
-   * @return the expected (minimum) length in bytes of the {@link io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT
-   *         compact public key data}.
-   */
+  /// @return the expected (minimum) length in bytes of the [compact public key data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
   protected int getPublicKeyCompactMinLength() {
 
     if (getPublicKeyCompactLength() == getPublicKeyEncodedLength()) {
@@ -119,34 +105,24 @@ public abstract class AsymmetricAccessTest extends Assertions {
     }
   }
 
-  /**
-   * @return the expected (maximum) length in bytes of the {@link java.security.PublicKey#getEncoded() encoded public
-   *         key data}.
-   */
+  /// @return the expected (maximum) length in bytes of the [encoded public
+         key data][java.security.PublicKey#getEncoded()].
   protected abstract int getPublicKeyEncodedLength();
 
-  /**
-   * @return the expected (minimum) length in bytes of the {@link java.security.PublicKey#getEncoded() encoded public
-   *         key data}.
-   */
+  /// @return the expected (minimum) length in bytes of the [encoded public
+         key data][java.security.PublicKey#getEncoded()].
   protected int getPublicKeyEncodedMinLength() {
 
     return getPublicKeyEncodedLength();
   }
 
-  /**
-   * @return the expected (maximum) length in bytes of the {@link io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT
-   *         compact private key data}.
-   */
+  /// @return the expected (maximum) length in bytes of the [compact private key data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
   protected int getPrivateKeyCompactLength() {
 
     return getPrivateKeyEncodedLength();
   }
 
-  /**
-   * @return the expected (minimum) length in bytes of the {@link io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT
-   *         compact private key data}.
-   */
+  /// @return the expected (minimum) length in bytes of the [compact private key data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
   protected int getPrivateKeyCompactMinLength() {
 
     if (getPrivateKeyCompactLength() == getPrivateKeyEncodedLength()) {
@@ -156,26 +132,20 @@ public abstract class AsymmetricAccessTest extends Assertions {
     }
   }
 
-  /**
-   * @return the expected (maximum) length in bytes of the {@link java.security.PrivateKey#getEncoded() encoded private
-   *         key data}.
-   */
+  /// @return the expected (maximum) length in bytes of the [encoded private
+         key data][java.security.PrivateKey#getEncoded()].
   protected abstract int getPrivateKeyEncodedLength();
 
-  /**
-   * @return the expected (minimum) length in bytes of the {@link java.security.PrivateKey#getEncoded() encoded private
-   *         key data}.
-   */
+  /// @return the expected (minimum) length in bytes of the [encoded private
+         key data][java.security.PrivateKey#getEncoded()].
   protected int getPrivateKeyEncodedMinLength() {
 
     return getPrivateKeyEncodedLength();
   }
 
-  /**
-   * @param signature the {@link SignatureBinary} to verify.
-   * @param minLength the minimum length
-   * @param maxLength the maximum length
-   */
+  /// @param signature the [SignatureBinary] to verify.
+  /// @param minLength the minimum length
+  /// @param maxLength the maximum length
   protected void verifySignatureLength(SignatureBinary signature, int minLength, int maxLength) {
 
     if (maxLength > 0) {

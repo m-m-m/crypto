@@ -9,31 +9,25 @@ import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyCreator;
 import io.github.mmm.crypto.provider.SecurityProvider;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Implementation of {@link AsymmetricKeyCreator} for {@link AsymmetricKeyPairRsa RSA}.
- *
- * @since 1.0.0
- */
+/// Implementation of [AsymmetricKeyCreator] for [RSA][AsymmetricKeyPairRsa].
+///
+/// @since 1.0.0
 public class AsymmetricKeyCreatorRsa
     extends AbstractAsymmetricKeyCreator<RSAPrivateKey, RSAPublicKey, AsymmetricKeyPairRsa> {
 
-  /**
-   * The constructor.
-   *
-   * @param keyLength the {@link #getKeyLength() key length}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyLength the [key length][#getKeyLength()].
   public AsymmetricKeyCreatorRsa(int keyLength) {
 
     this(keyLength, null, null);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param keyLength the {@link #getKeyLength() key length}.
-   * @param provider the {@link #getProvider() provider}.
-   * @param randomFactory the {@link #getRandomFactory() random factory}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyLength the [key length][#getKeyLength()].
+  /// @param provider the [provider][#getProvider()].
+  /// @param randomFactory the [random factory][#getRandomFactory()].
   public AsymmetricKeyCreatorRsa(int keyLength, SecurityProvider provider, RandomFactory randomFactory) {
 
     super(AsymmetricKeyPairRsa.getKeyFactory(), keyLength, provider, randomFactory);

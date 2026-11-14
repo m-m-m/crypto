@@ -7,12 +7,10 @@ import java.util.Objects;
 import io.github.mmm.crypto.algorithm.CryptoAlgorithm;
 import io.github.mmm.crypto.hash.HashConfig;
 
-/**
- * Little helper to workaround quirks in JCE/JCA for {@link java.security.Signature#getAlgorithm() signature algorithm}
- * names.
- *
- * @since 1.0.0
- */
+/// Little helper to workaround quirks in JCE/JCA for [signature algorithm][java.security.Signature#getAlgorithm()]
+/// names.
+///
+/// @since 1.0.0
 public final class SignatureAlgorithm implements CryptoAlgorithm {
 
   private static final String SEPARATOR = "with";
@@ -69,26 +67,19 @@ public final class SignatureAlgorithm implements CryptoAlgorithm {
     return this.algorithm;
   }
 
-  /**
-   * @return the hash algorithm to perform of the message payload before signing.
-   */
+  /// @return the hash algorithm to perform of the message payload before signing.
   public String getHashAlgorithm() {
 
     return this.hashAlgorithm;
   }
 
-  /**
-   * @return {@code true} if {@link #getHashAlgorithm() hash algorithm} is {@link HashConfig#ALGORITHM_NONE
-   *         NONE}.
-   */
+  /// @return `true` if [hash algorithm][#getHashAlgorithm()] is [NONE][HashConfig#ALGORITHM_NONE].
   public boolean isNoHashing() {
 
     return HashConfig.ALGORITHM_NONE.equals(this.hashAlgorithm);
   }
 
-  /**
-   * @return the raw signing algorithm (e.g. RSA, DSA, or ECDSA).
-   */
+  /// @return the raw signing algorithm (e.g. RSA, DSA, or ECDSA).
   public String getSigningAlgorithm() {
 
     return this.signingAlgorithm;
@@ -122,11 +113,9 @@ public final class SignatureAlgorithm implements CryptoAlgorithm {
     return this.algorithm;
   }
 
-  /**
-   * @param hashAlgorithm the {@link #getHashAlgorithm()}.
-   * @param signingAlgorithm the {@link #getSigningAlgorithm()}.
-   * @return the {@link SignatureAlgorithm} instance.
-   */
+  /// @param hashAlgorithm the [#getHashAlgorithm()].
+  /// @param signingAlgorithm the [#getSigningAlgorithm()].
+  /// @return the [SignatureAlgorithm] instance.
   public static SignatureAlgorithm of(String hashAlgorithm, String signingAlgorithm) {
 
     register(signingAlgorithm, "signingAlgorithm");
@@ -148,10 +137,8 @@ public final class SignatureAlgorithm implements CryptoAlgorithm {
     return hashingAlgorithm;
   }
 
-  /**
-   * @param algorithm the {@link #getAlgorithm() signature algorithm}.
-   * @return the {@link SignatureAlgorithm} instance.
-   */
+  /// @param algorithm the [signature algorithm][#getAlgorithm()].
+  /// @return the [SignatureAlgorithm] instance.
   public static SignatureAlgorithm of(String algorithm) {
 
     require(algorithm, "algorithm");

@@ -22,12 +22,10 @@ import io.github.mmm.crypto.io.CryptoResource;
 import io.github.mmm.crypto.key.KeySet;
 import io.github.mmm.crypto.symmetric.key.SymmetricKeyGeneric;
 
-/**
- * Implementation of {@link KeyStoreFacade}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [KeyStoreFacade].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class KeyStoreFacadeImpl implements KeyStoreFacade {
 
   private static final Certificate[] NO_CHAIN = null;
@@ -38,11 +36,9 @@ public class KeyStoreFacadeImpl implements KeyStoreFacade {
 
   private KeyStore keyStore;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link KeyStoreConfig}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [KeyStoreConfig].
   public KeyStoreFacadeImpl(KeyStoreConfig config) {
 
     super();

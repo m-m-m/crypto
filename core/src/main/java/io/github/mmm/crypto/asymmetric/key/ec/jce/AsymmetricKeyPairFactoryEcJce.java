@@ -9,21 +9,17 @@ import java.security.spec.ECPoint;
 import io.github.mmm.crypto.asymmetric.key.AbstractAsymmetricKeyPairFactory;
 import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPairFactory;
 
-/**
- * Implementation of {@link AsymmetricKeyPairFactory} for {@link AsymmetricKeyPairEcJce}.
- *
- * @since 1.0.0
- */
+/// Implementation of [AsymmetricKeyPairFactory] for [AsymmetricKeyPairEcJce].
+///
+/// @since 1.0.0
 public class AsymmetricKeyPairFactoryEcJce
     extends AbstractAsymmetricKeyPairFactory<ECPrivateKey, ECPublicKey, AsymmetricKeyPairEcJce> {
 
   private final ECParameterSpec ecParameters;
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
   public AsymmetricKeyPairFactoryEcJce(ECParameterSpec ecParameters) {
 
     super(AsymmetricKeyPairEcJce.getKeyFactory());

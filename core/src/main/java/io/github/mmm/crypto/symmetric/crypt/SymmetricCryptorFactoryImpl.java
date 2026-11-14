@@ -11,24 +11,20 @@ import io.github.mmm.crypto.crypt.Decryptor;
 import io.github.mmm.crypto.crypt.Encryptor;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Implementation of {@link SymmetricCryptorFactory}.
- *
- * @param <K> type of {@link SecretKey}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SymmetricCryptorFactory].
+///
+/// @param <K> type of [SecretKey].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SymmetricCryptorFactoryImpl<K extends SecretKey> extends CryptorFactoryImpl
     implements SymmetricCryptorFactory<K> {
 
   private final SymmetricCryptorConfig config;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link SymmetricCryptorConfig}.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [SymmetricCryptorConfig].
+  /// @param randomFactory the [RandomFactory].
   public SymmetricCryptorFactoryImpl(SymmetricCryptorConfig config, RandomFactory randomFactory) {
 
     super(config.getProvider(), randomFactory);

@@ -6,12 +6,10 @@ import org.bouncycastle.asn1.x9.X9ECParameters;
 import org.bouncycastle.crypto.ec.CustomNamedCurves;
 import org.bouncycastle.jce.spec.ECParameterSpec;
 
-/**
- * Configuration for a specific <a href="https://en.wikipedia.org/wiki/Elliptic_curve_cryptography">elliptic curve</a>
- * based on bouncy castles {@link ECParameterSpec}.
- *
- * @since 1.0.0
- */
+/// Configuration for a specific <a href="https://en.wikipedia.org/wiki/Elliptic_curve_cryptography">elliptic curve</a>
+/// based on bouncy castles [ECParameterSpec].
+///
+/// @since 1.0.0
 public abstract class CryptoEllipticCurveBc {
 
   private final String curveName;
@@ -22,28 +20,22 @@ public abstract class CryptoEllipticCurveBc {
 
   private BigInteger halfN;
 
-  /**
-   * The constructor.
-   *
-   * @param curveName the {@link #getCurveName() curve name}.
-   */
+  /// The constructor.
+  ///
+  /// @param curveName the [curve name][#getCurveName()].
   CryptoEllipticCurveBc(String curveName) {
 
     super();
     this.curveName = curveName;
   }
 
-  /**
-   * @return the curve name.
-   */
+  /// @return the curve name.
   public String getCurveName() {
 
     return this.curveName;
   }
 
-  /**
-   * @return the {@link ECParameterSpec}.
-   */
+  /// @return the [ECParameterSpec].
   public ECParameterSpec getEcParameters() {
 
     if (this.ecParameters == null) {
@@ -57,9 +49,7 @@ public abstract class CryptoEllipticCurveBc {
     return this.ecParameters;
   }
 
-  /**
-   * @return the Q value of the {@link ECParameterSpec#getCurve() curve}.
-   */
+  /// @return the Q value of the [curve][ECParameterSpec#getCurve()].
   public BigInteger getQ() {
 
     if (this.q == null) {
@@ -72,14 +62,10 @@ public abstract class CryptoEllipticCurveBc {
     return this.q;
   }
 
-  /**
-   * @return the {@link #getQ() Q value}.
-   */
+  /// @return the [Q value][#getQ()].
   protected abstract BigInteger determineCurveQ();
 
-  /**
-   * @return halfN
-   */
+  /// @return halfN
   public BigInteger getHalfN() {
 
     if (this.halfN == null) {
@@ -92,27 +78,21 @@ public abstract class CryptoEllipticCurveBc {
     return this.halfN;
   }
 
-  /**
-   * @return the length of the curve order and keys in bits.
-   */
+  /// @return the length of the curve order and keys in bits.
   public int getBitLength() {
 
     return getEcParameters().getCurve().getOrder().bitLength();
   }
 
-  /**
-   * @return the length of the curve order and keys in bytes.
-   */
+  /// @return the length of the curve order and keys in bytes.
   public int getByteLength() {
 
     return getByteLength(getEcParameters());
   }
 
-  /**
-   * @param ecParameters the {@link ECParameterSpec}.
-   * @return the length of the curve order in bytes. This is also the length of the (compressed) keys except for a
-   *         potential extra byte.
-   */
+  /// @param ecParameters the [ECParameterSpec].
+  /// @return the length of the curve order in bytes. This is also the length of the (compressed) keys except for a
+  ///         potential extra byte.
   public static int getByteLength(ECParameterSpec ecParameters) {
 
     return (ecParameters.getCurve().getOrder().bitLength() + 7) / 8;

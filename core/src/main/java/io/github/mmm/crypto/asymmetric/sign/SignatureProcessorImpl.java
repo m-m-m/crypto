@@ -4,30 +4,24 @@ import java.security.Signature;
 
 import io.github.mmm.crypto.algorithm.AbstractSecurityAlgorithm;
 
-/**
- * Implementation of {@link SignatureProcessor} based on {@link Signature}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SignatureProcessor] based on [Signature].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class SignatureProcessorImpl extends AbstractSecurityAlgorithm implements SignatureProcessor {
 
   private final Signature signature;
 
-  /**
-   * The constructor.
-   *
-   * @param signature the {@link Signature} to use.
-   */
+  /// The constructor.
+  ///
+  /// @param signature the [Signature] to use.
   public SignatureProcessorImpl(Signature signature) {
 
     super();
     this.signature = signature;
   }
 
-  /**
-   * @return the underlying {@link Signature}.
-   */
+  /// @return the underlying [Signature].
   protected Signature getSignature() {
 
     return this.signature;

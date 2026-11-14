@@ -6,30 +6,26 @@ import io.github.mmm.crypto.asymmetric.sign.SignatureConfig;
 import io.github.mmm.crypto.asymmetric.sign.SignatureProcessor;
 import io.github.mmm.crypto.asymmetric.sign.ec.SignatureConfigEcDsa;
 
-/**
- * Implementation of {@link io.github.mmm.crypto.asymmetric.sign.SignatureSigner}.
- *
- * @param <S> type of {@link SignatureEcBc}.
- * @since 1.0.0
- */
+/// Implementation of [io.github.mmm.crypto.asymmetric.sign.SignatureSigner].
+///
+/// @param <S> type of [SignatureEcBc].
+/// @since 1.0.0
 public abstract class SignatureProcessorImplEcBc<S extends SignatureEcBc> implements SignatureProcessor {
 
   private final SignatureConfig<S> config;
 
   private final SignatureFactoryEcBc<S> signatureFactory;
 
-  /** The {@link ECDSASigner}. */
+  /// The [ECDSASigner].
   protected final ECDSASigner signer;
 
-  /** The binary data to sign. */
+  /// The binary data to sign.
   protected byte[] data;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link #getConfig() config}.
-   * @param signer the underlying {@link ECDSASigner}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [config][#getConfig()].
+  /// @param signer the underlying [ECDSASigner].
   public SignatureProcessorImplEcBc(SignatureConfigEcDsa<S> config, ECDSASigner signer) {
 
     super();
@@ -44,17 +40,13 @@ public abstract class SignatureProcessorImplEcBc<S extends SignatureEcBc> implem
     return this.config.getAlgorithm();
   }
 
-  /**
-   * @return the {@link SignatureConfig}.
-   */
+  /// @return the [SignatureConfig].
   public SignatureConfig<S> getConfig() {
 
     return this.config;
   }
 
-  /**
-   * @return the {@link SignatureFactoryEcBc}.
-   */
+  /// @return the [SignatureFactoryEcBc].
   public SignatureFactoryEcBc<S> getSignatureFactory() {
 
     return this.signatureFactory;

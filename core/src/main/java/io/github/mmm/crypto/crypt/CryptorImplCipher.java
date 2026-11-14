@@ -13,12 +13,10 @@ import io.github.mmm.binary.Binary;
 import io.github.mmm.crypto.algorithm.AbstractCryptoAlgorithmWithRandom;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Abstract implementation of {@link Cryptor} based on {@link Cipher}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Abstract implementation of [Cryptor] based on [Cipher].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class CryptorImplCipher extends AbstractCryptoAlgorithmWithRandom implements Cryptor {
 
   private final CryptorConfig config;
@@ -31,16 +29,14 @@ public abstract class CryptorImplCipher extends AbstractCryptoAlgorithmWithRando
 
   private byte[] nonce;
 
-  /** Index in {@link #nonce} or {@code -1} if nonce has completely been processed. */
+  /// Index in [#nonce] or `-1` if nonce has completely been processed.
   private int nonceIndex;
 
-  /**
-   * The constructor.
-   *
-   * @param randomFactory the {@link RandomFactory} to use.
-   * @param config the {@link CryptorConfig}.
-   * @param key the {@link Key} to use.
-   */
+  /// The constructor.
+  ///
+  /// @param randomFactory the [RandomFactory] to use.
+  /// @param config the [CryptorConfig].
+  /// @param key the [Key] to use.
   public CryptorImplCipher(RandomFactory randomFactory, CryptorConfig config, Key key) {
 
     super(config.getProvider(), randomFactory);
@@ -61,9 +57,7 @@ public abstract class CryptorImplCipher extends AbstractCryptoAlgorithmWithRando
     return this.nonceSize;
   }
 
-  /**
-   * @return the underlying {@link Cipher}.
-   */
+  /// @return the underlying [Cipher].
   protected Cipher getCipher() {
 
     if (this.cipher == null) {
@@ -109,22 +103,16 @@ public abstract class CryptorImplCipher extends AbstractCryptoAlgorithmWithRando
     return this.cipher;
   }
 
-  /**
-   * @return {@code true} if {@link Encryptor}, {@code false} if {@link Decryptor}.
-   */
+  /// @return `true` if [Encryptor], `false` if [Decryptor].
   protected abstract boolean isEncryptor();
 
-  /**
-   * @return the {@link CryptorConfig}.
-   */
+  /// @return the [CryptorConfig].
   public final CryptorConfig getConfig() {
 
     return this.config;
   }
 
-  /**
-   * @return "decryption" for {@link Decryptor} and "encryption" for {@link Encryptor}.
-   */
+  /// @return "decryption" for [Decryptor] and "encryption" for [Encryptor].
   protected String getMode() {
 
     if (isEncryptor()) {
@@ -187,10 +175,8 @@ public abstract class CryptorImplCipher extends AbstractCryptoAlgorithmWithRando
     }
   }
 
-  /**
-   * @param e the {@link Exception} to wrap.
-   * @return the wrapped {@link RuntimeException}.
-   */
+  /// @param e the [Exception] to wrap.
+  /// @return the wrapped [RuntimeException].
   protected RuntimeException wrapSecurityException(Exception e) {
 
     return new IllegalStateException("The " + getMode() + " failed: " + e.getMessage(), e);

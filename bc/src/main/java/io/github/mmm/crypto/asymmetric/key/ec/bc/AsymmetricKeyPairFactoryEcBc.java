@@ -10,36 +10,30 @@ import org.bouncycastle.jce.spec.ECParameterSpec;
 import io.github.mmm.crypto.asymmetric.access.ec.bc.CryptoEllipticCurveBc;
 import io.github.mmm.crypto.asymmetric.key.AbstractAsymmetricKeyPairFactory;
 
-/**
- * Abstract base implementation of {@link AbstractAsymmetricKeyPairFactory} for EC using BouncyCastle.
- *
- * @since 1.0.0
- */
+/// Abstract base implementation of [AbstractAsymmetricKeyPairFactory] for EC using BouncyCastle.
+///
+/// @since 1.0.0
 public abstract class AsymmetricKeyPairFactoryEcBc
     extends AbstractAsymmetricKeyPairFactory<BCECPrivateKey, BCECPublicKey, AsymmetricKeyPairEcBc> {
 
-  /** @see CryptoEllipticCurveBc#getEcParameters() */
+  /// @see CryptoEllipticCurveBc#getEcParameters()
   protected final ECParameterSpec ecParameters;
 
-  /** @see CryptoEllipticCurveBc#getByteLength() */
+  /// @see CryptoEllipticCurveBc#getByteLength()
   protected final int byteLength;
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
   public AsymmetricKeyPairFactoryEcBc(ECParameterSpec ecParameters) {
 
     this(ecParameters, AsymmetricKeyPairEcBc.getKeyFactory());
   }
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   * @param keyFactory the {@link KeyFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
+  /// @param keyFactory the [KeyFactory].
   public AsymmetricKeyPairFactoryEcBc(ECParameterSpec ecParameters, KeyFactory keyFactory) {
 
     super(keyFactory);

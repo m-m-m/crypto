@@ -4,23 +4,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-/**
- * An {@link InputStream} that wraps another {@link InputStream} to delegate from.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// An [InputStream] that wraps another [InputStream] to delegate from.
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class InputStreamWrapper extends InputStream {
 
   private final InputStream delegate;
 
   private boolean closed;
 
-  /**
-   * The constructor.
-   *
-   * @param delegate the {@link #getDelegate() delegate}. May <b>not</b> be {@code null}.
-   */
+  /// The constructor.
+  ///
+  /// @param delegate the [delegate][#getDelegate()]. May **not** be `null`.
   public InputStreamWrapper(InputStream delegate) {
 
     super();
@@ -29,17 +25,13 @@ public class InputStreamWrapper extends InputStream {
     this.closed = false;
   }
 
-  /**
-   * @return the wrapped {@link InputStream} to delegate from. May <b>not</b> be {@code null}.
-   */
+  /// @return the wrapped [InputStream] to delegate from. May **not** be `null`.
   protected InputStream getDelegate() {
 
     return this.delegate;
   }
 
-  /**
-   * @throws IOException if the stream has already been closed.
-   */
+  /// @throws IOException if the stream has already been closed.
   protected void requireNotClosed() throws IOException {
 
     if (this.closed) {

@@ -6,32 +6,26 @@ import java.security.MessageDigest;
 
 import io.github.mmm.crypto.io.OutputStreamWrapper;
 
-/**
- * An {@link OutputStream} that writes to a {@link MessageDigest}. Unlike {@link java.security.DigestOutputStream} it
- * does not wrap an {@link OutputStream} to write through.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// An [OutputStream] that writes to a [MessageDigest]. Unlike [java.security.DigestOutputStream] it
+/// does not wrap an [OutputStream] to write through.
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class HashOutputStream extends OutputStreamWrapper {
 
   private final HashCreator hashGenerator;
 
-  /**
-   * The constructor.
-   *
-   * @param hashGenerator the {@link HashCreator}.
-   */
+  /// The constructor.
+  ///
+  /// @param hashGenerator the [HashCreator].
   public HashOutputStream(HashCreator hashGenerator) {
     this(hashGenerator, null);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param hashGenerator the {@link HashCreator}.
-   * @param delegate the {@link #getDelegate() delegate}. May be {@code null}.
-   */
+  /// The constructor.
+  ///
+  /// @param hashGenerator the [HashCreator].
+  /// @param delegate the [delegate][#getDelegate()]. May be `null`.
   public HashOutputStream(HashCreator hashGenerator, OutputStream delegate) {
 
     super(delegate);

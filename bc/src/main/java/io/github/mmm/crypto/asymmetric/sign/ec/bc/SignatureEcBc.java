@@ -13,11 +13,9 @@ import io.github.mmm.crypto.asymmetric.access.ec.bc.CryptoEllipticCurveBc;
 import io.github.mmm.crypto.asymmetric.key.ec.bc.AsymmetricKeyPairEcBc;
 import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 
-/**
- * {@link SignatureBinary} for ECDSA based on {@link io.github.mmm.crypto.provider.bc.BouncyCastle}.
- *
- * @since 1.0.0
- */
+/// [SignatureBinary] for ECDSA based on [io.github.mmm.crypto.provider.bc.BouncyCastle].
+///
+/// @since 1.0.0
 public abstract class SignatureEcBc extends SignatureBinary {
 
   private final CryptoEllipticCurveBc curve;
@@ -26,14 +24,12 @@ public abstract class SignatureEcBc extends SignatureBinary {
 
   private BigInteger s;
 
-  /**
-   * The constructor.
-   *
-   * @param curve the {@link #getCurve() elliptic curve}.
-   * @param data the {@link #getData() binary data}.
-   * @param r - see {@link #getR()}.
-   * @param s - see {@link #getS()}.
-   */
+  /// The constructor.
+  ///
+  /// @param curve the [elliptic curve][#getCurve()].
+  /// @param data the [binary data][#getData()].
+  /// @param r - see [#getR()].
+  /// @param s - see [#getS()].
   public SignatureEcBc(CryptoEllipticCurveBc curve, byte[] data, BigInteger r, BigInteger s) {
 
     super(data);
@@ -42,12 +38,10 @@ public abstract class SignatureEcBc extends SignatureBinary {
     this.s = s;
   }
 
-  /**
-   * The constructor.
-   *
-   * @param curve the {@link #getCurve() elliptic curve}.
-   * @param data the {@link #getData() binary data}.
-   */
+  /// The constructor.
+  ///
+  /// @param curve the [elliptic curve][#getCurve()].
+  /// @param data the [binary data][#getData()].
   public SignatureEcBc(CryptoEllipticCurveBc curve, byte[] data) {
 
     super(data);
@@ -64,17 +58,13 @@ public abstract class SignatureEcBc extends SignatureBinary {
     }
   }
 
-  /**
-   * @return number of bytes reserved at the beginning (header) of the {@link #getData() binary} data.
-   */
+  /// @return number of bytes reserved at the beginning (header) of the [binary][#getData()] data.
   protected int getHead() {
 
     return 0;
   }
 
-  /**
-   * Initializes the internal fields like {@link #getR() r} and {@link #getS() s} from {@link #getData() binary data}.
-   */
+  /// Initializes the internal fields like [r][#getR()] and [s][#getS()] from [binary data][#getData()].
   protected void deserialize() {
 
     int len = this.data.length;
@@ -91,12 +81,10 @@ public abstract class SignatureEcBc extends SignatureBinary {
     this.s = new BigInteger(1, biData);
   }
 
-  /**
-   * @param head the number of bytes reserved at the beginning.
-   * @param r the value {@link #getR() r}.
-   * @param s the value {@link #getS() s}.
-   * @return the {@link #getData() binary data}.
-   */
+  /// @param head the number of bytes reserved at the beginning.
+  /// @param r the value [r][#getR()].
+  /// @param s the value [s][#getS()].
+  /// @return the [binary data][#getData()].
   protected static byte[] createData(int head, BigInteger r, BigInteger s) {
 
     byte[] rData = r.toByteArray();
@@ -123,52 +111,42 @@ public abstract class SignatureEcBc extends SignatureBinary {
     return data;
   }
 
-  /**
-   * @return r
-   */
+  /// @return r
   public BigInteger getR() {
 
     initRS();
     return this.r;
   }
 
-  /**
-   * @return s
-   */
+  /// @return s
   public BigInteger getS() {
 
     initRS();
     return this.s;
   }
 
-  /**
-   * @return the {@link CryptoEllipticCurveBc elliptic curve}.
-   */
+  /// @return the [elliptic curve][CryptoEllipticCurveBc].
   protected CryptoEllipticCurveBc getCurve() {
 
     return this.curve;
   }
 
-  /**
-   * @param message the payload (typically hash of message) that was signed when this signature was created.
-   * @param recoveryIndex the recovery index for public key recovery.
-   * @return the recovered public key.
-   */
+  /// @param message the payload (typically hash of message) that was signed when this signature was created.
+  /// @param recoveryIndex the recovery index for public key recovery.
+  /// @return the recovered public key.
   protected BCECPublicKey recoverPublicKey(byte[] message, byte recoveryIndex) {
 
     initRS();
     return recoverPublicKey(message, this.curve, this.r, this.s, recoveryIndex);
   }
 
-  /**
-   * @param message the payload (typically hash of message) that was signed when this signature was created.
-   * @param curve the {@link CryptoEllipticCurveBc elliptic curve}.
-   * @param r value {@link #getR() R}.
-   * @param s value {@link #getS() S}.
-   * @param publicKey the {@link BCECPublicKey public key} corresponding to the private key that was used to sign the
-   *        {@code message}.
-   * @return the {@link SignatureEcBcWithRecoveryId#getRecoveryIndex() recovery index}.
-   */
+  /// @param message the payload (typically hash of message) that was signed when this signature was created.
+  /// @param curve the [elliptic curve][CryptoEllipticCurveBc].
+  /// @param r value [R][#getR()].
+  /// @param s value [S][#getS()].
+  /// @param publicKey the [public key][BCECPublicKey] corresponding to the private key that was used to sign the
+  ///        `message`.
+  /// @return the [recovery index][SignatureEcBcWithRecoveryId#getRecoveryIndex()].
   protected static byte calculateRecoveryIndex(byte[] message, CryptoEllipticCurveBc curve, BigInteger r, BigInteger s,
       BCECPublicKey publicKey) {
 
@@ -188,15 +166,13 @@ public abstract class SignatureEcBc extends SignatureBinary {
     return recoveryIndex;
   }
 
-  /**
-   * @param message the payload (typically hash of message) that was signed when this signature was created.
-   * @param curve the {@link CryptoEllipticCurveBc elliptic curve}.
-   * @param r value {@link #getR() R}.
-   * @param s value {@link #getS() S}.
-   * @param recoveryIndex the {@link SignatureEcBcWithRecoveryId#getRecoveryIndex() recovery index} for public key
-   *        recovery.
-   * @return the recovered public key.
-   */
+  /// @param message the payload (typically hash of message) that was signed when this signature was created.
+  /// @param curve the [elliptic curve][CryptoEllipticCurveBc].
+  /// @param r value [R][#getR()].
+  /// @param s value [S][#getS()].
+  /// @param recoveryIndex the [recovery index][SignatureEcBcWithRecoveryId#getRecoveryIndex()] for public key
+  ///        recovery.
+  /// @return the recovered public key.
   protected static BCECPublicKey recoverPublicKey(byte[] message, CryptoEllipticCurveBc curve, BigInteger r,
       BigInteger s, byte recoveryIndex) {
 

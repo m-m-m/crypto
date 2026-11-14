@@ -13,26 +13,22 @@ import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPairFactory;
 import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPairFactorySimple;
 
-/**
- * Implementation of {@link AsymmetricKeyPairFactory} for {@link CryptoBinaryFormat#FORMAT_ENCODED encoded format}
- * based on {@link PKCS8EncodedKeySpec} and {@link X509EncodedKeySpec}.
- *
- * @param <PR> type of {@link PrivateKey}.
- * @param <PU> type of {@link PublicKey}.
- * @param <PAIR> type of {@link AsymmetricKeyPair}.
- * @since 1.0.0
- */
+/// Implementation of [AsymmetricKeyPairFactory] for [encoded format][CryptoBinaryFormat#FORMAT_ENCODED]
+/// based on [PKCS8EncodedKeySpec] and [X509EncodedKeySpec].
+///
+/// @param <PR> type of [PrivateKey].
+/// @param <PU> type of [PublicKey].
+/// @param <PAIR> type of [AsymmetricKeyPair].
+/// @since 1.0.0
 public class AsymmetricKeyPairFactoryEncoded<PR extends PrivateKey, PU extends PublicKey, PAIR extends AbstractAsymmetricKeyPair<PR, PU>>
     extends AbstractAsymmetricKeyPairFactory<PR, PU, PAIR> {
 
   private AsymmetricKeyPairFactorySimple<PR, PU, PAIR> keyPairCreator;
 
-  /**
-   * The constructor.
-   *
-   * @param keyFactory the {@link KeyFactory}.
-   * @param keyPairCreator the {@link AsymmetricKeyPairFactorySimple}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyFactory the [KeyFactory].
+  /// @param keyPairCreator the [AsymmetricKeyPairFactorySimple].
   public AsymmetricKeyPairFactoryEncoded(KeyFactory keyFactory,
       AsymmetricKeyPairFactorySimple<PR, PU, PAIR> keyPairCreator) {
 

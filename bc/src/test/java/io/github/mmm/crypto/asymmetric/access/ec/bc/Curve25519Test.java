@@ -12,15 +12,11 @@ import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.mmm.crypto.hash.HashConfig;
 import io.github.mmm.crypto.hash.sha2.Sha256;
 
-/**
- * Test of {@link Curve25519}.
- */
+/// Test of [Curve25519].
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class Curve25519Test extends AsymmetricAccessTest {
 
-  /**
-   * Test of {@link Curve25519#ofPlain(HashConfig)}.
-   */
+  /// Test of [Curve25519#ofPlain(HashConfig)].
   @Test
   void testCurve25519() {
 
@@ -67,11 +63,9 @@ public class Curve25519Test extends AsymmetricAccessTest {
     return 309;
   }
 
-  /**
-   * Test of {@link Curve25519#ofPlain(HashConfig)}.
-   *
-   * @throws Exception on error.
-   */
+  /// Test of [Curve25519#ofPlain(HashConfig)].
+  ///
+  /// @throws Exception on error.
   @Test
   void testCurve25519Sign() throws Exception {
 

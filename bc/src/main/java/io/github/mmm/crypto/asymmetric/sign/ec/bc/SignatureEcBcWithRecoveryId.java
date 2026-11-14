@@ -7,35 +7,31 @@ import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
 import io.github.mmm.crypto.asymmetric.access.ec.bc.CryptoEllipticCurveBc;
 import io.github.mmm.crypto.asymmetric.sign.SignatureWithPublicKeyRecovery;
 
-/**
- * {@link SignatureEcBc} with an extra byte for the {@link #getRecoveryId() recovery ID}. Allows to
- * {@link #recoverPublicKey(byte[]) recover} the {@link BCECPublicKey public key}. This enables to transfer only a
- * compact hash of the public key to save capacity. E.g. BitCoin uses this to transmit a BitCoin Address instead of the
- * actual public key.
- *
- * @since 1.0.0
- */
+/// [SignatureEcBc] with an extra byte for the [recovery ID][#getRecoveryId()]. Allows to
+/// [recover][#recoverPublicKey(byte[])] the [public key][BCECPublicKey]. This enables to transfer only a
+/// compact hash of the public key to save capacity. E.g. BitCoin uses this to transmit a BitCoin Address instead of the
+/// actual public key.
+///
+/// @since 1.0.0
 public class SignatureEcBcWithRecoveryId extends SignatureEcBc implements SignatureWithPublicKeyRecovery {
 
-  /** {@link #getRecoveryOffset() recovery offset} used for BitCoin. Nobody knows why this magic number was chosen. */
+  /// [recovery offset][#getRecoveryOffset()] used for BitCoin. Nobody knows why this magic number was chosen.
   public static final byte BITCOIN_RECOVERY_OFFSET = 27;
 
-  /** Additional {@link #getRecoveryOffset() recovery offset} used for BitCoin for compressed public key. */
+  /// Additional [recovery offset][#getRecoveryOffset()] used for BitCoin for compressed public key.
   public static final byte BITCOIN_COMPRESSED_OFFSET = 4;
 
   private static final int HEAD = 1;
 
   private final byte recoveryOffset;
 
-  /**
-   * The constructor.
-   *
-   * @param curve the {@link #getCurve() elliptic curve}.
-   * @param data the {@link #getData() binary data}.
-   * @param r - see {@link #getR()}.
-   * @param s - see {@link #getS()}.
-   * @param recoveryOffset the {@link #getRecoveryOffset() recovery offset}.
-   */
+  /// The constructor.
+  ///
+  /// @param curve the [elliptic curve][#getCurve()].
+  /// @param data the [binary data][#getData()].
+  /// @param r - see [#getR()].
+  /// @param s - see [#getS()].
+  /// @param recoveryOffset the [recovery offset][#getRecoveryOffset()].
   protected SignatureEcBcWithRecoveryId(CryptoEllipticCurveBc curve, byte[] data, BigInteger r, BigInteger s,
       byte recoveryOffset) {
 
@@ -43,13 +39,11 @@ public class SignatureEcBcWithRecoveryId extends SignatureEcBc implements Signat
     this.recoveryOffset = recoveryOffset;
   }
 
-  /**
-   * The constructor.
-   *
-   * @param curve the {@link #getCurve() elliptic curve}.
-   * @param data the {@link #getData() binary data}.
-   * @param recoveryOffset the {@link #getRecoveryOffset() recovery offset}.
-   */
+  /// The constructor.
+  ///
+  /// @param curve the [elliptic curve][#getCurve()].
+  /// @param data the [binary data][#getData()].
+  /// @param recoveryOffset the [recovery offset][#getRecoveryOffset()].
   public SignatureEcBcWithRecoveryId(CryptoEllipticCurveBc curve, byte[] data, byte recoveryOffset) {
 
     super(curve, data);
@@ -62,19 +56,14 @@ public class SignatureEcBcWithRecoveryId extends SignatureEcBc implements Signat
     return HEAD;
   }
 
-  /**
-   * @return the recovery ID containing the {@link #getRecoveryIndex() recovery index} and {@link #isCompressed()
-   *         compression} information.
-   */
+  /// @return the recovery ID containing the [recovery index][#getRecoveryIndex()] and [compression][#isCompressed()] information.
   public byte getRecoveryId() {
 
     return this.data[0];
   }
 
-  /**
-   * @return the index to {@link #recoverPublicKey(byte[]) recover the public key} from the signature. It is a value in
-   *         the range from {@code 0} to {@code 3}.
-   */
+  /// @return the index to [recover the public key][#recoverPublicKey(byte[])] from the signature. It is a value in
+  ///         the range from `0` to `3`.
   public byte getRecoveryIndex() {
 
     int recoveryIndex = this.data[0] - this.recoveryOffset;
@@ -82,27 +71,21 @@ public class SignatureEcBcWithRecoveryId extends SignatureEcBc implements Signat
     return (byte) recoveryIndex;
   }
 
-  /**
-   * @return the offset to add to the {@link #getRecoveryIndex() recovery index} for building the
-   *         {@link #getRecoveryId() recovery ID}.
-   */
+  /// @return the offset to add to the [recovery index][#getRecoveryIndex()] for building the
+  ///         [recovery ID][#getRecoveryId()].
   protected byte getRecoveryOffset() {
 
     return this.recoveryOffset;
   }
 
-  /**
-   * @return {@code true} if public key was compressed, {@code false} otherwise.
-   */
+  /// @return `true` if public key was compressed, `false` otherwise.
   public boolean isCompressed() {
 
     return (this.data[0] - this.recoveryOffset) >= BITCOIN_COMPRESSED_OFFSET;
   }
 
-  /**
-   * @param message the payload (typically hash of message) that was signed when this signature was created.
-   * @return the recovered public key.
-   */
+  /// @param message the payload (typically hash of message) that was signed when this signature was created.
+  /// @return the recovered public key.
   @Override
   public BCECPublicKey recoverPublicKey(byte[] message) {
 
@@ -114,15 +97,13 @@ public class SignatureEcBcWithRecoveryId extends SignatureEcBc implements Signat
         "Can not recover public key from signature. Most probably you did not provide the same playload as when creating the signature.");
   }
 
-  /**
-   * @param curve the {@link #getCurve() elliptic curve}.
-   * @param r the value {@link #getR() r}.
-   * @param s the value {@link #getS() s}.
-   * @param message the signed message (hash).
-   * @param publicKey the {@link BCECPublicKey} that was used to sign the message.
-   * @param recoveryOffset the {@link #getRecoveryOffset() recovery offset}.
-   * @return the signature.
-   */
+  /// @param curve the [elliptic curve][#getCurve()].
+  /// @param r the value [r][#getR()].
+  /// @param s the value [s][#getS()].
+  /// @param message the signed message (hash).
+  /// @param publicKey the [BCECPublicKey] that was used to sign the message.
+  /// @param recoveryOffset the [recovery offset][#getRecoveryOffset()].
+  /// @return the signature.
   public static SignatureEcBcWithRecoveryId of(CryptoEllipticCurveBc curve, BigInteger r, BigInteger s, byte[] message,
       BCECPublicKey publicKey, byte recoveryOffset) {
 

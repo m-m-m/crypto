@@ -2,12 +2,10 @@ package io.github.mmm.crypto.random;
 
 import java.security.SecureRandom;
 
-/**
- * Implementation of {@link RandomCreator}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [RandomCreator].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class RandomCreatorImpl implements RandomCreator {
 
   private final SecureRandom secureRandom;
@@ -16,14 +14,12 @@ public class RandomCreatorImpl implements RandomCreator {
 
   private int count;
 
-  /**
-   * The constructor.
-   *
-   * @param secureRandom the underlying {@link SecureRandom}.
-   * @param reseedCount the
-   *        {@link io.github.mmm.crypto.random.RandomConfig#getReseedCount() re-seed
-   *        count}.
-   */
+  /// The constructor.
+  ///
+  /// @param secureRandom the underlying [SecureRandom].
+  /// @param reseedCount the
+  ///        [re-seed
+        count][io.github.mmm.crypto.random.RandomConfig#getReseedCount()].
   public RandomCreatorImpl(SecureRandom secureRandom, int reseedCount) {
     super();
     this.secureRandom = secureRandom;

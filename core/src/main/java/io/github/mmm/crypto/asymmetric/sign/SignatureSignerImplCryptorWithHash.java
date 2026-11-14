@@ -5,24 +5,20 @@ import io.github.mmm.crypto.asymmetric.sign.generic.SignatureGeneric;
 import io.github.mmm.crypto.crypt.Encryptor;
 import io.github.mmm.crypto.hash.HashCreator;
 
-/**
- * Implementation of {@link SignatureSigner} combining a {@link Encryptor} with a
- * {@link HashCreator}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SignatureSigner] combining a [Encryptor] with a
+/// [HashCreator].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SignatureSignerImplCryptorWithHash extends SignatureProcessorImplWithHash
     implements SignatureSigner<SignatureBinary> {
 
   private final Encryptor encryptor;
 
-  /**
-   * The constructor.
-   *
-   * @param hashGenerator the {@link HashCreator} to apply as extension.
-   * @param encryptor the {@link Encryptor} to use.
-   */
+  /// The constructor.
+  ///
+  /// @param hashGenerator the [HashCreator] to apply as extension.
+  /// @param encryptor the [Encryptor] to use.
   public SignatureSignerImplCryptorWithHash(HashCreator hashGenerator, Encryptor encryptor) {
 
     super(hashGenerator);

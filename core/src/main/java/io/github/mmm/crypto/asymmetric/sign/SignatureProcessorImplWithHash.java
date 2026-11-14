@@ -4,36 +4,28 @@ import io.github.mmm.crypto.algorithm.AbstractSecurityAlgorithm;
 import io.github.mmm.crypto.algorithm.CryptoAlgorithm;
 import io.github.mmm.crypto.hash.HashCreator;
 
-/**
- * Implementation of {@link SignatureProcessor} combining a {@link SignatureSigner} with a
- * {@link HashCreator}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SignatureProcessor] combining a [SignatureSigner] with a
+/// [HashCreator].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class SignatureProcessorImplWithHash extends AbstractSecurityAlgorithm implements SignatureProcessor {
 
   private final HashCreator hashGenerator;
 
-  /**
-   * The constructor.
-   *
-   * @param hashGenerator the {@link HashCreator} to apply as extension.
-   */
+  /// The constructor.
+  ///
+  /// @param hashGenerator the [HashCreator] to apply as extension.
   public SignatureProcessorImplWithHash(HashCreator hashGenerator) {
 
     super();
     this.hashGenerator = hashGenerator;
   }
 
-  /**
-   * @return the {@link CryptoAlgorithm} to extend.
-   */
+  /// @return the [CryptoAlgorithm] to extend.
   protected abstract CryptoAlgorithm getSignatureAlgorithm();
 
-  /**
-   * @return the {@link HashCreator} to apply as extension.
-   */
+  /// @return the [HashCreator] to apply as extension.
   protected HashCreator getHashGenerator() {
 
     return this.hashGenerator;

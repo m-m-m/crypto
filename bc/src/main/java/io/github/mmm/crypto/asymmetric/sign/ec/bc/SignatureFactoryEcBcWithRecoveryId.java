@@ -6,12 +6,10 @@ import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
 
 import io.github.mmm.crypto.asymmetric.access.ec.bc.CryptoEllipticCurveBc;
 
-/**
- * Implementation of {@link io.github.mmm.crypto.asymmetric.sign.SignatureFactory} for
- * {@link SignatureEcBcWithRecoveryId}.
- *
- * @since 1.0.0
- */
+/// Implementation of [io.github.mmm.crypto.asymmetric.sign.SignatureFactory] for
+/// [SignatureEcBcWithRecoveryId].
+///
+/// @since 1.0.0
 public class SignatureFactoryEcBcWithRecoveryId extends SignatureFactoryEcBc<SignatureEcBcWithRecoveryId> {
 
   private static final byte DEFAULT_RECOVERY_OFFSET = (byte) (SignatureEcBcWithRecoveryId.BITCOIN_RECOVERY_OFFSET
@@ -19,22 +17,18 @@ public class SignatureFactoryEcBcWithRecoveryId extends SignatureFactoryEcBc<Sig
 
   private final byte recoveryOffset;
 
-  /**
-   * The constructor.
-   *
-   * @param curve the {@link CryptoEllipticCurveBc elliptic curve}.
-   */
+  /// The constructor.
+  ///
+  /// @param curve the [elliptic curve][CryptoEllipticCurveBc].
   public SignatureFactoryEcBcWithRecoveryId(CryptoEllipticCurveBc curve) {
 
     this(curve, DEFAULT_RECOVERY_OFFSET);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param curve the {@link CryptoEllipticCurveBc elliptic curve}.
-   * @param recoveryOffset the {@link SignatureEcBcWithRecoveryId#getRecoveryOffset() recovery offset}.
-   */
+  /// The constructor.
+  ///
+  /// @param curve the [elliptic curve][CryptoEllipticCurveBc].
+  /// @param recoveryOffset the [recovery offset][SignatureEcBcWithRecoveryId#getRecoveryOffset()].
   public SignatureFactoryEcBcWithRecoveryId(CryptoEllipticCurveBc curve, byte recoveryOffset) {
 
     super(curve);

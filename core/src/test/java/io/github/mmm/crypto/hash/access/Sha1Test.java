@@ -4,12 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import io.github.mmm.crypto.hash.sha1.Sha1;
 
-/**
- * Test of {@link Sha1}.
- */
+/// Test of [Sha1].
 public class Sha1Test extends HashAccessTest {
 
-  /** Test of {@link Sha1#of()}. */
+  /// Test of [Sha1#of()].
   @Test
   void testSingle() {
 

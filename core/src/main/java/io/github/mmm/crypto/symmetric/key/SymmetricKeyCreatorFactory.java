@@ -3,17 +3,14 @@ package io.github.mmm.crypto.symmetric.key;
 import io.github.mmm.crypto.AbstractCryptoFactory;
 import io.github.mmm.crypto.key.KeyCreatorFactory;
 
-/**
- * Interface for a {@link AbstractCryptoFactory factory} to {@link #newKeyCreator() create} instances of
- * {@link SymmetricKeyCreator} for symmetric cryptographic keys.<br>
- * An instance of {@link SymmetricKeyCreatorFactory} therefore represents a configuration with specific
- * {@link java.security.Key} {@link java.security.Key#getAlgorithm() algorithm} and {@link java.security.Key#getFormat()
- * format}(s).
- *
- * @param <C> type of {@link SymmetricKeyCreator}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Interface for a [factory][AbstractCryptoFactory] to [create][#newKeyCreator()] instances of
+/// [SymmetricKeyCreator] for symmetric cryptographic keys.
+/// An instance of [SymmetricKeyCreatorFactory] therefore represents a configuration with specific
+/// [java.security.Key] [algorithm][java.security.Key#getAlgorithm()] and [format][java.security.Key#getFormat()](s).
+///
+/// @param <C> type of [SymmetricKeyCreator].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public interface SymmetricKeyCreatorFactory<C extends SymmetricKeyCreator<?>> extends KeyCreatorFactory {
 
   @Override

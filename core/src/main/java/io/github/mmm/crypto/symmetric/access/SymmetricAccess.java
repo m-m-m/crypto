@@ -19,14 +19,12 @@ import io.github.mmm.crypto.symmetric.key.SymmetricKeyCreator;
 import io.github.mmm.crypto.symmetric.key.SymmetricKeyCreatorFactory;
 import io.github.mmm.crypto.symmetric.key.SymmetricKeyCreatorImpl;
 
-/**
- * Abstract base implementation of factory for {@link SymmetricKeyCreator key management} and
- * {@link SymmetricCryptorFactory encryption/decryption} based on
- * {@link io.github.mmm.crypto.symmetric.key.SymmetricKey symmetric} cryptography.
- *
- * @param <K> type of {@link SecretKey}.
- * @since 1.0.0
- */
+/// Abstract base implementation of factory for [key management][SymmetricKeyCreator] and
+/// [encryption/decryption][SymmetricCryptorFactory] based on
+/// [symmetric][io.github.mmm.crypto.symmetric.key.SymmetricKey] cryptography.
+///
+/// @param <K> type of [SecretKey].
+/// @since 1.0.0
 public abstract class SymmetricAccess<K extends SecretKey> extends CryptoAccess implements
     SymmetricKeyCreatorFactory<SymmetricKeyCreator<K>>, SymmetricCryptorFactory<K>, AbstractGetKeyLength {
 
@@ -38,12 +36,10 @@ public abstract class SymmetricAccess<K extends SecretKey> extends CryptoAccess 
 
   private SymmetricKeyCreator<K> keyCreator;
 
-  /**
-   * The constructor.
-   *
-   * @param keyConfig the {@link SymmetricKeyConfig}.
-   * @param cryptorConfig the {@link CryptorConfig}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyConfig the [SymmetricKeyConfig].
+  /// @param cryptorConfig the [CryptorConfig].
   public SymmetricAccess(SymmetricKeyConfig keyConfig, CryptorConfig cryptorConfig) {
 
     super();
@@ -67,17 +63,13 @@ public abstract class SymmetricAccess<K extends SecretKey> extends CryptoAccess 
     return this.keyCreator;
   }
 
-  /**
-   * @return the {@link SymmetricKeyConfig}.
-   */
+  /// @return the [SymmetricKeyConfig].
   public SymmetricKeyConfig getKeyConfig() {
 
     return this.keyConfig;
   }
 
-  /**
-   * @return the {@link CryptorConfig}.
-   */
+  /// @return the [CryptorConfig].
   public CryptorConfig getCryptorConfig() {
 
     return this.cryptorConfig;

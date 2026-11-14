@@ -25,30 +25,27 @@ import io.github.mmm.crypto.hash.HashFactory;
 import io.github.mmm.crypto.hash.access.HashAccess;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Abstract base implementation of factory for {@link AsymmetricKeyCreator key management},
- * {@link AsymmetricCryptorFactory encryption/decryption}, and {@link SignatureProcessorFactory
- * signature management} based on {@link io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPair asymmetric}
- * cryptography.
- *
- * @param <S> type of {@link SignatureBinary}.
- * @param <PR> type of {@link PrivateKey}.
- * @param <PU> type of {@link PublicKey}.
- * @param <PAIR> type of {@link AsymmetricKeyPair}.
- * @param <KC> type of {@link AsymmetricKeyCreator}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Abstract base implementation of factory for [key management][AsymmetricKeyCreator],
+/// [encryption/decryption][AsymmetricCryptorFactory], and [signature management][SignatureProcessorFactory] based on [asymmetric][io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPair]
+/// cryptography.
+///
+/// @param <S> type of [SignatureBinary].
+/// @param <PR> type of [PrivateKey].
+/// @param <PU> type of [PublicKey].
+/// @param <PAIR> type of [AsymmetricKeyPair].
+/// @param <KC> type of [AsymmetricKeyCreator].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class AsymmetricAccess<S extends SignatureBinary, PR extends PrivateKey, PU extends PublicKey, PAIR extends AsymmetricKeyPair<PR, PU>, KC extends AsymmetricKeyCreator<PR, PU, PAIR>>
     extends CryptoAccess implements AsymmetricKeyCreatorFactory<KC>, AsymmetricCryptorFactory<PR, PU>,
     SignatureProcessorFactory<S, PR, PU>, HashFactory {
 
-  /** The {@link AsymmetricCryptorConfig}. */
+  /// The [AsymmetricCryptorConfig].
   protected final AsymmetricCryptorConfig<PR, PU> cryptorConfig;
 
   private final SignatureConfig<S> signatureConfig;
 
-  /** The {@link RandomFactory}. */
+  /// The [RandomFactory].
   protected final RandomFactory randomFactory;
 
   private final SignatureProcessorFactory<S, PR, PU> signatureFactory;
@@ -57,27 +54,23 @@ public abstract class AsymmetricAccess<S extends SignatureBinary, PR extends Pri
 
   private KC keyCreator;
 
-  /**
-   * The constructor.
-   *
-   * @param signatureConfig the {@link SignatureConfig}.
-   * @param cryptorConfig the {@link AsymmetricCryptorConfig}.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param signatureConfig the [SignatureConfig].
+  /// @param cryptorConfig the [AsymmetricCryptorConfig].
+  /// @param randomFactory the [RandomFactory].
   public AsymmetricAccess(SignatureConfig<S> signatureConfig, AsymmetricCryptorConfig<PR, PU> cryptorConfig,
       RandomFactory randomFactory) {
 
     this(signatureConfig, null, cryptorConfig, randomFactory);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param signatureConfig the {@link SignatureConfig}.
-   * @param signatureFactory the {@link SignatureProcessorFactory}.
-   * @param cryptorConfig the {@link AsymmetricCryptorConfig}.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param signatureConfig the [SignatureConfig].
+  /// @param signatureFactory the [SignatureProcessorFactory].
+  /// @param cryptorConfig the [AsymmetricCryptorConfig].
+  /// @param randomFactory the [RandomFactory].
   public AsymmetricAccess(SignatureConfig<S> signatureConfig, SignatureProcessorFactory<S, PR, PU> signatureFactory,
       AsymmetricCryptorConfig<PR, PU> cryptorConfig, RandomFactory randomFactory) {
 
@@ -93,17 +86,13 @@ public abstract class AsymmetricAccess<S extends SignatureBinary, PR extends Pri
     this.hashFactory = new HashAccess(signatureConfig.getHashConfig());
   }
 
-  /**
-   * @return the {@link SignatureConfig}.
-   */
+  /// @return the [SignatureConfig].
   public SignatureConfig<S> getSignatureConfig() {
 
     return this.signatureConfig;
   }
 
-  /**
-   * @return the {@link AsymmetricCryptorConfig}.
-   */
+  /// @return the [AsymmetricCryptorConfig].
   public AsymmetricCryptorConfig<PR, PU> getCryptorConfig() {
 
     return this.cryptorConfig;

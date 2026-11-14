@@ -7,19 +7,15 @@ import org.bouncycastle.math.ec.ECPoint;
 import io.github.mmm.crypto.CryptoBinaryFormat;
 import io.github.mmm.crypto.asymmetric.key.AbstractAsymmetricKeyPairFactory;
 
-/**
- * Implementation of {@link AbstractAsymmetricKeyPairFactory} for EC using BouncyCastle in
- * {@link CryptoBinaryFormat#FORMAT_COMPACT compact format}.
- *
- * @since 1.0.0
- */
+/// Implementation of [AbstractAsymmetricKeyPairFactory] for EC using BouncyCastle in
+/// [compact format][CryptoBinaryFormat#FORMAT_COMPACT].
+///
+/// @since 1.0.0
 public class AsymmetricKeyPairFactoryEcBcUncompressed extends AsymmetricKeyPairFactoryEcBc {
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
   public AsymmetricKeyPairFactoryEcBcUncompressed(ECParameterSpec ecParameters) {
 
     super(ecParameters);

@@ -5,22 +5,18 @@ import java.util.Objects;
 import io.github.mmm.crypto.CryptoConfig;
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * Configuration for {@link CertificateCreator}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Configuration for [CertificateCreator].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class CertificateConfig extends CryptoConfig {
 
   private final String type;
 
-  /**
-   * The constructor.
-   *
-   * @param type the {@link #getType() type}.
-   * @param provider the {@link #getProvider() provider}.
-   */
+  /// The constructor.
+  ///
+  /// @param type the [type][#getType()].
+  /// @param provider the [provider][#getProvider()].
   public CertificateConfig(String type, SecurityProvider provider) {
 
     super(provider);
@@ -28,10 +24,7 @@ public class CertificateConfig extends CryptoConfig {
     this.type = type;
   }
 
-  /**
-   * @return type the {@link javax.security.cert.Certificate} {@link java.security.cert.CertificateFactory#getType()
-   *         type}.
-   */
+  /// @return type the [javax.security.cert.Certificate] [type][java.security.cert.CertificateFactory#getType()].
   public String getType() {
 
     return this.type;

@@ -3,27 +3,22 @@ package io.github.mmm.crypto.crypt;
 import io.github.mmm.crypto.algorithm.CryptoAlgorithmConfig;
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * Class of an {@link CryptoAlgorithmConfig algorithm configuration} for
- * {@link Encryptor#crypt(byte[], boolean) encryption} and {@link Decryptor#crypt(byte[], boolean)
- * decryption}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Class of an [algorithm configuration][CryptoAlgorithmConfig] for
+/// [encryption][Encryptor#crypt(byte[], boolean)] and [decryption][Decryptor#crypt(byte[], boolean)].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class CryptorConfig extends CryptoAlgorithmConfig implements AbstractGetNonceSize {
 
   private final CipherTransformation transformation;
 
   private final int nonceSize;
 
-  /**
-   * The constructor.
-   *
-   * @param transformation the {@link #getTransformation() transfomation} for the {@link javax.crypto.Cipher}.
-   * @param provider the {@link SecurityProvider}.
-   * @param nonceSize the {@link #getNonceSize() nonce size}.
-   */
+  /// The constructor.
+  ///
+  /// @param transformation the [transfomation][#getTransformation()] for the [javax.crypto.Cipher].
+  /// @param provider the [SecurityProvider].
+  /// @param nonceSize the [nonce size][#getNonceSize()].
   public CryptorConfig(CipherTransformation transformation, SecurityProvider provider, int nonceSize) {
 
     super(transformation.getTransformation(), provider);
@@ -31,22 +26,17 @@ public class CryptorConfig extends CryptoAlgorithmConfig implements AbstractGetN
     this.nonceSize = nonceSize;
   }
 
-  /**
-   * @return the {@link CipherTransformation}.
-   */
+  /// @return the [CipherTransformation].
   public CipherTransformation getTransformation() {
 
     return this.transformation;
   }
 
-  /**
-   * This method returns {@code false} by default. You may override this method to create a random nonce individually
-   * but only if you know exactly what you are doing and what are the details about the cryptographic algorithm.
-   *
-   * @return {@code true} if the {@link #getNonceSize() nonce} should be created individually from
-   *         {@link java.security.SecureRandom}, {@code false} to get from {@link javax.crypto.Cipher#getIV()
-   *         initialization vector}.
-   */
+  /// This method returns `false` by default. You may override this method to create a random nonce individually
+  /// but only if you know exactly what you are doing and what are the details about the cryptographic algorithm.
+  ///
+  /// @return `true` if the [nonce][#getNonceSize()] should be created individually from
+  ///         [java.security.SecureRandom], `false` to get from [initialization vector][javax.crypto.Cipher#getIV()].
   public boolean isCreateRandomNonce() {
 
     return false;

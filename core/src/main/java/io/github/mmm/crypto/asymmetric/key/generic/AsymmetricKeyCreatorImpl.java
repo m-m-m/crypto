@@ -13,30 +13,26 @@ import io.github.mmm.crypto.key.KeyCreator;
 import io.github.mmm.crypto.provider.SecurityProvider;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * Generic implementation of {@link KeyCreator}. If available you should prefer implementations for specific
- * algorithms according {@code SecurityAccess*} classes (e.g.
- * {@link io.github.mmm.crypto.asymmetric.access.rsa.Rsa}).
- *
- * @param <PR> type of {@link PrivateKey}.
- * @param <PU> type of {@link PublicKey}.
- * @param <PAIR> type of {@link AsymmetricKeyPair}.
- * @since 1.0.0
- */
+/// Generic implementation of [KeyCreator]. If available you should prefer implementations for specific
+/// algorithms according `SecurityAccess*` classes (e.g.
+/// [io.github.mmm.crypto.asymmetric.access.rsa.Rsa]).
+///
+/// @param <PR> type of [PrivateKey].
+/// @param <PU> type of [PublicKey].
+/// @param <PAIR> type of [AsymmetricKeyPair].
+/// @since 1.0.0
 public class AsymmetricKeyCreatorImpl<PR extends PrivateKey, PU extends PublicKey, PAIR extends AbstractAsymmetricKeyPair<PR, PU>>
     extends AbstractAsymmetricKeyCreator<PR, PU, PAIR> {
 
   private final AsymmetricKeyPairFactorySimple<PR, PU, PAIR> keyPairFactory;
 
-  /**
-   * The constructor.
-   *
-   * @param keyFactory the {@link KeyFactory}.
-   * @param keyLength the {@link #getKeyLength() key length}.
-   * @param provider the security {@link SecurityProvider}.
-   * @param keyPairFactory the {@link AsymmetricKeyPairFactorySimple}.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param keyFactory the [KeyFactory].
+  /// @param keyLength the [key length][#getKeyLength()].
+  /// @param provider the security [SecurityProvider].
+  /// @param keyPairFactory the [AsymmetricKeyPairFactorySimple].
+  /// @param randomFactory the [RandomFactory].
   public AsymmetricKeyCreatorImpl(KeyFactory keyFactory, int keyLength, SecurityProvider provider,
       AsymmetricKeyPairFactorySimple<PR, PU, PAIR> keyPairFactory, RandomFactory randomFactory) {
 
@@ -62,35 +58,29 @@ public class AsymmetricKeyCreatorImpl<PR extends PrivateKey, PU extends PublicKe
     return getKeyLength();
   }
 
-  /**
-   * @param algorithm the {@link #getAlgorithm() algorithm}.
-   * @param keyLength the {@link #getKeyLength() key length}.
-   * @return the {@link AsymmetricKeyCreator}.
-   */
+  /// @param algorithm the [algorithm][#getAlgorithm()].
+  /// @param keyLength the [key length][#getKeyLength()].
+  /// @return the [AsymmetricKeyCreator].
   public static AsymmetricKeyCreator<PrivateKey, PublicKey, AsymmetricKeyPairGeneric> of(String algorithm, int keyLength) {
 
     return of(algorithm, keyLength, null, null);
   }
 
-  /**
-   * @param algorithm the {@link #getAlgorithm() algorithm}.
-   * @param keyLength the {@link #getKeyLength() key length}.
-   * @param randomFactory the {@link RandomFactory}.
-   * @return the {@link AsymmetricKeyCreator}.
-   */
+  /// @param algorithm the [algorithm][#getAlgorithm()].
+  /// @param keyLength the [key length][#getKeyLength()].
+  /// @param randomFactory the [RandomFactory].
+  /// @return the [AsymmetricKeyCreator].
   public static AsymmetricKeyCreator<PrivateKey, PublicKey, AsymmetricKeyPairGeneric> of(String algorithm, int keyLength,
       RandomFactory randomFactory) {
 
     return of(algorithm, keyLength, null, randomFactory);
   }
 
-  /**
-   * @param algorithm the {@link #getAlgorithm() algorithm}.
-   * @param keyLength the {@link #getKeyLength() key length}.
-   * @param provider the {@link SecurityProvider}.
-   * @param randomFactory the {@link RandomFactory}.
-   * @return the {@link AsymmetricKeyCreator}.
-   */
+  /// @param algorithm the [algorithm][#getAlgorithm()].
+  /// @param keyLength the [key length][#getKeyLength()].
+  /// @param provider the [SecurityProvider].
+  /// @param randomFactory the [RandomFactory].
+  /// @return the [AsymmetricKeyCreator].
   public static AsymmetricKeyCreator<PrivateKey, PublicKey, AsymmetricKeyPairGeneric> of(String algorithm, int keyLength,
       SecurityProvider provider, RandomFactory randomFactory) {
 

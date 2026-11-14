@@ -7,21 +7,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Generic implementation of {@link CertificatePath}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Generic implementation of [CertificatePath].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class CertificatePathGeneric implements CertificatePath {
 
   private final List<Certificate> certificates;
 
-  /**
-   * The constructor.
-   *
-   * @param certificates the {@link #getCertificates() certificates}.
-   */
+  /// The constructor.
+  ///
+  /// @param certificates the [certificates][#getCertificates()].
   public CertificatePathGeneric(Collection<Certificate> certificates) {
 
     super();
@@ -34,11 +30,9 @@ public class CertificatePathGeneric implements CertificatePath {
     this.certificates = Collections.unmodifiableList(certificateList);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param certificates the {@link #getCertificates() certificates}.
-   */
+  /// The constructor.
+  ///
+  /// @param certificates the [certificates][#getCertificates()].
   public CertificatePathGeneric(Certificate... certificates) {
 
     super();

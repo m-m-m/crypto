@@ -6,24 +6,20 @@ import java.security.SignatureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Implementation of {@link SignatureVerifier}.
- *
- * @param <S> type of {@link SignatureBinary}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SignatureVerifier].
+///
+/// @param <S> type of [SignatureBinary].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SignatureVerifierImpl<S extends SignatureBinary> extends SignatureProcessorImpl
     implements SignatureVerifier<S> {
 
-  /** Logger instance. */
+  /// Logger instance.
   private static final Logger LOG = LoggerFactory.getLogger(SignatureVerifierImpl.class);
 
-  /**
-   * The constructor.
-   *
-   * @param signature the underlying {@link Signature}.
-   */
+  /// The constructor.
+  ///
+  /// @param signature the underlying [Signature].
   public SignatureVerifierImpl(Signature signature) {
 
     super(signature);

@@ -4,18 +4,14 @@ package io.github.mmm.crypto;
 
 import io.github.mmm.binary.BinaryType;
 
-/**
- * {@link BinaryType} for security content such as {@link io.github.mmm.crypto.hash.Hash},
- * {@link io.github.mmm.crypto.asymmetric.sign.SignatureBinary}, encrypted data, serialized {@link java.security.Key}s,
- * etc.
- */
+/// [BinaryType] for security content such as [io.github.mmm.crypto.hash.Hash],
+/// [io.github.mmm.crypto.asymmetric.sign.SignatureBinary], encrypted data, serialized [java.security.Key]s,
+/// etc.
 public class CryptoBinary extends BinaryType {
 
-  /**
-   * The constructor.
-   *
-   * @param data the raw binary {@link #getData() data}.
-   */
+  /// The constructor.
+  ///
+  /// @param data the raw binary [data][#getData()].
   public CryptoBinary(byte[] data) {
 
     super(data);

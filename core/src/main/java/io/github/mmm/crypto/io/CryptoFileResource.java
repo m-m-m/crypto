@@ -8,21 +8,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 
-/**
- * Implementation of {@link CryptoResource} for a {@link File}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [CryptoResource] for a [File].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class CryptoFileResource implements CryptoResource {
 
   private final File file;
 
-  /**
-   * The constructor.
-   *
-   * @param file the {@link File} pointing to the data resource.
-   */
+  /// The constructor.
+  ///
+  /// @param file the [File] pointing to the data resource.
   public CryptoFileResource(File file) {
 
     super();
@@ -30,9 +26,7 @@ public class CryptoFileResource implements CryptoResource {
     verifyNotDirectory();
   }
 
-  /**
-   * @return the wrapped {@link File}.
-   */
+  /// @return the wrapped [File].
   public File getFile() {
 
     return this.file;

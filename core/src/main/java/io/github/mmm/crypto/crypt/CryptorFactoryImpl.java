@@ -8,28 +8,22 @@ import io.github.mmm.crypto.algorithm.AbstractCryptoAlgorithmWithRandom;
 import io.github.mmm.crypto.provider.SecurityProvider;
 import io.github.mmm.crypto.random.RandomFactory;
 
-/**
- * The implementation of {@link CryptorFactory} based on {@link Cipher}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// The implementation of [CryptorFactory] based on [Cipher].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class CryptorFactoryImpl extends AbstractCryptoAlgorithmWithRandom implements CryptorFactory {
 
-  /**
-   * The constructor.
-   *
-   * @param provider the security {@link SecurityProvider}.
-   * @param randomFactory the {@link RandomFactory}.
-   */
+  /// The constructor.
+  ///
+  /// @param provider the security [SecurityProvider].
+  /// @param randomFactory the [RandomFactory].
   public CryptorFactoryImpl(SecurityProvider provider, RandomFactory randomFactory) {
 
     super(provider, randomFactory);
   }
 
-  /**
-   * @return the {@link CryptorConfig}.
-   */
+  /// @return the [CryptorConfig].
   public abstract CryptorConfig getConfig();
 
   @Override

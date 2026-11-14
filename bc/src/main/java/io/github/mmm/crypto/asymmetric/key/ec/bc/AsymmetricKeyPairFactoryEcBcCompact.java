@@ -6,18 +6,14 @@ import org.bouncycastle.math.ec.ECPoint;
 
 import io.github.mmm.crypto.CryptoBinaryFormat;
 
-/**
- * Implementation of {@link AsymmetricKeyPairFactoryEcBc} in {@link CryptoBinaryFormat#FORMAT_COMPACT compact format}.
- *
- * @since 1.0.0
- */
+/// Implementation of [AsymmetricKeyPairFactoryEcBc] in [compact format][CryptoBinaryFormat#FORMAT_COMPACT].
+///
+/// @since 1.0.0
 public class AsymmetricKeyPairFactoryEcBcCompact extends AsymmetricKeyPairFactoryEcBc {
 
-  /**
-   * The constructor.
-   *
-   * @param ecParameters the {@link ECParameterSpec}.
-   */
+  /// The constructor.
+  ///
+  /// @param ecParameters the [ECParameterSpec].
   public AsymmetricKeyPairFactoryEcBcCompact(ECParameterSpec ecParameters) {
 
     super(ecParameters);

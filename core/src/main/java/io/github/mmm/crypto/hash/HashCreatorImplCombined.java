@@ -5,21 +5,17 @@ import java.security.MessageDigest;
 
 import io.github.mmm.crypto.algorithm.AbstractSecurityAlgorithm;
 
-/**
- * This is a simple implementation of {@link HashCreator} that only wraps {@link MessageDigest}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// This is a simple implementation of [HashCreator] that only wraps [MessageDigest].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class HashCreatorImplCombined extends AbstractSecurityAlgorithm implements HashCreator {
 
   private final HashCreator[] generators;
 
-  /**
-   * The constructor.
-   *
-   * @param generators the {@link HashCreator}s to combine sequentially.
-   */
+  /// The constructor.
+  ///
+  /// @param generators the [HashCreator]s to combine sequentially.
   public HashCreatorImplCombined(HashCreator[] generators) {
     super();
     this.generators = generators;

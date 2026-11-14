@@ -4,21 +4,17 @@ import java.util.Objects;
 
 import javax.crypto.SecretKey;
 
-/**
- * Generic implementation of {@link SymmetricKey}.
- *
- * @param <K> type of {@link SecretKey}.
- * @since 1.0.0
- */
+/// Generic implementation of [SymmetricKey].
+///
+/// @param <K> type of [SecretKey].
+/// @since 1.0.0
 public class SymmetricKeyGeneric<K extends SecretKey> implements SymmetricKey<K> {
 
   private final K key;
 
-  /**
-   * The constructor.
-   *
-   * @param key the {@link SecretKey}.
-   */
+  /// The constructor.
+  ///
+  /// @param key the [SecretKey].
   public SymmetricKeyGeneric(K key) {
 
     super();

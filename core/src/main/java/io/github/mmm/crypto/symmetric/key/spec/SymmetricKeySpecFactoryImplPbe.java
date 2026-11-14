@@ -6,14 +6,12 @@ import javax.crypto.spec.PBEKeySpec;
 
 import io.github.mmm.crypto.symmetric.key.SymmetricKeySpecFactory;
 
-/**
- * Implementation of {@link SymmetricKeySpecFactory} for PBE ({@link PBEKeySpec}). For sufficient security
- * strength you should use a salt of {@code 20} bytes, a {@link #getKeyLength() key length} of {@code 256} bits (never
- * use less than {@code 128} bits) and a high number of iterations (e.g. {@code 65536}).
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Implementation of [SymmetricKeySpecFactory] for PBE ([PBEKeySpec]). For sufficient security
+/// strength you should use a salt of `20` bytes, a [key length][#getKeyLength()] of `256` bits (never
+/// use less than `128` bits) and a high number of iterations (e.g. `65536`).
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SymmetricKeySpecFactoryImplPbe implements SymmetricKeySpecFactory {
 
   private byte[] salt;
@@ -22,42 +20,34 @@ public class SymmetricKeySpecFactoryImplPbe implements SymmetricKeySpecFactory {
 
   private int keyLength;
 
-  /**
-   * The constructor.
-   */
+  /// The constructor.
   public SymmetricKeySpecFactoryImplPbe() {
 
     this(null, 0, 0);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param salt the {@link PBEKeySpec#getSalt() salt} or {@code null} for no salting.
-   */
+  /// The constructor.
+  ///
+  /// @param salt the [salt][PBEKeySpec#getSalt()] or `null` for no salting.
   public SymmetricKeySpecFactoryImplPbe(byte[] salt) {
 
     this(salt, 0, 0);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param salt the {@link PBEKeySpec#getSalt() salt} or {@code null} for no salting.
-   * @param iterationCount the {@link #getIterationCount() iteration count}.
-   */
+  /// The constructor.
+  ///
+  /// @param salt the [salt][PBEKeySpec#getSalt()] or `null` for no salting.
+  /// @param iterationCount the [iteration count][#getIterationCount()].
   public SymmetricKeySpecFactoryImplPbe(byte[] salt, int iterationCount) {
 
     this(salt, iterationCount, 0);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param salt the {@link PBEKeySpec#getSalt() salt} or {@code null} for no salting.
-   * @param iterationCount the {@link #getIterationCount() iteration count}.
-   * @param keyLength the {@link #getKeyLength() key length}.
-   */
+  /// The constructor.
+  ///
+  /// @param salt the [salt][PBEKeySpec#getSalt()] or `null` for no salting.
+  /// @param iterationCount the [iteration count][#getIterationCount()].
+  /// @param keyLength the [key length][#getKeyLength()].
   public SymmetricKeySpecFactoryImplPbe(byte[] salt, int iterationCount, int keyLength) {
     super();
     if (iterationCount < 0) {
@@ -93,17 +83,13 @@ public class SymmetricKeySpecFactoryImplPbe implements SymmetricKeySpecFactory {
     }
   }
 
-  /**
-   * @return the {@link PBEKeySpec#getIterationCount() iteration count} or {@code 0} for no iterations.
-   */
+  /// @return the [iteration count][PBEKeySpec#getIterationCount()] or `0` for no iterations.
   public int getIterationCount() {
 
     return this.iterationCount;
   }
 
-  /**
-   * @return the {@link PBEKeySpec#getKeyLength() key length} in bits or {@code 0} if unspecified (to use defaults).
-   */
+  /// @return the [key length][PBEKeySpec#getKeyLength()] in bits or `0` if unspecified (to use defaults).
   public int getKeyLength() {
 
     return this.keyLength;

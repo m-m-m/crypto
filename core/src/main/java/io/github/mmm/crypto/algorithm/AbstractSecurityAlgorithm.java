@@ -2,27 +2,21 @@ package io.github.mmm.crypto.algorithm;
 
 import java.security.InvalidKeyException;
 
-/**
- * The abstract base implementation of {@link CryptoAlgorithm}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// The abstract base implementation of [CryptoAlgorithm].
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class AbstractSecurityAlgorithm implements CryptoAlgorithm {
 
-  /**
-   * The constructor.
-   */
+  /// The constructor.
   public AbstractSecurityAlgorithm() {
 
     super();
   }
 
-  /**
-   * @param algorithms the combined algorithms.
-   * @return the combined algorithm {@link String}.
-   * @see #getAlgorithm()
-   */
+  /// @param algorithms the combined algorithms.
+  /// @return the combined algorithm [String].
+  /// @see #getAlgorithm()
   protected static String getAlgorithm(CryptoAlgorithm[] algorithms) {
 
     StringBuilder buffer = new StringBuilder();
@@ -35,43 +29,35 @@ public abstract class AbstractSecurityAlgorithm implements CryptoAlgorithm {
     return buffer.toString();
   }
 
-  /**
-   * @param cause the {@link Exception#getCause() cause} of the error.
-   * @param objectType the type of the object that could not be created.
-   * @return the wrapped {@link RuntimeException}.
-   */
+  /// @param cause the [cause][Exception#getCause()] of the error.
+  /// @param objectType the type of the object that could not be created.
+  /// @return the wrapped [RuntimeException].
   protected RuntimeException creationFailedException(Exception cause, Class<?> objectType) {
 
     return creationFailedException(cause, objectType.getSimpleName());
   }
 
-  /**
-   * @param cause the {@link Exception#getCause() cause} of the error.
-   * @param objectType the type of the object that could not be created.
-   * @return the wrapped {@link RuntimeException}.
-   */
+  /// @param cause the [cause][Exception#getCause()] of the error.
+  /// @param objectType the type of the object that could not be created.
+  /// @return the wrapped [RuntimeException].
   protected RuntimeException creationFailedException(Exception cause, String objectType) {
 
     return creationFailedException(cause, objectType, getAlgorithm());
   }
 
-  /**
-   * @param cause the {@link Exception#getCause() cause} of the error.
-   * @param objectType the type of the object that could not be created.
-   * @param variant the {@link #getAlgorithm() algorithm} or type.
-   * @return the wrapped {@link RuntimeException}.
-   */
+  /// @param cause the [cause][Exception#getCause()] of the error.
+  /// @param objectType the type of the object that could not be created.
+  /// @param variant the [algorithm][#getAlgorithm()] or type.
+  /// @return the wrapped [RuntimeException].
   public static RuntimeException creationFailedException(Exception cause, Class<?> objectType, String variant) {
 
     return creationFailedException(cause, objectType.getSimpleName(), variant);
   }
 
-  /**
-   * @param cause the {@link Exception#getCause() cause} of the error.
-   * @param objectType the type of the object that could not be created.
-   * @param variant the {@link #getAlgorithm() algorithm} or type.
-   * @return the wrapped {@link RuntimeException}.
-   */
+  /// @param cause the [cause][Exception#getCause()] of the error.
+  /// @param objectType the type of the object that could not be created.
+  /// @param variant the [algorithm][#getAlgorithm()] or type.
+  /// @return the wrapped [RuntimeException].
   public static RuntimeException creationFailedException(Exception cause, String objectType, String variant) {
 
     String suffix = "";

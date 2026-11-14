@@ -2,14 +2,12 @@ package io.github.mmm.crypto.asymmetric.sign.generic;
 
 import io.github.mmm.crypto.asymmetric.sign.SignatureFactory;
 
-/**
- * Implementation of {@link SignatureFactory} for {@link SignatureGeneric}.
- *
- * @since 1.0.0
- */
+/// Implementation of [SignatureFactory] for [SignatureGeneric].
+///
+/// @since 1.0.0
 public class SignatureFactoryGeneric implements SignatureFactory<SignatureGeneric> {
 
-  /** The singleton instance. */
+  /// The singleton instance.
   public static final SignatureFactoryGeneric INSTANCE = new SignatureFactoryGeneric();
 
   @Override

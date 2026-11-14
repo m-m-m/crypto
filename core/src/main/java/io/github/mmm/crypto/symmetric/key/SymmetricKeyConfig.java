@@ -6,24 +6,20 @@ import javax.crypto.SecretKeyFactory;
 import io.github.mmm.crypto.key.KeyConfig;
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * {@link KeyConfig} for symmetric cryptography.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// [KeyConfig] for symmetric cryptography.
+///
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public abstract class SymmetricKeyConfig extends KeyConfig {
 
   private final SymmetricKeySpecFactory keySpecFactory;
 
-  /**
-   * The constructor.
-   *
-   * @param algorithm the {@link #getAlgorithm() algorithm}.
-   * @param provider the {@link SecurityProvider}.
-   * @param keyLength the {@link #getKeyLength() key length} in bits.
-   * @param keySpecFactory the {@link #getKeySpecFactory() key spec factory}.
-   */
+  /// The constructor.
+  ///
+  /// @param algorithm the [algorithm][#getAlgorithm()].
+  /// @param provider the [SecurityProvider].
+  /// @param keyLength the [key length][#getKeyLength()] in bits.
+  /// @param keySpecFactory the [key spec factory][#getKeySpecFactory()].
   public SymmetricKeyConfig(String algorithm, SecurityProvider provider, int keyLength,
       SymmetricKeySpecFactory keySpecFactory) {
 
@@ -31,18 +27,14 @@ public abstract class SymmetricKeyConfig extends KeyConfig {
     this.keySpecFactory = keySpecFactory;
   }
 
-  /**
-   * @return the {@link SymmetricKeySpecFactory}.
-   */
+  /// @return the [SymmetricKeySpecFactory].
   public SymmetricKeySpecFactory getKeySpecFactory() {
 
     return this.keySpecFactory;
   }
 
-  /**
-   * @param key the {@link SecretKey}.
-   * @param keyFactory the {@link SecretKeyFactory}.
-   * @return the {@link #getKeyLength() key length} of the given {@link SecretKey}.
-   */
+  /// @param key the [SecretKey].
+  /// @param keyFactory the [SecretKeyFactory].
+  /// @return the [key length][#getKeyLength()] of the given [SecretKey].
   public abstract int getKeyLength(SecretKey key, SecretKeyFactory keyFactory);
 }

@@ -26,23 +26,19 @@ import io.github.mmm.crypto.hash.HashCreator;
 import io.github.mmm.crypto.hash.HashCreatorImplDigest;
 import io.github.mmm.crypto.hash.HashCreatorImplMultipleRounds;
 
-/**
- * Default implementation of {@link SignatureProcessorFactory} for {@link SignatureEcBc}.
- *
- * @param <S> type of {@link SignatureBinary}.
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- */
+/// Default implementation of [SignatureProcessorFactory] for [SignatureEcBc].
+///
+/// @param <S> type of [SignatureBinary].
+/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+/// @since 1.0.0
 public class SignatureProcessorFactoryImplEcBc<S extends SignatureEcBc> extends AbstractSecurityAlgorithm
     implements SignatureProcessorFactory<S, BCECPrivateKey, BCECPublicKey> {
 
   private final SignatureConfigEcDsa<S> config;
 
-  /**
-   * The constructor.
-   *
-   * @param config the {@link SignatureConfig}.
-   */
+  /// The constructor.
+  ///
+  /// @param config the [SignatureConfig].
   public SignatureProcessorFactoryImplEcBc(SignatureConfigEcDsa<S> config) {
 
     super();

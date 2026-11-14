@@ -7,37 +7,31 @@ import io.github.mmm.crypto.asymmetric.sign.SignatureFactory;
 import io.github.mmm.crypto.hash.HashConfig;
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/**
- * {@link SignatureConfig} for {@link io.github.mmm.crypto.asymmetric.access.rsa.Rsa}.
- *
- * @param <S> type of {@link SignatureBinary}.
- * @since 1.0.0
- */
+/// [SignatureConfig] for [io.github.mmm.crypto.asymmetric.access.rsa.Rsa].
+///
+/// @param <S> type of [SignatureBinary].
+/// @since 1.0.0
 public class SignatureConfigEcDsa<S extends SignatureBinary> extends SignatureConfig<S> {
 
-  /** The {@link #getAlgorithm() algorithm} name {@value}. */
+  /// The [algorithm][#getAlgorithm()] name {@value}.
   public static final String ALGORITHM_ECDSA = "ECDSA";
 
-  /**
-   * The constructor.
-   *
-   * @param signatureFactory the {@link #getSignatureFactory() signature factory}.
-   * @param hashConfig the {@link HashConfig} to be used as {@link #getHashConfig() hashing config}.
-   * @param provider the {@link #getProvider() provider}.
-   */
+  /// The constructor.
+  ///
+  /// @param signatureFactory the [signature factory][#getSignatureFactory()].
+  /// @param hashConfig the [HashConfig] to be used as [hashing config][#getHashConfig()].
+  /// @param provider the [provider][#getProvider()].
   public SignatureConfigEcDsa(SignatureFactory<S> signatureFactory, HashConfig hashConfig, SecurityProvider provider) {
 
     super(signatureFactory, hashConfig, ALGORITHM_ECDSA, provider);
   }
 
-  /**
-   * The constructor.
-   *
-   * @param signatureFactory the {@link #getSignatureFactory() signature factory}.
-   * @param hashConfig the {@link HashConfig} to be used as {@link #getHashConfig() hashing config}.
-   * @param hashAlgorithm the {@link SignatureAlgorithm#getHashAlgorithm() hash algorithm}.
-   * @param provider the {@link #getProvider() provider}.
-   */
+  /// The constructor.
+  ///
+  /// @param signatureFactory the [signature factory][#getSignatureFactory()].
+  /// @param hashConfig the [HashConfig] to be used as [hashing config][#getHashConfig()].
+  /// @param hashAlgorithm the [hash algorithm][SignatureAlgorithm#getHashAlgorithm()].
+  /// @param provider the [provider][#getProvider()].
   public SignatureConfigEcDsa(SignatureFactory<S> signatureFactory, HashConfig hashConfig, String hashAlgorithm,
       SecurityProvider provider) {
 
