@@ -10,7 +10,6 @@ import java.util.Arrays;
 import org.assertj.core.api.AbstractIntegerAssert;
 import org.assertj.core.api.Assertions;
 
-import io.github.mmm.crypto.asymmetric.access.AsymmetricAccess;
 import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyCreator;
 import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
@@ -21,7 +20,7 @@ import io.github.mmm.crypto.hash.Hash;
 /// Abstract test class for [AsymmetricAccess].
 public abstract class AsymmetricAccessTest extends Assertions {
 
-  /// @param access the [AbstractSecurityAsymmetricCryptoraccessPrivatePublic] to test.
+  /// @param access the [AbstractSecurityAsymmetricCryptor#accessPrivatePublic] to test.
   protected void verify(AsymmetricAccess<?, ?, ?, ?, ?> access, int encryptionLength) {
 
     verify((AsymmetricAccess) access, encryptionLength, false);
@@ -45,7 +44,8 @@ public abstract class AsymmetricAccessTest extends Assertions {
     PrivateKey privateKey = keyPair.getPrivateKey();
     verifyCrypt(access.newEncryptor(publicKey), access.newDecryptor(privateKey), rawMessage, encryptionLength);
     if (bidirectional) {
-      verifyCrypt(access.newEncryptorUnsafe(privateKey), access.newDecryptorUnsafe(publicKey), rawMessage, encryptionLength);
+      verifyCrypt(access.newEncryptorUnsafe(privateKey), access.newDecryptorUnsafe(publicKey), rawMessage,
+          encryptionLength);
     }
     // signing
     Hash data = new Hash(rawMessage);
@@ -111,26 +111,24 @@ public abstract class AsymmetricAccessTest extends Assertions {
     }
   }
 
-  /// @return the expected (maximum) length in bytes of the [encoded public
-         key data][java.security.PublicKey#getEncoded()].
+  /// @return the expected (maximum) length in bytes of the [encoded public key
+  ///         data][java.security.PublicKey#getEncoded()].
   protected abstract int getPublicKeyEncodedLength();
 
-  /// @return the expected (minimum) length in bytes of the [encoded public
-         key data][java.security.PublicKey#getEncoded()].
+  /// @return the expected (minimum) length in bytes of the [encoded public key
+  ///         data][java.security.PublicKey#getEncoded()].
   protected int getPublicKeyEncodedMinLength() {
 
     return getPublicKeyEncodedLength();
   }
 
-  /// @return the expected (maximum) length in bytes of the [compact private key
-         data][SecurityPrivateKey#getData()].
+  /// @return the expected (maximum) length in bytes of the [compact private key data][SecurityPrivateKey#getData()].
   protected int getPrivateKeyCompactLength() {
 
     return getPrivateKeyEncodedLength();
   }
 
-  /// @return the expected (minimum) length in bytes of the [compact private key
-         data][SecurityPrivateKey#getData()].
+  /// @return the expected (minimum) length in bytes of the [compact private key data][SecurityPrivateKey#getData()].
   protected int getPrivateKeyCompactMinLength() {
 
     if (getPrivateKeyCompactLength() == getPrivateKeyEncodedLength()) {
@@ -140,12 +138,12 @@ public abstract class AsymmetricAccessTest extends Assertions {
     }
   }
 
-  /// @return the expected (maximum) length in bytes of the [encoded private
-         key data][java.security.PrivateKey#getEncoded()].
+  /// @return the expected (maximum) length in bytes of the [encoded private key
+  ///         data][java.security.PrivateKey#getEncoded()].
   protected abstract int getPrivateKeyEncodedLength();
 
-  /// @return the expected (minimum) length in bytes of the [encoded private
-         key data][java.security.PrivateKey#getEncoded()].
+  /// @return the expected (minimum) length in bytes of the [encoded private key
+  ///         data][java.security.PrivateKey#getEncoded()].
   protected int getPrivateKeyEncodedMinLength() {
 
     return getPrivateKeyEncodedLength();

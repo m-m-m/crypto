@@ -2,13 +2,12 @@ package io.github.mmm.crypto;
 
 import io.github.mmm.crypto.asymmetric.sign.SignatureProcessor;
 
-/// This is the interface for a security algorithm function that [combines chunks of data][#update(byte[])] to a
+/// This is the interface for a security algorithm function that [combines chunks of data][#update(byte\[\])] to a
 /// compact result.
 ///
 /// @see io.github.mmm.crypto.hash.HashCreator
 /// @see SignatureProcessor
 ///
-/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
 /// @since 1.0.0
 public interface CryptoChunker extends CryptoProcessor {
 

@@ -4,7 +4,6 @@ import io.github.mmm.crypto.algorithm.CryptoAlgorithm;
 
 /// The abstract interface for any object that is based on a security [algorithm][#getAlgorithm()].
 ///
-/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
 /// @since 1.0.0
 public abstract interface CryptoProcessor extends CryptoAlgorithm {
 
@@ -12,12 +11,12 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   /// <table summary="method usage examples" border="1">
   /// <tr>
   /// <th>[CryptoProcessor]</th>
-  /// <th>Equivalent of [process][#process(byte[])](input)</th>
+  /// <th>Equivalent of [process][#process(byte\[\])](input)</th>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.hash.HashCreator]</td>
-  /// <td>`[update][io.github.mmm.crypto.hash.HashCreator#update(byte[])](input);
-  /// return [hash][io.github.mmm.crypto.hash.HashCreator#hash(boolean)](true);`</td>
+  /// <td>`[update][io.github.mmm.crypto.hash.HashCreator#update(byte[])](input); return
+  /// [hash][io.github.mmm.crypto.hash.HashCreator#hash(boolean)](true);`</td>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.crypt.Cryptor]</td>
@@ -25,8 +24,8 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.asymmetric.sign.SignatureSigner]</td>
-  /// <td>`[update][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#update(byte[])](input);
-  /// return [signAfterUpdateRaw][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#signAfterUpdateRaw(boolean)](true);`</td>
+  /// <td>`[update][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#update(byte[])](input); return
+  /// [signAfterUpdateRaw][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#signAfterUpdateRaw(boolean)](true);`</td>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.asymmetric.sign.SignatureVerifier]</td>
@@ -45,21 +44,23 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   /// <table summary="method usage examples" border="1">
   /// <tr>
   /// <th>[CryptoProcessor]</th>
-  /// <th>Equivalent of [process][#process(byte[], int, int)](input, offset, length)</th>
+  /// <th>Equivalent of [process][#process(byte\[\], int, int)](input, offset, length)</th>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.hash.HashCreator]</td>
-  /// <td>`[update][io.github.mmm.crypto.hash.HashCreator#update(byte[], int, int)](input, offset, length);
-  /// return [hash][io.github.mmm.crypto.hash.HashCreator#hash(boolean)](true);`</td>
+  /// <td>`[update][io.github.mmm.crypto.hash.HashCreator#update(byte[], int, int)](input, offset, length); return
+  /// [hash][io.github.mmm.crypto.hash.HashCreator#hash(boolean)](true);`</td>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.crypt.Cryptor]</td>
-  /// <td>`return [crypt][io.github.mmm.crypto.crypt.Cryptor#crypt(byte[], int, int, boolean)](input, offset, length, true);`</td>
+  /// <td>`return [crypt][io.github.mmm.crypto.crypt.Cryptor#crypt(byte[], int, int, boolean)](input, offset, length,
+  /// true);`</td>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.asymmetric.sign.SignatureSigner]</td>
-  /// <td>`[update][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#update(byte[], int, int)](input, offset, length);
-  /// return [signAfterUpdate][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#signAfterUpdate(boolean)](true);`</td>
+  /// <td>`[update][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#update(byte[], int, int)](input, offset,
+  /// length); return
+  /// [signAfterUpdate][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#signAfterUpdate(boolean)](true);`</td>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.asymmetric.sign.SignatureVerifier]</td>
@@ -80,21 +81,23 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   /// <table summary="method usage examples" border="1">
   /// <tr>
   /// <th>[CryptoProcessor]</th>
-  /// <th>Equivalent of [process][#process(byte[], int, int, boolean)](input, offset, length, complete)</th>
+  /// <th>Equivalent of [process][#process(byte\[\], int, int, boolean)](input, offset, length, complete)</th>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.hash.HashCreator]</td>
-  /// <td>`[update][io.github.mmm.crypto.hash.HashCreator#update(byte[], int, int)](input, offset, length);
-  /// return [hash][io.github.mmm.crypto.hash.HashCreator#hash(boolean)](complete);`</td>
+  /// <td>`[update][io.github.mmm.crypto.hash.HashCreator#update(byte[], int, int)](input, offset, length); return
+  /// [hash][io.github.mmm.crypto.hash.HashCreator#hash(boolean)](complete);`</td>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.crypt.Cryptor]</td>
-  /// <td>`return [crypt][io.github.mmm.crypto.crypt.Cryptor#crypt(byte[], int, int, boolean)](input, offset, length, true);`</td>
+  /// <td>`return [crypt][io.github.mmm.crypto.crypt.Cryptor#crypt(byte[], int, int, boolean)](input, offset, length,
+  /// true);`</td>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.asymmetric.sign.SignatureSigner]</td>
-  /// <td>`[update][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#update(byte[], int, int)](input, offset, length);
-  /// return [signAfterUpdate][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#signAfterUpdate(boolean)](complete);`</td>
+  /// <td>`[update][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#update(byte[], int, int)](input, offset,
+  /// length); return
+  /// [signAfterUpdate][io.github.mmm.crypto.asymmetric.sign.SignatureSigner#signAfterUpdate(boolean)](complete);`</td>
   /// </tr>
   /// <tr>
   /// <td>[io.github.mmm.crypto.asymmetric.sign.SignatureVerifier]</td>
@@ -105,8 +108,7 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   /// @param input the data to process.
   /// @param offset the index where to start reading data from `input`.
   /// @param length the number of bytes to read from `input`.
-  /// @param complete - `true` to complete/reset this processor after processing the given `input`,
-  ///        `false` otherwise.
+  /// @param complete - `true` to complete/reset this processor after processing the given `input`, `false` otherwise.
   /// @return the transformed `input` data.
   default byte[] process(byte[] input, int offset, int length, boolean complete) {
 
@@ -114,8 +116,7 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   }
 
   /// @param input the [CryptoBinary] [containing the data][CryptoBinary#getData()] to process.
-  /// @param complete - `true` to complete/reset this processor after processing the given `input`,
-  ///        `false` otherwise.
+  /// @param complete - `true` to complete/reset this processor after processing the given `input`, `false` otherwise.
   /// @return the transformed `input` data.
   /// @see #process(byte[])
   default byte[] process(CryptoBinary input, boolean complete) {
@@ -125,8 +126,8 @@ public abstract interface CryptoProcessor extends CryptoAlgorithm {
   }
 
   /// Will reset the internal state of this object. Please note that complex algorithms especially for
-  /// [io.github.mmm.crypto.crypt.Cryptor] may **not** reusable. It is therefore preferable to always create a
-  /// fresh instance for each cryptographic task.
+  /// [io.github.mmm.crypto.crypt.Cryptor] may **not** reusable. It is therefore preferable to always create a fresh
+  /// instance for each cryptographic task.
   ///
   /// @see java.security.MessageDigest#reset()
   void reset();

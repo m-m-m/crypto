@@ -5,7 +5,7 @@ import java.security.cert.Certificate;
 import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 
 /// Interface to [generate][#generateCertificate(AsymmetricKeyPair, CertificateData)] or
-/// [deserialize][#createCertificate(byte[])] [Certificate]s as well to
+/// [deserialize][#createCertificate(byte\[\])] [Certificate]s as well to
 /// [extract][#getCertificateData(Certificate)] [CertificateData] from a [Certificate].
 ///
 /// @author Joerg Hohwiller (hohwille at users.sourceforge.net)

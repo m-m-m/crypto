@@ -4,7 +4,6 @@ import java.security.SecureRandom;
 
 /// Implementation of [RandomCreator].
 ///
-/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
 /// @since 1.0.0
 public class RandomCreatorImpl implements RandomCreator {
 
@@ -17,10 +16,9 @@ public class RandomCreatorImpl implements RandomCreator {
   /// The constructor.
   ///
   /// @param secureRandom the underlying [SecureRandom].
-  /// @param reseedCount the
-  ///        [re-seed
-        count][io.github.mmm.crypto.random.RandomConfig#getReseedCount()].
+  /// @param reseedCount the [re-seed count][io.github.mmm.crypto.random.RandomConfig#getReseedCount()].
   public RandomCreatorImpl(SecureRandom secureRandom, int reseedCount) {
+
     super();
     this.secureRandom = secureRandom;
     this.reseedCount = reseedCount;

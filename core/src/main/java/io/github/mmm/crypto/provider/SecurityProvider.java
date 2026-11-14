@@ -58,9 +58,8 @@ public final class SecurityProvider {
     this.providerName = providerName;
   }
 
-  /// @param algorithm the [key-pair generator algorithm][KeyPairGenerator#getAlgorithm()]. See <a href=
-        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keypairgenerator-algorithms">KeyPairGenerator
-  ///        Algorithms</a>.
+  /// @param algorithm the [key-pair generator algorithm][KeyPairGenerator#getAlgorithm()]. See [KeyPairGenerator
+  ///        Algorithms](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keypairgenerator-algorithms).
   /// @return the (uninitialized) [KeyPairGenerator] instance.
   public KeyPairGenerator createKeyPairGenerator(String algorithm) {
 
@@ -74,15 +73,15 @@ public final class SecurityProvider {
         return KeyPairGenerator.getInstance(algorithm);
       }
     } catch (NoSuchAlgorithmException e) {
-      throw new IllegalStateException("Unsupported key-pair-generator algorithm '" + algorithm + "' for " + toString(), e);
+      throw new IllegalStateException("Unsupported key-pair-generator algorithm '" + algorithm + "' for " + toString(),
+          e);
     } catch (NoSuchProviderException e) {
       throw new IllegalStateException("Unsupported security provider '" + this.providerName + "'.", e);
     }
   }
 
-  /// @param algorithm the [secret key factory algorithm][SecretKeyFactory#getAlgorithm()]. See <a href=
-        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#secretkeyfactory-algorithms">SecretKeyFactory
-  ///        Algorithms</a>.
+  /// @param algorithm the [secret key factory algorithm][SecretKeyFactory#getAlgorithm()]. See [SecretKeyFactory
+  ///        Algorithms](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#secretkeyfactory-algorithms).
   /// @return the (uninitialized) [SecretKeyFactory] instance.
   public SecretKeyFactory createSecretKeyFactory(String algorithm) {
 
@@ -96,15 +95,15 @@ public final class SecurityProvider {
         return SecretKeyFactory.getInstance(algorithm);
       }
     } catch (NoSuchAlgorithmException e) {
-      throw new IllegalStateException("Unsupported secret-key-factory algorithm '" + algorithm + "' for " + toString(), e);
+      throw new IllegalStateException("Unsupported secret-key-factory algorithm '" + algorithm + "' for " + toString(),
+          e);
     } catch (NoSuchProviderException e) {
       throw new IllegalStateException("Unsupported security provider '" + this.providerName + "'.", e);
     }
   }
 
-  /// @param algorithm the [signature algorithm][Signature#getAlgorithm()]. See <a href=
-        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#signature-algorithms">Signature
-  ///        Algorithms</a>.
+  /// @param algorithm the [signature algorithm][Signature#getAlgorithm()]. See [Signature
+  ///        Algorithms](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#signature-algorithms).
   /// @return the (uninitialized) [Signature] instance.
   /// @see io.github.mmm.crypto.asymmetric.sign.SignatureAlgorithm
   public Signature createSignature(String algorithm) {
@@ -140,16 +139,15 @@ public final class SecurityProvider {
         return Cipher.getInstance(transformation);
       }
     } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-      throw new IllegalStateException("Unsupported encryption algorithm (cipher transformation) '" + transformation + "' for " + toString(),
-          e);
+      throw new IllegalStateException(
+          "Unsupported encryption algorithm (cipher transformation) '" + transformation + "' for " + toString(), e);
     } catch (NoSuchProviderException e) {
       throw new IllegalStateException("Unsupported security provider '" + this.providerName + "'.", e);
     }
   }
 
-  /// @param algorithm the [hash algorithm][MessageDigest#getAlgorithm()] (see <a href=
-        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#messagedigest-algorithms">MessageDigest
-  ///        Algorithms</a>).
+  /// @param algorithm the [hash algorithm][MessageDigest#getAlgorithm()] (see [MessageDigest
+  ///        Algorithms](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#messagedigest-algorithms)).
   /// @return the (uninitialized) [MessageDigest] instance.
   public MessageDigest createDigest(String algorithm) {
 
@@ -169,9 +167,8 @@ public final class SecurityProvider {
     }
   }
 
-  /// @param algorithm the [secure random algorithm][SecureRandom#getAlgorithm()] (see <a href=
-        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#securerandom-number-generation-algorithms">SecureRandom
-  ///        Number Generation Algorithms</a>).
+  /// @param algorithm the [secure random algorithm][SecureRandom#getAlgorithm()] (see [SecureRandom Number Generation
+  ///        Algorithms](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#securerandom-number-generation-algorithms)).
   /// @return the [SecureRandom] instance.
   public SecureRandom createSecureRandom(String algorithm) {
 
@@ -185,15 +182,15 @@ public final class SecurityProvider {
         return SecureRandom.getInstance(algorithm);
       }
     } catch (NoSuchAlgorithmException e) {
-      throw new IllegalStateException("Unsupported secure-random-factory algorithm '" + algorithm + "' for " + toString(), e);
+      throw new IllegalStateException(
+          "Unsupported secure-random-factory algorithm '" + algorithm + "' for " + toString(), e);
     } catch (NoSuchProviderException e) {
       throw new IllegalStateException("Unsupported security provider '" + this.providerName + "'.", e);
     }
   }
 
-  /// @param type the [type][CertificateFactory#getType()] of the [CertificateFactory] (see <a href=
-        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#certificatefactory-types">CertificateFactory
-  ///        Types</a>).
+  /// @param type the [type][CertificateFactory#getType()] of the [CertificateFactory] (see [CertificateFactory
+  ///        Types](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#certificatefactory-types)).
   /// @return the [CertificateFactory] instance.
   public CertificateFactory createCertificateFactory(String type) {
 
@@ -213,9 +210,8 @@ public final class SecurityProvider {
     }
   }
 
-  /// @param algorithm the [algorithm][KeyFactory#getAlgorithm()] of the [KeyFactory] (see <a href=
-        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keyfactory-algorithms">KeyFactory
-  ///        Algorithms</a>).
+  /// @param algorithm the [algorithm][KeyFactory#getAlgorithm()] of the [KeyFactory] (see [KeyFactory
+  ///        Algorithms](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keyfactory-algorithms)).
   /// @return the [KeyFactory] instance.
   public KeyFactory createKeyFactory(String algorithm) {
 
@@ -235,9 +231,9 @@ public final class SecurityProvider {
     }
   }
 
-  /// @param type the [type][KeyStore#getType()] of the [KeyStore] (see <a href=
-        "https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keystore-types">KeyStore
-  ///        Types</a>).
+  /// @param type the [type][KeyStore#getType()] of the [KeyStore] (see [KeyStore
+  ///        Types](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#keystore-types)).
+  ///
   /// @return the [KeyStore] instance.
   public KeyStore createKeyStore(String type) {
 

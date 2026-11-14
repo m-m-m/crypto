@@ -3,7 +3,6 @@ package io.github.mmm.crypto.hash.sha2;
 import org.junit.jupiter.api.Test;
 
 import io.github.mmm.crypto.hash.access.HashAccessTest;
-import io.github.mmm.crypto.hash.sha2.Sha256;
 
 /// Test of [Sha256].
 public class Sha256Test extends HashAccessTest {

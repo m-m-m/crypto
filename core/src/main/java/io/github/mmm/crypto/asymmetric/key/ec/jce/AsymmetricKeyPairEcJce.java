@@ -19,7 +19,6 @@ import io.github.mmm.crypto.asymmetric.key.ec.AsymmetricKeyPairEc;
 
 /// An implementation of [AsymmetricKeyPair] for [ECPrivateKey] and [ECPublicKey].
 ///
-/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
 /// @since 1.0.0
 public class AsymmetricKeyPairEcJce extends AsymmetricKeyPairEc<ECPrivateKey, ECPublicKey> {
 

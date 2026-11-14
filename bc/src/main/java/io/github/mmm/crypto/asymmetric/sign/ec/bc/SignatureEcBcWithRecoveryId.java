@@ -8,9 +8,9 @@ import io.github.mmm.crypto.asymmetric.access.ec.bc.CryptoEllipticCurveBc;
 import io.github.mmm.crypto.asymmetric.sign.SignatureWithPublicKeyRecovery;
 
 /// [SignatureEcBc] with an extra byte for the [recovery ID][#getRecoveryId()]. Allows to
-/// [recover][#recoverPublicKey(byte[])] the [public key][BCECPublicKey]. This enables to transfer only a
-/// compact hash of the public key to save capacity. E.g. BitCoin uses this to transmit a BitCoin Address instead of the
-/// actual public key.
+/// [recover][#recoverPublicKey(byte\[\])] the [public key][BCECPublicKey]. This enables to transfer only a compact hash
+/// of the public key to save capacity. E.g. BitCoin uses this to transmit a BitCoin Address instead of the actual public
+/// key.
 ///
 /// @since 1.0.0
 public class SignatureEcBcWithRecoveryId extends SignatureEcBc implements SignatureWithPublicKeyRecovery {
@@ -56,13 +56,14 @@ public class SignatureEcBcWithRecoveryId extends SignatureEcBc implements Signat
     return HEAD;
   }
 
-  /// @return the recovery ID containing the [recovery index][#getRecoveryIndex()] and [compression][#isCompressed()] information.
+  /// @return the recovery ID containing the [recovery index][#getRecoveryIndex()] and
+  ///         [compression][#isCompressed()] information.
   public byte getRecoveryId() {
 
     return this.data[0];
   }
 
-  /// @return the index to [recover the public key][#recoverPublicKey(byte[])] from the signature. It is a value in
+  /// @return the index to [recover the public key][#recoverPublicKey(byte\[\])] from the signature. It is a value in
   ///         the range from `0` to `3`.
   public byte getRecoveryIndex() {
 

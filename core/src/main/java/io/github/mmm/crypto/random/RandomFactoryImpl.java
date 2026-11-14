@@ -8,7 +8,6 @@ import io.github.mmm.crypto.provider.SecurityProvider;
 
 /// Implementation of [RandomFactory].
 ///
-/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
 /// @since 1.0.0
 public class RandomFactoryImpl extends AbstractCryptoAlgorithmWithProvider implements RandomFactory {
 
@@ -43,7 +42,7 @@ public class RandomFactoryImpl extends AbstractCryptoAlgorithmWithProvider imple
     return this.provider.createSecureRandom(getAlgorithm());
   }
 
-  /// @return [RandomFactoryImpl] for [SecureRandom#getInstanceStrong()].
+  /// @return the [RandomFactoryImpl] for [SecureRandom#getInstanceStrong()].
   public static RandomFactoryImpl ofStrong() {
 
     if (STRONG_INSTANCE == null) {

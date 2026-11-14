@@ -89,13 +89,15 @@ public abstract class AsymmetricAccessTest extends Assertions {
     }
   }
 
-  /// @return the expected (maximum) length in bytes of the [compact public key data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
+  /// @return the expected (maximum) length in bytes of the [compact public key
+  ///         data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
   protected int getPublicKeyCompactLength() {
 
     return getPublicKeyEncodedLength();
   }
 
-  /// @return the expected (minimum) length in bytes of the [compact public key data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
+  /// @return the expected (minimum) length in bytes of the [compact public key
+  ///         data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
   protected int getPublicKeyCompactMinLength() {
 
     if (getPublicKeyCompactLength() == getPublicKeyEncodedLength()) {
@@ -105,24 +107,26 @@ public abstract class AsymmetricAccessTest extends Assertions {
     }
   }
 
-  /// @return the expected (maximum) length in bytes of the [encoded public
-         key data][java.security.PublicKey#getEncoded()].
+  /// @return the expected (maximum) length in bytes of the [encoded public key
+  ///         data][java.security.PublicKey#getEncoded()].
   protected abstract int getPublicKeyEncodedLength();
 
-  /// @return the expected (minimum) length in bytes of the [encoded public
-         key data][java.security.PublicKey#getEncoded()].
+  /// @return the expected (minimum) length in bytes of the [encoded public key
+  ///         data][java.security.PublicKey#getEncoded()].
   protected int getPublicKeyEncodedMinLength() {
 
     return getPublicKeyEncodedLength();
   }
 
-  /// @return the expected (maximum) length in bytes of the [compact private key data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
+  /// @return the expected (maximum) length in bytes of the [compact private key
+  ///         data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
   protected int getPrivateKeyCompactLength() {
 
     return getPrivateKeyEncodedLength();
   }
 
-  /// @return the expected (minimum) length in bytes of the [compact private key data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
+  /// @return the expected (minimum) length in bytes of the [compact private key
+  ///         data][io.github.mmm.crypto.CryptoBinaryFormat#FORMAT_COMPACT].
   protected int getPrivateKeyCompactMinLength() {
 
     if (getPrivateKeyCompactLength() == getPrivateKeyEncodedLength()) {
@@ -132,12 +136,12 @@ public abstract class AsymmetricAccessTest extends Assertions {
     }
   }
 
-  /// @return the expected (maximum) length in bytes of the [encoded private
-         key data][java.security.PrivateKey#getEncoded()].
+  /// @return the expected (maximum) length in bytes of the [encoded private key
+  ///         data][java.security.PrivateKey#getEncoded()].
   protected abstract int getPrivateKeyEncodedLength();
 
-  /// @return the expected (minimum) length in bytes of the [encoded private
-         key data][java.security.PrivateKey#getEncoded()].
+  /// @return the expected (minimum) length in bytes of the [encoded private key
+  ///         data][java.security.PrivateKey#getEncoded()].
   protected int getPrivateKeyEncodedMinLength() {
 
     return getPrivateKeyEncodedLength();

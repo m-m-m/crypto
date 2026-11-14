@@ -6,13 +6,11 @@ import java.util.Objects;
 import io.github.mmm.crypto.io.CryptoResource;
 import io.github.mmm.crypto.provider.SecurityProvider;
 
-/// Configuration for [KeyStoreFacade].
-/// Additional proprietary configs:
+/// Configuration for [KeyStoreFacade]. Additional proprietary configs:
 ///
 /// - "Windows-MY" / "SunMSCAPI"
 /// - "KeychainStore" / "Apple"
 ///
-/// @author Joerg Hohwiller (hohwille at users.sourceforge.net)
 /// @since 1.0.0
 public class KeyStoreConfig {
 
@@ -62,9 +60,10 @@ public class KeyStoreConfig {
     return "." + this.type.toLowerCase(Locale.US);
   }
 
-  /// @return type the [java.security.KeyStore] [type][java.security.KeyStore#getType()]. For details see the
-  ///         available sub-classes as well as this <a href=
-         "http://www.pixelstech.net/article/1408345768-Different-types-of-keystore-in-Java----Overview">overview</a>.
+  /// @return type the [java.security.KeyStore] [type][java.security.KeyStore#getType()]. For details see the available
+  ///         sub-classes as well as
+  ///         this [overview](http://www.pixelstech.net/article/1408345768-Different-types-of-keystore-in-Java----Overview).
+
   public String getType() {
 
     return this.type;
